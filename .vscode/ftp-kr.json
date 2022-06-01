@@ -2,7 +2,7 @@
     "host": "167.71.49.154",
     "username": "dev.liner",
     "password": "SecureL0g!sdgf@123123##",
-    "remotePath": "/public_html/wp-content/themes/liner/inc",
+    "remotePath": "/public_html/wp-content/themes/liner",
     "protocol": "sftp",
     "port": 0,
     "fileNameEncoding": "utf8",
