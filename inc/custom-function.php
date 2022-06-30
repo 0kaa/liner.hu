@@ -155,7 +155,7 @@ function footer_widgets_init()
 }
 add_action('widgets_init', 'footer_widgets_init');
 
-add_filter('wp_nav_menu_items', 'add_admin_link', 10, 2);
+// add_filter('wp_nav_menu_items', 'add_admin_link', 10, 2);
 function add_admin_link($items, $args)
 {
   if ($args->theme_location == 'primary') {
@@ -663,13 +663,11 @@ function get_latest_news_blocks($postnot_in = 0)
 
 
     $output_latest_news_block[$i] = '
-        <div class="row  nues_contentnew' . $popular . $breaknews . '">
-            <div class="col-12 col-sm-3 col-lg-3">
-                <div>
-                    <img class="w-100" src="' . $image_attributes[0] . '">
-                </div>
-            </div>
-            <div class="col-12 col-md-9 col-lg-9">
+        <div class="center px-2 gap-4 ' . $popular . $breaknews . '">            
+            <div class="w-25">
+                <img class="w-100" src="' . $image_attributes[0] . '">
+            </div>            
+            <div>
                 <div>
                     <p class="post-tagline">
                         ' . getCategoryByPostId($latest_news->post->ID) . '
@@ -725,20 +723,20 @@ function get_latest_news_blocks_two($postnot_in = 0)
     $brknews = get_field('breaking_news', $latest_news->post->ID);
 
     if ($poplr == 1) {
-      $popular = ' post-background-green';
+      $popular = ' post-background-green px-2';
     } else {
       $popular = '';
     }
 
     if ($brknews == 1) {
-      $breaknews = ' post-background-yellow';
+      $breaknews = ' post-background-yellow px-2';
       $popular = '';
     } else {
       $breaknews = '';
     }
     $output_latest_news_block[$i] = '
-    <div class="col-12 col-md-6 col-lg-6 ' . $popular . $breaknews . '">
-      <div>
+    <div class="col-12 col-md-6 col-lg-6">
+      <div class=" ' . $popular . $breaknews . '">
         <h2 class="post-title post-title4 post-bullet">
           <a class="title-slug" href="' . get_the_permalink($latest_news->post->ID) . '">' . get_the_title() . '</a>
         </h2>
@@ -837,7 +835,7 @@ function section2_shortcode($atts, $content)
       ' . getCategoryByPostId($the_query->post->ID) . '
 					<span>|</span>
 					<span>' . get_post_time('H:i') .  '</span>
-                    <p>' . wp_trim_words($the_query->post->post_excerpt, 11) . '</p>' .
+                    <p>' . $the_query->post->post_excerpt . '</p>' .
         '<hr style="margin-inline:0;">';
 
 
@@ -903,13 +901,13 @@ function section2_shortcode($atts, $content)
       $brknews = get_field('breaking_news', $the_query->post->ID);
 
       if ($poplr == 1) {
-        $popular = ' post-background-green';
+        $popular = ' post-background-green px-2';
       } else {
         $popular = '';
       }
 
       if ($brknews == 1) {
-        $breaknews = ' post-background-yellow';
+        $breaknews = ' post-background-yellow px-2';
         $popular = '';
       } else {
         $breaknews = '';
@@ -918,8 +916,7 @@ function section2_shortcode($atts, $content)
       if ($z == 1) {
         $output .= '
       <div class="col-12 col-md-7 col-lg-7">
-        <div class="row">
-            <div class="col-12 col-md-12 col-lg-12 ' . $popular . $breaknews . '">
+            <div class="' . $popular . $breaknews . '">
                 <div>
                   <img class="w-100" src="' . $image_attributes[0] . '">
                 </div>
@@ -938,13 +935,12 @@ function section2_shortcode($atts, $content)
           <p class="post-description section1-description">
             ' . $the_query->post->post_excerpt . '
           </p>
-          </div>        
       </div>';
       } elseif ($z <= 5) {
         $output .= '        
             <div class="row my-2">
-              <div class="col-12 col-md-12 col-lg-12 ' . $popular . $breaknews . '">
-                <div>
+              <div class="col-12 col-md-12 col-lg-12">
+                <div class="' . $popular . $breaknews . '">
                     <h2 class="post-title post-title4 post-bullet">
                       <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
                       ' . $ttln . '
@@ -961,8 +957,8 @@ function section2_shortcode($atts, $content)
 
       if ($z > 5 && $z <= 7) {
         $output .= '
-              <div class="row my-2">
-                <div class="col-12 col-md-12 col-lg-12 ' . $popular . $breaknews . '">
+              <div class="my-2">
+                <div class="' . $popular . $breaknews . '">
                    <div>
                       <p class="post-tagline">
                       ' . getCategoryByPostId($the_query->post->ID) . '
@@ -983,8 +979,8 @@ function section2_shortcode($atts, $content)
 
       if ($z > 7) {
         $output .= '
-                <div class="row my-2">
-                  <div class="col-12 col-md-12 col-lg-12 ' . $popular . $breaknews . '">
+                <div class="my-2">
+                  <div class="' . $popular . $breaknews . '">
                   <div>
                   <img class="w-100" src="' . $image_attributes[0] . '">
               </div>
@@ -1085,13 +1081,13 @@ function section3_shortcode($atts, $content)
       $brknews = get_field('breaking_news', $the_query->post->ID);
 
       if ($poplr == 1) {
-        $popular = ' post-background-green';
+        $popular = ' post-background-green px-2';
       } else {
         $popular = '';
       }
 
       if ($brknews == 1) {
-        $breaknews = ' post-background-yellow';
+        $breaknews = ' post-background-yellow px-2';
         $popular = '';
       } else {
         $breaknews = '';
@@ -1110,27 +1106,11 @@ function section3_shortcode($atts, $content)
         $trm_str[] = ['link' => '<a href="' . $trm_link . '" class="trmLnk">' . $nwstrm->name . '</a>'];
       }
       $terms_string = join(', ', wp_list_pluck($trm_str, 'link'));
-      // $output.='<div class="col-12 col-md-3 col-lg-3">
-      //              <div class="tyle_oBx_new tyle_oBx1">
-      //                <div class="d_flexleft">
-      //                    <label class="time_nnBtn">'.get_the_date( 'G:i', $the_query->post->ID ).'</label>
-      //                    <label class="cat">'.$terms_string.'</label>
-      //                </div>
-      //                  <span class="nues_imgSpan">
-
-      //                  </span>
-      //                  <div class="nues_contentnew'.$popular.$breaknews.'">
-      //                     <p><a href="'.get_the_permalink($the_query->post->ID).'">'.$ttln.'</a></p>
-      //                     <label class="author_view"><a href="'.home_url('/szerzo/').'?a='.$custom_author.'" class="athr_lnk">'.$custom_author.'</a><b></b></label>
-
-      //                  </div>
-      //              </div>
-      //           </div>';
 
       $output .= '
-          <div class="col-12 col-sm-3 col-lg-3">
-                    <div class="row h-100 nues_contentnew' . $popular . $breaknews . '">
-                        <div class="col-12 col-md-12 col-lg-12">
+          <div class="col-12 col-lg-3">
+                    <div class="h-100' . $popular . $breaknews . '">
+                        <div class="">
                             <div>
                               <img class="w-100" src="' . $image_attributes[0] . '">
                             </div>
@@ -1419,7 +1399,7 @@ function section5_shortcode($atts, $content)
 
       if ($i > 0 && $i < 2) {
         $output .= '
-              <div class="row mb-3  ' . $popular . $breaknews . '">
+              <div class="row mb-3' . $popular . $breaknews . '">
                   <div class="col-12 col-md-6 col-lg-6">
                       <div>
                         <img class="w-100" src="' . $image_attributes[0] . '">
@@ -1475,7 +1455,7 @@ function section5_shortcode($atts, $content)
           </div>';
       }
       if ($i == 5) {
-        $output .= '</div></div><div class="col-12 col-sm-3 col-lg-3">';
+        $output .= '</div></div><div class="col-12 col-lg-3">';
       } elseif ($i < 11 && $i > 5) {
         $output .= '<div class="row my-4  ' . $popular . $breaknews . '">
                 <div class="col-12 col-md-12 col-lg-12">
@@ -1602,30 +1582,32 @@ function section6_shortcode($atts, $content)
       }
 
       if ($i === 2) {
-        $output .= '<div class="row  ' . $popular . $breaknews . '">';
+        $output .= '<div class="row">';
       }
 
       if ($i > 1 && $i < 5) {
         $output .= '
         <div class="col-12 col-md-4 col-lg-4">
-            <div>
-              <img class="w-100" src="' . $image_attributes[0] . '">
-            </div>
-            <div>
-              <p class="post-tagline">
-              ' . getCategoryByPostId($the_query->post->ID) . '
-                <span>|</span>
-                <span>' . get_post_time('H:i') .  '</span>
-              </p>
-            </div>            
-            <h2 class="post-title post-title2">
-                <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a></h2>
-                <p class="post-description section1-description">' . $newscont . '</p>
+          <div class="h-100 px-2' . $popular . $breaknews . '">
+          <div>
+          <img class="w-100" src="' . $image_attributes[0] . '">
+        </div>
+        <div>
+          <p class="post-tagline">
+          ' . getCategoryByPostId($the_query->post->ID) . '
+            <span>|</span>
+            <span>' . get_post_time('H:i') .  '</span>
+          </p>
+        </div>            
+        <h2 class="post-title post-title2">
+            <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a></h2>
+            <p class="post-description section1-description">' . $newscont . '</p>
+          </div>
         </div>
         ';
       }
       if ($i == 4) {
-        $output .= '</div></div><div class="col-12 col-sm-3 col-lg-3">';
+        $output .= '</div></div><div class="col-12 col-lg-3">';
       }
 
       if ($i > 4 && $i < 13) {
@@ -1719,13 +1701,13 @@ function fekete_shortcode($atts, $content)
       $brknews = get_field('breaking_news', $the_query->post->ID);
 
       if ($poplr == 1) {
-        $popular = ' post-background-green';
+        $popular = ' post-background-green px-2';
       } else {
         $popular = '';
       }
 
       if ($brknews == 1) {
-        $breaknews = ' post-background-yellow';
+        $breaknews = ' post-background-yellow px-2';
         $popular = '';
       } else {
         $breaknews = '';
@@ -1734,44 +1716,48 @@ function fekete_shortcode($atts, $content)
 
       if ($i <= 4) {
         $output .=  '
-            <div class="col-12 col-sm-3 col-lg-3 mb-3 d-flex flex-column justify-content-between ' . $popular . $breaknews . '">
-                    <div>
-                      <img class="w-100" src="' . $image_attributes[0] . '">
-                    </div>
-                    <div>
-                      <p class="post-tagline">
-                      ' . getCategoryByPostId($the_query->post->ID) . '
-                        <span>|</span>
-                        <span>' . get_post_time('H:i') .  '</span>
-                      </p>
-                    </div>
-                    <h2 class="post-title post-title2">
-                    <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
-                      ' . $the_query->post->post_title . '
-                    </a></h2>
-                    <p class="post-description section1-description">
-                      ' . $the_query->post->post_excerpt . '
-                    </p>                
+            <div class="col-12 col-lg-3 mb-3 d-flex flex-column justify-content-between">
+              <div class="h-100 ' . $popular . $breaknews . '">
+                   <div>
+                   <img class="w-100" src="' . $image_attributes[0] . '">
+                 </div>
+                 <div>
+                   <p class="post-tagline">
+                   ' . getCategoryByPostId($the_query->post->ID) . '
+                     <span>|</span>
+                     <span>' . get_post_time('H:i') .  '</span>
+                   </p>
+                 </div>
+                 <h2 class="post-title post-title3">
+                 <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
+                   ' . $the_query->post->post_title . '
+                 </a></h2>
+                 <p class="post-description section1-description">
+                   ' . $the_query->post->post_excerpt . '
+                 </p> 
+                   </div>               
                     <hr>
                 </div>
             ';
       } else {
         $output .=  '
-            <div class="col-12 col-sm-3 col-lg-3 mb-3 d-flex flex-column justify-content-between ' . $popular . $breaknews . '">                    
-                    <div>
-                      <p class="post-tagline">
-                      ' . getCategoryByPostId($the_query->post->ID) . '
-                        <span>|</span>
-                        <span>' . get_post_time('H:i') .  '</span>
-                      </p>
-                    </div>
-                    <h2 class="post-title post-title2">
-                    <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
-                      ' . $the_query->post->post_title . '
-                    </a></h2>
-                    <p class="post-description section1-description">
-                      ' . $the_query->post->post_excerpt . '
-                    </p>                
+            <div class="col-12 col-lg-3 mb-3 d-flex flex-column justify-content-between">
+                  <div class="h-100 ' . $popular . $breaknews . '">
+                  <div>
+                  <p class="post-tagline">
+                  ' . getCategoryByPostId($the_query->post->ID) . '
+                    <span>|</span>
+                    <span>' . get_post_time('H:i') .  '</span>
+                  </p>
+                </div>
+                <h2 class="post-title post-title3">
+                <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
+                  ' . $the_query->post->post_title . '
+                </a></h2>
+                <p class="post-description section1-description">
+                  ' . $the_query->post->post_excerpt . '
+                </p>  
+                  </div>              
                     <hr>
                 </div>
             ';
@@ -2059,89 +2045,116 @@ function section9_shortcode($atts, $content)
 
   $the_query = new WP_Query($args);
   $i = 1;
-  $j = 1;
-  $popular = '';
-  $first = '';
-  $second = '';
-  $cls = '';
-  $loop = array();
 
   if ($the_query->have_posts()) {
 
-    $output .= '<section class="porta_section auto_float"><div class="porta_container auto_float clr">';
+    $output .= '<section class="porta_section auto_float"><div class="porta_container auto_float clr"><div class="row">';
     while ($the_query->have_posts()) {
       $the_query->the_post();
 
       $poplr = get_field('most_popular_news', $the_query->post->ID);
       $brknews = get_field('breaking_news', $the_query->post->ID);
-      $author_id = $the_query->post->post_author;
-      $custom_author = get_field('news_author', $the_query->post->ID);
 
       if ($poplr == 1) {
-        $popular = ' line_leftGu';
+        $popular = ' post-background-green px-2';
       } else {
         $popular = '';
       }
 
       if ($brknews == 1) {
-        $breaknews = ' brknews';
+        $breaknews = ' post-background-yellow px-2';
         $popular = '';
       } else {
         $breaknews = '';
       }
 
-      $ttln = '';
-      $newscont = '';
+      $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'section9-thumb');
+      $ttln = $the_query->post->post_title;
+      $newscont = $the_query->post->post_excerpt;
 
       if ($i == 1) {
 
-        $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'section9-thumb');
-        //if(strlen($the_query->post->post_title) > 80){
-        //$ttln= substr($the_query->post->post_title, 0, 80) . '...';
-        //}else{
-        $ttln = $the_query->post->post_title;
-        //}
 
-        //if(strlen($the_query->post->post_excerpt) > 125){
-        //$newscont= substr($the_query->post->post_excerpt, 0, 125) . '...';
-        //}else{
-        $newscont = $the_query->post->post_excerpt;
-        //}
-
-        $first = '<span><img src="' . $image_attributes[0] . '"></span><div class="porta_Content_left' . $breaknews . '"><h1><a href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a></h1><p>' . $newscont . '</p><label>Szerző: <a href="' . home_url('/szerzo/') . '?a=' . $custom_author . '" class="athr_lnk">' . $custom_author . '</a></label></div>';
+        $output .= '
+          <div class="col-12 col-lg-6">
+            <span><img src="' . $image_attributes[0] . '"></span>
+            <div class="porta_Content_left' . $breaknews . $popular . '">
+              <h1 class="title post-title1">
+                <a href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a>
+              </h1>
+              <div class="post-tagline">
+                <div>
+                  ' . getCategoryByPostId($the_query->post->ID) . '
+                  <span>|</span>
+                  <span>' . get_post_time('H:i') .  '</span>
+                </div>
+                ' . $newscont . '
+              </div>
+            </div>
+          </div>
+          ';
       } elseif ($i == 2) {
-        //if(strlen($the_query->post->post_title) > 85){
-        //$ttln= substr($the_query->post->post_title, 0, 85) . '...';
-        //}else{
-        $ttln = $the_query->post->post_title;
-        //}
-
-        $second = '<div class="porta_bottomContent' . $breaknews . '"><h2><a href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a></h2><label>Szerző: <a href="' . home_url('/szerzo/') . '?a=' . $custom_author . '" class="athr_lnk">' . $custom_author . '</a></label></div>';
-      } else {
-
-        if ($j % 2 == 0) {
-          $cls = ' gue_right50';
-        } else {
-          $cls = ' gue_left50';
-        }
-        //if(strlen($the_query->post->post_title) > 35){
-        //$ttln= substr($the_query->post->post_title, 0, 35) . '...';
-        //}else{
-        $ttln = $the_query->post->post_title;
-        //}
-
-        $loop[] = '<article class="gue_leftmain' . $cls . $popular . $breaknews . '"><h3><a href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a></h3><label>Szerző: <a href="' . home_url('/szerzo/') . '?a=' . $custom_author . '" class="athr_lnk">' . $custom_author . '</a></label></article>';
-        $j++;
+        $output .= '
+          <div class="col-12 col-lg-6">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                  <div class="porta_Content_left' . $breaknews . $popular . '">
+                    <span><img src="' . $image_attributes[0] . '"></span>
+                    <h6 class="title post-title2 mt-2">
+                      <a href="' . get_the_permalink($the_query->post->ID) . '" class="text-body">' . $ttln . '</a>
+                    </h6>
+                    <div class="">              
+                      <div class="post-tagline">
+                        <div>
+                          ' . getCategoryByPostId($the_query->post->ID) . '
+                          <span>|</span>
+                          <span>' . get_post_time('H:i') .  '</span>
+                        </div>
+                        ' . $newscont . '
+                      </div>
+                    </div>
+                  </div>
+                
+        ';
+      } elseif ($i == 3) {
+        $output .= '                
+                <div class="porta_Content_left mt-2' . $breaknews . $popular . '">
+                <h6 class="title post-title2">
+                  <a href="' . get_the_permalink($the_query->post->ID) . '" class="text-body">' . $ttln . '</a>
+                </h6>                
+                <div class="">              
+                  <div class="post-tagline">
+                    <div>
+                      ' . getCategoryByPostId($the_query->post->ID) . '
+                      <span>|</span>
+                      <span>' . get_post_time('H:i') .  '</span>
+                    </div>
+                    ' . $newscont . '
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="col-12 col-lg-6">
+         ';
+      } elseif ($i > 3 && $i < 10) {
+        $output .=
+          '          
+          <div class="porta_Content_left mb-2' . $breaknews . $popular . '">
+            <h6 class="title post-title2">
+            <a href="' . get_the_permalink($the_query->post->ID) . '" class="text-body">' . $ttln . '</a>
+            </h6> 
+          </div>
+         ';
       }
-
-
-
+      if ($i == 9) {
+        $output .= ' </div>
+        </div></div>';
+      }
+      $postnot[] = $the_query->post->ID;
       $i++;
     }
 
-    $output .= '<div class="porta_left">' . $first . $second . '</div><div class="porta_right">' . join('', $loop) . '</div>';
-
-    $output .= '</div></section>';
+    $output .= '</div></div></section>';
   }
 
   // Restore original Post Data
@@ -2161,13 +2174,14 @@ function section10_shortcode($atts, $content)
   $shortcode_id = rand(0, 99999);
   $output = '';
   $tag_ar = explode(',', $tag);
-
+  global $postnot;
 
   $args = array(
     'post_type'              => 'linernews',
     'post_status'            => 'publish',
-    'posts_per_page'         => 1,
+    'posts_per_page'         => 5,
     'no_found_rows'      => true,
+    'post__not_in'           => $postnot,
     'update_post_meta_cache' => false,
     'update_post_term_cache' => false,
     'tax_query'        => array(
@@ -2180,6 +2194,7 @@ function section10_shortcode($atts, $content)
   );
 
   $the_query = new WP_Query($args);
+  $i = 1;
 
 
   if ($the_query->have_posts()) {
@@ -2189,23 +2204,79 @@ function section10_shortcode($atts, $content)
       $the_query->the_post();
 
       $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'section10-thumb');
-      $author_id = $the_query->post->post_author;
       $custom_author = get_field('news_author', $the_query->post->ID);
-      $ttln = '';
-
-
-      //if(strlen($the_query->post->post_title) > 63){
-      //$ttln= substr($the_query->post->post_title, 0, 63) . '...';
-      //}else{
       $ttln = $the_query->post->post_title;
-      //}
+      $newscont = $the_query->post->post_excerpt;
+
+      $poplr = get_field('most_popular_news', $the_query->post->ID);
+      $brknews = get_field('breaking_news', $the_query->post->ID);
+
+      if ($poplr == 1) {
+        $popular = ' post-background-green px-2';
+      } else {
+        $popular = '';
+      }
+
+      if ($brknews == 1) {
+        $breaknews = ' post-background-yellow px-2';
+        $popular = '';
+      } else {
+        $breaknews = '';
+      }
 
 
-      $output .= '<div class="div_mainLenos auto_float clr"><div class="lenus_leftBoimg"> <span><img src="' . $image_attributes[0] . '"></span> </div><div class="lenus_righttxt"><h1><a href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a></h1><label>Szerző: <a href="' . home_url('/szerzo/') . '?a=' . $custom_author . '" class="athr_lnk">' . $custom_author . '</a></label></div></div>';
+      if ($i === 1) {
+        $output .=
+          '
+          <div class="row">
+            <div class="col-12 col-lg-9">
+              <span><img src="' . $image_attributes[0] . '"></span>
+            </div>
+            <div class="col-12 col-lg-3">
+             <div class="post-tagline">
+                <div>
+                  ' . getCategoryByPostId($the_query->post->ID) . '
+                  <span>|</span>
+                  <span>' . get_post_time('H:i') .  '</span>
+                </div>                
+              </div>
+              <h6 class="title title-large mb-2">
+                <a href="' . get_the_permalink($the_query->post->ID) . '" class="text-body">' . $ttln . '</a>
+              </h6> 
+              <h5 style="font-size:22px;">
+              ' . $newscont . '
+              </h5>
+            </div>
+          </div><div class="row mt-5">
+        ';
+      } elseif ($i > 1 && $i < 6) {
+        $output .=
+          '
+          <div class="col-12 col-lg-3">
+            <div class="porta_Content_left' . $breaknews . $popular . '">
+              <span><img src="' . $image_attributes[0] . '"></span>
+              <div class="post-tagline">
+                <div>
+                  ' . getCategoryByPostId($the_query->post->ID) . '
+                  <span>|</span>
+                  <span>' . get_post_time('H:i') .  '</span>
+                </div>                  
+              </div>
+              <h6 class="title post-title2">
+                <a href="' . get_the_permalink($the_query->post->ID) . '" class="text-body">' . $ttln . '</a>
+              </h6>           
+            </div>
+          </div>
+          ';
+      }
+
+      if ($i === 5) {
+        $output .= '</div>';
+      }
+
+      $postnot[] = $the_query->post->ID;
+      $i++;
     }
-
-
-
     $output .= '</div></section>';
   }
 
@@ -2300,7 +2371,7 @@ function section_sportnews_shortcode($atts, $content)
       if ($i == 2) {
         $output .= '
         <div class="row ' . $popular . $breaknews . '">
-        <div class="col-12 col-sm-3 col-lg-3">
+        <div class="col-12 col-lg-3">
             <div>
                 <img class="w-100" src="' . $image_attributes[0] . '">
             </div>
@@ -2392,7 +2463,7 @@ function section_sportnews_shortcode($atts, $content)
 
       if ($i > 7 && $i < 11) {
         $output .= '
-        <div class="col-12 col-md-12 col-lg-12 px-0  ' . $popular . $breaknews . '">
+        <div class="col-12 col-md-12 col-lg-12 px-2 mb-2' . $popular . $breaknews . '">
           <div>
             <p class="post-tagline">
             ' . getCategoryByPostId($the_query->post->ID) . '
@@ -2538,18 +2609,18 @@ function section_stylenews_shortcode($atts, $content)
           <div class="">';
     while ($the_query->have_posts()) {
       $the_query->the_post();
-      $artclebk_img = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'video-thumb');
+      $artclebk_img = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'full');
       $poplr = get_field('most_popular_news', $the_query->post->ID);
       $brknews = get_field('breaking_news', $the_query->post->ID);
 
       if ($poplr == 1) {
-        $popular = ' post-background-green';
+        $popular = ' post-background-green px-2';
       } else {
         $popular = '';
       }
 
       if ($brknews == 1) {
-        $breaknews = ' post-background-yellow';
+        $breaknews = ' post-background-yellow px-2';
         $popular = '';
       } else {
         $breaknews = '';
@@ -2557,13 +2628,11 @@ function section_stylenews_shortcode($atts, $content)
 
 
       $output .= '
-      <div class="row  ' . $popular . $breaknews . '">
-        <div class="col-12 col-sm-3 col-lg-3">
-            <div>
-                <img class="w-100" src="' . $artclebk_img[0] . '">
-            </div>
+      <div class="center gap-4 mb-2' . $popular . $breaknews . '">
+        <div class="media-width">
+            <img class="w-100" src="' . $artclebk_img[0] . '">
         </div>
-        <div class="col-12 col-md-9 col-lg-9">
+        <div class="">
             <div>
               <p class="post-tagline">
               ' . getCategoryByPostId($the_query->post->ID) . '
@@ -2639,20 +2708,20 @@ function section_stylenews_shortcode($atts, $content)
       $brknews = get_field('breaking_news', $the_query->post->ID);
 
       if ($poplr == 1) {
-        $popular = ' post-background-green';
+        $popular = ' post-background-green px-2';
       } else {
         $popular = '';
       }
 
       if ($brknews == 1) {
-        $breaknews = ' post-background-yellow';
+        $breaknews = ' post-background-yellow px-2';
         $popular = '';
       } else {
         $breaknews = '';
       }
 
-      $output .= '<div class="col-lg-3 col-12 ' . $popular . $breaknews . '">
-                <div class="style_Bx tyle_oBx1 styMainNewC">
+      $output .= '<div class="col-lg-3 col-12">
+                <div class="style_Bx tyle_oBx1 styMainNewC h-100' . $popular . $breaknews . '">
                   <span class="nues_imgSpan">
                    <img src="' . $stylenes_img[0] . '">
                   </span>
@@ -2963,9 +3032,37 @@ function justin_shortcode($atts, $content)
       //}else{
       $ttln = $the_query->post->post_title;
       //}
+      $poplr = get_field('most_popular_news', $the_query->post->ID);
+      $brknews = get_field('breaking_news', $the_query->post->ID);
 
+      if ($poplr == 1) {
+        $popular = 'fontos';
+      } else {
+        $popular = '';
+      }
 
-      $output .= '<li><span>' . get_the_time('H:i', $the_query->post->ID) . '</span><h6><a href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a></h6></li>';
+      if ($brknews == 1) {
+        $breaknews = 'fontos';
+        $popular = '';
+      } else {
+        $breaknews = '';
+      }
+
+      $output .= '<li>          
+          <span>
+          ' . getCategoryByPostId($the_query->post->ID) . '
+            <span>|</span>
+            <span>' . get_post_time('H:i') .  '</span>
+            ';
+            if($poplr == 1 || $brknews == 1) {
+              $output .= '<img class="fontos-img" src="' . get_bloginfo("template_url") . '/images/fontos.png" style="width:15px" />';
+            }
+      $output .= '            
+          </span>
+          <h6>
+            <a href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a>
+          </h6>
+        </li>';
     }
     $output .= '</ul></div>';
   }
@@ -3290,7 +3387,7 @@ add_filter('body_class', function ($classes) {
   return $classes;
 });
 
-add_filter('wp_nav_menu_items', 'dm_switch_button', 10, 2);
+// add_filter('wp_nav_menu_items', 'dm_switch_button', 10, 2);
 function dm_switch_button($items, $args)
 {
   if ($args->theme_location == 'primary') {
