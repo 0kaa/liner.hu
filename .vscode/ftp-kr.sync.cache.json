@@ -65,15 +65,15 @@
             },
             "header.php": {
               "type": "-",
-              "size": 20149,
-              "lmtime": 1656522174550,
+              "size": 22051,
+              "lmtime": 1656626315859,
               "modified": false
             },
             "single-linernews.php": {
               "type": "-",
-              "size": 28335,
-              "lmtime": 1656098924949,
-              "modified": false
+              "size": 28385,
+              "lmtime": 1656626285107,
+              "modified": true
             },
             "content.php": {
               "type": "-",
@@ -102,8 +102,8 @@
             "inc": {
               "custom-function.php": {
                 "type": "-",
-                "size": 128307,
-                "lmtime": 1656009780475,
+                "size": 128314,
+                "lmtime": 1656627300460,
                 "modified": false
               },
               "custom-header.php": {
@@ -166,6 +166,12 @@
                 "type": "-",
                 "size": 18881,
                 "lmtime": 1654897241663,
+                "modified": false
+              },
+              "facebook_22.png": {
+                "type": "-",
+                "size": 939,
+                "lmtime": 0,
                 "modified": false
               },
               "eu2020_logo.png": {
@@ -332,9 +338,9 @@
               },
               "facebook_2.png": {
                 "type": "-",
-                "size": 939,
+                "size": 585,
                 "lmtime": 0,
-                "modified": false
+                "modified": true
               },
               "koronavirus.jpg": {
                 "type": "-",
@@ -449,6 +455,12 @@
                 "size": 1001,
                 "lmtime": 1654897251293,
                 "modified": false
+              },
+              "sztorid.png": {
+                "type": "-",
+                "size": 10822,
+                "lmtime": 1656786972059,
+                "modified": false
               }
             },
             "files": {
@@ -523,6 +535,12 @@
               "type": "-",
               "size": 1174,
               "lmtime": 1654897237185,
+              "modified": false
+            },
+            "page-sztori-bekuldes.php": {
+              "type": "-",
+              "size": 2377,
+              "lmtime": 1656845060898,
               "modified": false
             },
             "content-quote.php": {
@@ -736,8 +754,8 @@
               },
               "custom-script.js": {
                 "type": "-",
-                "size": 6499,
-                "lmtime": 1656079863256,
+                "size": 6500,
+                "lmtime": 1656547169004,
                 "modified": false
               }
             },
@@ -939,14 +957,14 @@
             },
             "custom-style.css": {
               "type": "-",
-              "size": 109981,
-              "lmtime": 1656530185704,
+              "size": 112364,
+              "lmtime": 1656788570455,
               "modified": false
             },
             "functions.php": {
               "type": "-",
-              "size": 32984,
-              "lmtime": 1656520591664,
+              "size": 32947,
+              "lmtime": 1656547889886,
               "modified": false
             },
             "page-templates": {
@@ -995,8 +1013,8 @@
             },
             "style.css": {
               "type": "-",
-              "size": 48612,
-              "lmtime": 1654897239900,
+              "size": 48630,
+              "lmtime": 1656624568439,
               "modified": false
             }
           },

@@ -890,7 +890,7 @@ function section2_shortcode($atts, $content)
       $the_query->the_post();
 
 
-      $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'full');
+      $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'video-thumb');
       $custom_author = get_field('news_author', $the_query->post->ID);
       //if(strlen($the_query->post->post_title) > 40){
       //$ttln= substr($the_query->post->post_title, 0, 40) . '...';

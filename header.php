@@ -307,7 +307,7 @@
 
 
 
-				<div class="mid-nav d-flex justify-content-between align-items-center">
+				<div class="mid-nav justify-content-between align-items-center">
 					<a href="<?php echo esc_url(home_url('/')); ?>" class="header__logo navbar-brand" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
 						<?php if (get_theme_mod('site_logo')) : ?>
 							<img src='<?php echo $logo_src; ?>' class="img-responsive" alt=""><?php endif; ?>

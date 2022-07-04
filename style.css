@@ -2040,8 +2040,8 @@ p {
 } */
 
 .post-title4 {
-    font-size: .9rem;
-    font-weight: 700;
+    font-size: 14px !important;
+	font-weight: 600 !important;
 }
 
 .post-bullet {

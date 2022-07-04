@@ -68,7 +68,7 @@ a:hover {
   font-weight: bold;
 }
 .row {
-  --bs-gutter-x: 1.5rem;
+  --bs-gutter-x: 1rem;
   --bs-gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
@@ -239,14 +239,14 @@ footer .ftrwidgetContainer aside.widget ul.menu li.current-menu-item a {
 }
 .menu_1ul li .search_btn {
   color: #000;
-  border: 1px solid;
+  border: 1px solid #a4a4a4;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 25px;
+  height: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 11px;
   margin-left: 10px;
 }
 .search_panle {
@@ -377,6 +377,12 @@ section.section_1 {
   padding-bottom: 15px;
   font-weight: 600;
 }
+
+.post-title4 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
 .nc_container {
   margin-top: -10px;
 }
@@ -1832,13 +1838,13 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
 }
 .single_news .author-desc h3 {
   font: 600 17px/17px "Bai Jamjuree";
-  color: blue;
+  color: #070707;
   margin: 8px 0 2px 0;
 }
 .single_news .author-desc p {
   margin: 0;
   font-family: "Roboto";
-  color: blue;
+  color: #444;
   font-size: 13px;
 }
 .author-detail .author-social {
@@ -2021,7 +2027,7 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
 
 .news_sidebar #text-2 .widget-title {
   position: relative;
-  padding: 0 0 15px;
+  padding: 0 0 4px;
   font: 500 30px/29px "Bai Jamjuree";
   color: #000000;
   margin: 0 0 30px 1px;
@@ -2032,7 +2038,7 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   bottom: -5px;
   left: 0;
   width: 40px;
-  height: 10px;
+  height: 5px;
   background-color: rgb(148, 148, 148);
   content: "";
 }
@@ -2267,13 +2273,14 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
 }
 .page_banner span {
   font-family: "Bai Jamjuree", sans-serif, Sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   display: flex;
   align-items: start;
   gap: 10px;
-  margin: 12px 0;
   color: #282828;
-  font-weight: 600;
+  font-weight: 300;
+  background-color: #edece8;
+  padding: 10px;
 }
 .page_banner {
   margin-bottom: 15px;
@@ -3249,6 +3256,8 @@ body.single-linernews header.move_header {
 @media (min-width: 1200px) {
   .container {
     max-width: 1200px;
+    padding-right: 3px;
+    padding-left: 3px;
   }
   .page_banner img.img-responsive {
     /* width: 1090px; */
@@ -3259,7 +3268,25 @@ body.single-linernews header.move_header {
   }
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) {
+  .col-lg-8 {
+    -ms-flex: 0 0 70.667%;
+    flex: 0 0 70.667%;
+    flex-shrink: 0;
+    max-width: 70.667%;
+  }
+  .col-lg-4 {
+    -ms-flex: 0 0 29.333%;
+    flex: 0 0 29.333%;
+    flex-shrink: 0;
+    max-width: 29.333%;
+  }
+  .col-lg-1 {
+    -ms-flex: 0 0 7.333%;
+    flex: 0 0 7.333%;
+    flex-shrink: 0;
+    max-width: 7.333%;
+  }
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .right1_content {
@@ -3479,11 +3506,20 @@ body.single-linernews header.move_header {
     padding-left: 0px;
     padding-right: 0;
   }
+
+  .mb-2,
+  .my-2 {
+    margin-top: 0rem !important;
+  }
+
   .col-md-5 {
-    -ms-flex: 0 0 35.666667%;
+    /*-ms-flex: 0 0 35.666667%;
     flex: 0 0 35.666667%;
     max-width: 35.666667%;
-    margin-top: 10px;
+    margin-top: 10px;*/
+    -ms-flex: 0 0 43.667%;
+    flex: 0 0 43.667%;
+    max-width: 43.667%;
   }
   .col-md-3 {
     -ms-flex: 0 0 25%;
@@ -3492,9 +3528,12 @@ body.single-linernews header.move_header {
     margin-left: 5px;
   }
   .col-md-7 {
-    -ms-flex: 0 0 64.333333%;
+    /*-ms-flex: 0 0 64.333333%;
     flex: 0 0 64.333333%;
-    max-width: 64.333333%;
+    max-width: 64.333333%;*/
+    -ms-flex: 0 0 56.333333%;
+    flex: 0 0 56.333333%;
+    max-width: 56.333333%;
   }
 
   .single_news > .row:not(:first-child) {
@@ -4817,9 +4856,9 @@ h5.article-meta {
 }
 
 .top-nav-link {
-  color: #000 !important;
-  font-weight: bold;
-  font-size: 13px;
+  color: #646464 !important;
+  font-weight: 300;
+  font-size: 11px;
   text-decoration: none !important;
 }
 
@@ -4832,7 +4871,7 @@ h5.article-meta {
 .currnet-date {
   font-size: 12px;
   color: #848792;
-  font-weight: bold;
+  font-weight: 300;
 }
 
 .header__logo img {
@@ -4843,6 +4882,7 @@ h5.article-meta {
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #bdbdbd;
+  display: flex;
 }
 
 .currency-gap {
@@ -4974,6 +5014,7 @@ h5.article-meta {
   align-items: center;
   width: 38px;
   height: 38px;
+  font-size: 20px;
   background: transparent !important;
   border: none;
   outline: none !important;
@@ -5088,13 +5129,15 @@ h5.article-meta {
 .breadcrumb {
   background-color: transparent;
   position: relative;
+  padding: 0 0;
+  margin-top: 10px;
 }
 .breadcrumb::after {
   content: "";
   position: absolute;
   bottom: -5px;
   width: 40px;
-  height: 10px;
+  height: 5px;
   background-color: rgb(148, 148, 148);
 }
 .breadcrumb a {
@@ -5206,6 +5249,7 @@ iframe {
   gap: 20px;
   position: sticky;
   top: 150px;
+  margin-top: 2.67rem !important;
   margin-bottom: 10px;
 }
 .fontos-img {
@@ -5369,7 +5413,7 @@ iframe {
   color: #fff;
   padding: 10px 30px 20px;
   background: #ff6d00;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 16px;
 }
 .ao-article-banner span:last-child {
@@ -5379,7 +5423,7 @@ iframe {
   margin-left: 30px;
   background: #f2f2f2;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   display: block;
 }
 .ao-article-banner span:last-child a {
@@ -5426,6 +5470,46 @@ iframe {
 }
 .notification-articles.mobile {
   display: none;
+}
+.mobile-share {
+  display: flex;
+}
+
+.sztorid-section {
+  border: 3px solid #000;
+  text-align: center;
+  padding: 86px 30px 30px;
+  margin-top: 80px;
+  position: relative;
+  margin-bottom: 80px;
+}
+
+.sztorid-section .sztorid-img {
+  position: absolute;
+  top: -43px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 0 20px;
+  background-color: white;
+  width: max-content;
+}
+.sztorid-section img {
+  width: 86px;
+  height: 86px;
+  object-fit: cover;
+}
+.sztorid-section .sztorid-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #000;  
+  margin-bottom: 20px;
+}
+.sztorid-section .sztorid-paragraph {
+  font-size: 18px;
+  font-weight: 500;
+  color: #383737;
+  margin-top: 10px;
 }
 
 @media (min-width: 992px) {

@@ -117,7 +117,7 @@ get_header(); ?>
 								$image_cap = wp_get_attachment_caption(get_post_thumbnail_id($post->ID));
 								if (!empty($image_cap)) {
 									$caption = '<span class="test">
-							<img style="width:20px;" src="' . get_bloginfo("template_url") . '/images/foto.png"  />
+							<img style="width:15px;margin-top: 5px;" src="' . get_bloginfo("template_url") . '/images/foto.png"  />
 							
 							' . $image_cap . '</span>';
 								} else {
@@ -171,7 +171,7 @@ get_header(); ?>
 								$twitterlink = get_field('twitter-url', $post->ID);
 								?>
 							<ul class="author-social">
-								<li><a class="google d-flex align-items-center" target="_blank" href="https://news.google.com/publications/CAAqBwgKMKulmQswy6-xAw?hl=hu&gl=HU&ceid=HU%253Ahu">Follow us on Google News
+								<li><a class="google d-flex align-items-center" target="_blank" href="https://news.google.com/publications/CAAqBwgKMKulmQswy6-xAw?hl=hu&gl=HU&ceid=HU%253Ahu">Google hírek
 										<img style="width:30px;margin-left:10px;object-fit:cover;" src="<?php echo get_bloginfo("template_url"); ?>/images/google_news.png" />
 									</a></li>
 								<li>
@@ -185,7 +185,7 @@ get_header(); ?>
 						<div class="row">
 							<div class="col-lg-1 order-2 order-lg-0 d-none d-lg-block">
 								<!-- share -->
-								<div class="d-flex align-items-center justify-content-between share-parent">
+								<div class="d-flex align-items-start justify-content-between share-parent h-100">
 									<div class="share-content mt-4">
 										<a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank" class="facebook-share-icon">
 											<img src="<?php echo get_bloginfo("template_url"); ?>/images/Facebook-share.png" style="width:30px" />
@@ -249,7 +249,7 @@ get_header(); ?>
 									<?php //get_template_part( 'content', get_post_format() ); 
 										?>
 								</div>
-								<div class="d-flex align-items-center justify-content-between share-parent d-lg-none">
+								<div class="mobile-share align-items-center justify-content-between share-parent d-lg-none">
 									<div class="share-content mt-4">
 										<a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank" class="facebook-share-icon">
 											<img src="<?php echo get_bloginfo("template_url"); ?>/images/Facebook-share.png" style="width:30px" />
