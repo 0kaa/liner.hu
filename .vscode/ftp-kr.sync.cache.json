@@ -54,7 +54,7 @@
             "page-friss-hirek.php": {
               "type": "-",
               "size": 4897,
-              "lmtime": 1656520596688,
+              "lmtime": 1656958509727,
               "modified": false
             },
             "content-status.php": {
@@ -66,14 +66,14 @@
             "header.php": {
               "type": "-",
               "size": 22051,
-              "lmtime": 1656626315859,
-              "modified": false
+              "lmtime": 1656522174550,
+              "modified": true
             },
             "single-linernews.php": {
               "type": "-",
-              "size": 28385,
-              "lmtime": 1656626285107,
-              "modified": true
+              "size": 29112,
+              "lmtime": 1657050684311,
+              "modified": false
             },
             "content.php": {
               "type": "-",
@@ -102,8 +102,8 @@
             "inc": {
               "custom-function.php": {
                 "type": "-",
-                "size": 128314,
-                "lmtime": 1656627300460,
+                "size": 130943,
+                "lmtime": 1657433590023,
                 "modified": false
               },
               "custom-header.php": {
@@ -171,7 +171,7 @@
               "facebook_22.png": {
                 "type": "-",
                 "size": 939,
-                "lmtime": 0,
+                "lmtime": 1656958511169,
                 "modified": false
               },
               "eu2020_logo.png": {
@@ -339,8 +339,8 @@
               "facebook_2.png": {
                 "type": "-",
                 "size": 585,
-                "lmtime": 0,
-                "modified": true
+                "lmtime": 1656958511458,
+                "modified": false
               },
               "koronavirus.jpg": {
                 "type": "-",
@@ -459,7 +459,13 @@
               "sztorid.png": {
                 "type": "-",
                 "size": 10822,
-                "lmtime": 1656786972059,
+                "lmtime": 0,
+                "modified": false
+              },
+              "24_liner.png": {
+                "type": "-",
+                "size": 24285,
+                "lmtime": 1657219234522,
                 "modified": false
               }
             },
@@ -509,8 +515,8 @@
             },
             "taxonomy-news_cat.php": {
               "type": "-",
-              "size": 13018,
-              "lmtime": 1656074432763,
+              "size": 13139,
+              "lmtime": 1657432641468,
               "modified": false
             },
             "search.php": {
@@ -539,8 +545,8 @@
             },
             "page-sztori-bekuldes.php": {
               "type": "-",
-              "size": 2377,
-              "lmtime": 1656845060898,
+              "size": 7239,
+              "lmtime": 1657048836715,
               "modified": false
             },
             "content-quote.php": {
@@ -755,8 +761,8 @@
               "custom-script.js": {
                 "type": "-",
                 "size": 6500,
-                "lmtime": 1656547169004,
-                "modified": false
+                "lmtime": 1656079863256,
+                "modified": true
               }
             },
             "image.php": {
@@ -766,6 +772,18 @@
               "modified": false
             },
             "fonts": {
+              "Balto-Medium.woff": {
+                "type": "-",
+                "size": 36232,
+                "lmtime": 1657166538749,
+                "modified": false
+              },
+              "Balto-Bold.ttf": {
+                "type": "-",
+                "size": 101392,
+                "lmtime": 1657166538435,
+                "modified": false
+              },
               "pts55f.svg": {
                 "type": "-",
                 "size": 378957,
@@ -808,10 +826,40 @@
                 "lmtime": 1654897268324,
                 "modified": false
               },
+              "Balto-Book.eot": {
+                "type": "-",
+                "size": 97066,
+                "lmtime": 1657166538571,
+                "modified": false
+              },
+              "Balto-BookItalic.eot": {
+                "type": "-",
+                "size": 92856,
+                "lmtime": 1657166538653,
+                "modified": false
+              },
+              "Balto-BookItalic.ttf": {
+                "type": "-",
+                "size": 92652,
+                "lmtime": 1657166538668,
+                "modified": false
+              },
               "FontAwesome.otf": {
                 "type": "-",
                 "size": 134808,
                 "lmtime": 1654897268780,
+                "modified": false
+              },
+              "Balto-BoldItalic.ttf": {
+                "type": "-",
+                "size": 97280,
+                "lmtime": 1657166538512,
+                "modified": false
+              },
+              "Balto-Medium.eot": {
+                "type": "-",
+                "size": 102982,
+                "lmtime": 1657166538715,
                 "modified": false
               },
               "pts75f.svg": {
@@ -844,6 +892,48 @@
                 "lmtime": 1654897271423,
                 "modified": false
               },
+              "Balto-BoldItalic.woff2": {
+                "type": "-",
+                "size": 25900,
+                "lmtime": 1657166538549,
+                "modified": false
+              },
+              "Balto-Book.woff2": {
+                "type": "-",
+                "size": 22628,
+                "lmtime": 1657166538627,
+                "modified": false
+              },
+              "Balto-MediumItalic.ttf": {
+                "type": "-",
+                "size": 97896,
+                "lmtime": 1657166538800,
+                "modified": false
+              },
+              "Balto-BookItalic.woff2": {
+                "type": "-",
+                "size": 22888,
+                "lmtime": 1657166538699,
+                "modified": false
+              },
+              "Balto-BoldItalic.eot": {
+                "type": "-",
+                "size": 97484,
+                "lmtime": 1657166538494,
+                "modified": false
+              },
+              "Balto-MediumItalic.woff": {
+                "type": "-",
+                "size": 37032,
+                "lmtime": 1657166538807,
+                "modified": false
+              },
+              "Balto-Medium.woff2": {
+                "type": "-",
+                "size": 25704,
+                "lmtime": 1657166538767,
+                "modified": false
+              },
               "myriadprobold.eot": {
                 "type": "-",
                 "size": 114574,
@@ -866,6 +956,18 @@
                 "type": "-",
                 "size": 62926,
                 "lmtime": 1654897273499,
+                "modified": false
+              },
+              "Balto-MediumItalic.eot": {
+                "type": "-",
+                "size": 98108,
+                "lmtime": 1657166538783,
+                "modified": false
+              },
+              "Balto-Medium.ttf": {
+                "type": "-",
+                "size": 102796,
+                "lmtime": 1657166538732,
                 "modified": false
               },
               "myriadproregular.ttf": {
@@ -892,10 +994,28 @@
                 "lmtime": 1654897276014,
                 "modified": false
               },
+              "Balto-BookItalic.woff": {
+                "type": "-",
+                "size": 33652,
+                "lmtime": 1657166538684,
+                "modified": false
+              },
               "myriadproregular.eot": {
                 "type": "-",
                 "size": 116410,
                 "lmtime": 1654897276473,
+                "modified": false
+              },
+              "Balto-Bold.woff": {
+                "type": "-",
+                "size": 36112,
+                "lmtime": 1657166538454,
+                "modified": false
+              },
+              "Balto-Book.ttf": {
+                "type": "-",
+                "size": 96888,
+                "lmtime": 1657166538588,
                 "modified": false
               },
               "fontawesome-webfont.eot": {
@@ -910,10 +1030,40 @@
                 "lmtime": 1654897277312,
                 "modified": false
               },
+              "Balto-Bold.eot": {
+                "type": "-",
+                "size": 101570,
+                "lmtime": 1657166538413,
+                "modified": false
+              },
+              "Balto-Bold.woff2": {
+                "type": "-",
+                "size": 25632,
+                "lmtime": 1657166538473,
+                "modified": false
+              },
+              "Balto-BoldItalic.woff": {
+                "type": "-",
+                "size": 36888,
+                "lmtime": 1657166538531,
+                "modified": false
+              },
+              "Balto-Book.woff": {
+                "type": "-",
+                "size": 32792,
+                "lmtime": 1657166538603,
+                "modified": false
+              },
               "pts55f.eot": {
                 "type": "-",
                 "size": 325492,
                 "lmtime": 1654897278025,
+                "modified": false
+              },
+              "Balto-MediumItalic.woff2": {
+                "type": "-",
+                "size": 25972,
+                "lmtime": 1657166538825,
                 "modified": false
               }
             },
@@ -957,15 +1107,15 @@
             },
             "custom-style.css": {
               "type": "-",
-              "size": 112364,
-              "lmtime": 1656788570455,
+              "size": 116288,
+              "lmtime": 1657225081955,
               "modified": false
             },
             "functions.php": {
               "type": "-",
               "size": 32947,
-              "lmtime": 1656547889886,
-              "modified": false
+              "lmtime": 1656520591664,
+              "modified": true
             },
             "page-templates": {
               "front-page.php": {
@@ -1014,8 +1164,8 @@
             "style.css": {
               "type": "-",
               "size": 48630,
-              "lmtime": 1656624568439,
-              "modified": false
+              "lmtime": 1654897239900,
+              "modified": true
             }
           },
           "index.php": {

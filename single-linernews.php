@@ -171,7 +171,7 @@ get_header(); ?>
 								$twitterlink = get_field('twitter-url', $post->ID);
 								?>
 							<ul class="author-social">
-								<li><a class="google d-flex align-items-center" target="_blank" href="https://news.google.com/publications/CAAqBwgKMKulmQswy6-xAw?hl=hu&gl=HU&ceid=HU%253Ahu">Google hírek
+								<li><a class="google d-flex align-items-center" target="_blank" href="https://news.google.com/publications/CAAqBwgKMKulmQswy6-xAw?hl=hu&amp;gl=HU&amp;ceid=HU%253Ahu" style="font-weight: 600;">Google hírek
 										<img style="width:30px;margin-left:10px;object-fit:cover;" src="<?php echo get_bloginfo("template_url"); ?>/images/google_news.png" />
 									</a></li>
 								<li>
@@ -377,8 +377,20 @@ get_header(); ?>
 				<div class="sdbrstcky_post">
 					<?php echo do_shortcode('[sidebar-sticky]'); ?>
 				</div>
+				<div class="van-sztorid-widget">
+					<div class="sztorid-img">
+						<img src="<?php echo get_template_directory_uri() ?>/images/sztorid.png" alt="ads" class="img-fluid">
+					</div>
+					<h1 class="sztorid-title">Van egy sztorid?</h1>
+					<p class="sztorid-paragraph">Szemtanúja voltál valaminek, vagy épp van egy olyan történeted, melyet szívesen megosztanál másokkal?</p>
+					<p class="sztorid-paragraph">Küldd el nekünk, és amennyiben érdekesnek találjuk, úgy közzétesszük azt oldalunkon.</p>
+					<?php $url = get_permalink(get_page_by_title('Sztori Bekuldes')); ?>
+					<div class="sztorid-button">
+						<a href="<?php echo $url; ?>" class="sztori-btn">Beküldés</a>
+					</div>
+				</div>
 				<!--Liner_cikk_jobb_2-->
-				<div class="siderbar_ads2" id="liner_cikk_jobb_2">
+				<div class="siderbar_ads2 mb-4" id="liner_cikk_jobb_2">
 					<script type="text/javascript">
 						activateBanner('liner_cikk_jobb_2');
 					</script>

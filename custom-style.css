@@ -44,6 +44,57 @@ font-family: 'Poppins', sans-serif;
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "Balto";
+  src: url("fonts/Balto-Medium.eot");
+  src: url("fonts/Balto-Medium.woff") format("woff"),
+    url("fonts/Balto-Medium.ttf") format("truetype");
+  font-weight: medium;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Balto";
+  src: url("fonts/Balto-Bold.eot");
+  src: url("fonts/Balto-Bold.woff") format("woff"),
+    url("fonts/Balto-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Balto";
+  src: url("fonts/Balto-Book.eot");
+  src: url("fonts/Balto-Book.woff") format("woff"),
+    url("fonts/Balto-Book.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Italic versions */
+@font-face {
+  font-family: "Balto";
+  src: url("fonts/Balto-MediumItalic.eot");
+  src: url("fonts/Balto-MediumItalic.woff") format("woff"),
+    url("fonts/Balto-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Balto";
+  src: url("fonts/Balto-BoldItalic.eot");
+  src: url("fonts/Balto-BoldItalic.woff") format("woff"),
+    url("fonts/Balto-BoldItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Balto";
+  src: url("fonts/Balto-BookItalic.eot");
+  src: url("fonts/Balto-BookItalic.woff") format("woff"),
+    url("fonts/Balto-BookItalic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
 .gap-4 {
   gap: 1rem !important;
 }
@@ -2028,32 +2079,63 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
 .news_sidebar #text-2 .widget-title {
   position: relative;
   padding: 0 0 4px;
-  font: 500 30px/29px "Bai Jamjuree";
+  font: 500 22px/24px "Bai Jamjuree";
   color: #000000;
-  margin: 0 0 30px 1px;
+  margin: 0;
 }
-
-.news_sidebar #text-2 .widget-title:after {
+.news_sidebar .justin_single {
+  border: 3px solid #000;
+  padding-top: 40px;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.news_sidebar .justin_single .sidebar-img {
   position: absolute;
-  bottom: -5px;
+  top: 0;
   left: 0;
-  width: 40px;
-  height: 5px;
-  background-color: rgb(148, 148, 148);
-  content: "";
+  right: 0;
+  margin: auto;
+  background-color: white;
+  max-width: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9;
 }
-.news_sidebar .justin_single ul {
-  margin-bottom: 37px;
+.meg-tobb-btn {
+  background: #567076 !important;
+  display: block;
+  color: #fff !important;
+  box-shadow: none !important;
+  width: 80%;
+  padding: 15px;
+  border-radius: 0 !important;
+  text-transform: uppercase;
+  font-size: 18px;
+  text-align: center;
+  font-weight: normal;
+}
+.news_sidebar .justin_single img {
+  max-width: 60px;
+  box-shadow: none !important;
+  border-radius: 0 !important;
 }
 .news_sidebar .justin_single ul li {
   margin: 0;
   padding: 10px 15px;
   position: relative;
-  border: 1px solid #e3e3e3;
   margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
 }
 .news_sidebar .justin_single ul li span {
-  color: blue;
+  color: #000;
+  margin-top: 3px;
+  width:35px;
 }
 .news_sidebar .justin_single ul li h6 a {
   font-size: 16px;
@@ -2065,6 +2147,7 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   overflow: hidden;
   clear: none;
   margin: 0;
+  max-width: 235px;
 }
 .news_sidebar .justin_single ul li::before {
   position: absolute;
@@ -2699,10 +2782,23 @@ li.blocks-gallery-item {
 #form-message-success {
   display: none;
 }
+.contact-us-2 #form-message-warning,
+#form-message-success {
+  display: none;
+}
 .contact-us #form-message-warning {
   color: #b90b0b;
 }
+.contact-us-2 #form-message-warning {
+  color: #b90b0b;
+}
 .contact-us #form-message-success {
+  color: #55a44e;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+.contact-us-2 #form-message-success {
   color: #55a44e;
   font-size: 18px;
   font-weight: 600;
@@ -5502,7 +5598,7 @@ iframe {
 .sztorid-section .sztorid-title {
   font-size: 32px;
   font-weight: 600;
-  color: #000;  
+  color: #000;
   margin-bottom: 20px;
 }
 .sztorid-section .sztorid-paragraph {
@@ -5512,6 +5608,81 @@ iframe {
   margin-top: 10px;
 }
 
+input.contact-submit-btn {
+  background: #567076 !important;
+  display: block;
+  color: #fff;
+  box-shadow: none !important;
+  width: 100%;
+  padding: 15px;
+  min-height: 53.5px;
+  border: 1px solid transparent !important;
+  border-radius: 0 !important;
+}
+.filepond--credits {
+  display: none;
+}
+.upload-file-btn {
+  background: #f3f3f3 !important;
+  border: 1px solid #000 !important;
+  display: block;
+  color: #000;
+  box-shadow: none !important;
+  padding: 15px;
+  margin: 0;
+  cursor: pointer;
+}
+.form-bot {
+  gap: 30px;
+}
+.van-sztorid-widget {
+  border: 3px solid #000;
+  padding: 30px;
+  margin-bottom: 30px;
+  margin-top: 27px;
+  text-align: center;
+  position: relative;
+}
+.van-sztorid-widget .sztorid-img {
+  position: absolute;
+  top: -27px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 0 20px;
+  background-color: white;
+  width: max-content;
+}
+.van-sztorid-widget .sztorid-img img {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+}
+.van-sztorid-widget .sztorid-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 20px;
+}
+.van-sztorid-widget .sztorid-paragraph {
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #383737;
+  margin-top: 10px;
+  text-align: center;
+}
+.van-sztorid-widget .sztori-btn {
+  background: #567076 !important;
+  display: block;
+  color: #fff !important;
+  box-shadow: none !important;
+  width: 100%;
+  padding: 15px;
+  border-radius: 0 !important;
+  text-transform: uppercase;
+  font-size: 18px;
+}
 @media (min-width: 992px) {
   .category-wide-section {
     flex: 0 0 69.666667% !important;
@@ -5614,6 +5785,13 @@ iframe {
 }
 
 @media (max-width: 768px) {
+  .form-bot {
+    gap: 30px;
+  }
+
+  .upload-file-btn {
+    width: 100% !important;
+  }
   .top-nav .top-nav-link {
     display: none !important;
   }

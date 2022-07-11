@@ -901,13 +901,13 @@ function section2_shortcode($atts, $content)
       $brknews = get_field('breaking_news', $the_query->post->ID);
 
       if ($poplr == 1) {
-        $popular = ' post-background-green px-2';
+        $popular = ' post-background-green px-2 mb-2';
       } else {
         $popular = '';
       }
 
       if ($brknews == 1) {
-        $breaknews = ' post-background-yellow px-2';
+        $breaknews = ' post-background-yellow px-2 mb-2';
         $popular = '';
       } else {
         $breaknews = '';
@@ -916,11 +916,12 @@ function section2_shortcode($atts, $content)
       if ($z == 1) {
         $output .= '
       <div class="col-12 col-md-7 col-lg-7">
-            <div class="' . $popular . $breaknews . '">
+            <div>
                 <div>
                   <img class="w-100" src="' . $image_attributes[0] . '">
                 </div>
-            <div>
+            <div class="' . $popular . $breaknews . '">
+              <div>
               <p class="post-tagline">
                 ' . getCategoryByPostId($the_query->post->ID) . '
                 <span>|</span>
@@ -935,6 +936,7 @@ function section2_shortcode($atts, $content)
           <p class="post-description section1-description">
             ' . $the_query->post->post_excerpt . '
           </p>
+            </div>
       </div>';
       } elseif ($z <= 5) {
         $output .= '        
@@ -980,12 +982,13 @@ function section2_shortcode($atts, $content)
       if ($z > 7) {
         $output .= '
                 <div class="my-2">
-                  <div class="' . $popular . $breaknews . '">
                   <div>
-                  <img class="w-100" src="' . $image_attributes[0] . '">
-              </div>
                     <div>
-                        <p class="post-tagline">
+                      <img class="w-100" src="' . $image_attributes[0] . '">
+                    </div>
+                    <div>
+                     <div class="' . $popular . $breaknews . '">
+                           <p class="post-tagline">
                         ' . getCategoryByPostId($the_query->post->ID) . '
                           <span>|</span>
                           <span>' . get_post_time('H:i') .  '</span>
@@ -995,7 +998,8 @@ function section2_shortcode($atts, $content)
                         <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
                           ' . $ttln . '
                         </a>
-                      </h2>
+                      </h2> 
+                    </div>
                      
                     </div>
                   </div>
@@ -1081,13 +1085,13 @@ function section3_shortcode($atts, $content)
       $brknews = get_field('breaking_news', $the_query->post->ID);
 
       if ($poplr == 1) {
-        $popular = ' post-background-green px-2';
+        $popular = ' post-background-green px-0 py-0';
       } else {
         $popular = '';
       }
 
       if ($brknews == 1) {
-        $breaknews = ' post-background-yellow px-2';
+        $breaknews = ' post-background-yellow px-0 py-0';
         $popular = '';
       } else {
         $breaknews = '';
@@ -1114,7 +1118,8 @@ function section3_shortcode($atts, $content)
                             <div>
                               <img class="w-100" src="' . $image_attributes[0] . '">
                             </div>
-                          <div>
+                         <div class="px-2 py-2">
+                             <div>
                           <p class="post-tagline">
                           ' . getCategoryByPostId($the_query->post->ID) . '
                           <span>|</span>
@@ -1128,6 +1133,7 @@ function section3_shortcode($atts, $content)
                             <p class="post-description section1-description">
                               ' . $the_query->post->post_excerpt . '
                             </p>
+                         </div>
                         </div>
                     </div>
                 </div>
@@ -1717,26 +1723,28 @@ function fekete_shortcode($atts, $content)
       if ($i <= 4) {
         $output .=  '
             <div class="col-12 col-lg-3 mb-3 d-flex flex-column justify-content-between">
-              <div class="h-100 ' . $popular . $breaknews . '">
-                   <div>
+              <div class="h-100 ' . $popular . $breaknews . '" style="padding:0 !important;">
+                  <div>
                    <img class="w-100" src="' . $image_attributes[0] . '">
                  </div>
-                 <div>
-                   <p class="post-tagline">
-                   ' . getCategoryByPostId($the_query->post->ID) . '
-                     <span>|</span>
-                     <span>' . get_post_time('H:i') .  '</span>
-                   </p>
-                 </div>
-                 <h2 class="post-title post-title3">
-                 <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
-                   ' . $the_query->post->post_title . '
-                 </a></h2>
-                 <p class="post-description section1-description">
-                   ' . $the_query->post->post_excerpt . '
-                 </p> 
-                   </div>               
-                    <hr>
+               <div class="px-2">
+               <div>
+               <p class="post-tagline">
+               ' . getCategoryByPostId($the_query->post->ID) . '
+                 <span>|</span>
+                 <span>' . get_post_time('H:i') .  '</span>
+               </p>
+             </div>
+             <h2 class="post-title post-title3">
+             <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
+               ' . $the_query->post->post_title . '
+             </a></h2>
+             <p class="post-description section1-description">
+               ' . $the_query->post->post_excerpt . '
+             </p> 
+               </div>
+                  </div>               
+                  <hr>
                 </div>
             ';
       } else {
@@ -2253,18 +2261,20 @@ function section10_shortcode($atts, $content)
         $output .=
           '
           <div class="col-12 col-lg-3">
-            <div class="porta_Content_left' . $breaknews . $popular . '">
+            <div class="porta_Content_left' . $breaknews . $popular . '" style="padding:0 !important;">
               <span><img src="' . $image_attributes[0] . '"></span>
-              <div class="post-tagline">
-                <div>
-                  ' . getCategoryByPostId($the_query->post->ID) . '
-                  <span>|</span>
-                  <span>' . get_post_time('H:i') .  '</span>
-                </div>                  
+              <div class="px-2">
+                <div class="post-tagline">
+                  <div>
+                    ' . getCategoryByPostId($the_query->post->ID) . '
+                    <span>|</span>
+                    <span>' . get_post_time('H:i') .  '</span>
+                  </div>                  
+                </div>
+                <h6 class="title post-title2">
+                  <a href="' . get_the_permalink($the_query->post->ID) . '" class="text-body">' . $ttln . '</a>
+                </h6>           
               </div>
-              <h6 class="title post-title2">
-                <a href="' . get_the_permalink($the_query->post->ID) . '" class="text-body">' . $ttln . '</a>
-              </h6>           
             </div>
           </div>
           ';
@@ -2346,26 +2356,28 @@ function section_sportnews_shortcode($atts, $content)
 
       $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'full');
       if ($i == 1) {
-        $output .= '<div class="row ' . $popular . $breaknews . '">
-            <div class="col-12 col-md-12 col-lg-12">
+        $output .= '<div class="row">
+            <div class="col-12 col-md-12 col-lg-12  ' . $popular . $breaknews . '" style="padding:0 !important;">
                 <div>
                   <img class="w-100" src="' . $image_attributes[0] . '">
                 </div>
+            <div class="px-2">
             <div>
-              <p class="post-tagline">
-              ' . getCategoryByPostId($the_query->post->ID) . '
-                <span>|</span>
-                <span>' . get_post_time('H:i') .  '</span>
-              </p>
-          </div>
-          <h2 class="post-title post-title2">
-            <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
-            ' . get_the_title() . '
-            </a>
-          </h2>
-          <p class="post-description section1-description">
-            ' . $the_query->post->post_excerpt . '
-          </p>               
+            <p class="post-tagline">
+            ' . getCategoryByPostId($the_query->post->ID) . '
+              <span>|</span>
+              <span>' . get_post_time('H:i') .  '</span>
+            </p>
+        </div>
+        <h2 class="post-title post-title2">
+          <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
+          ' . get_the_title() . '
+          </a>
+        </h2>
+        <p class="post-description section1-description">
+          ' . $the_query->post->post_excerpt . '
+        </p>   
+            </div>            
       </div></div><hr>';
       }
       if ($i == 2) {
@@ -2708,13 +2720,13 @@ function section_stylenews_shortcode($atts, $content)
       $brknews = get_field('breaking_news', $the_query->post->ID);
 
       if ($poplr == 1) {
-        $popular = ' post-background-green px-2';
+        $popular = ' post-background-green px-0 px-0';
       } else {
         $popular = '';
       }
 
       if ($brknews == 1) {
-        $breaknews = ' post-background-yellow px-2';
+        $breaknews = ' post-background-yellow px-0 py-0';
         $popular = '';
       } else {
         $breaknews = '';
@@ -2725,13 +2737,15 @@ function section_stylenews_shortcode($atts, $content)
                   <span class="nues_imgSpan">
                    <img src="' . $stylenes_img[0] . '">
                   </span>
-                  <label class="">
-                  ' . getCategoryByPostId($the_query->post->ID) . '
-                  <b></b></label>
-                  <label>' . $dfrnc . '</label>
-                  <div class="nues_content style_new_ContentBox' . $popular . $breaknews . '">
-                   <p><a href="' . get_the_permalink($the_query->post->ID) . '">' . $the_query->post->post_title . '</a></p>                 
-                  </div>
+               <div class="px-2">
+               <label class="">
+               ' . getCategoryByPostId($the_query->post->ID) . '
+               <b></b></label>
+               <label>' . $dfrnc . '</label>
+               <div class="nues_content style_new_ContentBox' . $popular . $breaknews . '">
+                <p><a href="' . get_the_permalink($the_query->post->ID) . '">' . $the_query->post->post_title . '</a></p>                 
+               </div>
+                </div>
                 </div>
                </div>';
     }
@@ -2998,7 +3012,7 @@ function justin_shortcode($atts, $content)
   $args = array(
     'post_type'         => 'linernews',
     'post_status'       => 'publish',
-    'posts_per_page'    => 6,
+    'posts_per_page'    => 5,
     'no_found_rows'      => true,
     'update_post_meta_cache' => false,
     'update_post_term_cache' => false,
@@ -3023,7 +3037,11 @@ function justin_shortcode($atts, $content)
   $the_query = new WP_Query($args);
 
   if ($the_query->have_posts()) {
-    $output .= '<div class="justin_single"><ul>';
+    $output .= '<div class="justin_single">
+    <div class="sidebar-img">
+    <img src="' . get_template_directory_uri() . '/images/24_liner.png" class="img-responsive">
+    </div>
+    <ul>';
     while ($the_query->have_posts()) {
       $the_query->the_post();
 
@@ -3050,13 +3068,12 @@ function justin_shortcode($atts, $content)
 
       $output .= '<li>          
           <span>
-          ' . getCategoryByPostId($the_query->post->ID) . '
-            <span>|</span>
+          
             <span>' . get_post_time('H:i') .  '</span>
             ';
-            if($poplr == 1 || $brknews == 1) {
-              $output .= '<img class="fontos-img" src="' . get_bloginfo("template_url") . '/images/fontos.png" style="width:15px" />';
-            }
+      // if ($poplr == 1 || $brknews == 1) {
+      //   $output .= '<img class="fontos-img" src="' . get_bloginfo("template_url") . '/images/fontos.png" style="width:15px" />';
+      // }
       $output .= '            
           </span>
           <h6>
@@ -3064,7 +3081,11 @@ function justin_shortcode($atts, $content)
           </h6>
         </li>';
     }
-    $output .= '</ul></div>';
+    $output .= '</ul>
+      <a class="meg-tobb-btn" href="' . get_permalink(get_page_by_title('Friss hirek')) . '">
+      MÉG TÖBB
+      </a>
+    </div>';
   }
 
   // Restore original Post Data
@@ -3755,8 +3776,6 @@ function add_breaking_bar()
     function liner_contact_us_ajax()
     {
       // Implement ajax function here
-
-      /* 	print_r($_POST); */
       if (isset($_POST['action'])) {
 
         $name = trim($_POST['name']);
@@ -3772,10 +3791,10 @@ function add_breaking_bar()
 
         $subject = 'contact us email : ' . $subject;
         $body = "Name : $name <br/>
-			Email : $email <br/>
-			Subject : $subject <br/>
-			Message : $message <br/>
-			";
+      Email : $email <br/>
+      Subject : $subject <br/>
+      Message : $message <br/>
+      ";
         $headers[] = "From: $site <$from>";
         $headers[] = 'Content-Type: text/html; charset=UTF-8';
 
@@ -3790,7 +3809,64 @@ function add_breaking_bar()
       wp_die();
     }
     add_action('wp_ajax_liner_contact_us', 'liner_contact_us_ajax');    // If called from admin panel
-    add_action('wp_ajax_nopriv_liner_contact_use', 'liner_contact_us_ajax');    // If called from front end
+    add_action('wp_ajax_nopriv_liner_contact_us', 'liner_contact_us_ajax');    // If called from front end
+    function liner_contact_us_2_ajax()
+    {
+      // Implement ajax function here
+
+
+      $kv_errors = array();
+      if ('POST' == $_SERVER['REQUEST_METHOD']) {
+        $fields = array('name', 'email', 'message');
+
+        foreach ($fields as $field) {
+          if (isset($_POST[$field])) $posted[$field] = stripslashes(trim($_POST[$field]));
+          else $posted[$field] = '';
+        }
+        if ($posted['name'] == null)
+          array_push($kv_errors,  sprintf('Notice: Please enter Your Name.', 'kvcodes'));
+
+        if ($posted['email'] == null)
+          array_push($kv_errors,  sprintf('Notice: Please enter Your Email.', 'kvcodes'));
+
+        if ($posted['message'] == null)
+          array_push($kv_errors,  sprintf('Notice: Please enter Your Message.', 'kvcodes'));
+
+        $errors = array_filter($kv_errors);
+
+        if (empty($errors)) {
+          if (!function_exists('wp_handle_upload')) {
+            require_once(ABSPATH . 'wp-admin/includes/file.php');
+          }
+
+          $uploadedfile = $_FILES['file'];
+
+          $upload_overrides = array('test_form' => false);
+
+          $movefile = wp_handle_upload($uploadedfile, $upload_overrides);
+
+          if ($movefile && !isset($movefile['error'])) {
+            $movefile['url'];
+          }
+
+          $attachments = array($movefile['file']);
+          $headers = 'From: ' . $posted['name'] . ' <' . $posted['email'] . '>' . "\r\n";
+          $body = '
+          Name: ' . $posted['name'] . '<br>
+          Email: ' . $posted['email'] . '<br>
+          Message: ' . $posted['message'] . '<br>
+          Attachment: ' . $movefile['url'] . '<br>
+          ';
+          wp_mail('sztori@liner.hu', 'Sendmail', $body, $headers);
+          echo 'OK';
+          unlink($movefile['file']);
+        }
+      }
+
+      wp_die();
+    }
+    add_action('wp_ajax_liner_contact_us_2', 'liner_contact_us_2_ajax');    // If called from admin panel
+    add_action('wp_ajax_nopriv_liner_contact_us_2', 'liner_contact_us_2_ajax');    // If called from front end
 
     function feed_extra($qv)
     {

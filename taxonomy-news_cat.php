@@ -353,7 +353,11 @@ function getCategoryOrSub($id)
 							));
 
 							if ($posts) {
-								$output .= '<div class="justin_single"><ul>';
+								$output .= '<div class="justin_single" style="padding-top:60px">
+								<div class="sidebar-img">
+								<img src="' . get_template_directory_uri() . '/images/24_liner.png" class="img-responsive">
+								</div>
+								<ul>';
 								foreach ($posts as $post) {
 
 									$ttln = $post->post_title;
@@ -375,8 +379,7 @@ function getCategoryOrSub($id)
 
 									$output .= '<li>          
 								  <span>
-								  ' . getCategoryByPostId($post->ID) . '
-									<span>|</span>
+								  
 									<span>' . get_post_time('H:i') .  '</span>
 									';
 									if ($poplr == 1 || $brknews == 1) {
