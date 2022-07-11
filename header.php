@@ -111,22 +111,8 @@
 
 			$last_visit_query = new WP_Query($last_visit_args);
 		} else {
-			$last_visit_args = array(
-				'post_type' => 'not_found',
-				'post_status' => 'publish',
-				'posts_per_page' => 15,
-				'orderby' => 'date',
-				'order' => 'DESC',
-				'date_query' => array(
-					array(
-						'after' => $date,
-						'inclusive' => true,
-					)
-				),
-
-			);
-
-			$last_visit_query = new WP_Query($last_visit_args);
+		
+			$last_visit_query = array();
 		}
 	}
 	?>
@@ -635,7 +621,7 @@
 						echo '</div></div></nav>';
 					}
 
-					if ($last_visit_query->have_posts()) {
+					if ($last_visit_query &&$last_visit_query->have_posts()) {
 						echo '<div class="last-visit-modal">
 						<div class="container">
 							<div class="text-right">
