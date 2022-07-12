@@ -1405,8 +1405,8 @@ function section5_shortcode($atts, $content)
 
       if ($i > 0 && $i < 2) {
         $output .= '
-              <div class="row mb-3' . $popular . $breaknews . '">
-                  <div class="col-12 col-md-6 col-lg-6">
+              <div class="row mb-3' . $popular . $breaknews . '" style="padding:0 !important;">
+                  <div class="col-12 col-md-6 col-lg-6"  style="padding:0 !important;">
                       <div>
                         <img class="w-100" src="' . $image_attributes[0] . '">
                       </div>
@@ -1435,13 +1435,13 @@ function section5_shortcode($atts, $content)
 
         $output .= '
               <div class="col-12 col-md-6 col-lg-6 d-flex flex-column justify-content-between">
-                <div class="row  ' . $popular . $breaknews . '">
-                    <div class="col-12 col-md-4 col-lg-4">
-                      <div>
-                          <img class="w-100" src="' . $image_attributes[0] . '">
+                <div class="row h-100">
+                    <div class="col-12 col-md-4 col-lg-4" style="padding-right:0 !important;">
+                      <div class="h-100">
+                          <img class="w-100 h-100" style="object-fit:cover;" src="' . $image_attributes[0] . '">
                       </div>
                     </div>
-                  <div class="col-12 col-md-8 col-lg-8">
+                  <div class="col-12 col-md-8 col-lg-8  ' . $popular . $breaknews . '">
                     <div>
                       <p class="post-tagline">
                       ' . getCategoryByPostId($the_query->post->ID) . '
@@ -1450,7 +1450,7 @@ function section5_shortcode($atts, $content)
                       </p>
 
                   </div>
-                    <h2 class="post-title post-title2">
+                    <h2 class="post-title post-title2 m-0">
                       <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
                         ' . $ttln . '
                       </a>
@@ -2626,25 +2626,31 @@ function section_stylenews_shortcode($atts, $content)
       $brknews = get_field('breaking_news', $the_query->post->ID);
 
       if ($poplr == 1) {
-        $popular = ' post-background-green px-2';
+        $popular = ' post-background-green px-3';
       } else {
         $popular = '';
       }
 
       if ($brknews == 1) {
-        $breaknews = ' post-background-yellow px-2';
+        $breaknews = ' post-background-yellow px-3';
         $popular = '';
       } else {
         $breaknews = '';
       }
 
+      if ($brknews == 1 || $poplr == 1) {
+        $gap = '';
+      } else {
+        $gap = 'gap-4';
+      }
+
 
       $output .= '
-      <div class="center gap-4 mb-2' . $popular . $breaknews . '">
+      <div class="d-flex mb-2 ' . $gap . '">
         <div class="media-width">
             <img class="w-100" src="' . $artclebk_img[0] . '">
         </div>
-        <div class="">
+        <div class="' . $popular . $breaknews . '">
             <div>
               <p class="post-tagline">
               ' . getCategoryByPostId($the_query->post->ID) . '
@@ -2652,7 +2658,7 @@ function section_stylenews_shortcode($atts, $content)
                 <span>' . get_post_time('H:i') .  '</span>
               </p>
             </div>            
-              <h2 class="post-title post-title2">
+              <h2 class="post-title post-title2 mb-0">
                 <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
                 ' . $the_query->post->post_title . '
                 </a>
