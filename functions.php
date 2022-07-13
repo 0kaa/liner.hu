@@ -1046,9 +1046,9 @@ if (!function_exists('liner_content_nav')) :
 			if (is_admin()) return;
 			$current = current_time('timestamp');
 			if (!isset($_COOKIE['lastvisit'])) {
-				
+
 				$expire = $current + 31536000;
-				
+
 				setcookie('lastvisit', $current, $expire, COOKIEPATH, COOKIE_DOMAIN);
 			}
 		}
@@ -1081,3 +1081,9 @@ if (!function_exists('liner_content_nav')) :
 			}
 			return $output;
 		}
+		function wptrc_query_vars($query_vars)
+		{
+			$query_vars[] = 'date';
+			return $query_vars;
+		}
+		add_filter('query_vars', 'wptrc_query_vars');

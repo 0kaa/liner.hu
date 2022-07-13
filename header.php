@@ -111,7 +111,7 @@
 
 			$last_visit_query = new WP_Query($last_visit_args);
 		} else {
-		
+
 			$last_visit_query = array();
 		}
 	}
@@ -311,7 +311,7 @@
 										<span class="change up"></span>
 									</div>
 									<span class="value">
-										<?php echo $usd_currency; ?>
+										<?php echo number_format($usd_currency, 3, ',', ' '); ?>
 									</span>
 								</div>
 							</div>
@@ -321,7 +321,7 @@
 								</div>
 								<div class="info">
 									<div class="top"><span class="title">Euró</span> <span class="change up"></span></div>
-									<span class="value"><?php echo $eur_currency; ?></span>
+									<span class="value"><?php echo number_format($eur_currency, 3, ',', ' '); ?></span>
 								</div>
 							</div>
 							<div class="item">
@@ -332,7 +332,8 @@
 									<div class="top"><span class="title">Font</span> <span class="change up"></span>
 									</div>
 									<span class="value">
-										<?php echo $gbp_currency; ?>
+										<?php echo number_format($gbp_currency, 3, ',', ' '); ?>
+
 									</span>
 								</div>
 							</div>
@@ -343,7 +344,7 @@
 								<div class="info">
 									<div class="top"><span class="title">Bitcoin</span> <span class="change up"></span>
 									</div>
-									<span class="value"><?php echo $btc_currency; ?></span>
+									<span class="value"><?php echo number_format($btc_currency); ?></span>
 								</div>
 							</div>
 						</div>
@@ -621,7 +622,7 @@
 						echo '</div></div></nav>';
 					}
 
-					if ($last_visit_query &&$last_visit_query->have_posts()) {
+					if ($last_visit_query && $last_visit_query->have_posts()) {
 						echo '<div class="last-visit-modal">
 						<div class="container">
 							<div class="text-right">

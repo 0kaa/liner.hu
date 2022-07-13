@@ -217,6 +217,18 @@ jQuery(document).ready(function ($) {
 		$(this).find('i').toggleClass('fa-angle-right fa-minus');
 		$(this).next('ul').toggleClass('active');
 	});
+	var $temp = $("<input>");
+
+	$('.copy-link.pr').on('click', function(e) {
+		e.preventDefault();
+		var $url = $(this).data('permalink');
+		$("body").append($temp);
+		$temp.val($url).select();
+		document.execCommand("copy");
+		$temp.remove();
+		$('.copy-message').text('URL másolva!');
+		$('.copy-message').fadeIn(500).delay(1000).fadeOut(500);
+	});
 });
 
 
