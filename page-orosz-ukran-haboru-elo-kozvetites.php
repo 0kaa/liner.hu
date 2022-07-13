@@ -1,6 +1,7 @@
 <?php
 get_header();
-$paged = (get_query_var('date')) ? get_query_var('date') : 1;
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+echo $paged;
 $date = '';
 global $postnotin;
 $i = 1;
@@ -40,7 +41,7 @@ $the_query = new WP_Query($args); ?>
         endif;
         ?>
 
-        <p>description we will change it </p>
+        <p class="mb-4">Élő közvetítés az orosz-ukrán háború történéseiről</p>
         <div class="row">
             <div class="col-md-8 category-wide-section">
                 <div class="key-points-section">
@@ -74,9 +75,10 @@ $the_query = new WP_Query($args); ?>
                     $short_args = array(
                         'post_type'              => 'linernews',
                         'post_status'            => 'publish',
-                        'posts_per_page'         =>    10,
+                        'posts_per_page'         =>    5,
                         // 'post__not_in'           => $postnotin,
                         'orderby'                => 'date',
+                        'paged'                  => $paged,
                         'tax_query'              => array(
                             array(
                                 'taxonomy' => 'newstag',
@@ -93,6 +95,23 @@ $the_query = new WP_Query($args); ?>
                         while ($short_query->have_posts()) :
                             $short_query->the_post();
                             $permalink = get_permalink();
+
+                            $poplr = get_field('most_popular_news', $short_query->post->ID);
+                            $brknews = get_field('breaking_news', $short_query->post->ID);
+
+                            if ($poplr == 1) {
+                                $popular = ' timeline-highlighted ';
+                            } else {
+                                $popular = '';
+                            }
+
+                            if ($brknews == 1) {
+                                $breaknews = ' timeline-highlighted ';
+                                $popular = '';
+                            } else {
+                                $breaknews = '';
+                            }
+
                             ?>
                             <div class="timeline-item">
                                 <div class="timeline-header mb-3 d-flex align-items-center justify-content-between">
@@ -122,7 +141,7 @@ $the_query = new WP_Query($args); ?>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="timeline-content">
+                                <div class="timeline-content <?php echo $popular . $breaknews; ?>">
                                     <?php $terms = get_the_terms($post->ID, 'newstag');
                                             $term_list = array();
                                             foreach ($terms as $term) {
@@ -145,10 +164,24 @@ $the_query = new WP_Query($args); ?>
                                 </div>
                             </div>
                     <?php endwhile;
-                    wp_reset_query();
+                        wp_reset_query();
                     endif;
                     ?>
                 </div>
+                <?php
+
+                $big = 999999999; // need an unlikely integer
+                echo '<div class="text-center">';
+                echo '<div class="page-links page cat aut">';
+                echo paginate_links(array(
+                    'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                    'format' => '?paged=%#%',
+                    'current' => max(1, get_query_var('paged')),
+                    'total' => $short_query->max_num_pages
+                ));
+                echo '</div>';
+                echo '</div>';
+                ?>
             </div>
             <div class="col-md-4 category-wide-sidebar">
                 <?php if (is_active_sidebar('sidebar-5')) : ?>
