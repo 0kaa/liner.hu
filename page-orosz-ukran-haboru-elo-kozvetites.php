@@ -1,7 +1,6 @@
 <?php
 get_header();
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-echo $paged;
 $date = '';
 global $postnotin;
 $i = 1;
@@ -120,7 +119,7 @@ $the_query = new WP_Query($args); ?>
                                     </div>
                                     <div class="d-flex align-items-start justify-content-between share-parent h-100">
                                         <div class="share-content flex-row" style="margin:0 !important;">
-                                            <a href="#" class="copy-link pr" data-permalink="<?php echo $permalink; ?>" id="copylink_<?php echo $post->ID ?>">
+                                            <a href="#" class="copy-link pr" data-permalink="<?php echo $permalink; ?>" data-id="copylink_<?php echo $post->ID ?>">
                                                 <img src="<?php echo get_bloginfo("template_url"); ?>/images/copy.png" style="width:30px" />
                                             </a>
                                             <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $permalink; ?>" target="_blank" class="facebook-share-icon">
@@ -131,7 +130,7 @@ $the_query = new WP_Query($args); ?>
                                             </a>
 
 
-                                            <div class="copy-message">
+                                            <div class="copy-message" data-id="copylink_<?php echo $post->ID ?>">
                                                 URL másolva
                                             </div>
 

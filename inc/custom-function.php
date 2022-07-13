@@ -663,13 +663,13 @@ function get_latest_news_blocks($postnot_in = 0)
 
 
     $output_latest_news_block[$i] = '
-        <div class="center px-2 gap-4 ' . $popular . $breaknews . '">            
-            <div class="w-25">
-                <img class="w-100" src="' . $image_attributes[0] . '">
+        <div class="d-flex">            
+            <div style="max-width:30%;">
+                <img class="w-100 h-100" style="object-fit:cover;" src="' . $image_attributes[0] . '">
             </div>            
-            <div>
+            <div class=" ' . $popular . $breaknews . ' pl-3 d-flex flex-column justify-content-center" >
                 <div>
-                    <p class="post-tagline">
+                    <p class="post-tagline mt-0">
                         ' . getCategoryByPostId($latest_news->post->ID) . '
                         <span>|</span>
 					    <span>' . get_post_time('H:i') .  '</span>
@@ -993,12 +993,13 @@ function section2_shortcode($atts, $content)
                           <span>|</span>
                           <span>' . get_post_time('H:i') .  '</span>
                         </p>
-                      </div>
+                     
                       <h2 class="post-title post-title4">
                         <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
                           ' . $ttln . '
                         </a>
                       </h2> 
+                      </div>
                     </div>
                      
                     </div>
@@ -1205,7 +1206,7 @@ function section4_shortcode($atts, $content)
   $args = array(
     'post_type'              => 'linernews',
     'post_status'            => 'publish',
-    'posts_per_page'         => 5,
+    'posts_per_page'         => 6,
     'post__not_in'       => $postnot,
     'no_found_rows'      => true,
     'update_post_meta_cache' => false,
@@ -1222,189 +1223,176 @@ function section4_shortcode($atts, $content)
   );
 
   $the_query = new WP_Query($args);
-  if ($the_query->have_posts()) {
-    $output .= '<section class="section_poartMian"><div class="poart_container"><div class="auto_float"><div class="row"><div class="col-md-5 col-sm-12 col-xs-12"><div class="poart_pcol4">';
+  if ($the_query->have_posts()) :
+    $output .= '
+    <section class="uk-war-section">    
+      <span class="d-flex align-items-center uk-war-title">
+        <span style="width: 0.75rem;height: 0.75rem;position: relative;margin-right: 0.75rem;" class="w-3 h-3 mr-3 relative live_icon"></span> 
+        Russia\'s War Against Ukraine
+      </span>
+    ';
 
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
-
-      $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'mosttag-thumb');
-      $ttln = '';
-
-
-      if ($i == 1) {
-        $custom_author = get_field('news_author', $the_query->post->ID);
-        //if(strlen($the_query->post->post_title) > 76){
-        //$ttln= substr($the_query->post->post_title, 0, 76) . '...';
-        //}else{
-        $ttln = $the_query->post->post_title;
-        //}
-        $output .= '<span class="spanImg"><img src="' . $image_attributes[0] . '"></span></div></div><div class="col-md-7 col-sm-12 col-xs-12"><div class="poart_pcol4 right_poart"><label>' . $tagterm->name . '</label><p><a href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a></p>';
-      } else {
-        //if(strlen($the_query->post->post_title) > 40){
-        //$ttln= substr($the_query->post->post_title, 0, 40) . '...';
-        //}else{
-        $ttln = '<a href="' . get_the_permalink($the_query->post->ID) . '">' . $the_query->post->post_title . '</a>';
-        //}
-        $relpost[] = '<li><span>' . get_the_time('H:i', $the_query->post->ID) . '</span> ' . $ttln . '</li>';
-      }
-      $postnot[] = $the_query->post->ID;
-      $i++;
-    }
-
-    $output .= '<ul>' . join('', $relpost) . '</ul></div></div></div></div></div></section>';
-  }
-
-  // Restore original Post Data
-  wp_reset_postdata();
-  $tag_ar = explode(',', $tag);
-  $i = 1;
-  $relpost = array();
-  global $postnot;
-
-  $tagterm = get_term_by('slug', $tag, 'newstag');
-
-  $args = array(
-    'post_type'              => 'linernews',
-    'post_status'            => 'publish',
-    'posts_per_page'         => 4,
-    'post__not_in'       => $postnot,
-    'no_found_rows'      => true,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-    'tax_query'        => array(
-      array(
-        'taxonomy' => 'newstag',
-        'field' => 'slug',
-        'terms' => $tag_ar,
-        'terms' => array('koronavirus'),
-        'operator' => 'IN'
-      )
-    )
-  );
-
-  $the_query = new WP_Query($args);
-  if ($the_query->have_posts()) {
-    $output .= '<section class="section_poartMian"><div class="poart_container korona"><div class="auto_float"><div class="row"><div class="col-md-5 col-sm-12 col-xs-12"><div class="poart_pcol4">';
-
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
+    while ($the_query->have_posts()) : $the_query->the_post();
 
       $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'mosttag-thumb');
-      $ttln = '';
+      ?>
+
+    <?php $postnot[] = $the_query->post->ID;
+          $i++;
+        endwhile;
+        $output .= '</section>';
+      endif;
+
+      // Restore original Post Data
+      wp_reset_postdata();
+      $tag_ar = explode(',', $tag);
+      $i = 1;
+      $relpost = array();
+      global $postnot;
+
+      $tagterm = get_term_by('slug', $tag, 'newstag');
+
+      $args = array(
+        'post_type'              => 'linernews',
+        'post_status'            => 'publish',
+        'posts_per_page'         => 4,
+        'post__not_in'       => $postnot,
+        'no_found_rows'      => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        'tax_query'        => array(
+          array(
+            'taxonomy' => 'newstag',
+            'field' => 'slug',
+            'terms' => $tag_ar,
+            'terms' => array('koronavirus'),
+            'operator' => 'IN'
+          )
+        )
+      );
+
+      $the_query = new WP_Query($args);
+      if ($the_query->have_posts()) {
+        $output .= '<section class="section_poartMian"><div class="poart_container korona"><div class="auto_float"><div class="row"><div class="col-md-5 col-sm-12 col-xs-12"><div class="poart_pcol4">';
+
+        while ($the_query->have_posts()) {
+          $the_query->the_post();
+
+          $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'mosttag-thumb');
+          $ttln = '';
 
 
-      if ($i == 1) {
-        $custom_author = get_field('news_author', $the_query->post->ID);
-        //if(strlen($the_query->post->post_title) > 76){
-        //$ttln= substr($the_query->post->post_title, 0, 76) . '...';
-        //}else{
-        $ttln = $the_query->post->post_title;
-        //}
-        $output .= '</div></div><div class="col-md-7 col-sm-12 col-xs-12"><div class="poart_pcol4 right_poart"><label>' . $tagterm->name . '</label><p><a href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a></p>';
-      } else {
-        //if(strlen($the_query->post->post_title) > 40){
-        //$ttln= substr($the_query->post->post_title, 0, 40) . '...';
-        //}else{
-        $ttln = '<a href="' . get_the_permalink($the_query->post->ID) . '" class="text-white">' . $the_query->post->post_title . '</a>';
-        //}
-        $relpost[] = '<h3 class="post-title post-title4 post-bullet my-4">' . $ttln . '</h3>';
+          if ($i == 1) {
+            $custom_author = get_field('news_author', $the_query->post->ID);
+            //if(strlen($the_query->post->post_title) > 76){
+            //$ttln= substr($the_query->post->post_title, 0, 76) . '...';
+            //}else{
+            $ttln = $the_query->post->post_title;
+            //}
+            $output .= '</div></div><div class="col-md-7 col-sm-12 col-xs-12"><div class="poart_pcol4 right_poart"><label>' . $tagterm->name . '</label><p><a href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a></p>';
+          } else {
+            //if(strlen($the_query->post->post_title) > 40){
+            //$ttln= substr($the_query->post->post_title, 0, 40) . '...';
+            //}else{
+            $ttln = '<a href="' . get_the_permalink($the_query->post->ID) . '" class="text-white">' . $the_query->post->post_title . '</a>';
+            //}
+            $relpost[] = '<h3 class="post-title post-title4 post-bullet my-4">' . $ttln . '</h3>';
+          }
+          $postnot[] = $the_query->post->ID;
+          $i++;
+        }
+
+        $output .= '<div class="pl-5">' . join('', $relpost) . '</div></div></div></div></div></div></section>';
       }
-      $postnot[] = $the_query->post->ID;
-      $i++;
+
+
+      return $output;
     }
-
-    $output .= '<div class="pl-5">' . join('', $relpost) . '</div></div></div></div></div></div></section>';
-  }
-
-
-  return $output;
-}
-add_shortcode('section-4', 'section4_shortcode');
+    add_shortcode('section-4', 'section4_shortcode');
 
 
 
-add_image_size('normalnews-thumb', 282, 160, true);
-function section5_shortcode($atts, $content)
-{
-  extract(shortcode_atts(array(
-    'tag' => '',
-  ), $atts));
+    add_image_size('normalnews-thumb', 282, 160, true);
+    function section5_shortcode($atts, $content)
+    {
+      extract(shortcode_atts(array(
+        'tag' => '',
+      ), $atts));
 
-  $shortcode_id = rand(0, 99999);
-  $output = '';
-  global $postnot;
+      $shortcode_id = rand(0, 99999);
+      $output = '';
+      global $postnot;
 
-  $args = array(
-    'post_type'              => 'linernews',
-    'post_status'            => 'publish',
-    'posts_per_page'         => 10,
-    'post__not_in'       => $postnot,
-    'no_found_rows'      => true,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-    //'date_query'             => array(
-    //                  array(
-    //                                'before' => '24 hours ago',
-    //                              ),
-    //                      ),
-    'tax_query'         => array(
-      array(
-        'taxonomy' => 'news_cat',
-        'field' => 'slug',
-        'terms' => array('style'),
-        'operator' => 'Not IN'
-      )
-    )
-  );
+      $args = array(
+        'post_type'              => 'linernews',
+        'post_status'            => 'publish',
+        'posts_per_page'         => 10,
+        'post__not_in'       => $postnot,
+        'no_found_rows'      => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        //'date_query'             => array(
+        //                  array(
+        //                                'before' => '24 hours ago',
+        //                              ),
+        //                      ),
+        'tax_query'         => array(
+          array(
+            'taxonomy' => 'news_cat',
+            'field' => 'slug',
+            'terms' => array('style'),
+            'operator' => 'Not IN'
+          )
+        )
+      );
 
-  $the_query = new WP_Query($args);
+      $the_query = new WP_Query($args);
 
-  $i = 1;
-  $popular = '';
+      $i = 1;
+      $popular = '';
 
-  if ($the_query->have_posts()) {
+      if ($the_query->have_posts()) {
 
-    $output .= '<section class="aguse_mainSection auto_float"><div class="aguse_container auto_float"><div class="row"><div class="col-12 col-md-9 col-lg-9">';
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
+        $output .= '<section class="aguse_mainSection auto_float"><div class="aguse_container auto_float"><div class="row"><div class="col-12 col-md-9 col-lg-9">';
+        while ($the_query->have_posts()) {
+          $the_query->the_post();
 
-      $poplr = get_field('most_popular_news', $the_query->post->ID);
-      $brknews = get_field('breaking_news', $the_query->post->ID);
+          $poplr = get_field('most_popular_news', $the_query->post->ID);
+          $brknews = get_field('breaking_news', $the_query->post->ID);
 
-      if ($poplr == 1) {
-        $popular = ' post-background-green';
-      } else {
-        $popular = '';
-      }
+          if ($poplr == 1) {
+            $popular = ' post-background-green';
+          } else {
+            $popular = '';
+          }
 
-      if ($brknews == 1) {
-        $breaknews = ' post-background-yellow';
-        $popular = '';
-      } else {
-        $breaknews = '';
-      }
+          if ($brknews == 1) {
+            $breaknews = ' post-background-yellow';
+            $popular = '';
+          } else {
+            $breaknews = '';
+          }
 
-      $ttln = '';
-      $newscont = '';
-      $custom_author = get_field('news_author', $the_query->post->ID);
+          $ttln = '';
+          $newscont = '';
+          $custom_author = get_field('news_author', $the_query->post->ID);
 
-      $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'full');
+          $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'full');
 
-      //if(strlen($the_query->post->post_title) > 19){
-      //$ttln= substr($the_query->post->post_title, 0, 19) . '...';
-      //}else{
-      $ttln = $the_query->post->post_title;
-      //}
+          //if(strlen($the_query->post->post_title) > 19){
+          //$ttln= substr($the_query->post->post_title, 0, 19) . '...';
+          //}else{
+          $ttln = $the_query->post->post_title;
+          //}
 
-      //if(strlen($the_query->post->post_excerpt) > 149){
-      // $newscont= substr($the_query->post->post_excerpt, 0, 149) . '...';
-      //}else{
-      $newscont = $the_query->post->post_excerpt;
-      //}
+          //if(strlen($the_query->post->post_excerpt) > 149){
+          // $newscont= substr($the_query->post->post_excerpt, 0, 149) . '...';
+          //}else{
+          $newscont = $the_query->post->post_excerpt;
+          //}
 
-      if ($i > 0 && $i < 2) {
-        $output .= '
+          if ($i > 0 && $i < 2) {
+            $output .= '
               <div class="row mb-3' . $popular . $breaknews . '" style="padding:0 !important;">
                   <div class="col-12 col-md-6 col-lg-6"  style="padding:0 !important;">
                       <div>
@@ -1431,9 +1419,9 @@ function section5_shortcode($atts, $content)
               </div>
               <div class="row">
               ';
-      } elseif ($i < 6 && $i > 1) {
+          } elseif ($i < 6 && $i > 1) {
 
-        $output .= '
+            $output .= '
               <div class="col-12 col-md-6 col-lg-6 d-flex flex-column justify-content-between">
                 <div class="row h-100">
                     <div class="col-12 col-md-4 col-lg-4" style="padding-right:0 !important;">
@@ -1459,11 +1447,11 @@ function section5_shortcode($atts, $content)
               </div>
               <hr>
           </div>';
-      }
-      if ($i == 5) {
-        $output .= '</div></div><div class="col-12 col-lg-3">';
-      } elseif ($i < 11 && $i > 5) {
-        $output .= '<div class="row my-4  ' . $popular . $breaknews . '">
+          }
+          if ($i == 5) {
+            $output .= '</div></div><div class="col-12 col-lg-3">';
+          } elseif ($i < 11 && $i > 5) {
+            $output .= '<div class="row my-4  ' . $popular . $breaknews . '">
                 <div class="col-12 col-md-12 col-lg-12">
                     <div>
                       <p class="post-tagline">
@@ -1479,94 +1467,94 @@ function section5_shortcode($atts, $content)
                   </h2>
                 </div>
             </div>';
+          }
+
+          if ($i == 10) {
+            $output .= '</div>';
+          }
+          $postnot[] = $the_query->post->ID;
+          $i++;
+        }
+        $output .= '</div></div></section>';
       }
 
-      if ($i == 10) {
-        $output .= '</div>';
-      }
-      $postnot[] = $the_query->post->ID;
-      $i++;
+      // Restore original Post Data
+      wp_reset_postdata();
+      return $output;
     }
-    $output .= '</div></div></section>';
-  }
+    add_shortcode('section-5', 'section5_shortcode');
+    function section6_shortcode($atts, $content)
+    {
+      extract(shortcode_atts(array(
+        'tag' => '',
+      ), $atts));
 
-  // Restore original Post Data
-  wp_reset_postdata();
-  return $output;
-}
-add_shortcode('section-5', 'section5_shortcode');
-function section6_shortcode($atts, $content)
-{
-  extract(shortcode_atts(array(
-    'tag' => '',
-  ), $atts));
+      $shortcode_id = rand(0, 99999);
+      $output = '';
+      global $postnot;
 
-  $shortcode_id = rand(0, 99999);
-  $output = '';
-  global $postnot;
+      $args = array(
+        'post_type'              => 'linernews',
+        'post_status'            => 'publish',
+        'posts_per_page'         => 12,
+        'post__not_in'       => $postnot,
+        'no_found_rows'      => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        //'date_query'             => array(
+        //                  array(
+        //                                'before' => '24 hours ago',
+        //                              ),
+        //                      ),
+        'tax_query'         => array(
+          array(
+            'taxonomy' => 'news_cat',
+            'field' => 'slug',
+            'terms' => array('style'),
+            'operator' => 'Not IN'
+          )
+        )
+      );
 
-  $args = array(
-    'post_type'              => 'linernews',
-    'post_status'            => 'publish',
-    'posts_per_page'         => 12,
-    'post__not_in'       => $postnot,
-    'no_found_rows'      => true,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-    //'date_query'             => array(
-    //                  array(
-    //                                'before' => '24 hours ago',
-    //                              ),
-    //                      ),
-    'tax_query'         => array(
-      array(
-        'taxonomy' => 'news_cat',
-        'field' => 'slug',
-        'terms' => array('style'),
-        'operator' => 'Not IN'
-      )
-    )
-  );
+      $the_query = new WP_Query($args);
 
-  $the_query = new WP_Query($args);
+      $i = 1;
+      $popular = '';
 
-  $i = 1;
-  $popular = '';
+      if ($the_query->have_posts()) {
 
-  if ($the_query->have_posts()) {
+        $output .= '<section class="aguse_mainSection auto_float"><div class="aguse_container auto_float"><div class="row"><div class="col-12 col-md-9 col-lg-9">';
+        while ($the_query->have_posts()) {
+          $the_query->the_post();
 
-    $output .= '<section class="aguse_mainSection auto_float"><div class="aguse_container auto_float"><div class="row"><div class="col-12 col-md-9 col-lg-9">';
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
+          $poplr = get_field('most_popular_news', $the_query->post->ID);
+          $brknews = get_field('breaking_news', $the_query->post->ID);
 
-      $poplr = get_field('most_popular_news', $the_query->post->ID);
-      $brknews = get_field('breaking_news', $the_query->post->ID);
+          if ($poplr == 1) {
+            $popular = ' post-background-green';
+          } else {
+            $popular = '';
+          }
 
-      if ($poplr == 1) {
-        $popular = ' post-background-green';
-      } else {
-        $popular = '';
-      }
+          if ($brknews == 1) {
+            $breaknews = ' post-background-yellow';
+            $popular = '';
+          } else {
+            $breaknews = '';
+          }
 
-      if ($brknews == 1) {
-        $breaknews = ' post-background-yellow';
-        $popular = '';
-      } else {
-        $breaknews = '';
-      }
+          $custom_author = get_field('news_author', $the_query->post->ID);
+          $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'full');
 
-      $custom_author = get_field('news_author', $the_query->post->ID);
-      $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'full');
-
-      $ttln = $the_query->post->post_title;
+          $ttln = $the_query->post->post_title;
 
 
-      $newscont = $the_query->post->post_excerpt;
+          $newscont = $the_query->post->post_excerpt;
 
 
-      if ($i === 1) {
-        $output .=
-          '<div class="row mb-3 ' . $popular . $breaknews . '">
+          if ($i === 1) {
+            $output .=
+              '<div class="row mb-3 ' . $popular . $breaknews . '">
           <div class="col-12 col-md-4 col-lg-4">
               <div>
               <p class="post-tagline">
@@ -1585,39 +1573,40 @@ function section6_shortcode($atts, $content)
               </div>
           </div>
       </div>';
-      }
+          }
 
-      if ($i === 2) {
-        $output .= '<div class="row">';
-      }
+          if ($i === 2) {
+            $output .= '<div class="row">';
+          }
 
-      if ($i > 1 && $i < 5) {
-        $output .= '
+          if ($i > 1 && $i < 5) {
+            $output .= '
         <div class="col-12 col-md-4 col-lg-4">
-          <div class="h-100 px-2' . $popular . $breaknews . '">
-          <div>
-          <img class="w-100" src="' . $image_attributes[0] . '">
-        </div>
-        <div>
+          <div class="h-100">
+            <div>
+              <img class="w-100" src="' . $image_attributes[0] . '">
+            </div>
+        <div class=" px-2' . $popular . $breaknews . '">
           <p class="post-tagline">
           ' . getCategoryByPostId($the_query->post->ID) . '
             <span>|</span>
             <span>' . get_post_time('H:i') .  '</span>
           </p>
-        </div>            
+                 
         <h2 class="post-title post-title2">
             <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a></h2>
             <p class="post-description section1-description">' . $newscont . '</p>
+            </div> 
           </div>
         </div>
         ';
-      }
-      if ($i == 4) {
-        $output .= '</div></div><div class="col-12 col-lg-3">';
-      }
+          }
+          if ($i == 4) {
+            $output .= '</div></div><div class="col-12 col-lg-3">';
+          }
 
-      if ($i > 4 && $i < 13) {
-        $output .= '
+          if ($i > 4 && $i < 13) {
+            $output .= '
         <div class="row mb-3  ' . $popular . $breaknews . '">
           <div class="col-12 col-md-12 col-lg-12">
               <div>
@@ -1632,101 +1621,101 @@ function section6_shortcode($atts, $content)
           </div>
         </div>
         ';
+          }
+
+          if ($i == 12) {
+            $output .= '</div>';
+          }
+
+          $postnot[] = $the_query->post->ID;
+          $i++;
+        }
+        $output .= '</div></div></section>';
       }
 
-      if ($i == 12) {
-        $output .= '</div>';
-      }
-
-      $postnot[] = $the_query->post->ID;
-      $i++;
+      // Restore original Post Data
+      wp_reset_postdata();
+      return $output;
     }
-    $output .= '</div></div></section>';
-  }
-
-  // Restore original Post Data
-  wp_reset_postdata();
-  return $output;
-}
-add_shortcode('section-6', 'section6_shortcode');
+    add_shortcode('section-6', 'section6_shortcode');
 
 
-add_image_size('fekete-thumb', 314, 178, true);
-function fekete_shortcode($atts, $content)
-{
-  extract(shortcode_atts(array(
-    'tag' => '',
-  ), $atts));
+    add_image_size('fekete-thumb', 314, 178, true);
+    function fekete_shortcode($atts, $content)
+    {
+      extract(shortcode_atts(array(
+        'tag' => '',
+      ), $atts));
 
-  $shortcode_id = rand(0, 99999);
-  $output = '';
-  $tag_ar = explode(',', $tag);
-  global $postnot;
-
-
-  $args = array(
-    'post_type'              => 'linernews',
-    'post_status'            => 'publish',
-    'posts_per_page'         => 8,
-    // not in
-    'post__not_in'           => $postnot,
-    'no_found_rows'      => true,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-    'tax_query'        => array(
-      //  array(
-      //    'taxonomy' => 'newstag',
-      //  'field' => 'name',
-      //  'terms' => $tag_ar
-      //    )
-      //  )
-      array(
-        'taxonomy' => 'news_cat',
-        'field' => 'slug',
-        'terms' => array('style'),
-        'operator' => 'Not IN'
-      )
-    )
+      $shortcode_id = rand(0, 99999);
+      $output = '';
+      $tag_ar = explode(',', $tag);
+      global $postnot;
 
 
-  );
+      $args = array(
+        'post_type'              => 'linernews',
+        'post_status'            => 'publish',
+        'posts_per_page'         => 8,
+        // not in
+        'post__not_in'           => $postnot,
+        'no_found_rows'      => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        'tax_query'        => array(
+          //  array(
+          //    'taxonomy' => 'newstag',
+          //  'field' => 'name',
+          //  'terms' => $tag_ar
+          //    )
+          //  )
+          array(
+            'taxonomy' => 'news_cat',
+            'field' => 'slug',
+            'terms' => array('style'),
+            'operator' => 'Not IN'
+          )
+        )
 
-  $the_query = new WP_Query($args);
-  $last = '';
-  $custom_author = get_field('news_author', $the_query->post->ID);
-  $i = 1;
 
-  $first3 = array();
+      );
 
-  if ($the_query->have_posts()) {
+      $the_query = new WP_Query($args);
+      $last = '';
+      $custom_author = get_field('news_author', $the_query->post->ID);
+      $i = 1;
 
-    $output .= '<section class="aguse_mainSection auto_float"><div class="aguse_container auto_float"><div class="row">';
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
-      $poplr = get_field('most_popular_news', $the_query->post->ID);
-      $brknews = get_field('breaking_news', $the_query->post->ID);
+      $first3 = array();
 
-      if ($poplr == 1) {
-        $popular = ' post-background-green px-2';
-      } else {
-        $popular = '';
-      }
+      if ($the_query->have_posts()) {
 
-      if ($brknews == 1) {
-        $breaknews = ' post-background-yellow px-2';
-        $popular = '';
-      } else {
-        $breaknews = '';
-      }
-      $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'fekete-thumb');
+        $output .= '<section class="aguse_mainSection auto_float"><div class="aguse_container auto_float"><div class="row">';
+        while ($the_query->have_posts()) {
+          $the_query->the_post();
+          $poplr = get_field('most_popular_news', $the_query->post->ID);
+          $brknews = get_field('breaking_news', $the_query->post->ID);
 
-      if ($i <= 4) {
-        $output .=  '
+          if ($poplr == 1) {
+            $popular = ' post-background-green px-2';
+          } else {
+            $popular = '';
+          }
+
+          if ($brknews == 1) {
+            $breaknews = ' post-background-yellow px-2';
+            $popular = '';
+          } else {
+            $breaknews = '';
+          }
+          $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'fekete-thumb');
+
+          if ($i <= 4) {
+            $output .=  '
             <div class="col-12 col-lg-3 mb-3 d-flex flex-column justify-content-between">
               <div class="h-100 ' . $popular . $breaknews . '" style="padding:0 !important;">
-                  <div>
-                   <img class="w-100" src="' . $image_attributes[0] . '">
-                 </div>
+                <div>
+                  <img class="w-100" src="' . $image_attributes[0] . '">
+                </div>
                <div class="px-2">
                <div>
                <p class="post-tagline">
@@ -1747,8 +1736,8 @@ function fekete_shortcode($atts, $content)
                   <hr>
                 </div>
             ';
-      } else {
-        $output .=  '
+          } else {
+            $output .=  '
             <div class="col-12 col-lg-3 mb-3 d-flex flex-column justify-content-between">
                   <div class="h-100 ' . $popular . $breaknews . '">
                   <div>
@@ -1769,195 +1758,195 @@ function fekete_shortcode($atts, $content)
                     <hr>
                 </div>
             ';
+          }
+          $postnot[] = $the_query->post->ID;
+          $i++;
+        }
+        $output .= '</div></div></section>';
       }
-      $postnot[] = $the_query->post->ID;
-      $i++;
+
+      // Restore original Post Data
+      wp_reset_postdata();
+      return $output;
     }
-    $output .= '</div></div></section>';
-  }
-
-  // Restore original Post Data
-  wp_reset_postdata();
-  return $output;
-}
-add_shortcode('fekete_news', 'fekete_shortcode');
+    add_shortcode('fekete_news', 'fekete_shortcode');
 
 
-function array_sort($array, $on, $order = SORT_ASC)
-{
-  $new_array = array();
-  $sortable_array = array();
+    function array_sort($array, $on, $order = SORT_ASC)
+    {
+      $new_array = array();
+      $sortable_array = array();
 
-  if (count($array) > 0) {
-    foreach ($array as $k => $v) {
-      if (is_array($v)) {
-        foreach ($v as $k2 => $v2) {
-          if ($k2 == $on) {
-            $sortable_array[$k] = $v2;
+      if (count($array) > 0) {
+        foreach ($array as $k => $v) {
+          if (is_array($v)) {
+            foreach ($v as $k2 => $v2) {
+              if ($k2 == $on) {
+                $sortable_array[$k] = $v2;
+              }
+            }
+          } else {
+            $sortable_array[$k] = $v;
           }
         }
-      } else {
-        $sortable_array[$k] = $v;
-      }
-    }
 
-    switch ($order) {
-      case SORT_ASC:
-        asort($sortable_array);
-        break;
-      case SORT_DESC:
-        arsort($sortable_array);
-        break;
-    }
+        switch ($order) {
+          case SORT_ASC:
+            asort($sortable_array);
+            break;
+          case SORT_DESC:
+            arsort($sortable_array);
+            break;
+        }
 
-    foreach ($sortable_array as $k => $v) {
-      $new_array[$k] = $array[$k];
-    }
-  }
-
-  return $new_array;
-}
-
-
-add_image_size('fekete-thumb', 314, 178, true);
-
-function getCategoryByPostId($id)
-{
-  $categories = wp_get_post_terms($id, 'news_cat', array('fields' => 'all'));
-  $parentCategory = '';
-  $childCategory = '';
-  $parentLink = '';
-  $childLink = '';
-  foreach ($categories as $category) {
-    if ($category->parent == 0) {
-      $parentCategory = $category->name;
-      $parentCategory = str_replace('#', '', $parentCategory);
-      $parentLink = get_term_link($category->slug, 'news_cat');
-    }
-    if ($category->parent != 0) {
-      $childCategory = $category->name;
-      $childCategory = str_replace('#', '', $childCategory);
-      $childLink = get_term_link($category->slug, 'news_cat');
-    }
-  }
-  $output = '<a href="' . $parentLink . '" class="tag-slug">' . $parentCategory . '</a>';
-
-  if ($childCategory != '') {
-    $output .= '<span class="ml-1 tag-slug">/</span><a href="' . $childLink . '" class="tag-slug mx-1">' . $childCategory . '</a>';
-  }
-  return $output;
-}
-function mosttag_shortcode($atts, $content)
-{
-  extract(shortcode_atts(array(
-    'tag' => '',
-  ), $atts));
-
-  $shortcode_id = rand(0, 99999);
-  $output = '';
-  global $postnot;
-
-  $i = 0;
-
-  $args = array(
-    'post_type'              => 'linernews',
-    'post_status'            => 'publish',
-    'posts_per_page'         => 1,
-    // not in
-    'post__not_in'           => $postnot,
-    'no_found_rows'      => true,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-    'tax_query'              => array(
-      array(
-        'taxonomy' => 'newstag',
-        'field' => 'slug',
-        'terms' => array('longform'),
-        'operator' => 'IN'
-      )
-    )
-  );
-
-
-  $main = array();
-  $tagpost = array();
-  $terms = get_terms(array('taxonomy' => 'newstag', 'hide_empty' => true,));
-  foreach ($terms as $term) {
-    $main[] = $term->term_id;
-  }
-
-  $the_query = new WP_Query($args);
-
-  if ($the_query->have_posts()) {
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
-      $term_obj_list = array();
-      $tagpost = array();
-      $result = array();
-
-      $term_obj_list = get_the_terms($the_query->post->ID, 'newstag');
-
-      if (!empty($term_obj_list) && is_array($term_obj_list)) {
-        foreach ($term_obj_list as $tag) {
-          $tagpost[] = $tag->term_id;
+        foreach ($sortable_array as $k => $v) {
+          $new_array[$k] = $array[$k];
         }
       }
 
-      if (!empty($main) && !empty($tagpost)) {
-        $result = array_intersect($main, $tagpost);
-      }
-      $tagcount = count($result);
-      //die;
-      if ($tagcount > 0) {
-        $postidarr[$i]['id'] = $the_query->post->ID;
-        $postidarr[$i]['count'] = $tagcount;
-      }
-      unset($tagpost);
-      $i++;
+      return $new_array;
     }
-  }
 
 
-  wp_reset_postdata();
+    add_image_size('fekete-thumb', 314, 178, true);
 
+    function getCategoryByPostId($id)
+    {
+      $categories = wp_get_post_terms($id, 'news_cat', array('fields' => 'all'));
+      $parentCategory = '';
+      $childCategory = '';
+      $parentLink = '';
+      $childLink = '';
+      foreach ($categories as $category) {
+        if ($category->parent == 0) {
+          $parentCategory = $category->name;
+          $parentCategory = str_replace('#', '', $parentCategory);
+          $parentLink = get_term_link($category->slug, 'news_cat');
+        }
+        if ($category->parent != 0) {
+          $childCategory = $category->name;
+          $childCategory = str_replace('#', '', $childCategory);
+          $childLink = get_term_link($category->slug, 'news_cat');
+        }
+      }
+      $output = '<a href="' . $parentLink . '" class="tag-slug">' . $parentCategory . '</a>';
 
-  $final = array_sort($postidarr, 'count', SORT_DESC);
-  $postid = array();
-  $k = 1;
-  foreach ($final as $value) {
-    if ($k < 5) {
-      $postid[] = $value['id'];
+      if ($childCategory != '') {
+        $output .= '<span class="ml-1 tag-slug">/</span><a href="' . $childLink . '" class="tag-slug mx-1">' . $childCategory . '</a>';
+      }
+      return $output;
     }
-    $k++;
-  }
+    function mosttag_shortcode($atts, $content)
+    {
+      extract(shortcode_atts(array(
+        'tag' => '',
+      ), $atts));
+
+      $shortcode_id = rand(0, 99999);
+      $output = '';
+      global $postnot;
+
+      $i = 0;
+
+      $args = array(
+        'post_type'              => 'linernews',
+        'post_status'            => 'publish',
+        'posts_per_page'         => 1,
+        // not in
+        'post__not_in'           => $postnot,
+        'no_found_rows'      => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        'tax_query'              => array(
+          array(
+            'taxonomy' => 'newstag',
+            'field' => 'slug',
+            'terms' => array('longform'),
+            'operator' => 'IN'
+          )
+        )
+      );
 
 
-  $j = 1;
-  $jarr = array();
-  $firstpost = '';
+      $main = array();
+      $tagpost = array();
+      $terms = get_terms(array('taxonomy' => 'newstag', 'hide_empty' => true,));
+      foreach ($terms as $term) {
+        $main[] = $term->term_id;
+      }
 
-  $fargs = array(
-    'post_type'              => 'linernews',
-    'post_status'            => 'publish',
-    'posts_per_page'         => 1,
-    'post__in'               => $postid,
-    'no_found_rows'      => true,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-  );
+      $the_query = new WP_Query($args);
 
-  $final_query = new WP_Query($fargs);
+      if ($the_query->have_posts()) {
+        while ($the_query->have_posts()) {
+          $the_query->the_post();
+          $term_obj_list = array();
+          $tagpost = array();
+          $result = array();
 
-  if ($final_query->have_posts()) {
-    while ($final_query->have_posts()) {
-      $final_query->the_post();
+          $term_obj_list = get_the_terms($the_query->post->ID, 'newstag');
 
-      $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($final_query->post->ID), 'singlepagebanner-thumb');
-      $custom_author = get_field('news_author', $the_query->post->ID);
+          if (!empty($term_obj_list) && is_array($term_obj_list)) {
+            foreach ($term_obj_list as $tag) {
+              $tagpost[] = $tag->term_id;
+            }
+          }
 
-      $firstpost = '<h1><a href="' . get_the_permalink($final_query->post->ID) . '">' . $final_query->post->post_title . '</a></h1><p class="lacus_pTxt">' . $final_query->post->post_excerpt . '</p>';
+          if (!empty($main) && !empty($tagpost)) {
+            $result = array_intersect($main, $tagpost);
+          }
+          $tagcount = count($result);
+          //die;
+          if ($tagcount > 0) {
+            $postidarr[$i]['id'] = $the_query->post->ID;
+            $postidarr[$i]['count'] = $tagcount;
+          }
+          unset($tagpost);
+          $i++;
+        }
+      }
 
-      $output .= '<section class="full desktop-only">
+
+      wp_reset_postdata();
+
+
+      $final = array_sort($postidarr, 'count', SORT_DESC);
+      $postid = array();
+      $k = 1;
+      foreach ($final as $value) {
+        if ($k < 5) {
+          $postid[] = $value['id'];
+        }
+        $k++;
+      }
+
+
+      $j = 1;
+      $jarr = array();
+      $firstpost = '';
+
+      $fargs = array(
+        'post_type'              => 'linernews',
+        'post_status'            => 'publish',
+        'posts_per_page'         => 1,
+        'post__in'               => $postid,
+        'no_found_rows'      => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+      );
+
+      $final_query = new WP_Query($fargs);
+
+      if ($final_query->have_posts()) {
+        while ($final_query->have_posts()) {
+          $final_query->the_post();
+
+          $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($final_query->post->ID), 'singlepagebanner-thumb');
+          $custom_author = get_field('news_author', $the_query->post->ID);
+
+          $firstpost = '<h1><a href="' . get_the_permalink($final_query->post->ID) . '">' . $final_query->post->post_title . '</a></h1><p class="lacus_pTxt">' . $final_query->post->post_excerpt . '</p>';
+
+          $output .= '<section class="full desktop-only">
       <div class="immersive-break flex" style="background-color: rgb(188, 186, 179);">
         <div class="container flex column-horizontal-pad center">
           <div class="d-flex" style="position:absolute;top: 20px;left: 10px;gap:10px;align-items: end;">
@@ -1994,96 +1983,96 @@ function mosttag_shortcode($atts, $content)
       </div>
     </section>';
 
-      $postnot[] = $the_query->post->ID;
+          $postnot[] = $the_query->post->ID;
 
-      $j++;
+          $j++;
+        }
+      }
+
+      // $output .= '<section class="lacus_mainSection auto_float clr"><div class="laus_container auto_float" style="background-image: url(' . $image_attributes[0] . ')">' . $firstpost . '<div class="lacus_row auto_float"><div class="row">' . join('', $jarr) . '</div></div></div></section>';
+
+
+
+      // Restore original Post Data
+      wp_reset_postdata();
+      return $output;
     }
-  }
-
-  // $output .= '<section class="lacus_mainSection auto_float clr"><div class="laus_container auto_float" style="background-image: url(' . $image_attributes[0] . ')">' . $firstpost . '<div class="lacus_row auto_float"><div class="row">' . join('', $jarr) . '</div></div></div></section>';
 
 
 
-  // Restore original Post Data
-  wp_reset_postdata();
-  return $output;
-}
-
-
-
-add_shortcode('cover_news', 'mosttag_shortcode');
+    add_shortcode('cover_news', 'mosttag_shortcode');
 
 
 
 
-add_image_size('section9-thumb', 594, 337, true);
-function section9_shortcode($atts, $content)
-{
-  extract(shortcode_atts(array(
-    'tag' => '',
-  ), $atts));
+    add_image_size('section9-thumb', 594, 337, true);
+    function section9_shortcode($atts, $content)
+    {
+      extract(shortcode_atts(array(
+        'tag' => '',
+      ), $atts));
 
-  $shortcode_id = rand(0, 99999);
-  $output = '';
-  global $postnot;
+      $shortcode_id = rand(0, 99999);
+      $output = '';
+      global $postnot;
 
-  $args = array(
-    'post_type'              => 'linernews',
-    'post_status'            => 'publish',
-    'posts_per_page'         => 11,
-    'offset'                 => 5,
-    'no_found_rows'      => true,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-    'post__not_in'       => $postnot,
-    //    'date_query'             => array(
-    //                                  array(
-    //                                  'before' => '24 hours ago',
-    //                                ),
-    //                        ),
-    'tax_query'         => array(
-      array(
-        'taxonomy' => 'news_cat',
-        'field' => 'slug',
-        'terms' => array('style', 'sport'),
-        'operator' => 'Not IN'
-      )
-    )
-  );
+      $args = array(
+        'post_type'              => 'linernews',
+        'post_status'            => 'publish',
+        'posts_per_page'         => 11,
+        'offset'                 => 5,
+        'no_found_rows'      => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        'post__not_in'       => $postnot,
+        //    'date_query'             => array(
+        //                                  array(
+        //                                  'before' => '24 hours ago',
+        //                                ),
+        //                        ),
+        'tax_query'         => array(
+          array(
+            'taxonomy' => 'news_cat',
+            'field' => 'slug',
+            'terms' => array('style', 'sport'),
+            'operator' => 'Not IN'
+          )
+        )
+      );
 
-  $the_query = new WP_Query($args);
-  $i = 1;
+      $the_query = new WP_Query($args);
+      $i = 1;
 
-  if ($the_query->have_posts()) {
+      if ($the_query->have_posts()) {
 
-    $output .= '<section class="porta_section auto_float"><div class="porta_container auto_float clr"><div class="row">';
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
+        $output .= '<section class="porta_section auto_float"><div class="porta_container auto_float clr"><div class="row">';
+        while ($the_query->have_posts()) {
+          $the_query->the_post();
 
-      $poplr = get_field('most_popular_news', $the_query->post->ID);
-      $brknews = get_field('breaking_news', $the_query->post->ID);
+          $poplr = get_field('most_popular_news', $the_query->post->ID);
+          $brknews = get_field('breaking_news', $the_query->post->ID);
 
-      if ($poplr == 1) {
-        $popular = ' post-background-green px-2';
-      } else {
-        $popular = '';
-      }
+          if ($poplr == 1) {
+            $popular = ' post-background-green px-2';
+          } else {
+            $popular = '';
+          }
 
-      if ($brknews == 1) {
-        $breaknews = ' post-background-yellow px-2';
-        $popular = '';
-      } else {
-        $breaknews = '';
-      }
+          if ($brknews == 1) {
+            $breaknews = ' post-background-yellow px-2';
+            $popular = '';
+          } else {
+            $breaknews = '';
+          }
 
-      $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'section9-thumb');
-      $ttln = $the_query->post->post_title;
-      $newscont = $the_query->post->post_excerpt;
+          $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'section9-thumb');
+          $ttln = $the_query->post->post_title;
+          $newscont = $the_query->post->post_excerpt;
 
-      if ($i == 1) {
+          if ($i == 1) {
 
 
-        $output .= '
+            $output .= '
           <div class="col-12 col-lg-6">
             <span><img src="' . $image_attributes[0] . '"></span>
             <div class="porta_Content_left' . $breaknews . $popular . '">
@@ -2101,8 +2090,8 @@ function section9_shortcode($atts, $content)
             </div>
           </div>
           ';
-      } elseif ($i == 2) {
-        $output .= '
+          } elseif ($i == 2) {
+            $output .= '
           <div class="col-12 col-lg-6">
             <div class="row">
                 <div class="col-12 col-md-6">
@@ -2124,8 +2113,8 @@ function section9_shortcode($atts, $content)
                   </div>
                 
         ';
-      } elseif ($i == 3) {
-        $output .= '                
+          } elseif ($i == 3) {
+            $output .= '                
                 <div class="porta_Content_left mt-2' . $breaknews . $popular . '">
                 <h6 class="title post-title2">
                   <a href="' . get_the_permalink($the_query->post->ID) . '" class="text-body">' . $ttln . '</a>
@@ -2144,98 +2133,98 @@ function section9_shortcode($atts, $content)
             </div>
           <div class="col-12 col-lg-6">
          ';
-      } elseif ($i > 3 && $i < 10) {
-        $output .=
-          '          
+          } elseif ($i > 3 && $i < 10) {
+            $output .=
+              '          
           <div class="porta_Content_left mb-2' . $breaknews . $popular . '">
             <h6 class="title post-title2">
             <a href="' . get_the_permalink($the_query->post->ID) . '" class="text-body">' . $ttln . '</a>
             </h6> 
           </div>
          ';
-      }
-      if ($i == 9) {
-        $output .= ' </div>
+          }
+          if ($i == 9) {
+            $output .= ' </div>
         </div></div>';
+          }
+          $postnot[] = $the_query->post->ID;
+          $i++;
+        }
+
+        $output .= '</div></div></section>';
       }
-      $postnot[] = $the_query->post->ID;
-      $i++;
+
+      // Restore original Post Data
+      wp_reset_postdata();
+      return $output;
     }
-
-    $output .= '</div></div></section>';
-  }
-
-  // Restore original Post Data
-  wp_reset_postdata();
-  return $output;
-}
-add_shortcode('section-9', 'section9_shortcode');
+    add_shortcode('section-9', 'section9_shortcode');
 
 
-add_image_size('section10-thumb', 580, 329, true);
-function section10_shortcode($atts, $content)
-{
-  extract(shortcode_atts(array(
-    'tag' => '',
-  ), $atts));
+    add_image_size('section10-thumb', 580, 329, true);
+    function section10_shortcode($atts, $content)
+    {
+      extract(shortcode_atts(array(
+        'tag' => '',
+      ), $atts));
 
-  $shortcode_id = rand(0, 99999);
-  $output = '';
-  $tag_ar = explode(',', $tag);
-  global $postnot;
+      $shortcode_id = rand(0, 99999);
+      $output = '';
+      $tag_ar = explode(',', $tag);
+      global $postnot;
 
-  $args = array(
-    'post_type'              => 'linernews',
-    'post_status'            => 'publish',
-    'posts_per_page'         => 5,
-    'no_found_rows'      => true,
-    'post__not_in'           => $postnot,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-    'tax_query'        => array(
-      array(
-        'taxonomy' => 'newstag',
-        'field' => 'name',
-        'terms' => $tag_ar
-      )
-    )
-  );
+      $args = array(
+        'post_type'              => 'linernews',
+        'post_status'            => 'publish',
+        'posts_per_page'         => 5,
+        'no_found_rows'      => true,
+        'post__not_in'           => $postnot,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        'tax_query'        => array(
+          array(
+            'taxonomy' => 'newstag',
+            'field' => 'name',
+            'terms' => $tag_ar
+          )
+        )
+      );
 
-  $the_query = new WP_Query($args);
-  $i = 1;
-
-
-  if ($the_query->have_posts()) {
-
-    $output .= '<section class="porta_section auto_float"><div class="porta_container auto_float clr">';
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
-
-      $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'section10-thumb');
-      $custom_author = get_field('news_author', $the_query->post->ID);
-      $ttln = $the_query->post->post_title;
-      $newscont = $the_query->post->post_excerpt;
-
-      $poplr = get_field('most_popular_news', $the_query->post->ID);
-      $brknews = get_field('breaking_news', $the_query->post->ID);
-
-      if ($poplr == 1) {
-        $popular = ' post-background-green px-2';
-      } else {
-        $popular = '';
-      }
-
-      if ($brknews == 1) {
-        $breaknews = ' post-background-yellow px-2';
-        $popular = '';
-      } else {
-        $breaknews = '';
-      }
+      $the_query = new WP_Query($args);
+      $i = 1;
 
 
-      if ($i === 1) {
-        $output .=
-          '
+      if ($the_query->have_posts()) {
+
+        $output .= '<section class="porta_section auto_float"><div class="porta_container auto_float clr">';
+        while ($the_query->have_posts()) {
+          $the_query->the_post();
+
+          $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'section10-thumb');
+          $custom_author = get_field('news_author', $the_query->post->ID);
+          $ttln = $the_query->post->post_title;
+          $newscont = $the_query->post->post_excerpt;
+
+          $poplr = get_field('most_popular_news', $the_query->post->ID);
+          $brknews = get_field('breaking_news', $the_query->post->ID);
+
+          if ($poplr == 1) {
+            $popular = ' post-background-green px-2';
+          } else {
+            $popular = '';
+          }
+
+          if ($brknews == 1) {
+            $breaknews = ' post-background-yellow px-2';
+            $popular = '';
+          } else {
+            $breaknews = '';
+          }
+
+
+          if ($i === 1) {
+            $output .=
+              '
           <div class="row">
             <div class="col-12 col-lg-9">
               <span><img src="' . $image_attributes[0] . '"></span>
@@ -2257,9 +2246,9 @@ function section10_shortcode($atts, $content)
             </div>
           </div><div class="row mt-5">
         ';
-      } elseif ($i > 1 && $i < 6) {
-        $output .=
-          '
+          } elseif ($i > 1 && $i < 6) {
+            $output .=
+              '
           <div class="col-12 col-lg-3">
             <div class="porta_Content_left' . $breaknews . $popular . '" style="padding:0 !important;">
               <span><img src="' . $image_attributes[0] . '"></span>
@@ -2278,85 +2267,85 @@ function section10_shortcode($atts, $content)
             </div>
           </div>
           ';
+          }
+
+          if ($i === 5) {
+            $output .= '</div>';
+          }
+
+          $postnot[] = $the_query->post->ID;
+          $i++;
+        }
+        $output .= '</div></section>';
       }
 
-      if ($i === 5) {
-        $output .= '</div>';
-      }
-
-      $postnot[] = $the_query->post->ID;
-      $i++;
+      // Restore original Post Data
+      wp_reset_postdata();
+      return $output;
     }
-    $output .= '</div></section>';
-  }
-
-  // Restore original Post Data
-  wp_reset_postdata();
-  return $output;
-}
-add_shortcode('section-10', 'section10_shortcode');
+    add_shortcode('section-10', 'section10_shortcode');
 
 
-add_image_size('sport1-thumb', 400, 225, true);
-add_image_size('sport2-thumb', 254, 144, true);
-function section_sportnews_shortcode($atts, $content)
-{
-  extract(shortcode_atts(array(
-    'per_page' => '-1',
-  ), $atts));
+    add_image_size('sport1-thumb', 400, 225, true);
+    add_image_size('sport2-thumb', 254, 144, true);
+    function section_sportnews_shortcode($atts, $content)
+    {
+      extract(shortcode_atts(array(
+        'per_page' => '-1',
+      ), $atts));
 
-  $shortcode_id = rand(0, 99999);
-  $output = '';
-  global $postnot;
+      $shortcode_id = rand(0, 99999);
+      $output = '';
+      global $postnot;
 
-  $i = 0;
+      $i = 0;
 
-  $output .= '<div class="parsent_mainDiv">';
-  $args = array(
-    'post_type'        => 'linernews',
-    'post_status'      => 'publish',
-    'posts_per_page'   => 10,
-    'no_found_rows'      => true,
-    'post__not_in'     => $postnot,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-    'tax_query'        => array(
-      array(
-        'taxonomy' => 'news_cat',
-        'field'    => 'slug',
-        'terms'    => 'sport'
-      )
-    )
-  );
+      $output .= '<div class="parsent_mainDiv">';
+      $args = array(
+        'post_type'        => 'linernews',
+        'post_status'      => 'publish',
+        'posts_per_page'   => 10,
+        'no_found_rows'      => true,
+        'post__not_in'     => $postnot,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        'tax_query'        => array(
+          array(
+            'taxonomy' => 'news_cat',
+            'field'    => 'slug',
+            'terms'    => 'sport'
+          )
+        )
+      );
 
-  $the_query = new WP_Query($args);
+      $the_query = new WP_Query($args);
 
-  if ($the_query->have_posts()) {
-    $output .= '<div class="upr_prt">
+      if ($the_query->have_posts()) {
+        $output .= '<div class="upr_prt">
           <div class="row"><div class="col-12 col-sm-6 col-lg-6">';
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
-      $i++;
-      $custom_author = get_field('news_author', $the_query->post->ID);
-      $poplr = get_field('most_popular_news', $the_query->post->ID);
-      $brknews = get_field('breaking_news', $the_query->post->ID);
+        while ($the_query->have_posts()) {
+          $the_query->the_post();
+          $i++;
+          $custom_author = get_field('news_author', $the_query->post->ID);
+          $poplr = get_field('most_popular_news', $the_query->post->ID);
+          $brknews = get_field('breaking_news', $the_query->post->ID);
 
-      if ($poplr == 1) {
-        $popular = ' post-background-green';
-      } else {
-        $popular = '';
-      }
+          if ($poplr == 1) {
+            $popular = ' post-background-green';
+          } else {
+            $popular = '';
+          }
 
-      if ($brknews == 1) {
-        $breaknews = ' post-background-yellow';
-        $popular = '';
-      } else {
-        $breaknews = '';
-      }
+          if ($brknews == 1) {
+            $breaknews = ' post-background-yellow';
+            $popular = '';
+          } else {
+            $breaknews = '';
+          }
 
-      $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'full');
-      if ($i == 1) {
-        $output .= '<div class="row">
+          $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'full');
+          if ($i == 1) {
+            $output .= '<div class="row">
             <div class="col-12 col-md-12 col-lg-12  ' . $popular . $breaknews . '" style="padding:0 !important;">
                 <div>
                   <img class="w-100" src="' . $image_attributes[0] . '">
@@ -2379,9 +2368,9 @@ function section_sportnews_shortcode($atts, $content)
         </p>   
             </div>            
       </div></div><hr>';
-      }
-      if ($i == 2) {
-        $output .= '
+          }
+          if ($i == 2) {
+            $output .= '
         <div class="row ' . $popular . $breaknews . '">
         <div class="col-12 col-lg-3">
             <div>
@@ -2403,9 +2392,9 @@ function section_sportnews_shortcode($atts, $content)
             </h2>
         </div>
     </div></div><div class="col-12 col-sm-6 col-lg-6"><div class="row">';
-      }
-      if ($i == 3) {
-        $output .= '<div class="col-12 col-sm-6 col-lg-6">
+          }
+          if ($i == 3) {
+            $output .= '<div class="col-12 col-sm-6 col-lg-6">
                 <div>
                   <img class="w-100" src="' . $image_attributes[0] . '">
                 </div>
@@ -2425,10 +2414,10 @@ function section_sportnews_shortcode($atts, $content)
             ' . $the_query->post->post_excerpt . '
           </p>
       ';
-      }
+          }
 
-      if ($i > 3 && $i < 7) {
-        $output .= '
+          if ($i > 3 && $i < 7) {
+            $output .= '
           <div class="col-12 col-md-12 col-lg-12 px-0  ' . $popular . $breaknews . '">
             <div>
               <p class="post-tagline">
@@ -2444,13 +2433,13 @@ function section_sportnews_shortcode($atts, $content)
             </h2>
           </div>
           ';
-      }
-      if ($i == 6) {
-        $output .= '</div>';
-      }
+          }
+          if ($i == 6) {
+            $output .= '</div>';
+          }
 
-      if ($i == 7) {
-        $output .= '<div class="col-12 col-sm-6 col-lg-6">
+          if ($i == 7) {
+            $output .= '<div class="col-12 col-sm-6 col-lg-6">
               <div>
                 <img class="w-100" src="' . $image_attributes[0] . '">
               </div>
@@ -2471,10 +2460,10 @@ function section_sportnews_shortcode($atts, $content)
         </p>
         
       ';
-      }
+          }
 
-      if ($i > 7 && $i < 11) {
-        $output .= '
+          if ($i > 7 && $i < 11) {
+            $output .= '
         <div class="col-12 col-md-12 col-lg-12 px-2 mb-2' . $popular . $breaknews . '">
           <div>
             <p class="post-tagline">
@@ -2490,83 +2479,83 @@ function section_sportnews_shortcode($atts, $content)
           </h2>
         </div>
         ';
-      }
+          }
 
-      if ($i == 10) {
-        $output .= '</div>
+          if ($i == 10) {
+            $output .= '</div>
         </div>
         </div>
         </div>
         </div>
         </div>';
+          }
+          $postnot[] = $the_query->post->ID;
+        }
       }
-      $postnot[] = $the_query->post->ID;
+
+      // Restore original Post Data
+      wp_reset_postdata();
+
+      return $output;
     }
-  }
-
-  // Restore original Post Data
-  wp_reset_postdata();
-
-  return $output;
-}
-add_shortcode('section-sportnews', 'section_sportnews_shortcode');
+    add_shortcode('section-sportnews', 'section_sportnews_shortcode');
 
 
 
-add_image_size('style1-thumb', 673, 382, true);
-add_image_size('style2-thumb', 318, 179, true);
-function section_stylenews_shortcode($atts, $content)
-{
-  extract(shortcode_atts(array(
-    'per_page' => '-1',
-  ), $atts));
+    add_image_size('style1-thumb', 673, 382, true);
+    add_image_size('style2-thumb', 318, 179, true);
+    function section_stylenews_shortcode($atts, $content)
+    {
+      extract(shortcode_atts(array(
+        'per_page' => '-1',
+      ), $atts));
 
-  $shortcode_id = rand(0, 99999);
-  $output = '';
-  global $postnot;
+      $shortcode_id = rand(0, 99999);
+      $output = '';
+      global $postnot;
 
-  $i = 0;
+      $i = 0;
 
-  $output .= '<div class="auto_float style_boxRow">
+      $output .= '<div class="auto_float style_boxRow">
         <div class="row">';
-  $args = array(
-    'post_type'        => 'linernews',
-    'post_status'      => 'publish',
-    'posts_per_page'   => 1,
-    'no_found_rows'      => true,
-    // not in
-    'post__not_in'     => $postnot,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-    'tax_query'        => array(
-      array(
-        'taxonomy' => 'news_cat',
-        'field'    => 'slug',
-        'terms'    => 'style'
-      )
-    )
-  );
+      $args = array(
+        'post_type'        => 'linernews',
+        'post_status'      => 'publish',
+        'posts_per_page'   => 1,
+        'no_found_rows'      => true,
+        // not in
+        'post__not_in'     => $postnot,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        'tax_query'        => array(
+          array(
+            'taxonomy' => 'news_cat',
+            'field'    => 'slug',
+            'terms'    => 'style'
+          )
+        )
+      );
 
-  $the_query = new WP_Query($args);
+      $the_query = new WP_Query($args);
 
-  if ($the_query->have_posts()) {
-    $output .= '<div class="col-md-8 col-sm-12 mb-4">';
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
+      if ($the_query->have_posts()) {
+        $output .= '<div class="col-md-8 col-sm-12 mb-4">';
+        while ($the_query->have_posts()) {
+          $the_query->the_post();
 
-      $artclebk_img = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'style1-thumb');
-      $author_id = $the_query->post->post_author;
-      $custom_author = get_field('news_author', $the_query->post->ID);
-      $newsterm = get_the_terms($the_query->post->ID, 'news_cat');
+          $artclebk_img = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'style1-thumb');
+          $author_id = $the_query->post->post_author;
+          $custom_author = get_field('news_author', $the_query->post->ID);
+          $newsterm = get_the_terms($the_query->post->ID, 'news_cat');
 
-      foreach ($newsterm as $nwstrm) {
-        $trm_link = get_category_link($nwstrm->term_id);
-        $trm_str[] = ['link' => '<a href="' . $trm_link . '" class="trmLnk">' . $nwstrm->name . '</a>'];
-      }
-      $terms_string = join(', ', wp_list_pluck($trm_str, 'link'));
-      //$terms_string = join(', ', wp_list_pluck($newsterm, 'name'));
+          foreach ($newsterm as $nwstrm) {
+            $trm_link = get_category_link($nwstrm->term_id);
+            $trm_str[] = ['link' => '<a href="' . $trm_link . '" class="trmLnk">' . $nwstrm->name . '</a>'];
+          }
+          $terms_string = join(', ', wp_list_pluck($trm_str, 'link'));
+          //$terms_string = join(', ', wp_list_pluck($newsterm, 'name'));
 
-      $output .= '
+          $output .= '
                     <div class="">
                       <div>
                         <img class="w-100 mb-2" src="' . $artclebk_img[0] . '">
@@ -2586,66 +2575,66 @@ function section_stylenews_shortcode($atts, $content)
                     </div>
                    ';
 
-      $postnot[] = $the_query->post->ID;
-    }
-    $output .= '</div>';
-  }
+          $postnot[] = $the_query->post->ID;
+        }
+        $output .= '</div>';
+      }
 
-  // Restore original Post Data
-  wp_reset_postdata();
+      // Restore original Post Data
+      wp_reset_postdata();
 
 
-  $args = array(
-    'post_type'        => 'linernews',
-    'post_status'      => 'publish',
-    'posts_per_page'   => 5,
-    'no_found_rows'      => true,
-    'update_post_meta_cache' => false,
-    'post__not_in'     => $postnot,
-    'update_post_term_cache' => false,
-    'offset'           => 1,
-    'tax_query'        => array(
-      array(
-        'taxonomy' => 'news_cat',
-        'field'    => 'slug',
-        'terms'    => 'style'
-      )
-    )
-  );
+      $args = array(
+        'post_type'        => 'linernews',
+        'post_status'      => 'publish',
+        'posts_per_page'   => 5,
+        'no_found_rows'      => true,
+        'update_post_meta_cache' => false,
+        'post__not_in'     => $postnot,
+        'update_post_term_cache' => false,
+        'offset'           => 1,
+        'tax_query'        => array(
+          array(
+            'taxonomy' => 'news_cat',
+            'field'    => 'slug',
+            'terms'    => 'style'
+          )
+        )
+      );
 
-  $the_query = new WP_Query($args);
+      $the_query = new WP_Query($args);
 
-  if ($the_query->have_posts()) {
-    $popular = '';
-    $output .= '<div class="col-md-4 col-sm-12">
+      if ($the_query->have_posts()) {
+        $popular = '';
+        $output .= '<div class="col-md-4 col-sm-12">
           <div class="">';
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
-      $artclebk_img = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'full');
-      $poplr = get_field('most_popular_news', $the_query->post->ID);
-      $brknews = get_field('breaking_news', $the_query->post->ID);
+        while ($the_query->have_posts()) {
+          $the_query->the_post();
+          $artclebk_img = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'full');
+          $poplr = get_field('most_popular_news', $the_query->post->ID);
+          $brknews = get_field('breaking_news', $the_query->post->ID);
 
-      if ($poplr == 1) {
-        $popular = ' post-background-green px-3';
-      } else {
-        $popular = '';
-      }
+          if ($poplr == 1) {
+            $popular = ' post-background-green px-3';
+          } else {
+            $popular = '';
+          }
 
-      if ($brknews == 1) {
-        $breaknews = ' post-background-yellow px-3';
-        $popular = '';
-      } else {
-        $breaknews = '';
-      }
+          if ($brknews == 1) {
+            $breaknews = ' post-background-yellow px-3';
+            $popular = '';
+          } else {
+            $breaknews = '';
+          }
 
-      if ($brknews == 1 || $poplr == 1) {
-        $gap = '';
-      } else {
-        $gap = 'gap-4';
-      }
+          if ($brknews == 1 || $poplr == 1) {
+            $gap = '';
+          } else {
+            $gap = 'gap-4';
+          }
 
 
-      $output .= '
+          $output .= '
       <div class="d-flex mb-2 ' . $gap . '">
         <div class="media-width">
             <img class="w-100" src="' . $artclebk_img[0] . '">
@@ -2666,79 +2655,79 @@ function section_stylenews_shortcode($atts, $content)
         </div>
       </div>
       ';
-      $postnot[] = $the_query->post->ID;
-    }
-    $output .= '</div>
+          $postnot[] = $the_query->post->ID;
+        }
+        $output .= '</div>
         </div>';
-  }
-
-  // Restore original Post Data
-  wp_reset_postdata();
-
-  $output .= '</div>';
-
-  $args = array(
-    'post_type'        => 'linernews',
-    'post_status'      => 'publish',
-    'posts_per_page'   => 4,
-    'no_found_rows'      => true,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-    'offset'           => 7,
-    'tax_query'        => array(
-      array(
-        'taxonomy' => 'news_cat',
-        'field'    => 'slug',
-        'terms'    => 'style'
-      )
-    )
-  );
-
-  $the_query = new WP_Query($args);
-
-  if ($the_query->have_posts()) {
-    $popular = '';
-    $output .= '<div class="row">';
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
-      $i++;
-      $stylenes_img = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'style2-thumb');
-      $author_id = $the_query->post->post_author;
-      $custom_author = get_field('news_author', $the_query->post->ID);
-
-
-      $tdy = date('H:i');
-      $pday = get_the_date('H:i');
-      $date1 = date_create($tdy);
-      $date2 = date_create($pday);
-      $diff = date_diff($date1, $date2);
-      $day_diff = $diff->format("%a days Ago");
-      if ($day_diff == 0) {
-        $dfrnc = "Posted Today .";
-        $dfrnc = get_the_time('', $the_query->post->ID);
-      } else {
-        $dfrnc = $diff->format("%a days Ago");
       }
 
-      //echo '<h1>'.$date1.' _ '.$date2.'</h1>';
+      // Restore original Post Data
+      wp_reset_postdata();
 
-      $poplr = get_field('most_popular_news', $the_query->post->ID);
-      $brknews = get_field('breaking_news', $the_query->post->ID);
+      $output .= '</div>';
 
-      if ($poplr == 1) {
-        $popular = ' post-background-green px-0 px-0';
-      } else {
+      $args = array(
+        'post_type'        => 'linernews',
+        'post_status'      => 'publish',
+        'posts_per_page'   => 4,
+        'no_found_rows'      => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        'offset'           => 7,
+        'tax_query'        => array(
+          array(
+            'taxonomy' => 'news_cat',
+            'field'    => 'slug',
+            'terms'    => 'style'
+          )
+        )
+      );
+
+      $the_query = new WP_Query($args);
+
+      if ($the_query->have_posts()) {
         $popular = '';
-      }
+        $output .= '<div class="row">';
+        while ($the_query->have_posts()) {
+          $the_query->the_post();
+          $i++;
+          $stylenes_img = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'style2-thumb');
+          $author_id = $the_query->post->post_author;
+          $custom_author = get_field('news_author', $the_query->post->ID);
 
-      if ($brknews == 1) {
-        $breaknews = ' post-background-yellow px-0 py-0';
-        $popular = '';
-      } else {
-        $breaknews = '';
-      }
 
-      $output .= '<div class="col-lg-3 col-12">
+          $tdy = date('H:i');
+          $pday = get_the_date('H:i');
+          $date1 = date_create($tdy);
+          $date2 = date_create($pday);
+          $diff = date_diff($date1, $date2);
+          $day_diff = $diff->format("%a days Ago");
+          if ($day_diff == 0) {
+            $dfrnc = "Posted Today .";
+            $dfrnc = get_the_time('', $the_query->post->ID);
+          } else {
+            $dfrnc = $diff->format("%a days Ago");
+          }
+
+          //echo '<h1>'.$date1.' _ '.$date2.'</h1>';
+
+          $poplr = get_field('most_popular_news', $the_query->post->ID);
+          $brknews = get_field('breaking_news', $the_query->post->ID);
+
+          if ($poplr == 1) {
+            $popular = ' post-background-green px-0 px-0';
+          } else {
+            $popular = '';
+          }
+
+          if ($brknews == 1) {
+            $breaknews = ' post-background-yellow px-0 py-0';
+            $popular = '';
+          } else {
+            $breaknews = '';
+          }
+
+          $output .= '<div class="col-lg-3 col-12">
                 <div class="style_Bx tyle_oBx1 styMainNewC h-100' . $popular . $breaknews . '">
                   <span class="nues_imgSpan">
                    <img src="' . $stylenes_img[0] . '">
@@ -2754,81 +2743,81 @@ function section_stylenews_shortcode($atts, $content)
                 </div>
                 </div>
                </div>';
+        }
+        $output .= '</div>';
+      }
+
+      // Restore original Post Data
+      wp_reset_postdata();
+      $output .= '</div>';
+      return $output;
     }
-    $output .= '</div>';
-  }
-
-  // Restore original Post Data
-  wp_reset_postdata();
-  $output .= '</div>';
-  return $output;
-}
-add_shortcode('section-stylenews', 'section_stylenews_shortcode');
+    add_shortcode('section-stylenews', 'section_stylenews_shortcode');
 
 
 
 
-function getmost_popularpost_lastday($atts, $content)
-{
-  extract(shortcode_atts(array(
-    'cat' => '',
-  ), $atts));
+    function getmost_popularpost_lastday($atts, $content)
+    {
+      extract(shortcode_atts(array(
+        'cat' => '',
+      ), $atts));
 
-  $shortcode_id = rand(0, 99999);
-  $output = '';
-  $cat_ar = explode(',', $cat);
-  $i = 0;
-  $args = array(
-    'post_type'         => 'linernews',
-    'post_status'       => 'publish',
-    'posts_per_page'    => 15,
-    'no_found_rows'      => true,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-    /*'date_query'    => array(
+      $shortcode_id = rand(0, 99999);
+      $output = '';
+      $cat_ar = explode(',', $cat);
+      $i = 0;
+      $args = array(
+        'post_type'         => 'linernews',
+        'post_status'       => 'publish',
+        'posts_per_page'    => 15,
+        'no_found_rows'      => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        /*'date_query'    => array(
                     array(
                      'after' => '24 hours ago'
                     )
                   ),*/
-    'meta_query'    => array(
-      'relation' => 'OR',
-      array(
-        'key'   => 'most_popular_news',
-        'value' => '1',
-      ),
-      array(
-        'key'   => 'breaking_news',
-        'value' => '1',
-      )
+        'meta_query'    => array(
+          'relation' => 'OR',
+          array(
+            'key'   => 'most_popular_news',
+            'value' => '1',
+          ),
+          array(
+            'key'   => 'breaking_news',
+            'value' => '1',
+          )
 
-    ),
-    'tax_query'         => array(
-      array(
-        'taxonomy' => 'news_cat',
-        'field' => 'slug',
-        'terms' => array('style'),
-        'operator' => 'Not IN'
-      )
-    )
+        ),
+        'tax_query'         => array(
+          array(
+            'taxonomy' => 'news_cat',
+            'field' => 'slug',
+            'terms' => array('style'),
+            'operator' => 'Not IN'
+          )
+        )
 
 
-  );
+      );
 
-  $the_query = new WP_Query($args);
-  if ($the_query->have_posts()) {
-    $output .= '<div class="popular_prow auto_float">
+      $the_query = new WP_Query($args);
+      if ($the_query->have_posts()) {
+        $output .= '<div class="popular_prow auto_float">
             <div class="row">';
-    while ($the_query->have_posts()) {
-      $i++;
-      $the_query->the_post();
-      $tdy = date('Y-m-d H:i:s');
-      $pday = get_the_date('Y-m-d H:i:s');
-      $date1 = date_create($tdy);
-      $date2 = date_create($pday);
-      $diff = date_diff($date1, $date2);
-      $publish_time = get_the_time('', $the_query->post->ID);
+        while ($the_query->have_posts()) {
+          $i++;
+          $the_query->the_post();
+          $tdy = date('Y-m-d H:i:s');
+          $pday = get_the_date('Y-m-d H:i:s');
+          $date1 = date_create($tdy);
+          $date2 = date_create($pday);
+          $diff = date_diff($date1, $date2);
+          $publish_time = get_the_time('', $the_query->post->ID);
 
-      $output .= '<div class="col-md-4 col-sm-6">
+          $output .= '<div class="col-md-4 col-sm-6">
             <div class="popular_col clr">
                <div class="popular_col_left">
                 <span>' . $i . '.</span>
@@ -2838,434 +2827,434 @@ function getmost_popularpost_lastday($atts, $content)
              </div>
             </div>
            </div>';
-    }
-    $output .= '</div></div>';
-  }
-
-  // Restore original Post Data
-  wp_reset_postdata();
-  return $output;
-}
-add_shortcode('MostPopular_News', 'getmost_popularpost_lastday');
-
-
-function wpb_move_comment_field_to_bottom($fields)
-{
-  $comment_field = $fields['comment'];
-  unset($fields['comment']);
-  $fields['comment'] = $comment_field;
-  return $fields;
-}
-
-add_filter('comment_form_fields', 'wpb_move_comment_field_to_bottom');
-
-
-function wpb_move_cookies_field_to_bottom($fields)
-{
-  $cookies_field = $fields['cookies'];
-  unset($fields['cookies']);
-  $fields['cookies'] = $cookies_field;
-  return $fields;
-}
-
-add_filter('comment_form_fields', 'wpb_move_cookies_field_to_bottom');
-
-
-
-
-function latest_shortcode($atts, $content)
-{
-  extract(shortcode_atts(array(
-    'per_page' => '-1',
-  ), $atts));
-
-  $shortcode_id = rand(0, 99999);
-  $output = '';
-
-
-  $args = array(
-    'post_type'              => 'linernews',
-    'post_status'            => 'publish',
-    'posts_per_page'         => 1,
-    'no_found_rows'      => true,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-  );
-  $popular = '';
-  $ttln = '';
-  $the_query = new WP_Query($args);
-
-  if ($the_query->have_posts()) {
-
-    $output .= '<section class="latest_single">';
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
-
-      $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'slide-thumb');
-      $custom_author = get_field('news_author', $the_query->post->ID);
-
-      $poplr = get_field('most_popular_news', $the_query->post->ID);
-      if ($poplr == 1) {
-        $popular = ' poplrpost';
-      } else {
-        $popular = '';
+        }
+        $output .= '</div></div>';
       }
 
-      //if(strlen($the_query->post->post_title) > 45){
-      //$ttln= substr($the_query->post->post_title, 0, 45) . '...';
-      //}else{
-      $ttln = $the_query->post->post_title;
-      //}
-
-      $output .= '<div class="latest_img"><a href="' . get_the_permalink($the_query->post->ID) . '"><img src="' . $image_attributes[0] . '" class="img-responsive"></a></div>';
-      $output .= '<div class="popular_title' . $popular . '"><h2><a href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a></h2></div>';
-      $output .= '<div class="latest_auth">Szerző: <a href="' . home_url('/szerzo/') . '?a=' . $custom_author . '" class="athr_lnk">' . $custom_author . '</a></div>';
+      // Restore original Post Data
+      wp_reset_postdata();
+      return $output;
     }
-    $output .= '</section>';
-  }
+    add_shortcode('MostPopular_News', 'getmost_popularpost_lastday');
 
 
-  // Restore original Post Data
-  wp_reset_postdata();
-  return $output;
-}
-add_shortcode('latest_single', 'latest_shortcode');
+    function wpb_move_comment_field_to_bottom($fields)
+    {
+      $comment_field = $fields['comment'];
+      unset($fields['comment']);
+      $fields['comment'] = $comment_field;
+      return $fields;
+    }
+
+    add_filter('comment_form_fields', 'wpb_move_comment_field_to_bottom');
 
 
-add_image_size('slidesingle-thumb', 1000, 430, true);
-add_image_size('singlepop-thumb', 136, 120, true);
-function popularpost_sidebar($atts, $content)
-{
-  extract(shortcode_atts(array(
-    'cat' => '',
-  ), $atts));
+    function wpb_move_cookies_field_to_bottom($fields)
+    {
+      $cookies_field = $fields['cookies'];
+      unset($fields['cookies']);
+      $fields['cookies'] = $cookies_field;
+      return $fields;
+    }
 
-  $shortcode_id = rand(0, 99999);
-  $output = '';
-  $cat_ar = explode(',', $cat);
-  $i = 0;
-  $args = array(
-    'post_type'         => 'linernews',
-    'post_status'       => 'publish',
-    'posts_per_page'    => 4,
-    'no_found_rows'      => true,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-    /*'date_query'    => array(
+    add_filter('comment_form_fields', 'wpb_move_cookies_field_to_bottom');
+
+
+
+
+    function latest_shortcode($atts, $content)
+    {
+      extract(shortcode_atts(array(
+        'per_page' => '-1',
+      ), $atts));
+
+      $shortcode_id = rand(0, 99999);
+      $output = '';
+
+
+      $args = array(
+        'post_type'              => 'linernews',
+        'post_status'            => 'publish',
+        'posts_per_page'         => 1,
+        'no_found_rows'      => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+      );
+      $popular = '';
+      $ttln = '';
+      $the_query = new WP_Query($args);
+
+      if ($the_query->have_posts()) {
+
+        $output .= '<section class="latest_single">';
+        while ($the_query->have_posts()) {
+          $the_query->the_post();
+
+          $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'slide-thumb');
+          $custom_author = get_field('news_author', $the_query->post->ID);
+
+          $poplr = get_field('most_popular_news', $the_query->post->ID);
+          if ($poplr == 1) {
+            $popular = ' poplrpost';
+          } else {
+            $popular = '';
+          }
+
+          //if(strlen($the_query->post->post_title) > 45){
+          //$ttln= substr($the_query->post->post_title, 0, 45) . '...';
+          //}else{
+          $ttln = $the_query->post->post_title;
+          //}
+
+          $output .= '<div class="latest_img"><a href="' . get_the_permalink($the_query->post->ID) . '"><img src="' . $image_attributes[0] . '" class="img-responsive"></a></div>';
+          $output .= '<div class="popular_title' . $popular . '"><h2><a href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a></h2></div>';
+          $output .= '<div class="latest_auth">Szerző: <a href="' . home_url('/szerzo/') . '?a=' . $custom_author . '" class="athr_lnk">' . $custom_author . '</a></div>';
+        }
+        $output .= '</section>';
+      }
+
+
+      // Restore original Post Data
+      wp_reset_postdata();
+      return $output;
+    }
+    add_shortcode('latest_single', 'latest_shortcode');
+
+
+    add_image_size('slidesingle-thumb', 1000, 430, true);
+    add_image_size('singlepop-thumb', 136, 120, true);
+    function popularpost_sidebar($atts, $content)
+    {
+      extract(shortcode_atts(array(
+        'cat' => '',
+      ), $atts));
+
+      $shortcode_id = rand(0, 99999);
+      $output = '';
+      $cat_ar = explode(',', $cat);
+      $i = 0;
+      $args = array(
+        'post_type'         => 'linernews',
+        'post_status'       => 'publish',
+        'posts_per_page'    => 4,
+        'no_found_rows'      => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        /*'date_query'    => array(
                     array(
                      'after' => '24 hours ago'
                     )
                   ),*/
-    'meta_query'    => array(
-      array(
-        'key'   => 'most_popular_news',
-        'value' => '1',
-      )
-    ),
-    'tax_query'         => array(
-      array(
-        'taxonomy' => 'news_cat',
-        'field' => 'slug',
-        'terms' => array('style', 'sport'),
-        'operator' => 'Not IN'
-      )
-    )
+        'meta_query'    => array(
+          array(
+            'key'   => 'most_popular_news',
+            'value' => '1',
+          )
+        ),
+        'tax_query'         => array(
+          array(
+            'taxonomy' => 'news_cat',
+            'field' => 'slug',
+            'terms' => array('style', 'sport'),
+            'operator' => 'Not IN'
+          )
+        )
 
 
-  );
+      );
 
-  $the_query = new WP_Query($args);
-  if ($the_query->have_posts()) {
-    $output .= '<div class="popular_single"><div class="row">';
-    while ($the_query->have_posts()) {
+      $the_query = new WP_Query($args);
+      if ($the_query->have_posts()) {
+        $output .= '<div class="popular_single"><div class="row">';
+        while ($the_query->have_posts()) {
 
-      $the_query->the_post();
-      $tdy = date('Y-m-d H:i:s');
-      $pday = get_the_date('Y-m-d H:i:s');
-      $date1 = date_create($tdy);
-      $date2 = date_create($pday);
-      $diff = date_diff($date1, $date2);
+          $the_query->the_post();
+          $tdy = date('Y-m-d H:i:s');
+          $pday = get_the_date('Y-m-d H:i:s');
+          $date1 = date_create($tdy);
+          $date2 = date_create($pday);
+          $diff = date_diff($date1, $date2);
 
-      $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'singlepop-thumb');
+          $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'singlepop-thumb');
 
-      $output .= '<div class="col-sm-12">
+          $output .= '<div class="col-sm-12">
             <div class="popular_sin clr">
                <div class="popular_img pull-left"><img src="' . $image_attributes[0] . '" class="img-responsive" /></div>
                <div class="popular_content"><h4><a href="' . get_the_permalink($the_query->post->ID) . '">' . $the_query->post->post_title . '</a></h4><p>' . $diff->h . ' Hours Ago</p></div>
             </div>
            </div>';
+        }
+        $output .= '</div></div>';
+      }
+
+      // Restore original Post Data
+      wp_reset_postdata();
+      return $output;
     }
-    $output .= '</div></div>';
-  }
-
-  // Restore original Post Data
-  wp_reset_postdata();
-  return $output;
-}
-add_shortcode('popularpost_single', 'popularpost_sidebar');
+    add_shortcode('popularpost_single', 'popularpost_sidebar');
 
 
-function justin_shortcode($atts, $content)
-{
-  extract(shortcode_atts(array(
-    'per_page' => '5',
-  ), $atts));
+    function justin_shortcode($atts, $content)
+    {
+      extract(shortcode_atts(array(
+        'per_page' => '5',
+      ), $atts));
 
-  $shortcode_id = rand(0, 99999);
-  $output = '';
-  $ttln = '';
+      $shortcode_id = rand(0, 99999);
+      $output = '';
+      $ttln = '';
 
-  $args = array(
-    'post_type'         => 'linernews',
-    'post_status'       => 'publish',
-    'posts_per_page'    => 5,
-    'no_found_rows'      => true,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-    'tax_query'         => array(
-      array(
-        'taxonomy' => 'news_cat',
-        'field' => 'slug',
-        'terms' => array('style'),
-        'operator' => 'Not IN'
-      )
-    ),
-    /*'date_query'    => array(
+      $args = array(
+        'post_type'         => 'linernews',
+        'post_status'       => 'publish',
+        'posts_per_page'    => 5,
+        'no_found_rows'      => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        'tax_query'         => array(
+          array(
+            'taxonomy' => 'news_cat',
+            'field' => 'slug',
+            'terms' => array('style'),
+            'operator' => 'Not IN'
+          )
+        ),
+        /*'date_query'    => array(
                     array(
                      'after' => '24 hours ago'
                     )
                   )*/
 
 
-  );
+      );
 
-  // The Loop
-  $the_query = new WP_Query($args);
+      // The Loop
+      $the_query = new WP_Query($args);
 
-  if ($the_query->have_posts()) {
-    $output .= '<div class="justin_single">
+      if ($the_query->have_posts()) {
+        $output .= '<div class="justin_single">
     <div class="sidebar-img">
     <img src="' . get_template_directory_uri() . '/images/24_liner.png" class="img-responsive">
     </div>
     <ul>';
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
+        while ($the_query->have_posts()) {
+          $the_query->the_post();
 
-      //if(strlen($the_query->post->post_title) > 46){
-      //$ttln= substr($the_query->post->post_title, 0, 46) . '...';
-      //}else{
-      $ttln = $the_query->post->post_title;
-      //}
-      $poplr = get_field('most_popular_news', $the_query->post->ID);
-      $brknews = get_field('breaking_news', $the_query->post->ID);
+          //if(strlen($the_query->post->post_title) > 46){
+          //$ttln= substr($the_query->post->post_title, 0, 46) . '...';
+          //}else{
+          $ttln = $the_query->post->post_title;
+          //}
+          $poplr = get_field('most_popular_news', $the_query->post->ID);
+          $brknews = get_field('breaking_news', $the_query->post->ID);
 
-      if ($poplr == 1) {
-        $popular = 'fontos';
-      } else {
-        $popular = '';
-      }
+          if ($poplr == 1) {
+            $popular = 'fontos';
+          } else {
+            $popular = '';
+          }
 
-      if ($brknews == 1) {
-        $breaknews = 'fontos';
-        $popular = '';
-      } else {
-        $breaknews = '';
-      }
+          if ($brknews == 1) {
+            $breaknews = 'fontos';
+            $popular = '';
+          } else {
+            $breaknews = '';
+          }
 
-      $output .= '<li>          
+          $output .= '<li>          
           <span>
           
             <span>' . get_post_time('H:i') .  '</span>
             ';
-      // if ($poplr == 1 || $brknews == 1) {
-      //   $output .= '<img class="fontos-img" src="' . get_bloginfo("template_url") . '/images/fontos.png" style="width:15px" />';
-      // }
-      $output .= '            
+          // if ($poplr == 1 || $brknews == 1) {
+          //   $output .= '<img class="fontos-img" src="' . get_bloginfo("template_url") . '/images/fontos.png" style="width:15px" />';
+          // }
+          $output .= '            
           </span>
           <h6>
             <a href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a>
           </h6>
         </li>';
-    }
-    $output .= '</ul>
+        }
+        $output .= '</ul>
       <a class="meg-tobb-btn" href="' . get_permalink(get_page_by_title('Friss hirek')) . '">
       MÉG TÖBB
       </a>
     </div>';
-  }
+      }
 
-  // Restore original Post Data
-  wp_reset_postdata();
-  return $output;
-}
-add_shortcode('justin', 'justin_shortcode');
-
-
-
-
-
-
-
-function singlepopular_shortcode($atts, $content)
-{
-  extract(shortcode_atts(array(
-    'tag' => '',
-  ), $atts));
-
-  $shortcode_id = rand(0, 99999);
-  $output = '';
-
-  global $post;
-  $draught_links = array();
-  $terms = get_the_terms($post->ID, 'news_cat');
-  if ($terms && !is_wp_error($terms)) {
-
-    foreach ($terms as $term) {
-      $draught_links[] = $term->term_id;
+      // Restore original Post Data
+      wp_reset_postdata();
+      return $output;
     }
-  }
-  //print_r($draught_links);
-  $args = array(
-    'post_type'              => 'linernews',
-    //'post_status'            => 'publish',
-    'posts_per_page'         => 3,
-    //'no_found_rows' 		 => true,
-    //'update_post_meta_cache' => false,
-    //'update_post_term_cache' => false,
-    'post__not_in'        => array($post->ID),
-    'tax_query'              => array(
-      array(
-        'taxonomy' => 'news_cat',
-        'field' => 'term_id',
-        'terms' => $draught_links
-      )
-    )
-    /*,'meta_query'             => array(
+    add_shortcode('justin', 'justin_shortcode');
+
+
+
+
+
+
+
+    function singlepopular_shortcode($atts, $content)
+    {
+      extract(shortcode_atts(array(
+        'tag' => '',
+      ), $atts));
+
+      $shortcode_id = rand(0, 99999);
+      $output = '';
+
+      global $post;
+      $draught_links = array();
+      $terms = get_the_terms($post->ID, 'news_cat');
+      if ($terms && !is_wp_error($terms)) {
+
+        foreach ($terms as $term) {
+          $draught_links[] = $term->term_id;
+        }
+      }
+      //print_r($draught_links);
+      $args = array(
+        'post_type'              => 'linernews',
+        //'post_status'            => 'publish',
+        'posts_per_page'         => 3,
+        //'no_found_rows' 		 => true,
+        //'update_post_meta_cache' => false,
+        //'update_post_term_cache' => false,
+        'post__not_in'        => array($post->ID),
+        'tax_query'              => array(
+          array(
+            'taxonomy' => 'news_cat',
+            'field' => 'term_id',
+            'terms' => $draught_links
+          )
+        )
+        /*,'meta_query'             => array(
                                     array(
                                       'key'   => 'most_popular_news',
                                       'value' => '1',
                                     )
                                   )*/
-  );
+      );
 
-  $ttln = '';
-  $popular = '';
-  $the_query = new WP_Query($args);
+      $ttln = '';
+      $popular = '';
+      $the_query = new WP_Query($args);
 
-  if ($the_query->have_posts()) {
+      if ($the_query->have_posts()) {
 
-    $output .= '<section class="tyle_mainSection single_dontmiss"><div class="tyle_container auto_float"><div class="row" id="type-' . $shortcode_id . '">';
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
+        $output .= '<section class="tyle_mainSection single_dontmiss"><div class="tyle_container auto_float"><div class="row" id="type-' . $shortcode_id . '">';
+        while ($the_query->have_posts()) {
+          $the_query->the_post();
 
-      $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'slide-thumb');
-      $custom_author = get_field('news_author', $the_query->post->ID);
+          $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'slide-thumb');
+          $custom_author = get_field('news_author', $the_query->post->ID);
 
-      $poplr = get_field('most_popular_news', $the_query->post->ID);
-      $newsterm = get_the_terms($the_query->post->ID, 'news_cat');
-      $terms_string = join(', ', wp_list_pluck($newsterm, 'name'));
+          $poplr = get_field('most_popular_news', $the_query->post->ID);
+          $newsterm = get_the_terms($the_query->post->ID, 'news_cat');
+          $terms_string = join(', ', wp_list_pluck($newsterm, 'name'));
 
-      if ($poplr == 1) {
-        $popular = ' lineleft';
+          if ($poplr == 1) {
+            $popular = ' lineleft';
+          } else {
+            $popular = '';
+          }
+
+          //if(strlen($the_query->post->post_title) > 52){
+          //$ttln= substr($the_query->post->post_title, 0, 52) . '...';
+          //}else{
+          $ttln = $the_query->post->post_title;
+          //}
+          $img_src = '';
+          if ($image_attributes[0]) {
+            $img_src = $image_attributes[0];
+          }
+          $output .= '<div class="col-md-4 col-sm-12"><div class="tyle_oBx tyle_oBx1"><span class="nues_imgSpan"><img src="' . $img_src . '"></span><div class="nues_content' . $popular . '"><p><a href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a></p><label class="f_wBig"><strong><a href="' . home_url('/szerzo/') . '?a=' . $custom_author . '" class="athr_lnk">' . $custom_author . '</a></strong> <b></b></label><label>' . $terms_string . '</label></div></div></div>';
+        }
+
+        $output .= '</div></div></section>';
       } else {
-        $popular = '';
+        $output .= 'Nothing Found';
       }
 
-      //if(strlen($the_query->post->post_title) > 52){
-      //$ttln= substr($the_query->post->post_title, 0, 52) . '...';
-      //}else{
-      $ttln = $the_query->post->post_title;
-      //}
-      $img_src = '';
-      if ($image_attributes[0]) {
-        $img_src = $image_attributes[0];
+
+      // Restore original Post Data
+      wp_reset_postdata();
+      return $output;
+    }
+    add_shortcode('dontmiss_news', 'singlepopular_shortcode');
+
+    function wpse_81939_post_types_admin_order($wp_query)
+    {
+      if (is_admin()) {
+        // Get the post type from the query
+        $post_type = $wp_query->query['post_type'];
+        if ($post_type == 'linernews') {
+          $wp_query->set('orderby', 'date');
+          $wp_query->set('order', 'DESC');
+        }
       }
-      $output .= '<div class="col-md-4 col-sm-12"><div class="tyle_oBx tyle_oBx1"><span class="nues_imgSpan"><img src="' . $img_src . '"></span><div class="nues_content' . $popular . '"><p><a href="' . get_the_permalink($the_query->post->ID) . '">' . $ttln . '</a></p><label class="f_wBig"><strong><a href="' . home_url('/szerzo/') . '?a=' . $custom_author . '" class="athr_lnk">' . $custom_author . '</a></strong> <b></b></label><label>' . $terms_string . '</label></div></div></div>';
+    }
+    add_filter('pre_get_posts', 'wpse_81939_post_types_admin_order');
+
+
+    // Add the custom columns to the book post type:
+    add_filter('manage_linernews_posts_columns', 'set_custom_edit_book_columns');
+    function set_custom_edit_book_columns($columns)
+    {
+      unset($columns['author']);
+      $columns['news_author'] = __('Author', 'liner');
+
+      return $columns;
     }
 
-    $output .= '</div></div></section>';
-  } else {
-    $output .= 'Nothing Found';
-  }
+    // Add the data to the custom columns for the book post type:
+    add_action('manage_linernews_posts_custom_column', 'custom_book_column', 10, 2);
+    function custom_book_column($column, $post_id)
+    {
+      switch ($column) {
 
-
-  // Restore original Post Data
-  wp_reset_postdata();
-  return $output;
-}
-add_shortcode('dontmiss_news', 'singlepopular_shortcode');
-
-function wpse_81939_post_types_admin_order($wp_query)
-{
-  if (is_admin()) {
-    // Get the post type from the query
-    $post_type = $wp_query->query['post_type'];
-    if ($post_type == 'linernews') {
-      $wp_query->set('orderby', 'date');
-      $wp_query->set('order', 'DESC');
+        case 'news_author':
+          //$terms = get_the_term_list( $post_id , 'book_author' , '' , ',' , '' );
+          $custom_author = get_field('news_author', $post_id);
+          if (is_string($custom_author))
+            echo $custom_author;
+          else
+            _e('Unable to get author(s)', 'liner');
+          break;
+      }
     }
-  }
-}
-add_filter('pre_get_posts', 'wpse_81939_post_types_admin_order');
 
 
-// Add the custom columns to the book post type:
-add_filter('manage_linernews_posts_columns', 'set_custom_edit_book_columns');
-function set_custom_edit_book_columns($columns)
-{
-  unset($columns['author']);
-  $columns['news_author'] = __('Author', 'liner');
+    //define(SINGLE_PATH, TEMPLATEPATH . '/single');
 
-  return $columns;
-}
+    if (!defined('SINGLE_PATH')) {
+      //define('SINGLE_PATH', get_template_directory_uri() . '/single');
+      define('SINGLE_PATH', TEMPLATEPATH . '/single');
+    }
 
-// Add the data to the custom columns for the book post type:
-add_action('manage_linernews_posts_custom_column', 'custom_book_column', 10, 2);
-function custom_book_column($column, $post_id)
-{
-  switch ($column) {
+    //echo 'get_template_directory_uri(): '.SINGLE_PATH;
 
-    case 'news_author':
-      //$terms = get_the_term_list( $post_id , 'book_author' , '' , ',' , '' );
-      $custom_author = get_field('news_author', $post_id);
-      if (is_string($custom_author))
-        echo $custom_author;
-      else
-        _e('Unable to get author(s)', 'liner');
-      break;
-  }
-}
+    add_filter('single_template', 'my_single_longform_template');
+    function my_single_longform_template($single)
+    {
+      global $wp_query, $post;
 
+      $longform = get_field('long_form', $wp_query->post->ID);
+      if ($longform == 1) {
+        return SINGLE_PATH . '-longform.php';
+      } else {
+        return SINGLE_PATH . '-linernews.php';
+      }
+    }
 
-//define(SINGLE_PATH, TEMPLATEPATH . '/single');
+    //user mapping to new post scandir
 
-if (!defined('SINGLE_PATH')) {
-  //define('SINGLE_PATH', get_template_directory_uri() . '/single');
-  define('SINGLE_PATH', TEMPLATEPATH . '/single');
-}
+    function map_user_to_news()
+    {
 
-//echo 'get_template_directory_uri(): '.SINGLE_PATH;
-
-add_filter('single_template', 'my_single_longform_template');
-function my_single_longform_template($single)
-{
-  global $wp_query, $post;
-
-  $longform = get_field('long_form', $wp_query->post->ID);
-  if ($longform == 1) {
-    return SINGLE_PATH . '-longform.php';
-  } else {
-    return SINGLE_PATH . '-linernews.php';
-  }
-}
-
-//user mapping to new post scandir
-
-function map_user_to_news()
-{
-
-  if (get_the_ID() == 1) {
-    /*
+      if (get_the_ID() == 1) {
+        /*
 
 		Username - Displayed Name -  user id
 
@@ -3291,361 +3280,361 @@ Takacs Petra - Takács Petra
 		*/
 
 
-    echo 'user will be mapped<br/>';
-    $user_map = array();
+        echo 'user will be mapped<br/>';
+        $user_map = array();
 
-    $user_map['A T800-as']['name'] = 'A T-800-as';
-    $user_map['A T-800-as']['name'] = 'A T-800-as';
-    $user_map['Hujber Dávid']['name'] = 'A T-800-as';
-    //$user_map['A T800-as 7']['id'] = 7;
+        $user_map['A T800-as']['name'] = 'A T-800-as';
+        $user_map['A T-800-as']['name'] = 'A T-800-as';
+        $user_map['Hujber Dávid']['name'] = 'A T-800-as';
+        //$user_map['A T800-as 7']['id'] = 7;
 
-    $user_map['Köles István Ákos']['name'] = 'AztekSzotar';
-    //$user_map['Köles István Ákos']['id'] = 9;
+        $user_map['Köles István Ákos']['name'] = 'AztekSzotar';
+        //$user_map['Köles István Ákos']['id'] = 9;
 
 
-    $user_map['Kulcsár Péter']['name'] = 'BassMasterSK';
-    //$user_map['Kulcsár Péter']['id'] = 9;
+        $user_map['Kulcsár Péter']['name'] = 'BassMasterSK';
+        //$user_map['Kulcsár Péter']['id'] = 9;
 
-    $user_map['Borbély Fanni']['name'] = 'Fanni';
-    $user_map['Kiss László']['name'] = 'Kiss Laszlo';
-    $user_map['Kolláth Benjámin']['name'] = 'KolBen';
-    $user_map['Kornis Vivien']['name'] = 'Kornis Vivien ';
-    $user_map['Lakatos István']['name'] = 'LinerAcc';
-    $user_map['Nagy Noel']['name'] = 'NNoel98';
-    $user_map['Gyémánt Péter']['name'] = 'pgyemant';
-    //$user_map['Lakatos István']['name'] = 'Steve04';
-    $user_map['Szabó Kata']['name'] = 'SzKata';
-    $user_map['Takács Petra']['name'] = 'Takacs Petra';
+        $user_map['Borbély Fanni']['name'] = 'Fanni';
+        $user_map['Kiss László']['name'] = 'Kiss Laszlo';
+        $user_map['Kolláth Benjámin']['name'] = 'KolBen';
+        $user_map['Kornis Vivien']['name'] = 'Kornis Vivien ';
+        $user_map['Lakatos István']['name'] = 'LinerAcc';
+        $user_map['Nagy Noel']['name'] = 'NNoel98';
+        $user_map['Gyémánt Péter']['name'] = 'pgyemant';
+        //$user_map['Lakatos István']['name'] = 'Steve04';
+        $user_map['Szabó Kata']['name'] = 'SzKata';
+        $user_map['Takács Petra']['name'] = 'Takacs Petra';
 
-    echo '<pre>';
+        echo '<pre>';
 
-    //aget user id by user name
-    foreach ($user_map as $u => $ud) {
+        //aget user id by user name
+        foreach ($user_map as $u => $ud) {
 
-      //echo $u;
-      //print_r($ud);
-      $username = $ud['name'];
-      $user1 = get_user_by('login', $username);
-      //$id = $user1->ID;
-      $user_map[$u]['id'] = $user1->ID;
+          //echo $u;
+          //print_r($ud);
+          $username = $ud['name'];
+          $user1 = get_user_by('login', $username);
+          //$id = $user1->ID;
+          $user_map[$u]['id'] = $user1->ID;
 
-      //print_r($user1);
+          //print_r($user1);
 
+        }
+
+
+
+        print_r($user_map);
+
+        //get all new and update author
+
+        $args = array(
+          'post_type'              => 'linernews',
+          'posts_per_page'         => -1,
+        );
+        $z = 1;
+        $runupto = 99999999999999999999999999999;
+        $the_query = new WP_Query($args);
+        if ($the_query->have_posts()) {
+
+          while ($the_query->have_posts()) {
+
+            //echo $z;
+
+            $the_query->the_post();
+            //get stored user
+            $custom_author = get_field('news_author', $the_query->post->ID);
+            //print_r($the_query->post->ID);
+            //print_r($custom_author);
+            $user_id_new = $user_map[$custom_author]['id'];
+
+            //print_r($the_query);
+            //update new post
+
+
+            if ($z <= $runupto) { //run once
+              //start again from 13509
+              if ($z >= 13509) {
+                if ($user_id_new) {
+
+                  //$args2 = array('ID'=>999999999999999999999999999999999999999999,'post_author'=>$user_id_new);
+                  $args2 = array('ID' => $the_query->post->ID, 'post_author' => $user_id_new);
+                  $news_returned = wp_update_post($args2);
+
+
+                  if ($news_returned) {
+
+                    echo "  $z <span style='color:green'>updated news id : {$the_query->post->ID} , new post author id : {$user_id_new}</span><br/>";
+                  } else {
+                    echo "  $z <span style='color:red'>could not update news id :  {$the_query->post->ID} , new post author id : {$user_id_new}</span><br/>";
+                  }
+                } else {
+                  echo "  $z <span style='color:red'>could not  found author match name stored '{$custom_author}', news id :  {$the_query->post->ID} </span><br/>";
+                }
+              } //started again ended.
+
+              $z++;
+            } //run once end
+
+
+          }
+          // Restore original Post Data
+          //wp_reset_postdata();
+        }
+
+        echo '</pre>';
+      }
+    }
+    //script stopped
+    //add_action('wp_head','map_user_to_news');
+
+    /* add dark mode **/
+    add_filter('body_class', function ($classes) {
+
+      $dark_mode = isset($_GET['darkmode']) ? $_GET['darkmode'] : 0;
+      //check if user have aleady  enable dark mode
+      if (isset($_COOKIE['dark_mode'])) {
+        $dark_mode = true;
+      }
+      if (isset($dark_mode) and $dark_mode != 0) {
+        return array_merge($classes, array('darkmode'));
+      }
+
+      return $classes;
+    });
+
+    // add_filter('wp_nav_menu_items', 'dm_switch_button', 10, 2);
+    function dm_switch_button($items, $args)
+    {
+      if ($args->theme_location == 'primary') {
+        $items .= dm_switch_button_html();
+      }
+      return $items;
+    }
+    function dm_switch_button_html()
+    {
+
+      if (isset($_COOKIE['dark_mode'])) {
+        $dark_mode = true;
+      }
+      $selected = '';
+      if (isset($dark_mode)) {
+        $selected = 'checked';
+      }
+      $items = '<li><form action="" name="darkmode_form" method="post" id="darkmode_form" enctype="multipart/form-data"><label class="switch_dm"><input class="dm_checkbox" name="darkmode" type="checkbox" ' . $selected . ' value="1"><span class="slider_dm round_dm fas fa-sun"></span></label><input type="hidden"  name="dark_mode_form_submitted" value="1"/><input type="hidden"  name="dark_mode_form_submitted_val" id="dark_mode_form_submitted_val" value="no"/><input id="dark_mode_submit_btn" style="display:none" type="submit"  name="dark_mode_submit_btn" value="submit"/></form></li>';
+
+      return $items;
+    }
+    function url_origin($s, $use_forwarded_host = false)
+    {
+      $ssl      = (!empty($s['HTTPS']) && $s['HTTPS'] == 'on');
+      $sp       = strtolower($s['SERVER_PROTOCOL']);
+      $protocol = substr($sp, 0, strpos($sp, '/')) . (($ssl) ? 's' : '');
+      $port     = $s['SERVER_PORT'];
+      $port     = ((!$ssl && $port == '80') || ($ssl && $port == '443')) ? '' : ':' . $port;
+      $host     = ($use_forwarded_host && isset($s['HTTP_X_FORWARDED_HOST'])) ? $s['HTTP_X_FORWARDED_HOST'] : (isset($s['HTTP_HOST']) ? $s['HTTP_HOST'] : null);
+      $host     = isset($host) ? $host : $s['SERVER_NAME'] . $port;
+      return $protocol . '://' . $host;
+    }
+
+    function full_url($s, $use_forwarded_host = false)
+    {
+      return url_origin($s, $use_forwarded_host) . $s['REQUEST_URI'];
+    }
+
+    function dm_cookies()
+    {
+      //cookie dark mode it need to be at the top or cookie willnot work :(
+      if (isset($_REQUEST['dark_mode_form_submitted'])) {
+        $current_ul_md = full_url($_SERVER);
+        if ($_REQUEST['dark_mode_form_submitted_val'] == 'yes') {
+          setcookie('dark_mode', 1, time() + 3600, '/');
+        }
+        if ($_REQUEST['dark_mode_form_submitted_val'] == 'no') {
+          setcookie('dark_mode', '', time() - 3600, '/');
+          unset($_COOKIE['dark_mode']);
+        }
+
+        //	purge_all cache on switch darkmode
+        do_action('litespeed_purge_all', 'Darkmode switch');
+
+
+        wp_redirect($current_ul_md);
+        exit();
+      }
+    }
+    add_action('init', 'dm_cookies');
+
+    /* add category in feed */
+    function liner_cat_rss_categories($the_list)
+    {
+      global $post;
+      $terms = get_the_terms($post->ID, 'news_cat');
+      $cats = '';
+      if (is_array($terms)) {
+        foreach ($terms as $t => $tv) {
+          $cats  .= '<category><![CDATA[ ' . $tv->name . ' ]]></category>';
+        }
+      }
+      return $the_list . $cats;
+    }
+
+    add_filter('the_category_rss', 'liner_cat_rss_categories');
+
+    //remove cunt from editors
+    add_filter('manage_posts_columns', 'change_columns_for_user', 10, 2);
+    function change_columns_for_user($columns, $post_type)
+    {
+      if ('post' != $post_type)
+        return $columns;
+
+      if (current_user_can('administrator'))
+        return $columns;
+      else {
+        //Remove column
+        unset($columns['view_count']);
+        unset($columns['post_views']);
+        return $columns;
+      }
     }
 
 
+    add_filter('manage_posts_columns', 'change_columns_for_user_linernews', 10, 2);
+    function change_columns_for_user_linernews($columns, $post_type)
+    {
 
-    print_r($user_map);
+      if ('linernews' != $post_type)
+        return $columns;
 
-    //get all new and update author
 
-    $args = array(
-      'post_type'              => 'linernews',
-      'posts_per_page'         => -1,
-    );
-    $z = 1;
-    $runupto = 99999999999999999999999999999;
-    $the_query = new WP_Query($args);
-    if ($the_query->have_posts()) {
+      if (current_user_can('administrator'))
+        return $columns;
+      else {
+        //Remove column
+        unset($columns['view_count']);
+        unset($columns['post_views']);
+        return $columns;
+      }
+    }
+    add_filter('manage_linernews_posts_columns', 'change_columns_for_editor_linernews', 10000, 1);
+    function change_columns_for_editor_linernews($columns)
+    {
+
+      if (current_user_can('administrator'))
+        return $columns;
+      else {
+        //Remove column
+        unset($columns['view_count']);
+        unset($columns['post_views']);
+        return $columns;
+      }
+
+      return $columns;
+    }
+    // disable chart from editor on dashboard
+    add_filter('pvc_user_can_see_stats', 'liner_pvc_user_can_see_stats');
+    function liner_pvc_user_can_see_stats()
+    {
+      if (current_user_can('administrator'))
+        return true;
+
+      return false;
+    }
+    //hide view count on meta box
+    add_filter('pvc_restrict_edit_capability', 'liner_pvc_restrict_edit_capability');
+    function liner_pvc_restrict_edit_capability()
+    {
+      return false;
+    }
+    add_action('add_meta_boxes', 'liner_wpdocs_remove_post_custom_fields', 1000);
+
+    function liner_wpdocs_remove_post_custom_fields()
+    {
+      remove_meta_box('post_views_meta_box', 'linernews', 'side');
+    }
+    function liner_admin_footer_function()
+    {
+      echo '<style>.edit-post-post-views{display:none}</style>';
+    }
+    add_action('admin_footer', 'liner_admin_footer_function');
+
+
+    // admin check if acf saved to help decrease slow query 
+    add_action('acf/save_post', 'breaking_bar_save_meta');
+    function breaking_bar_save_meta($post_id)
+    {
+      if (any_breaking_news()) {
+        update_option('breaking_bar_run_query', 1);
+        update_option('breaking_bar_run_query_upate_time', time());
+      } else {
+        update_option('breaking_bar_run_query', 0);
+        update_option('breaking_bar_run_query_upate_time', time());
+      }
+    }
+    //any_breaking_news();
+    function any_breaking_news()
+    {
+      global $post;
+      $args = array(
+        'post_type'              => 'linernews',
+        'post_status'            => 'publish',
+        'posts_per_page'         => 1,
+        'no_found_rows'      => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        'meta_query'    => array(
+          array(
+            'key'   => 'breaking_bar',
+            'value' => '1',
+          )
+        )
+      );
+      $t = new WP_Query($args);
+      return $t->post_count;
+    }
+
+    //breaking bar
+    function breaking_bar_shortcode($atts, $content)
+    {
+      // it will help to decrease queries on inner page 
+      $runq = false;  //default	
+      $show_breaking_bar = get_option('breaking_bar_run_query');
+      if ($show_breaking_bar) {
+        $runq = 1;
+      } //for article pages	
+      if (!$runq) {
+        return '';
+      } //this is -ve condition
+
+
+
+      $output = '';
+      $selectpost = '';
+      global $post;
+      $args = array(
+        'post_type'              => 'linernews',
+        'post_status'            => 'publish',
+        'posts_per_page'         => 1,
+        'no_found_rows'      => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        'meta_query'    => array(
+          array(
+            'key'   => 'breaking_bar',
+            'value' => '1',
+          )
+        )
+      );
+
+      $the_query = new WP_Query($args);
 
       while ($the_query->have_posts()) {
-
-        //echo $z;
-
         $the_query->the_post();
-        //get stored user
+        $author_id = $the_query->post->post_author;
         $custom_author = get_field('news_author', $the_query->post->ID);
-        //print_r($the_query->post->ID);
-        //print_r($custom_author);
-        $user_id_new = $user_map[$custom_author]['id'];
-
-        //print_r($the_query);
-        //update new post
 
 
-        if ($z <= $runupto) { //run once
-          //start again from 13509
-          if ($z >= 13509) {
-            if ($user_id_new) {
-
-              //$args2 = array('ID'=>999999999999999999999999999999999999999999,'post_author'=>$user_id_new);
-              $args2 = array('ID' => $the_query->post->ID, 'post_author' => $user_id_new);
-              $news_returned = wp_update_post($args2);
-
-
-              if ($news_returned) {
-
-                echo "  $z <span style='color:green'>updated news id : {$the_query->post->ID} , new post author id : {$user_id_new}</span><br/>";
-              } else {
-                echo "  $z <span style='color:red'>could not update news id :  {$the_query->post->ID} , new post author id : {$user_id_new}</span><br/>";
-              }
-            } else {
-              echo "  $z <span style='color:red'>could not  found author match name stored '{$custom_author}', news id :  {$the_query->post->ID} </span><br/>";
-            }
-          } //started again ended.
-
-          $z++;
-        } //run once end
-
-
-      }
-      // Restore original Post Data
-      //wp_reset_postdata();
-    }
-
-    echo '</pre>';
-  }
-}
-//script stopped
-//add_action('wp_head','map_user_to_news');
-
-/* add dark mode **/
-add_filter('body_class', function ($classes) {
-
-  $dark_mode = isset($_GET['darkmode']) ? $_GET['darkmode'] : 0;
-  //check if user have aleady  enable dark mode
-  if (isset($_COOKIE['dark_mode'])) {
-    $dark_mode = true;
-  }
-  if (isset($dark_mode) and $dark_mode != 0) {
-    return array_merge($classes, array('darkmode'));
-  }
-
-  return $classes;
-});
-
-// add_filter('wp_nav_menu_items', 'dm_switch_button', 10, 2);
-function dm_switch_button($items, $args)
-{
-  if ($args->theme_location == 'primary') {
-    $items .= dm_switch_button_html();
-  }
-  return $items;
-}
-function dm_switch_button_html()
-{
-
-  if (isset($_COOKIE['dark_mode'])) {
-    $dark_mode = true;
-  }
-  $selected = '';
-  if (isset($dark_mode)) {
-    $selected = 'checked';
-  }
-  $items = '<li><form action="" name="darkmode_form" method="post" id="darkmode_form" enctype="multipart/form-data"><label class="switch_dm"><input class="dm_checkbox" name="darkmode" type="checkbox" ' . $selected . ' value="1"><span class="slider_dm round_dm fas fa-sun"></span></label><input type="hidden"  name="dark_mode_form_submitted" value="1"/><input type="hidden"  name="dark_mode_form_submitted_val" id="dark_mode_form_submitted_val" value="no"/><input id="dark_mode_submit_btn" style="display:none" type="submit"  name="dark_mode_submit_btn" value="submit"/></form></li>';
-
-  return $items;
-}
-function url_origin($s, $use_forwarded_host = false)
-{
-  $ssl      = (!empty($s['HTTPS']) && $s['HTTPS'] == 'on');
-  $sp       = strtolower($s['SERVER_PROTOCOL']);
-  $protocol = substr($sp, 0, strpos($sp, '/')) . (($ssl) ? 's' : '');
-  $port     = $s['SERVER_PORT'];
-  $port     = ((!$ssl && $port == '80') || ($ssl && $port == '443')) ? '' : ':' . $port;
-  $host     = ($use_forwarded_host && isset($s['HTTP_X_FORWARDED_HOST'])) ? $s['HTTP_X_FORWARDED_HOST'] : (isset($s['HTTP_HOST']) ? $s['HTTP_HOST'] : null);
-  $host     = isset($host) ? $host : $s['SERVER_NAME'] . $port;
-  return $protocol . '://' . $host;
-}
-
-function full_url($s, $use_forwarded_host = false)
-{
-  return url_origin($s, $use_forwarded_host) . $s['REQUEST_URI'];
-}
-
-function dm_cookies()
-{
-  //cookie dark mode it need to be at the top or cookie willnot work :(
-  if (isset($_REQUEST['dark_mode_form_submitted'])) {
-    $current_ul_md = full_url($_SERVER);
-    if ($_REQUEST['dark_mode_form_submitted_val'] == 'yes') {
-      setcookie('dark_mode', 1, time() + 3600, '/');
-    }
-    if ($_REQUEST['dark_mode_form_submitted_val'] == 'no') {
-      setcookie('dark_mode', '', time() - 3600, '/');
-      unset($_COOKIE['dark_mode']);
-    }
-
-    //	purge_all cache on switch darkmode
-    do_action('litespeed_purge_all', 'Darkmode switch');
-
-
-    wp_redirect($current_ul_md);
-    exit();
-  }
-}
-add_action('init', 'dm_cookies');
-
-/* add category in feed */
-function liner_cat_rss_categories($the_list)
-{
-  global $post;
-  $terms = get_the_terms($post->ID, 'news_cat');
-  $cats = '';
-  if (is_array($terms)) {
-    foreach ($terms as $t => $tv) {
-      $cats  .= '<category><![CDATA[ ' . $tv->name . ' ]]></category>';
-    }
-  }
-  return $the_list . $cats;
-}
-
-add_filter('the_category_rss', 'liner_cat_rss_categories');
-
-//remove cunt from editors
-add_filter('manage_posts_columns', 'change_columns_for_user', 10, 2);
-function change_columns_for_user($columns, $post_type)
-{
-  if ('post' != $post_type)
-    return $columns;
-
-  if (current_user_can('administrator'))
-    return $columns;
-  else {
-    //Remove column
-    unset($columns['view_count']);
-    unset($columns['post_views']);
-    return $columns;
-  }
-}
-
-
-add_filter('manage_posts_columns', 'change_columns_for_user_linernews', 10, 2);
-function change_columns_for_user_linernews($columns, $post_type)
-{
-
-  if ('linernews' != $post_type)
-    return $columns;
-
-
-  if (current_user_can('administrator'))
-    return $columns;
-  else {
-    //Remove column
-    unset($columns['view_count']);
-    unset($columns['post_views']);
-    return $columns;
-  }
-}
-add_filter('manage_linernews_posts_columns', 'change_columns_for_editor_linernews', 10000, 1);
-function change_columns_for_editor_linernews($columns)
-{
-
-  if (current_user_can('administrator'))
-    return $columns;
-  else {
-    //Remove column
-    unset($columns['view_count']);
-    unset($columns['post_views']);
-    return $columns;
-  }
-
-  return $columns;
-}
-// disable chart from editor on dashboard
-add_filter('pvc_user_can_see_stats', 'liner_pvc_user_can_see_stats');
-function liner_pvc_user_can_see_stats()
-{
-  if (current_user_can('administrator'))
-    return true;
-
-  return false;
-}
-//hide view count on meta box
-add_filter('pvc_restrict_edit_capability', 'liner_pvc_restrict_edit_capability');
-function liner_pvc_restrict_edit_capability()
-{
-  return false;
-}
-add_action('add_meta_boxes', 'liner_wpdocs_remove_post_custom_fields', 1000);
-
-function liner_wpdocs_remove_post_custom_fields()
-{
-  remove_meta_box('post_views_meta_box', 'linernews', 'side');
-}
-function liner_admin_footer_function()
-{
-  echo '<style>.edit-post-post-views{display:none}</style>';
-}
-add_action('admin_footer', 'liner_admin_footer_function');
-
-
-// admin check if acf saved to help decrease slow query 
-add_action('acf/save_post', 'breaking_bar_save_meta');
-function breaking_bar_save_meta($post_id)
-{
-  if (any_breaking_news()) {
-    update_option('breaking_bar_run_query', 1);
-    update_option('breaking_bar_run_query_upate_time', time());
-  } else {
-    update_option('breaking_bar_run_query', 0);
-    update_option('breaking_bar_run_query_upate_time', time());
-  }
-}
-//any_breaking_news();
-function any_breaking_news()
-{
-  global $post;
-  $args = array(
-    'post_type'              => 'linernews',
-    'post_status'            => 'publish',
-    'posts_per_page'         => 1,
-    'no_found_rows'      => true,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-    'meta_query'    => array(
-      array(
-        'key'   => 'breaking_bar',
-        'value' => '1',
-      )
-    )
-  );
-  $t = new WP_Query($args);
-  return $t->post_count;
-}
-
-//breaking bar
-function breaking_bar_shortcode($atts, $content)
-{
-  // it will help to decrease queries on inner page 
-  $runq = false;  //default	
-  $show_breaking_bar = get_option('breaking_bar_run_query');
-  if ($show_breaking_bar) {
-    $runq = 1;
-  } //for article pages	
-  if (!$runq) {
-    return '';
-  } //this is -ve condition
-
-
-
-  $output = '';
-  $selectpost = '';
-  global $post;
-  $args = array(
-    'post_type'              => 'linernews',
-    'post_status'            => 'publish',
-    'posts_per_page'         => 1,
-    'no_found_rows'      => true,
-    'update_post_meta_cache' => false,
-    'update_post_term_cache' => false,
-    'meta_query'    => array(
-      array(
-        'key'   => 'breaking_bar',
-        'value' => '1',
-      )
-    )
-  );
-
-  $the_query = new WP_Query($args);
-
-  while ($the_query->have_posts()) {
-    $the_query->the_post();
-    $author_id = $the_query->post->post_author;
-    $custom_author = get_field('news_author', $the_query->post->ID);
-
-
-    $output .= '
+        $output .= '
              <div class="breaking_bar_content" data-news-id="' . $the_query->post->ID . '">
 					<div class="breaking_before_title" ><span >Fontos: </span></div>
                   <div class="breaking_bar_news_text br_scrolling">
@@ -3654,17 +3643,17 @@ function breaking_bar_shortcode($atts, $content)
 
              </div>
          ';
-  }
-  // Restore original Post Data
-  wp_reset_postdata();
-  return $output;
-}
-add_shortcode('breaking_bar', 'breaking_bar_shortcode');
+      }
+      // Restore original Post Data
+      wp_reset_postdata();
+      return $output;
+    }
+    add_shortcode('breaking_bar', 'breaking_bar_shortcode');
 
-function add_breaking_bar()
-{
-  //echo 'br bar via action';
-  ?>
+    function add_breaking_bar()
+    {
+      //echo 'br bar via action';
+      ?>
       <div class=' container breaking_bar_outer' id='breaking_bar_outer' style='display:none;'>
         <div class=' breaking_bar'>
           <?php echo do_shortcode('[breaking_bar]'); ?>

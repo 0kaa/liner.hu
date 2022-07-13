@@ -222,12 +222,14 @@ jQuery(document).ready(function ($) {
 	$('.copy-link.pr').on('click', function(e) {
 		e.preventDefault();
 		var $url = $(this).data('permalink');
+		var id = $(this).data('id');
+		
 		$("body").append($temp);
 		$temp.val($url).select();
 		document.execCommand("copy");
 		$temp.remove();
-		$('.copy-message').text('URL másolva!');
-		$('.copy-message').fadeIn(500).delay(1000).fadeOut(500);
+		$(`.copy-message[data-id="${id}"]`).text('URL másolva!');
+		$(`.copy-message[data-id="${id}"]`).fadeIn(500).delay(1000).fadeOut(500);
 	});
 });
 
