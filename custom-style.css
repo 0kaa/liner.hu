@@ -5862,8 +5862,18 @@ input.contact-submit-btn {
   display: inline-block;
 }
 .uk-war-title {
-  font-size: 24px;
+  font-size: 18px;
   text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.live-badge {
+  background-color: red;
+  color: #fff;
+  padding: 0px 5px;
+  margin-right: 5px;
+  font-weight: 600;
+  font-size: 12px;
 }
 .live_icon:before {
   content: "";
@@ -5895,7 +5905,8 @@ input.contact-submit-btn {
   0% {
     transform: scale(0.33);
   }
-  80%, 100% {
+  80%,
+  100% {
     opacity: 0;
   }
 }
@@ -5915,6 +5926,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.border-dashed-bottom {
+  border-bottom:1px dashed #000;
+  height: 100%;
+}
+.border-dashed-parent:nth-child(3) .border-dashed-bottom,
+.border-dashed-parent:nth-child(4) .border-dashed-bottom {
+  border:none;
+  padding-top:15px;
 }
 
 /* Responsive */

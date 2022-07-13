@@ -631,6 +631,12 @@ function get_latest_news_blocks($postnot_in = 0)
         'field' => 'slug',
         'terms' => array('style'),
         'operator' => 'NOT IN'
+      ),
+      array(
+        'taxonomy' => 'newstag',
+        'field' => 'slug',        
+        'terms' => array('orosz-ukran-haboru-fontosabb-tortenesek'),
+        'operator' => 'NOT IN'
       )
     )
   );
@@ -707,6 +713,12 @@ function get_latest_news_blocks_two($postnot_in = 0)
         'taxonomy' => 'news_cat',
         'field' => 'slug',
         'terms' => array('style'),
+        'operator' => 'NOT IN'
+      ),
+      array(
+        'taxonomy' => 'newstag',
+        'field' => 'slug',        
+        'terms' => array('orosz-ukran-haboru-fontosabb-tortenesek'),
         'operator' => 'NOT IN'
       )
     )
@@ -877,6 +889,12 @@ function section2_shortcode($atts, $content)
         'field' => 'slug',
         'terms' => array('style'),
         'operator' => 'Not IN'
+      ),
+      array(
+        'taxonomy' => 'newstag',
+        'field' => 'slug',        
+        'terms' => array('orosz-ukran-haboru-fontosabb-tortenesek'),
+        'operator' => 'NOT IN'
       )
     )
   );
@@ -1059,6 +1077,12 @@ function section3_shortcode($atts, $content)
         'field' => 'slug',
         'terms' => array('style'),
         'operator' => 'Not IN'
+      ),
+      array(
+        'taxonomy' => 'newstag',
+        'field' => 'slug',        
+        'terms' => array('orosz-ukran-haboru-fontosabb-tortenesek'),
+        'operator' => 'NOT IN'
       )
     )
   );
@@ -1207,7 +1231,7 @@ function section4_shortcode($atts, $content)
     'post_type'              => 'linernews',
     'post_status'            => 'publish',
     'posts_per_page'         => 6,
-    'post__not_in'       => $postnot,
+    // 'post__not_in'       => $postnot,
     'no_found_rows'      => true,
     'update_post_meta_cache' => false,
     'update_post_term_cache' => false,
@@ -1216,7 +1240,7 @@ function section4_shortcode($atts, $content)
         'taxonomy' => 'newstag',
         'field' => 'slug',
         'terms' => $tag_ar,
-        'terms' => array('usa'),
+        'terms' => array('orosz-ukran-haboru-fontosabb-tortenesek'),
         'operator' => 'IN'
       )
     )
@@ -1225,22 +1249,66 @@ function section4_shortcode($atts, $content)
   $the_query = new WP_Query($args);
   if ($the_query->have_posts()) :
     $output .= '
-    <section class="uk-war-section">    
+    <section class="uk-war-section auto_float">    
       <span class="d-flex align-items-center uk-war-title">
         <span style="width: 0.75rem;height: 0.75rem;position: relative;margin-right: 0.75rem;" class="w-3 h-3 mr-3 relative live_icon"></span> 
         Russia\'s War Against Ukraine
       </span>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="row">
     ';
 
     while ($the_query->have_posts()) : $the_query->the_post();
-
       $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'mosttag-thumb');
+      if ($i <= 2) {
+        $output .= '<div class="col-lg-6">
+          <img class="w-100 img-fluid" src="' . $image_attributes[0] . '">
+          <div>
+            <p class="post-tagline">
+            ';
+        if ($i == 1) {
+          $output .= '<span class="live-badge">LIVE</span>';
+        }
+        $output .= '' . getCategoryByPostId($the_query->post->ID) . '
+              <span>|</span>
+              <span>' . get_post_time('H:i') .  '</span>
+            </p>
+            <h2 class="post-title post-title2">
+              <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
+                ' . get_the_title() . '
+              </a>
+            </h2>
+          </div>
+        </div>';
+      }
+      if ($i == 2) {
+        $output .= '</div></div><div class="col-lg-6"><div class="row">';
+      }
+      if($i > 2 && $i <= 6) {
+        $output .= '<div class="col-lg-6 border-dashed-parent">
+        <div class="border-dashed-bottom">
+          <p class="post-tagline">' . getCategoryByPostId($the_query->post->ID) . '
+            <span>|</span>
+            <span>' . get_post_time('H:i') .  '</span>
+          </p>
+          <h2 class="post-title post-title2">
+            <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
+              ' . get_the_title() . '
+            </a>
+          </h2>
+        </div>
+        </div>';                
+      }
+      if($i == 6) {
+        $output .= '</div></div>';
+      }
       ?>
 
     <?php $postnot[] = $the_query->post->ID;
           $i++;
         endwhile;
-        $output .= '</section>';
+        $output .= '</div></section>';
       endif;
 
       // Restore original Post Data
