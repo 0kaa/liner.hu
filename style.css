@@ -2005,17 +2005,59 @@ p {
 }
 
 .post-background-green {
-    background-color: #accdc4;
+    background-color: #58ceb6;
     padding-top: 10px;
     padding-bottom: 10px;
     margin: 0;
+	position: relative;	
+	text-transform: uppercase;
+	overflow: hidden;
+}
+.post-background-green.h-100,
+.post-background-yellow.h-100 {
+	height:auto !important
+}
+.post-background-green .post-description,
+.post-background-yellow .post-description {
+	display: none;
+}
+.post-background-green,
+.post-background-yellow {
+	position: relative;
+	padding-left:25px !important;
+}
+.post-background-green:before,
+.post-background-yellow:before {
+	content: "";
+    width: 3px;
+    height: calc(100% + 18px);
+    background-color: #fff;
+    position: absolute;
+    left: 7px;
+    top: 0;
+}
+.post-background-green:after,
+.post-background-yellow:after {
+	content: "";
+    width: 3px;
+    height: calc(100% + 18px);
+    background-color: #fff;
+    position: absolute;
+    left: 15px;
+    top: 0;
 }
 
 .post-background-yellow {
-    background-color: #ffbf6c;
+    background-color: #1a1d2e !important;
+	color: #58ceb6 !important;
     padding-top: 10px;
     padding-bottom: 10px;
     margin: 0;
+	text-transform: uppercase;
+	overflow: hidden;
+}
+.post-background-yellow .post-tagline {
+	color: #58ceb6 !important;	
 }
 
 .post-title1 {
@@ -2068,8 +2110,6 @@ p {
 .title-slug:hover {
     text-decoration: none;
     color: unset;
-    text-decoration: underline;
-    text-decoration-color: red;
 }
 
 .tag-slug,

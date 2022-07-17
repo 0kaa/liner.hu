@@ -6052,6 +6052,28 @@ body {
   font-size: 13px;
   display: inline-block;
 }
+.korona-section .korona-header {
+  background-color:#1a1d2e;
+  color: #58ceb6;
+  padding:5px 30px;
+  /* border radius from top */
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.korona-section .korona-header .korona-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+.korona-section .korona-body {
+  padding:30px;
+  border: 1px solid #1a1d2e ;
+}
+.tovabb-btn {
+  color:#58ceb6 !important;
+  font-weight: 600;
+  background: none !important;
+  border: none !important;
+}
 /* Responsive */
 @media (min-width: 992px) {
   .category-wide-section {
