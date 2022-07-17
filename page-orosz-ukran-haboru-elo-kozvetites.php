@@ -148,7 +148,9 @@ $the_query = new WP_Query($args); ?>
                                             }
                                             if (stripos(json_encode($term_list), 'orosz-ukran-rovid') === false) : ?>
                                         <div class="inner-content">
-                                            <h3 class="timeline-title"><?php echo get_the_title(); ?></h3>
+                                            <a href="<?php echo $permalink; ?>" class="timeline-title">
+                                                <?php echo get_the_title(); ?>
+                                            </a>
                                             <?php the_content(); ?>
                                             <!-- permalink read more -->
                                             <a href="<?php echo $permalink; ?>" class="read-more">Read more</a>

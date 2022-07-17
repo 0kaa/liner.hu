@@ -108,6 +108,8 @@ function liner_setup()
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menu('primary', __('Primary Menu', 'liner'));
+	register_nav_menu('hamburger', __('Hamburger Menu', 'liner'));
+	register_nav_menu('informations', __('Hamburger Menu', 'liner'));
 
 	/*
 	 * This theme supports custom background color and image,
@@ -199,6 +201,12 @@ function liner_scripts_styles()
 
 	// Adds JavaScript for handling the navigation menu hide-and-show behavior.
 	wp_enqueue_script('liner-navigation', get_template_directory_uri() . '/js/navigation.js', array('jquery'), '20141205', true);
+
+	// define global variables for the theme
+	wp_localize_script('liner-navigation', 'liner_global', array(
+		'baseUrl' => get_template_directory_uri(),
+		
+	));
 
 	$font_url = liner_get_font_url();
 	if (!empty($font_url)) {
@@ -949,13 +957,25 @@ if (!function_exists('liner_content_nav')) :
 			// add data to custom option
 			update_option('btc_currency', $data_btc);
 		}
+		add_action('wp_get_old_currencies', 'wp_get_old_currencies_func');
+
+		function wp_get_old_currencies_func()
+		{
+			update_option('usd_currency_old', get_option('usd_currency'));
+
+			update_option('eur_currency_old', get_option('eur_currency'));
+
+			update_option('gbp_currency_old', get_option('gbp_currency'));
+
+			update_option('btc_currency_old', get_option('btc_currency'));
+		}
 
 		add_action('wp_get_weather', 'wp_get_weather_func');
 
 		function wp_get_weather_func()
 		{
 			// request api
-			$url = 'https://api.openweathermap.org/data/2.5/group?id=3054643,721472,715429,717582,3046526&appid=1ea50bd98e863f8d95cad4fae3ae5c08&units=metric';
+			$url = 'https://api.openweathermap.org/data/2.5/group?id=3054643,721472,715429,717582,3045190&appid=1ea50bd98e863f8d95cad4fae3ae5c08&units=metric';
 			// use curl to get the data
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $url);
@@ -1077,7 +1097,7 @@ if (!function_exists('liner_content_nav')) :
 			$output = '<a href="' . $parentLink . '" class="tag-slug">' . $parentCategory . '</a>';
 
 			if ($childCategory != '') {
-				$output .= '<span class="ml-1 tag-slug">/</span><a href="' . $childLink . '" class="tag-slug mx-1">' . $childCategory . '</a>';
+				$output .= '<span class="ml-1 tag-slug">/</span><a href="' . $childLink . '" class="mx-1 tag-slug">' . $childCategory . '</a>';
 			}
 			return $output;
 		}

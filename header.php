@@ -211,7 +211,7 @@
 			<div class="container">
 				<div class="top-nav d-flex justify-content-between align-items-center">
 					<div class="d-flex align-items-center">
-						<button class="button-nav-toggle mr-1 mr-lg-3">
+						<button class="mr-1 button-nav-toggle mr-lg-3">
 							<i class="fa fa-bars" aria-hidden="true"></i>
 						</button>
 						<div class="currnet-date">
@@ -228,45 +228,52 @@
 							<?php if (get_theme_mod('site_logo')) : ?>
 								<img src='<?php echo $logo_src; ?>' class="img-responsive" alt=""><?php endif; ?>
 						</a>
+						<div class="ml-2 d-flex align-items-center">
+							<a href="https://liner.hu/" class="top-nav-link">
+								LINER.HU</a>
+							<a href="https://motorsport.hu/" class="top-nav-link">
+								MOTORSPORT.HU</a>
+						</div>
+
 					</div>
+					<button class="notification-articles active mobile" type="button">
+						<div class="position-relative" style="height:30px">
+							<img src="<?php echo get_template_directory_uri(); ?>/images/wall-clock.png" alt="clock" class="img-fluid" width="32">
+							<span>
+								<?php
+								echo count($last_visit_query->posts);
 
-					<div class="d-flex align-items-center">
-						<a href="https://liner.hu/" class="top-nav-link">
-							<img src="https://frontend.hirertek.hu/app/assets/images/logo/linhurlogo.png" width="16px" class="d-inline-block w-auto">
-							LINER.HU</a>
-						<a href="https://motorsport.hu/" class="top-nav-link">
-							<img src="https://frontend.hirertek.hu/app/assets/images/logo/ms_logo.png" width="23px" class="d-inline-block w-auto">
-							MOTORSPORT.HU</a>
-						<button class="notification-articles active mobile" type="button">
-							<div class="position-relative" style="height:30px">
-								<img src="<?php echo get_template_directory_uri(); ?>/images/wall-clock.png" alt="clock" class="img-fluid" width="32">
-								<span>
-									<?php
-									echo count($last_visit_query->posts);
+								?>
+							</span>
+						</div>
+					</button>
+					<div class="d-none d-lg-flex align-items-center">
+						<div class="weather-widget d-flex align-items-center justify-content-center">
+							<img style="margin-right:10px;object-fit: cover;height: 25px;" src="https://dev.liner.hu/wp-content/themes/liner/images/09.png" alt="Clouds" title="Clouds" width="30" height="30">
 
-									?>
+							<div class="d-flex flex-column" style="min-width:100%;">
+								<span class="graduak">
+									<span class="value">21</span>
+									<small>℃</small>
 								</span>
+								<span class="title">Budapest</span>
 							</div>
-						</button>
-						<div class="menu_1ul position-relative">
-							<li class="nav-item search_boxLi" style="list-style:none;">
-								<a href="#" class="nav-link search_btn"><i class="fa fa-search fa-lg" aria-hidden="true"></i></a>
-								<div class="search_panle">
-									<div class="frm_grp">
-										<div class="input-group mb-3">
-											<form role="search" method="get" id="searchform" class="searchform" action="<?php echo home_url(); ?>">
-												<div>
-													<label class="screen-reader-text" for="s">Keresés:</label>
-													<input type="text" value="" name="s" id="s">
-													<input type="submit" id="searchsubmit" value="Keresés">
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-							</li>
+						</div>
+						<div class="top-social d-flex align-items-center">
+							<a href="https://www.facebook.com/linerhungary" target="_blank" class="mr-3 rss-icon">
+								<!-- facebook -->
+								<i class="fa fa-facebook" aria-hidden="true"></i>
+							</a>
+							<a href="/feed" target="_blank" class="mr-3 rss-icon">
+								<i class="fa fa-rss" aria-hidden="true"></i>
+							</a>
+							<a href="/kapcsolat" target="_blank" class="rss-icon">
+								<!-- mail -->
+								<i class="fa fa-envelope" aria-hidden="true"></i>
+							</a>
 						</div>
 					</div>
+
 				</div>
 
 				<?php
@@ -282,9 +289,13 @@
 
 				$weather = get_option('weather');
 				$usd_currency = get_option('usd_currency')['data']['HUF']['value'];
+				$usd_currency_old = get_option('usd_currency_old')['data']['HUF']['value'];
 				$eur_currency = get_option('eur_currency')['data']['HUF']['value'];
+				$eur_currency_old = get_option('eur_currency_old')['data']['HUF']['value'];
 				$gbp_currency = get_option('gbp_currency')['data']['HUF']['value'];
+				$gbp_currency_old = get_option('gbp_currency_old')['data']['HUF']['value'];
 				$btc_currency = get_option('btc_currency')['data']['BTC']['value'];
+				$btc_currency_old = get_option('btc_currency_old')['data']['BTC']['value'];
 
 				wp_localize_script('liner-navigation', 'weather', array($weather));
 				wp_enqueue_script('liner-navigation');
@@ -294,106 +305,69 @@
 
 
 				<div class="mid-nav justify-content-between align-items-center">
-					<a href="<?php echo esc_url(home_url('/')); ?>" class="header__logo navbar-brand" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
-						<?php if (get_theme_mod('site_logo')) : ?>
-							<img src='<?php echo $logo_src; ?>' class="img-responsive" alt=""><?php endif; ?>
-					</a>
+					<div class="d-flex align-items-center">
+						<a href="<?php echo esc_url(home_url('/')); ?>" class="header__logo navbar-brand" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
+							<?php if (get_theme_mod('site_logo')) : ?>
+								<img src='<?php echo $logo_src; ?>' class="img-responsive" alt=""><?php endif; ?>
+						</a>
+						<button class="ml-4 mr-5 notification-articles active" type="button">
+							<div class="position-relative d-flex align-items-center" style="height:38px">
+								<img src="<?php echo get_template_directory_uri(); ?>/images/wall-clock.png" alt="clock" class="img-fluid" width="32">
+								<span><?php echo count($last_visit_query->posts); ?></span>
+							</div>
+						</button>
+						<a href="<?php echo get_permalink(get_page_by_title('orosz ukran haboru elo kozvetites')); ?>" class="orosz-ukran-btn">
+							orosz-ukrán háború
+						</a>
+					</div>
 					<div class="d-flex">
 						<div class="currency d-flex align-items-center currency-gap">
 							<div class="item">
-								<div class="icon">
-									<img src="<?php echo get_template_directory_uri(); ?>/images/american.png" alt="dollar" class="img-fluid" width="32">
-
-								</div>
 								<div class="info">
 									<div class="top">
 										<span class="title">Dollár</span>
-										<span class="change up"></span>
 									</div>
 									<span class="value">
 										<?php echo number_format($usd_currency, 3, ',', ' '); ?>
 									</span>
 								</div>
+								<?php if ($usd_currency_old !== $usd_currency) : ?>
+									<span class="change <?php echo ($usd_currency_old > $usd_currency) ? 'down' : 'up'; ?>"></span>
+								<?php endif; ?>
 							</div>
 							<div class="item">
-								<div class="icon">
-									<img src="<?php echo get_template_directory_uri(); ?>/images/coin.png" alt="pound" class="img-fluid" width="32">
-								</div>
 								<div class="info">
-									<div class="top"><span class="title">Euró</span> <span class="change up"></span></div>
+									<div class="top">
+										<span class="title">Euró</span>
+									</div>
 									<span class="value"><?php echo number_format($eur_currency, 3, ',', ' '); ?></span>
 								</div>
+								<?php if ($eur_currency_old !== $eur_currency) : ?>
+									<span class="change <?php echo ($eur_currency_old > $eur_currency) ? 'down' : 'up'; ?>"></span>
+								<?php endif; ?>
 							</div>
 							<div class="item">
-								<div class="icon">
-									<img src="<?php echo get_template_directory_uri(); ?>/images/pound.png" alt="pound" class="img-fluid" width="32">
-								</div>
 								<div class="info">
-									<div class="top"><span class="title">Font</span> <span class="change up"></span>
+									<div class="top">
+										<span class="title">Font</span>
 									</div>
-									<span class="value">
-										<?php echo number_format($gbp_currency, 3, ',', ' '); ?>
-
-									</span>
+									<span class="value"><?php echo number_format($gbp_currency, 3, ',', ' '); ?></span>
 								</div>
+								<?php if ($gbp_currency_old !== $gbp_currency) : ?>
+									<span class="change <?php echo ($gbp_currency_old > $gbp_currency) ? 'down' : 'up'; ?>"></span>
+								<?php endif; ?>
 							</div>
 							<div class="item">
-								<div class="icon">
-									<img src="<?php echo get_template_directory_uri(); ?>/images/bitcoin.png" alt="bitcoin" class="img-fluid" width="32">
-								</div>
 								<div class="info">
-									<div class="top"><span class="title">Bitcoin</span> <span class="change up"></span>
+									<div class="top">
+										<span class="title">Bitcoin</span>
 									</div>
 									<span class="value"><?php echo number_format($btc_currency); ?></span>
 								</div>
+								<?php if ($btc_currency_old !== $btc_currency) : ?>
+									<span class="change <?php echo ($btc_currency_old > $btc_currency) ? 'down' : 'up'; ?>"></span>
+								<?php endif; ?>
 							</div>
-						</div>
-						<!-- <div id="ikasgela-ikonoa">
-							<div style="text-align:center;padding-bottom:0;margin-bottom:0;">
-								<p class="bola azal_bila" style="margin-bottom:.275em;">
-									<a title="Liner.hu"><span class="hide">Liner.hu</span></a>
-								</p>
-							</div>
-							<p class="data text-center" style="margin-bottom:0;padding-bottom:0;font-family:'lft-etica',sans-serif;font-style:normal;font-weight:300;font-size:.750em;">
-								<a title="Liner.hu" class="bola-title"><span class="graduak">Liner.hu</span></a>
-							</p>
-						</div> -->
-
-						<button class="notification-articles active" type="button">
-							<div class="position-relative" style="height:38px">
-								<img src="<?php echo get_template_directory_uri(); ?>/images/wall-clock.png" alt="clock" class="img-fluid" width="32">
-								<span>
-									<?php
-									echo count($last_visit_query->posts);
-
-									?>
-								</span>
-							</div>
-						</button>
-
-						<div id="estilo-ikonoa">
-							<div style="text-align:center;padding-bottom:0;margin-bottom:0;">
-								<p class="bola azal_bila" style="margin-bottom:.275em;">
-									<a href="https://dev.liner.hu" class="bola-title" title=Liner.hu">
-										<span class="fa fa-book" aria-hidden="true">
-											<span class="hide">Liner.hu</span>
-										</span>
-									</a>
-								</p>
-							</div>
-							<p class="data text-center" style="margin-bottom:0;padding-bottom:0;font-family:'lft-etica',sans-serif;font-style:normal;font-weight:300;font-size:.750em;">
-								<a href="https://dev.liner.hu" class="bola-title" title="Liner.hu">
-									<span>Liner.hu</span>
-								</a>
-							</p>
-						</div>
-						<div class="weather-widget d-flex flex-column align-items-center justify-content-center">
-							<img style="margin-top:-8px; width:50px;height:50px;" src="https://openweathermap.org/img/wn/01d@2x.png" alt="Clouds" title="Clouds" width="50" height="50">
-							<span class="title"><strong>Budapest</strong></span>
-							<span class="graduak">
-								<span class="value">21</span>
-								<small>℃</small>
-							</span>
 						</div>
 					</div>
 				</div>
@@ -421,93 +395,80 @@
 		?>
 		<div class="ham-menu">
 			<div class="container">
-				<div class="row">
-					<?php foreach ($categories as $category) { ?>
-						<ul class="main-list col-lg-3">
-							<?php if ($category->name !== '#X') :
-									$child_categories = get_categories(array(
-										'orderby' => 'name',
-										'order' => 'ASC',
-										'parent' => $category->term_id,
-										'hide_empty' => 0,
-										'hierarchical' => 1,
-										'exclude' => '',
-										'include' => '',
-										'taxonomy' => 'news_cat',
-										'pad_counts' => false,
-									));
-									?>
-								<li class="parent-category-item">
-									<a href="<?php echo get_category_link($category->term_id) ?>" class="parent-category">
-										<?php echo str_replace('#', '', $category->name) ?>
-									</a>
-									<?php if (count($child_categories) > 0) : ?>
-										<button class="open-child-category">
-											<i class="fa fa-angle-right" aria-hidden="true"></i>
-										</button>
-									<?php else : ?>
-										<div style="width:40px;height:33px;"></div>
-									<?php endif; ?>
-									<ul class="child-category-menu">
-										<?php foreach ($child_categories as $child_category) { ?>
-											<li class="child-category-item">
-												<a href="<?php echo get_category_link($child_category->term_id) ?>" class="child-category">
-													<?php echo $child_category->name ?>
-												</a>
-											</li>
-										<?php } ?>
-									</ul>
-								</li>
-							<?php endif; ?>
-						</ul>
-					<?php } ?>
+				<div class="mb-3 input-group">
+					<form role="search" method="get" id="searchform" class="searchform w-100" action="<?php echo home_url(); ?>">
+						<div>
+							<label class="screen-reader-text" for="s">Keresés:</label>
+							<input type="text" placeholder="Keresés a Liner.hu-n" value="" name="s" id="s" class="w-100 ham-search">
+						</div>
+					</form>
 				</div>
-
-				<div class="currency d-flex d-lg-none align-items-center currency-gap mt-5 flex-wrap">
-					<div class="item">
-						<div class="icon">
-							<img src="<?php echo get_template_directory_uri(); ?>/images/american.png" alt="dollar" class="img-fluid" width="32">
-
+				<div class="row">
+					<?php wp_nav_menu(array('theme_location' => 'hamburger', 'menu_class' => 'hamburger-menu-items', 'container_class' => 'col-lg-8 menu-hamburger-menu-container')); ?>
+					<div class="col-lg-4">
+						<div class="mb-5 information-menu-section">
+							<h3 class="informac-title d-block">INFORMÁCIÓK</h3>
+							<?php wp_nav_menu(array('theme_location' => 'informations', 'menu_class' => 'informations-menu')); ?>
 						</div>
-						<div class="info">
-							<div class="top">
-								<span class="title">Dollár</span>
-								<span class="change up"></span>
+						<div class="mb-5">
+							<h3 class="informac-title">ÁREOLYAM</h3>
+							<div class="d-flex">
+								<div class="currency d-flex align-items-center currency-gap">
+									<div class="item">
+										<div class="info">
+											<div class="top">
+												<span class="title">Dollár</span>
+											</div>
+											<span class="value">
+												<?php echo number_format($usd_currency, 3, ',', ' '); ?>
+											</span>
+										</div>
+										<?php if ($usd_currency_old !== $usd_currency) : ?>
+											<span class="change <?php echo ($usd_currency_old > $usd_currency) ? 'down' : 'up'; ?>"></span>
+										<?php endif; ?>
+									</div>
+									<div class="item">
+										<div class="info">
+											<div class="top">
+												<span class="title">Euró</span>
+											</div>
+											<span class="value"><?php echo number_format($eur_currency, 3, ',', ' '); ?></span>
+										</div>
+										<?php if ($eur_currency_old !== $eur_currency) : ?>
+											<span class="change <?php echo ($eur_currency_old > $eur_currency) ? 'down' : 'up'; ?>"></span>
+										<?php endif; ?>
+									</div>
+									<div class="item">
+										<div class="info">
+											<div class="top">
+												<span class="title">Font</span>
+											</div>
+											<span class="value"><?php echo number_format($gbp_currency, 3, ',', ' '); ?></span>
+										</div>
+										<?php if ($gbp_currency_old !== $gbp_currency) : ?>
+											<span class="change <?php echo ($gbp_currency_old > $gbp_currency) ? 'down' : 'up'; ?>"></span>
+										<?php endif; ?>
+									</div>
+									<div class="item">
+										<div class="info">
+											<div class="top">
+												<span class="title">Bitcoin</span>
+											</div>
+											<span class="value"><?php echo number_format($btc_currency); ?></span>
+										</div>
+										<?php if ($btc_currency_old !== $btc_currency) : ?>
+											<span class="change <?php echo ($btc_currency_old > $btc_currency) ? 'down' : 'up'; ?>"></span>
+										<?php endif; ?>
+									</div>
+								</div>
 							</div>
-							<span class="value">
-								<?php echo $usd_currency; ?>
-							</span>
 						</div>
-					</div>
-					<div class="item">
-						<div class="icon">
-							<img src="<?php echo get_template_directory_uri(); ?>/images/coin.png" alt="pound" class="img-fluid" width="32">
-						</div>
-						<div class="info">
-							<div class="top"><span class="title">Euró</span> <span class="change up"></span></div>
-							<span class="value"><?php echo $eur_currency; ?></span>
-						</div>
-					</div>
-					<div class="item">
-						<div class="icon">
-							<img src="<?php echo get_template_directory_uri(); ?>/images/pound.png" alt="pound" class="img-fluid" width="32">
-						</div>
-						<div class="info">
-							<div class="top"><span class="title">Font</span> <span class="change up"></span>
+						<div>
+							<h3 class="informac-title">TOVABBI LAPOK</h3>
+							<div class="d-flex align-items-center justify-content-between">
+								<a href="https://tesztauto.hu/" class="external-link" target="_blank">TESZTAUTO.HU</a>
+								<a href="https://motorsport.hu/" class="external-link" target="_blank">MOTORSPORT.HU</a>
 							</div>
-							<span class="value">
-								<?php echo $gbp_currency; ?>
-							</span>
-						</div>
-					</div>
-					<div class="item">
-						<div class="icon">
-							<img src="<?php echo get_template_directory_uri(); ?>/images/bitcoin.png" alt="bitcoin" class="img-fluid" width="32">
-						</div>
-						<div class="info">
-							<div class="top"><span class="title">Bitcoin</span> <span class="change up"></span>
-							</div>
-							<span class="value"><?php echo $btc_currency; ?></span>
 						</div>
 					</div>
 				</div>
@@ -550,7 +511,7 @@
 					if ($childCategory == '') {
 						$output = '<a href="' . $parentLink . '" class="article-category">' . $parentCategory . '</a>';
 					} else {
-						$output .= '<a href="' . $childLink . '" class="article-category mx-1">' . $childCategory . '</a>';
+						$output .= '<a href="' . $childLink . '" class="mx-1 article-category">' . $childCategory . '</a>';
 					}
 					return $output;
 				}
@@ -626,7 +587,7 @@
 						echo '<div class="last-visit-modal">
 						<div class="container">
 							<div class="text-right">
-							<button class="close-visit-modal mt-4 px-3 bg-transparent">
+							<button class="px-3 mt-4 bg-transparent close-visit-modal">
 								<i class="fa fa-times"></i>
 							</button>
 							</div>
@@ -654,9 +615,9 @@
 							?>
 
 					<div class="news-item d-flex align-items-center">
-						<span class="post-tagline mt-0 mr-4 font-weight-bold"><?php echo get_post_time('H:i'); ?></span>
+						<span class="mt-0 mr-4 post-tagline font-weight-bold"><?php echo get_post_time('H:i'); ?></span>
 						<div>
-							<div class="news-item-title mt-0 mb-0">
+							<div class="mt-0 mb-0 news-item-title">
 								<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 							</div>
 						</div>
