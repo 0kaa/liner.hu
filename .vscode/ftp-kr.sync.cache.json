@@ -102,8 +102,8 @@
             "inc": {
               "custom-function.php": {
                 "type": "-",
-                "size": 139239,
-                "lmtime": 1657883410066,
+                "size": 142670,
+                "lmtime": 1658129828026,
                 "modified": false
               },
               "custom-header.php": {
@@ -1167,8 +1167,8 @@
             },
             "custom-style.css": {
               "type": "-",
-              "size": 124279,
-              "lmtime": 1657883715592,
+              "size": 126647,
+              "lmtime": 1658128979423,
               "modified": false
             },
             "functions.php": {
@@ -1223,7 +1223,7 @@
             },
             "style.css": {
               "type": "-",
-              "size": 48630,
+              "size": 49499,
               "lmtime": 1654897239900,
               "modified": true
             }
