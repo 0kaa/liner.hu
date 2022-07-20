@@ -1485,6 +1485,12 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   border-radius: 2px;
   padding: 3px;
 }
+.style_boxRow .item .post-title {
+  font-size: 14px !important;
+}
+.style_boxRow .item .post-title a {
+  font-weight: 500;
+ }
 .style_rightDiv p a {
   color: #000;
   text-decoration: none;

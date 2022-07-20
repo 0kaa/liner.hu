@@ -675,11 +675,11 @@ function get_latest_news_blocks($postnot_in = 0)
             </div>            
             <div class="' . $popular . $breaknews . ' d-flex flex-column justify-content-center ml-3" >
                 <div>
-                    <p class="mt-0 post-tagline">
+                    <div class="mt-0 post-tagline">
                         ' . getCategoryByPostId($latest_news->post->ID) . '
                         <span>|</span>
 					    <span>' . get_post_time('H:i') .  '</span>
-                    </p>
+                    </div>
                 </div>
                 <h2 class="post-title post-title2">
                     <a class="title-slug" href="' . get_the_permalink($latest_news->post->ID) . '">
@@ -2146,8 +2146,8 @@ if( $the_query->have_posts() ) {
                 <img src="' . $image_attributes[0] . '" alt="" style="width:100%;height:100%;object-fit:cover;">
               </div>
               <div class="w-50 p-5 text-part">
-                <h1 class="mb-4">
-                  <a href="' . get_the_permalink($final_query->post->ID) . '" class="tag-slug">
+                <h1 class="mb-4 post-title" style="font-size:32px;">
+                  <a href="' . get_the_permalink($final_query->post->ID) . '" class="title-slug">
                     ' . $final_query->post->post_title . '
                   </a>
                 </h1>
@@ -2815,7 +2815,7 @@ if( $the_query->have_posts() ) {
           if ($i == 2) {
             $output .= '
             <div class="col-12 col-sm-6 col-lg-6">
-              <div class="from-first-article mb-5 ' . $popular . $breaknews . '">
+              <div class="from-first-article mb-3 ' . $popular . $breaknews . '">
                 <p class="post-tagline">
                 ' . getCategoryByPostId($firstArticle) . '
                   <span>|</span>
@@ -2833,8 +2833,8 @@ if( $the_query->have_posts() ) {
           }
           if ($i >= 2 && $i <= 4) {
             $output .= '
-              <div class="item d-flex align-items-start ' . $popular . $breaknews . '">
-                <p class="post-tagline mr-4">
+              <div class="item mb-3 d-flex align-items-start ' . $popular . $breaknews . '">
+                <p class="post-tagline mt-0 mr-4">
                   <span>' . get_post_time('H:i') .  '</span>
                 </p>
                 <h2 class="post-title post-title1">

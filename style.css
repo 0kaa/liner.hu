@@ -2120,7 +2120,7 @@ p {
 .tag-slug,
 .tag-slug:hover {
     text-decoration: none;
-	color: #3e4960;
+	color: unset;
 	text-transform: uppercase;
 	font-size: 12px;
 	font-weight: 700;
