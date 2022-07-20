@@ -670,7 +670,7 @@ function get_latest_news_blocks($postnot_in = 0)
 
     $output_latest_news_block[$i] = '
         <div class="d-flex">            
-            <div style="max-width:15%;">
+            <div style="width: 200px;height: 80px;">
                 <img class="w-100 h-100" style="object-fit:cover;" src="' . $image_attributes[0] . '">
             </div>            
             <div class="' . $popular . $breaknews . ' d-flex flex-column justify-content-center ml-3" >
@@ -2762,17 +2762,17 @@ if( $the_query->have_posts() ) {
       $shortcode_id = rand(0, 99999);
       $output = '';
       global $postnot;
-
+      $firstArticle = '';
       $i = 0;
 
-      $output .= '<div class="auto_float style_boxRow">
+      $output .= '<div class="auto_float style_boxRow mb-4">
+      <h2 class="egy-header-title single text-uppercase">Style</h2>
         <div class="row">';
       $args = array(
         'post_type'        => 'linernews',
         'post_status'      => 'publish',
-        'posts_per_page'   => 1,
+        'posts_per_page'   => 8,
         'no_found_rows'      => true,
-        // not in
         'post__not_in'     => $postnot,
         'update_post_meta_cache' => false,
         'update_post_term_cache' => false,
@@ -2787,79 +2787,10 @@ if( $the_query->have_posts() ) {
 
       $the_query = new WP_Query($args);
 
-      if ($the_query->have_posts()) {
-        $output .= '<div class="mb-4 col-md-8 col-sm-12">';
-        while ($the_query->have_posts()) {
+      if ($the_query->have_posts()) :
+        while ($the_query->have_posts()) :
           $the_query->the_post();
 
-          $artclebk_img = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'style1-thumb');
-          $author_id = $the_query->post->post_author;
-          $custom_author = get_field('news_author', $the_query->post->ID);
-          $newsterm = get_the_terms($the_query->post->ID, 'news_cat');
-
-          foreach ($newsterm as $nwstrm) {
-            $trm_link = get_category_link($nwstrm->term_id);
-            $trm_str[] = ['link' => '<a href="' . $trm_link . '" class="trmLnk">' . $nwstrm->name . '</a>'];
-          }
-          $terms_string = join(', ', wp_list_pluck($trm_str, 'link'));
-          //$terms_string = join(', ', wp_list_pluck($newsterm, 'name'));
-
-          $output .= '
-                    <div class="">
-                      <div>
-                        <img class="mb-2 w-100" src="' . $artclebk_img[0] . '">
-                      </div>
-                      <div>
-                        <p class="post-tagline">
-                        ' . getCategoryByPostId($the_query->post->ID) . '
-                          <span>|</span>
-                          <span>' . get_post_time('H:i') .  '</span>
-                        </p>
-                      </div>
-                      <h2 class="post-title post-title1">
-                        <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
-                        ' . $the_query->post->post_title . '
-                        </a>
-                      </h2>
-                    </div>
-                   ';
-
-          $postnot[] = $the_query->post->ID;
-        }
-        $output .= '</div>';
-      }
-
-      // Restore original Post Data
-      wp_reset_postdata();
-
-
-      $args = array(
-        'post_type'        => 'linernews',
-        'post_status'      => 'publish',
-        'posts_per_page'   => 5,
-        'no_found_rows'      => true,
-        'update_post_meta_cache' => false,
-        'post__not_in'     => $postnot,
-        'update_post_term_cache' => false,
-        'offset'           => 1,
-        'tax_query'        => array(
-          array(
-            'taxonomy' => 'news_cat',
-            'field'    => 'slug',
-            'terms'    => 'style'
-          )
-        )
-      );
-
-      $the_query = new WP_Query($args);
-
-      if ($the_query->have_posts()) {
-        $popular = '';
-        $output .= '<div class="col-md-4 col-sm-12">
-          <div class="">';
-        while ($the_query->have_posts()) {
-          $the_query->the_post();
-          $artclebk_img = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'full');
           $poplr = get_field('most_popular_news', $the_query->post->ID);
           $brknews = get_field('breaking_news', $the_query->post->ID);
 
@@ -2876,129 +2807,73 @@ if( $the_query->have_posts() ) {
             $breaknews = '';
           }
 
-          if (false || true) {
-            $gap = '';
-          } else {
-            $gap = 'gap-4';
+          $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'full');
+          if ($i == 1) {
+            $firstArticle = $the_query->post->ID;
+            $output .= '<div class="col-12 col-sm-6 col-lg-6"><div><img class="w-100" src="' . $image_attributes[0] . '"></div></div>';
           }
-
-
-          $output .= '
-      <div class="mb-2 d-flex ' . $gap . '">
-        <div class="media-width">
-            <img class="w-100" src="' . $artclebk_img[0] . '">
-        </div>
-        <div class="' . $popular . $breaknews . '">
-            <div>
-              <p class="post-tagline">
-              ' . getCategoryByPostId($the_query->post->ID) . '
-                <span>|</span>
-                <span>' . get_post_time('H:i') .  '</span>
-              </p>
-            </div>            
-              <h2 class="mb-0 post-title post-title2">
-                <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
-                ' . $the_query->post->post_title . '
-                </a>
-            </h2>
-        </div>
-      </div>
-      ';
+          if ($i == 2) {
+            $output .= '
+            <div class="col-12 col-sm-6 col-lg-6">
+              <div class="from-first-article mb-5 ' . $popular . $breaknews . '">
+                <p class="post-tagline">
+                ' . getCategoryByPostId($firstArticle) . '
+                  <span>|</span>
+                  <span>' . get_the_time('H:i', $firstArticle) .  '</span>
+                </p>
+                <h2 class="post-title post-title1">
+                  <a class="title-slug" href="' . get_the_permalink($firstArticle) . '">
+                  ' . get_the_title($firstArticle) . '
+                  </a>
+                </h2>
+              </div>
+              
+            
+            ';
+          }
+          if ($i >= 2 && $i <= 4) {
+            $output .= '
+              <div class="item d-flex align-items-start ' . $popular . $breaknews . '">
+                <p class="post-tagline mr-4">
+                  <span>' . get_post_time('H:i') .  '</span>
+                </p>
+                <h2 class="post-title post-title1">
+                  <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
+                  ' . get_the_title($the_query->post->ID) . '
+                  </a>
+                </h2>
+              </div>
+            ';
+          }
+          if ($i == 4) {
+            $output .= '</div>';
+          }
+          if ($i >= 4 && $i <= 8) {
+            $output .= '
+              <div class="col-lg-3 mt-4">
+                <div>
+                  <img class="w-100" src="' . $image_attributes[0] . '">
+                </div>
+                <div class="' . $popular . $breaknews . '">
+                  <p class="post-tagline">
+                    ' . getCategoryByPostId($the_query->post->ID) . '
+                    <span>|</span>
+                    <span>' . get_post_time('H:i') .  '</span>
+                  </p>
+                  <h2 class="post-title post-title2">
+                    <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
+                      ' . get_the_title() . '
+                    </a>
+                  </h2>
+                </div>
+              </div>
+            ';
+          }
           $postnot[] = $the_query->post->ID;
-        }
-        $output .= '</div>
-        </div>';
-      }
-
-      // Restore original Post Data
-      wp_reset_postdata();
-
-      $output .= '</div>';
-
-      $args = array(
-        'post_type'        => 'linernews',
-        'post_status'      => 'publish',
-        'posts_per_page'   => 4,
-        'no_found_rows'      => true,
-        'update_post_meta_cache' => false,
-        'update_post_term_cache' => false,
-        'offset'           => 7,
-        'tax_query'        => array(
-          array(
-            'taxonomy' => 'news_cat',
-            'field'    => 'slug',
-            'terms'    => 'style'
-          )
-        )
-      );
-
-      $the_query = new WP_Query($args);
-
-      if ($the_query->have_posts()) {
-        $popular = '';
-        $output .= '<div class="row">';
-        while ($the_query->have_posts()) {
-          $the_query->the_post();
           $i++;
-          $stylenes_img = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'style2-thumb');
-          $author_id = $the_query->post->post_author;
-          $custom_author = get_field('news_author', $the_query->post->ID);
-
-
-          $tdy = date('H:i');
-          $pday = get_the_date('H:i');
-          $date1 = date_create($tdy);
-          $date2 = date_create($pday);
-          $diff = date_diff($date1, $date2);
-          $day_diff = $diff->format("%a days Ago");
-          if ($day_diff == 0) {
-            $dfrnc = "Posted Today .";
-            $dfrnc = get_the_time('', $the_query->post->ID);
-          } else {
-            $dfrnc = $diff->format("%a days Ago");
-          }
-
-          //echo '<h1>'.$date1.' _ '.$date2.'</h1>';
-
-          $poplr = get_field('most_popular_news', $the_query->post->ID);
-          $brknews = get_field('breaking_news', $the_query->post->ID);
-
-          if ($poplr == 1) {
-            $popular = ' post-background-green';
-          } else {
-            $popular = '';
-          }
-
-          if ($brknews == 1) {
-            $breaknews = ' post-background-yellow';
-            $popular = '';
-          } else {
-            $breaknews = '';
-          }
-
-          $output .= '<div class="col-lg-3 col-12">
-                <div class="style_Bx tyle_oBx1 styMainNewC h-100' . $popular . $breaknews . '">
-                  <span class="nues_imgSpan">
-                   <img src="' . $stylenes_img[0] . '">
-                  </span>
-               <div class="px-2">
-               <label class="">
-               ' . getCategoryByPostId($the_query->post->ID) . '
-               <b></b></label>
-               <label>' . $dfrnc . '</label>
-               <div class="nues_content style_new_ContentBox' . $popular . $breaknews . '">
-                <p><a href="' . get_the_permalink($the_query->post->ID) . '">' . $the_query->post->post_title . '</a></p>                 
-               </div>
-                </div>
-                </div>
-               </div>';
-        }
-        $output .= '</div>';
-      }
-
-      // Restore original Post Data
-      wp_reset_postdata();
-      $output .= '</div>';
+        endwhile;
+      endif;
+      $output .= '</div> </div>';
       return $output;
     }
     add_shortcode('section-stylenews', 'section_stylenews_shortcode');

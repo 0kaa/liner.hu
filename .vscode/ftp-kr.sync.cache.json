@@ -102,8 +102,8 @@
             "inc": {
               "custom-function.php": {
                 "type": "-",
-                "size": 142670,
-                "lmtime": 1658129828026,
+                "size": 141227,
+                "lmtime": 1658302694161,
                 "modified": false
               },
               "custom-header.php": {
@@ -268,6 +268,12 @@
                 "type": "-",
                 "size": 1601,
                 "lmtime": 1654897244257,
+                "modified": false
+              },
+              "50.png": {
+                "type": "-",
+                "size": 13327,
+                "lmtime": 1657882536007,
                 "modified": false
               },
               "300x600.jpeg": {
@@ -514,12 +520,6 @@
                 "type": "-",
                 "size": 10822,
                 "lmtime": 0,
-                "modified": false
-              },
-              "50.png": {
-                "type": "-",
-                "size": 13327,
-                "lmtime": 1657882536007,
                 "modified": false
               }
             },
@@ -880,6 +880,12 @@
                 "lmtime": 1654897267428,
                 "modified": false
               },
+              "Balto-MediumItalic.woff2": {
+                "type": "-",
+                "size": 25972,
+                "lmtime": 1657166538825,
+                "modified": false
+              },
               "fontawesome-webfont.svg": {
                 "type": "-",
                 "size": 444379,
@@ -1119,12 +1125,6 @@
                 "size": 325492,
                 "lmtime": 1654897278025,
                 "modified": false
-              },
-              "Balto-MediumItalic.woff2": {
-                "type": "-",
-                "size": 25972,
-                "lmtime": 1657166538825,
-                "modified": false
               }
             },
             ".vscode": {
@@ -1167,8 +1167,8 @@
             },
             "custom-style.css": {
               "type": "-",
-              "size": 126647,
-              "lmtime": 1658128979423,
+              "size": 127575,
+              "lmtime": 1658287408635,
               "modified": false
             },
             "functions.php": {
@@ -1223,9 +1223,9 @@
             },
             "style.css": {
               "type": "-",
-              "size": 49499,
-              "lmtime": 1654897239900,
-              "modified": true
+              "size": 49675,
+              "lmtime": 1658287409047,
+              "modified": false
             }
           },
           "index.php": {

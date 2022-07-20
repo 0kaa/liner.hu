@@ -449,13 +449,13 @@ section.section_1 {
   color: #212020;
   letter-spacing: -2px;
   text-decoration: underline;
-  text-decoration-color: #9ad0c4;
+  text-decoration-color: #58ceb6;
   margin-bottom: 25px;
 }
 .div_nc_left_title h2 a {
   color: #212020;
   text-decoration: underline;
-  text-decoration-color: #9ad0c4;
+  text-decoration-color: #58ceb6;
 }
 .div_nc_left {
   float: left;
@@ -616,14 +616,14 @@ section.section_1 {
 .nc_imgContent {
   width: 100%;
   float: left;
-  padding: 20px 0px;
+  padding: 8px 0px;
 }
 .nc_imgContent > span {
   text-transform: uppercase;
-  color: #585757;
-  font-weight: 400;
-  font-size: 12px;
-  font-family: "Roboto";
+  color: #3e4960;
+  font-weight: 700;
+  font-size: 11px;
+  font-family: "Bai jamjuree";
 }
 .nc_imgContent > span a {
   text-decoration: none;
@@ -5884,7 +5884,7 @@ input.contact-submit-btn {
 .uk-war-title {
   font-size: 18px;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-weight: 600;
   color: #000 !important;
   font-family: "Bai Jamjuree", sans-serif !important;
@@ -5965,11 +5965,11 @@ body {
 .orosz-ukran-btn {
   color: #000 !important;
   background-color: #58ceb6;
-  padding: 10px 20px;
+  padding: 5px 8px;
   border: none;
   text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
 }
 .menu-hamburger-menu-container .hamburger-menu-items {
   column-count: 4;
@@ -6079,28 +6079,29 @@ body {
   margin-bottom: 10px;
 }
 .egy-header {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 .egy-header-title {
   position: relative;
-  font-size: 32px;
+  font-size: 22px;
+  font-weight: 600;
 }
 .egy-header-title:before {
   content: "";
   position: absolute;
-  bottom: -12px;
+  bottom: -10px;
   left: 0;
-  width: 250px;
-  height: 10px;
+  width: 150px;
+  height: 5px;
   background-color: #1a1d2e;
 }
 .egy-header-title:after {
   content: "";
   position: absolute;
-  bottom: -12px;
-  left: 70px;
-  width: 100px;
-  height: 10px;
+  bottom: -10px;
+  left: 50px;
+  width: 50px;
+  height: 5px;
   background-color: #58ceb6;
 }
 .egy-header-title.single {
@@ -6111,7 +6112,7 @@ body {
 }
 .egy-header-title.single:before,
 .egy-header-title.single:after {
-  bottom: -6px;
+  bottom: -3px;
 }
 .egy-header .egy-header-body {
   padding: 20px 0;
@@ -6119,20 +6120,20 @@ body {
   border-bottom: 1px solid #000;
 }
 .egy-header .egy-header-body .post-title {
-  font-size: 38px;
+  font-size: 35px;
 }
 .egy-header .egy-header-body .egy-header-description {
-  font-size: 18px;
-  color: #929292;
+  font-size: 16px;
+  color: #353535;
   font-weight: 300;
   padding: 0 40px;
 }
 .egy-end-section {
   position: absolute;
-  bottom: -4px;
+  bottom: -2px;
   right: 0;
-  width: 250px;
-  height: 10px;
+  width: 150px;
+  height: 5px;
   background-color: #1a1d2e;
   display: block;
 }
@@ -6140,32 +6141,34 @@ body {
   content: "";
   position: absolute;
   bottom: 0;
-  left: 70px;
-  width: 100px;
-  height: 10px;
+  left: 50px;
+  width: 50px;
+  height: 5px;
   background-color: #58ceb6;
 }
 .olvas-title {
   border-bottom: 1px solid #000;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
   position: relative;
+  font-size: 22px;
+  font-weight: 600;
 }
 .olvas-title:before {
   content: "";
   position: absolute;
-  bottom: -5px;
+  bottom: -3px;
   left: 0;
-  width: 250px;
-  height: 10px;
+  width: 150px;
+  height: 5px;
   background-color: #1a1d2e;
 }
 .olvas-title:after {
   content: "";
   position: absolute;
-  bottom: -5px;
-  left: 70px;
-  width: 100px;
-  height: 10px;
+  bottom: -3px;
+  left: 50px;
+  width: 50px;
+  height: 5px;
   background-color: #58ceb6;
 }
 .immersive-break-2 {
