@@ -5889,6 +5889,10 @@ input.contact-submit-btn {
   gap: 40px;
   padding-bottom: 40px;
 }
+.timeline-item .timeline-header {
+  border-bottom: 1px solid #000;
+  padding-bottom: 10px;
+}
 .timeline-item .timeline-header .timeline-time {
   font-size: 24px;
 }
@@ -5914,9 +5918,10 @@ input.contact-submit-btn {
   font-weight: 300;
   font-size: 18px;
   line-height: 144%;
-  padding: 8px 0 8px 26px;
+  /* padding: 8px 0 8px 26px; */
+  padding: 8px 0 8px 0px;
   margin-bottom: 20px;
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     #ec0000,
     #ec0000 10px,
     #000a68 10px,
@@ -5924,7 +5929,11 @@ input.contact-submit-btn {
   );
   background-size: 6px 100%;
   background-position: left 0;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
+}
+.timeline-time.egy-header-title:before,
+.timeline-time.egy-header-title:after {
+  bottom:-13px
 }
 .inner-content .wp-block-pullquote,
 .timeline-content .content .wp-block-pullquote {

@@ -2072,12 +2072,15 @@ p {
 
 .post-title2 {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
 }
-
+.second-article.post-background-green h2,
+.second-article.post-background-yellow h2 {
+	font-weight: 600;
+}
 .post-title3 {
     font-size: 1.4rem;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 

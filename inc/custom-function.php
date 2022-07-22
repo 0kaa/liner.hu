@@ -670,7 +670,7 @@ function get_latest_news_blocks($postnot_in = 0)
             <div style="width: 150px;height: 80px;min-width: 150px;">
                 <img class="w-100 h-100" style="object-fit:cover;" src="' . $image_attributes[0] . '">
             </div>            
-            <div class="' . $popular . $breaknews . ' d-flex flex-column justify-content-center ml-3" >
+            <div class="second-article' . $popular . $breaknews . ' d-flex flex-column justify-content-center ml-3" >
                 <div>
                     <div class="mt-0 post-tagline">
                         ' . getCategoryByPostId($latest_news->post->ID) . '
@@ -942,7 +942,7 @@ function section2_shortcode($atts, $content)
                 <div>
                   <img class="w-100 mob-image7" src="' . $image_attributes[0] . '">
                 </div>
-            <div class="article-card-body ' . $popular . $breaknews . '">
+            <div class="article-card-body second-article ' . $popular . $breaknews . '">
               <div>
               <p class="post-tagline">
                 ' . getCategoryByPostId($the_query->post->ID) . '

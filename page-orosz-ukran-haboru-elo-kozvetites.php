@@ -57,7 +57,7 @@ $the_query = new WP_Query($args); ?>
 
                                         <a href="<?php the_permalink(); ?>" class="key-points-item-link">View post
                                             <!-- <span class="chevron-down">↓</span> -->
-                                            <i class="fa fa-arrow-down chevron-down"></i>
+                                            <i class="fa fa-arrow-right chevron-down"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@ $the_query = new WP_Query($args); ?>
                             ?>
                             <div class="timeline-item">
                                 <div class="timeline-header mb-3 d-flex align-items-center justify-content-between">
-                                    <div class="timeline-time">
+                                    <div class="timeline-time egy-header-title">
                                         <?php echo get_the_date('Y.m.d - H:i'); ?>
                                     </div>
                                     <div class="d-flex align-items-start justify-content-between h-100">
