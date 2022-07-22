@@ -166,7 +166,7 @@ get_header(); ?>
 									<p><?php
 
 											setlocale(LC_ALL, 'hu_HU.UTF-8');
-											echo strftime('%Y. %B %d', strtotime(get_the_date('Y/m/d'))); ?>
+											echo strftime('%Y. %B %d. - %R', strtotime(get_the_date('Y/m/d H:i a'))); ?>
 
 									</p>
 								</div>
@@ -591,7 +591,7 @@ if ($relterms && !is_wp_error($relterms)) {
 			$('.load_more #single_' + window.adsInfinityIndex).find('.content_ads2').html('').attr('id', 'liner_roadblock_2_infinite_' + window.adsInfinityIndex);
 
 			//player_infinite
-			$('.load_more #single_' + count).find('#fwdevpDiv0').attr('id', 'fwdevpDiv' + count);
+			$('#fwdevpDiv0').attr('id', 'fwdevpDiv' + count);
 			//pause old page video
 
 			console.log('page index');
@@ -629,6 +629,7 @@ if ($relterms && !is_wp_error($relterms)) {
 
 			console.log('new id easy player fwdevpDiv' + count);
 			var playerid_l = 'fwdevpDiv' + count;
+			
 			//check if div exists
 			var $pDiv = $('#' + playerid_l);
 			if ($pDiv.length) {

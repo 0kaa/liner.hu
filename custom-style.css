@@ -23,7 +23,7 @@ font-family: 'Poppins', sans-serif;
   font-weight: normal;
   font-style: normal;
 }
-@font-face {
+/* @font-face {
   font-family: "PTSansRegular";
   src: url("fonts/pts55f.eot");
   src: url("fonts/pts55f.eot?#iefix") format("embedded-opentype"),
@@ -32,7 +32,7 @@ font-family: 'Poppins', sans-serif;
     url("fonts/pts55f.svg#PTSansRegular") format("svg");
   font-weight: normal;
   font-style: normal;
-}
+} */
 
 @font-face {
   font-family: "PTSansBold";
@@ -408,7 +408,7 @@ section.section_1 {
 }
 .right1_content ul li {
   float: left;
-  margin-right: 10px;
+  margin-right: 5px;
   text-transform: uppercase;
   font-weight: 500;
   color: #000;
@@ -505,6 +505,24 @@ section.section_1 {
   max-height: 460px;
   object-fit: cover;
   min-height: 460px;
+}
+.mob-image7 {
+  max-height: 186px;
+  object-fit: cover;
+  min-height: 186px;
+}
+.mob-image8 {
+  max-height: 300px;
+  object-fit: cover;
+  min-height: 300px;
+}
+.mob-image9 {
+  max-height: 189px;
+  object-fit: cover;
+  min-height: 189px;
+}
+.friss-title2 {
+  /* font-size: 22px; */
 }
 .nc_section2 .popular.nc_left_1 {
   position: relative;
@@ -669,7 +687,7 @@ section.section_1 {
   font-size: 16px;
   margin-top: 10px;
   font-weight: 400;
-  font-family: "PTSansRegular";
+  font-family: "Roboto";
 }
 .nc_imgContent label {
   font-size: 16px;
@@ -1045,7 +1063,7 @@ section.section_poartMian .poart_pcol4 ul li:last-child::after {
   text-align: left;
   font-weight: normal;
   margin: 0;
-  font-family: "PTSansRegular";
+  font-family: "Roboto";
 }
 .agu_boxCol h2 {
   font-size: 20px;
@@ -1162,7 +1180,7 @@ section.section_poartMian .poart_pcol4 ul li:last-child::after {
   font-weight: 400;
   position: relative;
   z-index: 1;
-  font-family: "PTSansRegular";
+  font-family: "Roboto";
 }
 .laus_container .lacus_row {
   position: relative;
@@ -1237,7 +1255,7 @@ section.section_poartMian .poart_pcol4 ul li:last-child::after {
   width: 100%;
   float: left;
   margin-bottom: 10px;
-  font-family: "PTSansRegular";
+  font-family: "Roboto";
 }
 .porta_Content_left label {
   font-size: 12px;
@@ -1434,7 +1452,7 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   margin-top: 20px;
   margin-bottom: 0;
   font-weight: 400;
-  font-family: "PTSansRegular";
+  font-family: "Roboto";
 }
 .colSBoxx2 {
   text-align: left;
@@ -1709,7 +1727,7 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   margin: 30px 0 30px;
   padding: 0;
   text-align: left;
-  font: 400 18px/29px "PTSansRegular";
+  font: 400 18px/29px "Roboto";
   color: #000000;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -2930,11 +2948,10 @@ li.blocks-gallery-item {
   font-family: "PTSansBold";
   font-size: 18px;
 }
-.key-notes-content {
-}
+
 .key-notes-content ul {
   margin-left: 12%;
-  font: 100 16px/24px "PTSansRegular";
+  font: 100 16px/24px "Roboto";
   color: #101010;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -3821,7 +3838,7 @@ body.single-linernews header.move_header {
     font-size: 14px;
   }
   .popular_col_left span {
-    font-size: 52px;
+    font-size: 36px;
   }
   .popular_col_right label {
     font-size: 14px;
@@ -4317,7 +4334,7 @@ body.single-linernews header.move_header {
   .single_news h1.page_title {
     font: 600 28px/32px "Bai Jamjuree";
     margin: 0 0 8px;
-    margin-bottom:0 !important;
+    margin-bottom: 0 !important;
   }
   .tax_section .sponsorchildbox_wrapper h3 {
     font: 600 20px/28px "Poppins";
@@ -5066,9 +5083,9 @@ h5.article-meta {
 .currency .item {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   border-right: 1px solid #000;
-  padding-right: 1rem;
+  padding-right: 0.5rem;
 }
 .currency .item:last-child {
   border: 0;
@@ -5199,8 +5216,10 @@ h5.article-meta {
   height: 38px;
   font-size: 20px;
   background: transparent !important;
-  border: none;
+  border: none !important;
   outline: none !important;
+  color:#000 !important;
+  box-shadow: none !important;
 }
 .main-header {
   display: flex;
@@ -5321,12 +5340,14 @@ h5.article-meta {
   position: relative;
   padding: 0 0;
   margin-top: 10px;
+  border-bottom:1px solid #b5b5b5;
+  padding-bottom: 5px;
 }
 
 .breadcrumb:before {
   content: "";
   position: absolute;
-  bottom: -10px;
+  bottom: -3px;
   left: 0;
   width: 100px;
   height: 5px;
@@ -5335,7 +5356,7 @@ h5.article-meta {
 .breadcrumb:after {
   content: "";
   position: absolute;
-  bottom: -10px;
+  bottom: -3px;
   left: 25px;
   width: 50px;
   height: 5px;
@@ -5580,6 +5601,7 @@ iframe {
   margin-top: 20px;
   text-transform: uppercase;
 }
+
 .news-item {
   border-bottom: 1px solid #d1d1d1;
   padding: 1em 3% 0.5em 0;
@@ -6181,6 +6203,10 @@ body {
   position: relative;
   font-size: 22px;
   font-weight: 600;
+  color:#000;
+}
+.group-date.egy-header-title {
+  color:#149377;
 }
 .egy-header-title:before {
   content: "";
@@ -6248,6 +6274,10 @@ body {
   position: relative;
   font-size: 22px;
   font-weight: 600;
+  color:#000;
+}
+.longform .ao-article-banner {
+  display: none;
 }
 .olvas-title:before {
   content: "";
@@ -6375,7 +6405,7 @@ body {
     padding: 20px !important;
   }
   .immersive-break-2 .text-part h1 {
-    font-size: 24px;
+    font-size: 24px !important;
   }
   .immersive-break-2 .text-part p {
     font-size: 14px;
@@ -6482,6 +6512,11 @@ body {
   .button-nav-toggle {
     font-size: 26px;
   }
+  .crp_related.crp_related_shortcode .col-12.col-md-6.col-lg-6 {
+    border-bottom: 1px dashed #000;
+    padding-bottom: 5px;
+    padding-top: 10px;
+  }
   .form-bot {
     gap: 30px;
   }
@@ -6562,8 +6597,15 @@ body {
   .mob-image3,
   .mob-image4,
   .mob-image5,
-  .mob-image6 {
-    max-height: inherit;
-    min-height: inherit;
+  .mob-image6,
+  .mob-image7,
+  .mob-image8,
+  .mob-image9,
+  .article-card img,
+  .uk-war-section img,
+  .hometyle_mainSection img,
+  .immersive-break-2 img {
+    max-height: 225px !important;
+    min-height: 225px !important;
   }
 }

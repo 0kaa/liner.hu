@@ -352,7 +352,7 @@
 										<div class="top">
 											<span class="title">Bitcoin</span>
 										</div>
-										<span class="value"><?php echo number_format($btc_currency); ?></span>
+										<span class="value"><?php echo number_format($btc_currency); ?> $</span>
 									</div>
 									<?php if ($btc_currency_old !== $btc_currency) : ?>
 										<span class="change <?php echo ($btc_currency_old > $btc_currency) ? 'down' : 'up'; ?>"></span>
@@ -457,7 +457,7 @@
 											<div class="top">
 												<span class="title">Bitcoin</span>
 											</div>
-											<span class="value"><?php echo number_format($btc_currency); ?></span>
+											<span class="value"><?php echo number_format($btc_currency); ?> $</span>
 										</div>
 										<?php if ($btc_currency_old !== $btc_currency) : ?>
 											<span class="change <?php echo ($btc_currency_old > $btc_currency) ? 'down' : 'up'; ?>"></span>

@@ -61,15 +61,19 @@ $i = 1;
                             setlocale(LC_ALL, 'hu_HU.UTF-8');
                             if ($i == 1) {
                                 $dateTitle = 'Friss Hírek';
+                                $style = 'egy-header-title';
                             } else {
-
+                                $style = '';
                                 $dateTitle = strftime('%A', strtotime(get_the_date('Y/m/d')));
                             }
 
-                            echo '<div class="d-flex align-items-center justify-content-between mt-4" style="border-bottom: 1px solid #d1d1d1;">
-                            <h1 class="friss-title egy-header-title">' . $dateTitle . '</h1>';
+                            echo '<div class="d-flex align-items-center justify-content-between mt-4" style="border-bottom: 1px solid #d1d1d1;">';
+
                             $date = get_the_date('Y.m.d');
-                            echo '<div class="group-date">' . $date . '</div>';
+                            if ($i !== 1) :
+                                echo '<div class="group-date egy-header-title">' . $date . '</div>';
+                            endif;
+                            echo '<h1 class="friss-title2 '.$style.' mt-0">' . $dateTitle . '</h1>';
                             echo '</div>';
                         }
                         ?>

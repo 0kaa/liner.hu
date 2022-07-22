@@ -53,8 +53,8 @@
             },
             "page-friss-hirek.php": {
               "type": "-",
-              "size": 5508,
-              "lmtime": 1658439124721,
+              "size": 5599,
+              "lmtime": 1658491530180,
               "modified": false
             },
             "content-status.php": {
@@ -65,14 +65,14 @@
             },
             "header.php": {
               "type": "-",
-              "size": 21410,
-              "lmtime": 1658423673710,
+              "size": 21417,
+              "lmtime": 1658491008558,
               "modified": false
             },
             "single-linernews.php": {
               "type": "-",
-              "size": 29403,
-              "lmtime": 1658444034659,
+              "size": 29470,
+              "lmtime": 1658518410767,
               "modified": false
             },
             "content.php": {
@@ -102,8 +102,8 @@
             "inc": {
               "custom-function.php": {
                 "type": "-",
-                "size": 142168,
-                "lmtime": 1658440929679,
+                "size": 142520,
+                "lmtime": 1658519398418,
                 "modified": false
               },
               "custom-header.php": {
@@ -826,8 +826,8 @@
               },
               "custom-script.js": {
                 "type": "-",
-                "size": 7837,
-                "lmtime": 1657887661493,
+                "size": 9426,
+                "lmtime": 1658490859675,
                 "modified": false
               }
             },
@@ -1173,8 +1173,8 @@
             },
             "custom-style.css": {
               "type": "-",
-              "size": 131065,
-              "lmtime": 1658442322149,
+              "size": 131513,
+              "lmtime": 1658518911728,
               "modified": false
             },
             "functions.php": {

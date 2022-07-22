@@ -593,7 +593,8 @@ function section1_shortcode($atts, $content)
                   <p>' . $the_query->post->post_excerpt . '</p>
                   <ul>
                       <!--li><a href="' . get_author_posts_url($author_id) . '" class="athr_lnk">' . $custom_author . '</a> |</li-->
-                      <li>' . getCategoryByPostId($the_query->post->ID) . '|</li>
+                      <li>' . getCategoryByPostId($the_query->post->ID) . '</li>
+                      <li>|</li>
                       <li>' . get_the_date('M. d', $the_query->post->ID) . '</li>
                   </ul>
              </div>
@@ -618,9 +619,9 @@ function get_latest_news_blocks($postnot_in = 0)
   $largs = array(
     'post_type'         => 'linernews',
     'post_status'       => 'publish',
-    'offset'            => 1,
+
     'posts_per_page'     => 1,
-    //'post__not_in'	=> array($postnot_in),
+    'post__not_in'  => array($postnot_in),
     'tax_query'         => array(
       array(
         'taxonomy' => 'news_cat',
@@ -701,9 +702,9 @@ function get_latest_news_blocks_two($postnot_in = 0)
   $largs = array(
     'post_type'         => 'linernews',
     'post_status'       => 'publish',
-    'offset'            => 3,
+    'offset'            => 1,
     'posts_per_page'     => 2,
-    //'post__not_in'	=> array($postnot_in),
+    'post__not_in'  => array($postnot_in),
     'tax_query'         => array(
       array(
         'taxonomy' => 'news_cat',
@@ -745,6 +746,13 @@ function get_latest_news_blocks_two($postnot_in = 0)
     $output_latest_news_block[$i] = '
     <div class="col-12 col-md-6 col-lg-6">
       <div class="' . $popular . $breaknews . '">
+        <div>
+          <div class="mt-0 post-tagline">
+            ' . getCategoryByPostId($latest_news->post->ID) . '
+            <span>|</span>
+            <span>' . get_post_time('H:i') .  '</span>
+          </div>
+        </div>
         <h2 class="post-title post-title4">
           <a class="title-slug" href="' . get_the_permalink($latest_news->post->ID) . '">' . get_the_title() . '</a>
         </h2>
@@ -932,7 +940,7 @@ function section2_shortcode($atts, $content)
       <div class="col-12 col-md-7 col-lg-7">
             <div>
                 <div>
-                  <img class="w-100" src="' . $image_attributes[0] . '">
+                  <img class="w-100 mob-image7" src="' . $image_attributes[0] . '">
                 </div>
             <div class="article-card-body ' . $popular . $breaknews . '">
               <div>
@@ -957,6 +965,11 @@ function section2_shortcode($atts, $content)
             <div class="my-2 row">
               <div class="col-12 col-md-12 col-lg-12">
                 <div class="article-card-body' . $popular . $breaknews . '">
+                    <p class="post-tagline">
+                      ' . getCategoryByPostId($the_query->post->ID) . '
+                      <span>|</span>
+                      <span>' . get_post_time('H:i') .  '</span>
+                    </p>
                     <h2 class="post-title post-title4">
                       <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
                       ' . $ttln . '
@@ -1087,7 +1100,7 @@ function section3_shortcode($atts, $content)
       $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'medium_large');
       if ($i <= 2) {
         $output .= '<div class="col-lg-6">
-          <img class="w-100 img-fluid" src="' . $image_attributes[0] . '">
+          <img class="w-100 img-fluid mob-image9" src="' . $image_attributes[0] . '">
           <div>
             <p class="post-tagline">
             ';
@@ -1226,7 +1239,7 @@ function section3_shortcode($atts, $content)
                   <div class="h-100">
 
                     <div>
-                      <img class="w-100" src="' . $image_attributes[0] . '" style="max-height:192px; object-fit:cover;">
+                      <img class="w-100 mob-image3" src="' . $image_attributes[0] . '">
                     </div>
                     <div class="' . $popular . $breaknews . '">
                       <div>
@@ -1502,7 +1515,7 @@ if( $the_query->have_posts() ) {
           if ($i == 7) {
             $output .= '<div class="col-lg-6 bigger-section">
             <div class="article-card">
-              <img src="' . wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'medium_large')[0] . '" alt="' . $ttln . '" class="article-img" style="height:300px;object-fit:cover;">
+              <img src="' . wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'medium_large')[0] . '" alt="' . $ttln . '" class="article-img mob-image8">
               <div class="article-card-body ' . $popular . $breaknews . '">
                 <div>
                   <p class="post-tagline">
@@ -1793,7 +1806,10 @@ if( $the_query->have_posts() ) {
       $the_query = new WP_Query($args);
 
       if ($the_query->have_posts()) {
-        $output .= ' <section class="egy-header position-relative auto_float"><h2 class="egy-header-title text-uppercase">Megér Egy Misét</h2>';
+        // get epic category link
+        $epic_cat_link = get_term_link('epic', 'news_cat');
+        $output .= ' <section class="egy-header position-relative auto_float">
+        <a href="' . $epic_cat_link . '" target="_blank"><h2 class="egy-header-title text-uppercase">Megér Egy Misét</h2></a>';
         while ($the_query->have_posts()) {
           $the_query->the_post();
           $postnot[] = $the_query->post->ID;
@@ -2076,8 +2092,10 @@ if( $the_query->have_posts() ) {
       $final_query = new WP_Query($fargs);
 
       if ($final_query->have_posts()) {
+        $longform_cat_link = get_term_link('longform', 'newstag');
         $output .= '
-        <h3 class="mb-0 text-uppercase olvas-title" style="line-height:1;">OLVASMáNYOS</h3>
+
+        <a href="' . $longform_cat_link . '" target="_blank" class="d-block mb-4"><h3 class="mb-0 text-uppercase olvas-title" style="line-height:1;">OLVASMáNYOS</h3></a
         ';
         while ($final_query->have_posts()) {
           $final_query->the_post();
@@ -2398,7 +2416,10 @@ if( $the_query->have_posts() ) {
       $the_query = new WP_Query($args);
 
       if ($the_query->have_posts()) {
-        $output .= ' <section class="egy-header position-relative auto_float"><h2 class="egy-header-title text-uppercase">KikoKos</h2>';
+        $kisokos_cat_link = get_term_link('Kisokos', 'news_cat');
+        $output .= ' <section class="egy-header position-relative auto_float">
+        <a href="' . $kisokos_cat_link . '" target="_blank"><h2 class="egy-header-title text-uppercase">KikoKos</h2></a>
+        ';
         while ($the_query->have_posts()) {
           $the_query->the_post();
           $postnot[] = $the_query->post->ID;
@@ -2454,8 +2475,10 @@ if( $the_query->have_posts() ) {
       $the_query = new WP_Query($args);
 
       if ($the_query->have_posts()) {
+        $kultura_cat_link = get_term_link('kultura', 'news_cat');
         $output .= ' <section class="position-relative auto_float">
-        <h2 class="egy-header-title single text-uppercase">Kult</h2>
+        
+        <a href="' . $kultura_cat_link . '" target="_blank"><h2 class="egy-header-title single text-uppercase">Kult</h2></a>
         <div class="row">
         ';
         while ($the_query->have_posts()) {
@@ -2544,11 +2567,13 @@ if( $the_query->have_posts() ) {
       $the_query = new WP_Query($args);
 
       if ($the_query->have_posts()) {
+        $sport_cat_link = get_term_link('sport', 'news_cat');
         $output .= '<div class="">
           
-        <h2 class="egy-header-title single text-uppercase">Sport</h2>
+        
+        <a href="' . $sport_cat_link . '" target="_blank"><h2 class="egy-header-title single text-uppercase">Sport</h2></a>
           <div class="row">
-          <div class="col-12 col-sm-6 col-lg-6">';
+          <div class="col-12 col-lg-6">';
         while ($the_query->have_posts()) {
           $the_query->the_post();
           $i++;
@@ -2571,8 +2596,8 @@ if( $the_query->have_posts() ) {
 
           $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'medium_large');
           if ($i == 1) {
-            $output .= '<div class="row">
-            <div class="col-12 col-md-12 col-lg-12" style="padding:0 !important;">
+            $output .= '<div class="">
+            <div style="padding:0 !important;">
                 <div>
                   <img class="w-100 mob-image5" src="' . $image_attributes[0] . '">
                 </div>
@@ -2604,23 +2629,23 @@ if( $the_query->have_posts() ) {
             <div class="' . $popular . $breaknews . ' d-flex flex-column justify-content-center ml-3" >
                 <div>
                     <div class="mt-0 post-tagline">
-                        ' . getCategoryByPostId($latest_news->post->ID) . '
+                        ' . getCategoryByPostId($the_query->post->ID) . '
                         <span>|</span>
 					    <span>' . get_post_time('H:i') .  '</span>
                     </div>
                 </div>
                 <h2 class="post-title post-title2">
-                    <a class="title-slug" href="' . get_the_permalink($latest_news->post->ID) . '">
+                    <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
                     ' . get_the_title() . '
                     </a>
                 </h2>
             </div>
         </div>
     
-    </div><div class="col-12 col-sm-6 col-lg-6"><div class="row">';
+    </div><div class="col-12 col-lg-6"><div class="row">';
           }
           if ($i == 3) {
-            $output .= '<div class="col-12 col-sm-6 col-lg-6">
+            $output .= '<div class="col-12 col-lg-6">
                 <div>
                   <img class="w-100 mob-image3" src="' . $image_attributes[0] . '">
                 </div>
@@ -2667,7 +2692,7 @@ if( $the_query->have_posts() ) {
           }
 
           if ($i == 7) {
-            $output .= '<div class="col-12 col-sm-6 col-lg-6 ">
+            $output .= '<div class="col-12 col-lg-6 ">
             <div class="article-card-body ' . $breaknews . $popular . '">
               <div>
               <img class="w-100 mob-image3" src="' . $image_attributes[0] . '">
@@ -2741,9 +2766,10 @@ if( $the_query->have_posts() ) {
       global $postnot;
       $firstArticle = '';
       $i = 0;
-
+      $style_cat_link = get_term_link('style', 'news_cat');
       $output .= '<div class="auto_float style_boxRow mb-4">
-      <h2 class="egy-header-title single text-uppercase">Style</h2>
+      
+      <a href="' . $style_cat_link . '" target="_blank"><h2 class="egy-header-title single text-uppercase">Style</h2></a>
         <div class="row">';
       $args = array(
         'post_type'        => 'linernews',
@@ -2787,11 +2813,11 @@ if( $the_query->have_posts() ) {
           $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'medium_large');
           if ($i == 1) {
             $firstArticle = $the_query->post->ID;
-            $output .= '<div class="col-12 col-sm-6 col-lg-6"><div><img class="w-100 mob-image5" src="' . $image_attributes[0] . '"></div></div>';
+            $output .= '<div class="col-12 col-lg-6"><div><img class="w-100 mob-image5" src="' . $image_attributes[0] . '"></div></div>';
           }
           if ($i == 2) {
             $output .= '
-            <div class="col-12 col-sm-6 col-lg-6">
+            <div class="col-12 col-lg-6">
               <div class="from-first-article mb-3 ' . $popular . $breaknews . '">
                 <p class="post-tagline">
                 ' . getCategoryByPostId($firstArticle) . '

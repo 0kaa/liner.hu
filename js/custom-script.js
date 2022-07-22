@@ -221,8 +221,23 @@ jQuery(document).ready(function ($) {
     $(this).find("i").toggleClass("fa-bars fa-times");
     // focus on search input
     $(".ham-menu").toggleClass("active");
-    if ($(".ham-menu").hasClass("active")) {
+    if ($(".ham-menu").hasClass("active") && window.innerWidth > 768) {
       $(".searchform input").focus();
+    }
+  });
+  $(document).click(function (e) {
+    if (
+      e.target.classList.contains("button-nav-toggle") ||
+      e.target.classList.contains("fa")
+    ) {
+      return;
+    } else {
+      $(".button-nav-toggle").removeClass("active");
+      $(".button-nav-toggle")
+        .find("i")
+        .removeClass("fa-times")
+        .addClass("fa-bars");
+        $(".ham-menu").removeClass("active");
     }
   });
   $(".sub-menu").each(function () {
@@ -249,10 +264,54 @@ jQuery(document).ready(function ($) {
     $(`.copy-message[data-id="${id}"]`).text("URL másolva!");
     $(`.copy-message[data-id="${id}"]`).fadeIn(500).delay(1000).fadeOut(500);
   });
+  if (window.innerWidth < 768) {
+    $(".post-background-green,.post-background-yellow").each(function () {
+      if ($(this).parent().find("img").parent().hasClass("article-card")) {
+        $(this).parent().find("img").parent().find("img").addClass("d-none");
+      } else {
+        $(this).parent().find("img").parent().addClass("d-none");
+      }
+    });
+  } else {
+    $(".post-background-green,.post-background-yellow").each(function () {
+      if ($(this).parent().find("img").parent().hasClass("article-card")) {
+        $(this).parent().find("img").parent().find("img").removeClass("d-none");
+      } else {
+        $(this).parent().find("img").parent().removeClass("d-none");
+      }
+    });
+  }
 });
 
 /** width fix on breaking news **/
 jQuery(window).resize(function () {
+  if (window.innerWidth < 768) {
+    jQuery(".post-background-green,.post-background-yellow").each(function () {
+      if (jQuery(this).parent().find("img").parent().hasClass("article-card")) {
+        jQuery(this)
+          .parent()
+          .find("img")
+          .parent()
+          .find("img")
+          .addClass("d-none");
+      } else {
+        jQuery(this).parent().find("img").parent().addClass("d-none");
+      }
+    });
+  } else {
+    jQuery(".post-background-green,.post-background-yellow").each(function () {
+      if (jQuery(this).parent().find("img").parent().hasClass("article-card")) {
+        jQuery(this)
+          .parent()
+          .find("img")
+          .parent()
+          .find("img")
+          .removeClass("d-none");
+      } else {
+        jQuery(this).parent().find("img").parent().removeClass("d-none");
+      }
+    });
+  }
   var wcontainer = jQuery(".container ").width();
   jQuery(".breaking_bar").css("width", wcontainer);
 });
