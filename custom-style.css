@@ -521,8 +521,10 @@ section.section_1 {
   object-fit: cover;
   min-height: 189px;
 }
-.friss-title2 {
-  /* font-size: 22px; */
+.mob-image10 {
+  max-height: 80px;
+  object-fit: cover;
+  min-height: 80px;
 }
 .nc_section2 .popular.nc_left_1 {
   position: relative;
@@ -6601,6 +6603,7 @@ body {
   .mob-image7,
   .mob-image8,
   .mob-image9,
+  .mob-image10,
   .article-card img,
   .uk-war-section img,
   .hometyle_mainSection img,

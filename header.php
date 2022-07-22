@@ -560,11 +560,11 @@
 						while ($the_query->have_posts()) :
 							$the_query->the_post();
 							// $postlinks[] = get_the_permalink($the_query->post->ID);
-							$image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), '');
+							$image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'medium');
 							?>
 
 							<div class="related-article" data-slug="<?php echo get_post_field('post_name', $the_query->post->ID); ?>">
-								<img src="<?php echo $image_attributes[0] ?>" class="img-fluid">
+								<img src="<?php echo $image_attributes[0] ?>" class="img-fluid mob-image10">
 								<div class="align-self-center">
 									<a href="#" class="article-category">
 										<?php echo categoryByID($the_query->post->ID) ?>

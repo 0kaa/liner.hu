@@ -53,8 +53,8 @@
             },
             "page-friss-hirek.php": {
               "type": "-",
-              "size": 5599,
-              "lmtime": 1658491530180,
+              "size": 5726,
+              "lmtime": 1658521482101,
               "modified": false
             },
             "content-status.php": {
@@ -102,8 +102,8 @@
             "inc": {
               "custom-function.php": {
                 "type": "-",
-                "size": 142520,
-                "lmtime": 1658519398418,
+                "size": 143329,
+                "lmtime": 1658522844089,
                 "modified": false
               },
               "custom-header.php": {
@@ -826,8 +826,8 @@
               },
               "custom-script.js": {
                 "type": "-",
-                "size": 9426,
-                "lmtime": 1658490859675,
+                "size": 9826,
+                "lmtime": 1658523726098,
                 "modified": false
               }
             },
@@ -1173,8 +1173,8 @@
             },
             "custom-style.css": {
               "type": "-",
-              "size": 131513,
-              "lmtime": 1658518911728,
+              "size": 131966,
+              "lmtime": 1658522976576,
               "modified": false
             },
             "functions.php": {
@@ -1230,7 +1230,7 @@
             "style.css": {
               "type": "-",
               "size": 49673,
-              "lmtime": 1658316589973,
+              "lmtime": 1658523844180,
               "modified": false
             }
           },
