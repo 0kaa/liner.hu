@@ -473,7 +473,7 @@ if ($relterms && !is_wp_error($relterms)) {
 			array(
 				'taxonomy' => 'news_cat',
 				'field' 	 => 'slug',
-				'terms' 	 => $relterms_links,
+				'terms' 	 => $relterms[0]->slug,
 
 			)
 		)
@@ -597,35 +597,35 @@ if ($relterms && !is_wp_error($relterms)) {
 			console.log('page index');
 			var playerIndex = infScroll;
 			var pid = count - 2;
-			switch (pid) {
-				case -1:
+			// switch (pid) {
+			// 	case -1:
 
-					console.log('old player paused -1 :' + pid);
-					break;
-				case 1:
-					fwdevpPlayer1.pause();
-					console.log('old player paused 1 :' + pid);
-					break;
-				case 2:
-					fwdevpPlayer2.pause();
-					console.log('old player paused 2:' + pid);
-					break;
-				case 3:
-					fwdevpPlayer3.pause();
-					console.log('old player paused 3:' + pid);
-					break;
-				case 4:
-					fwdevpPlayer4.pause();
-					console.log('old player paused 4:' + pid);
-					break;
-				case 5:
-					fwdevpPlayer5.pause();
-					console.log('old player paused 5:' + pid);
-					break;
-				default:
-					fwdevpPlayer0.pause();
-					console.log('old player paused d :' + pid);
-			}
+			// 		console.log('old player paused -1 :' + pid);
+			// 		break;
+			// 	case 1:
+			// 		fwdevpPlayer1.pause();
+			// 		console.log('old player paused 1 :' + pid);
+			// 		break;
+			// 	case 2:
+			// 		fwdevpPlayer2.pause();
+			// 		console.log('old player paused 2:' + pid);
+			// 		break;
+			// 	case 3:
+			// 		fwdevpPlayer3.pause();
+			// 		console.log('old player paused 3:' + pid);
+			// 		break;
+			// 	case 4:
+			// 		fwdevpPlayer4.pause();
+			// 		console.log('old player paused 4:' + pid);
+			// 		break;
+			// 	case 5:
+			// 		fwdevpPlayer5.pause();
+			// 		console.log('old player paused 5:' + pid);
+			// 		break;
+			// 	default:
+			// 		fwdevpPlayer0.pause();
+			// 		console.log('old player paused d :' + pid);
+			// }
 
 			console.log('new id easy player fwdevpDiv' + count);
 			var playerid_l = 'fwdevpDiv' + count;

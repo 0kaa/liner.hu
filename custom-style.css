@@ -1756,7 +1756,7 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
 /*.single_news .single_dontmiss .col-sm-4{display: none;}*/
 .load_more .single_news {
   position: relative;
-  padding: 60px 0;
+  /* padding: 60px 0; */
 }
 .load_more .single_news::before {
   content: "";
@@ -6319,6 +6319,11 @@ body {
   margin: 0 !important;
   border: none !important;
 }
+.load_more .col-12.d-none.d-lg-block,
+.load_more .col-12.d-lg-none {
+  display: none !important;
+}
+
 /* Responsive */
 @media (min-width: 992px) {
   .cat-article-card .ml-4 {

@@ -541,7 +541,7 @@
 							array(
 								'taxonomy' => 'news_cat',
 								'field' 	 => 'slug',
-								'terms' 	 => $relterms_links,
+								'terms' 	 => $relterms[0]->slug,
 
 							)
 						)
