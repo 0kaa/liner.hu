@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying Archive pages
  *
@@ -17,147 +18,256 @@
  * @since Liner Hu 1.0
  */
 
-get_header(); ?>
+get_header();
+
+function getCategoryOrSub($id)
+{
+	$categories = wp_get_post_terms($id, 'news_cat', array('fields' => 'all'));
+	$parentCategory = '';
+	$childCategory = '';
+	$parentLink = '';
+	$childLink = '';
+	foreach ($categories as $category) {
+		if ($category->parent == 0) {
+			$parentCategory = $category->name;
+			$parentCategory = str_replace('#', '', $parentCategory);
+			$parentLink = get_term_link($category->slug, 'news_cat');
+		}
+		if ($category->parent != 0) {
+			$childCategory = $category->name;
+			$childCategory = str_replace('#', '', $childCategory);
+			$childLink = get_term_link($category->slug, 'news_cat');
+		}
+	}
+
+
+	if ($childCategory != '') {
+		$output = '<a href="' . $childLink . '" class="tag-slug mr-2 mb-1">' . $childCategory . '</a>';
+	} else {
+		$output = '<a href="' . $parentLink . '" class="tag-slug mr-2 mb-1">' . $parentCategory . '</a>';
+	}
+	return $output;
+}
+$term = get_queried_object();
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+$args = array(
+	'post_type'              => 'linernews',
+	'post_status'            => 'publish',
+	'posts_per_page'         => 5,
+	'paged' 				=>	 $paged,
+	'tax_query' 			 => array(
+		array(
+			'taxonomy' 	=> 'newstag',
+			'field'    	=> 'slug',
+			'terms'    	=> $term->slug,
+		)
+	)
+);
+
+$the_query = new WP_Query($args);
+global $postnot;
+
+?>
 
 
 
-	<section class="tax_section"><div class="container">
-			<div class="before_ads" id="liner_nyito_fekvo_1"><script type="text/javascript">activateBanner('liner_nyito_fekvo_1');</script></div>
-			<div class="row">
-			<div class="col-sm-12">
-			<h1 class="page-title page_title">
+<section class="tax_section category-page">
+	<div class="container">
+		<div class="before_ads mb-5" id="liner_nyito_fekvo_1">
+			<script type="text/javascript">
+				activateBanner('liner_nyito_fekvo_1');
+			</script>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
 				<?php
-					printf( __( 'Tag Archives: %s', 'liner' ), '<span>' . single_tag_title( '', false ) . '</span>' );
-				/* translators: %s: Search query.
-				//printf( __( 'Tag: %s', 'liner' ), '<span>' . get_the_date() . '</span>' );
+				if ($the_query->have_posts()) :
+					$i = 1;
+					while ($the_query->have_posts()) :
+						$the_query->the_post();
+						$excpt = $the_query->post->post_excerpt;
+						$ttln = $the_query->post->post_title;
+						$poplr = get_field('most_popular_news', $the_query->post->ID);
+						$brknews = get_field('breaking_news', $the_query->post->ID);
 
-				/* if ( is_day() ) {
-					// translators: %s: Date.
-					printf( __( 'Daily Archives: %s', 'liner' ), '<span>' . get_the_date() . '</span>' );
-				} elseif ( is_month() ) {
-				// translators: %s: Date.
-					printf( __( 'Monthly Archives: %s', 'liner' ), '<span>' . get_the_date( _x( 'F Y', 'monthly archives date format', 'liner' ) ) . '</span>' );
-				} elseif ( is_year() ) {
-					// translators: %s: Date.
-					printf( __( 'Yearly Archives: %s', 'liner' ), '<span>' . get_the_date( _x( 'Y', 'yearly archives date format', 'liner' ) ) . '</span>' );
-				} else {
-					_e( 'Archives', 'liner' );
-				} */
+						if ($poplr == 1) {
+							$popular = ' post-background-green';
+						} else {
+							$popular = '';
+						}
 
-
-				?>
-				</h1>
-				</div>
-
-
-		<?php
-				$term = $queried_object = get_queried_object();
-
-
-				$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-				//echo '<div class="col-sm-12"><h1 class="page_title">'.$term->name.'</h1></div>';
-				echo '<div class="col-sm-12" style="height:50px"></div>';
-
-				$args = array (
-								'post_type'              => 'linernews',
-								'post_status'            => 'publish',
-								'page' 				=>	 $paged		,
-								'paged' 				=>	 $paged		,
-
-								'posts_per_page'         => 15,
-								'tax_query' 			 => array(
-																array(
-																	'taxonomy' 	=> 'newstag',
-																	'field'    	=> 'slug',
-																	'terms'    	=> $term->slug,
-																)
-															)
-							);
-
-				$the_query = new WP_Query( $args );
-
-				$count = $the_query->found_posts;
-				$last='';
-				$i=1;
-
-			 if ( $the_query->have_posts() ) {
-			 	echo '<div class="col-sm-8">';
-
-			/* Start the Loop */
-			while ( $the_query->have_posts() ) {
-				$the_query->the_post();
-
-				//if (strlen($the_query->post->post_excerpt) > 120){
-					//$excpt = substr($the_query->post->post_excerpt, 0, 120) . ' ...';
-				//}else {
-					$excpt = $the_query->post->post_excerpt;
-				//}
-
-				if($i==$count){
-					$last=' last';
-				}else{
-					$last='';
-				}
-
-
-				echo '<div class="sponsorchildbox_wrapper'.$last.'">';
-
-
-				?>
-				<div class='box_left_side'>
-					<img src="<?php bloginfo('template_url')?>/images/news_box.png" class="box-left-img" />
-					<div class='line-left'> </div>
-				</div>
-				<div class='box_right_side'>
-				<div class='datebox'>
-				<?php echo get_the_date('Y.m.d', $the_query->post->ID); ?>
-
-				</div>
-				<div class='line-top'> </div>
+						if ($brknews == 1) {
+							$breaknews = ' post-background-yellow';
+							$popular = '';
+						} else {
+							$breaknews = '';
+						}
+						if ($i == 1) : ?>
+							<section class="full desktop-only mb-5">
+								<div class="immersive-break-2 d-lg-flex align-items-center">
+									<div class="w-50 h-100 image-part">
+										<img src="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'medium_large')[0] ?>" alt="" style="width:100%;height:100%;object-fit:cover;">
+									</div>
+									<div class="w-50 p-5 text-part">
+										<h1 class="mb-4 post-title" style="font-size:32px;">
+											<a href="<?php echo get_the_permalink($the_query->post->ID) ?>" class="title-slug">
+												<?php echo $ttln ?>
+											</a>
+										</h1>
+										<p class="post-description text-white"><?php echo $excpt ?></p>
+										<!-- <a href="' . $link . '" class="tovabb-btn-2">Tovább</a> -->
+									</div>
+								</div>
+							</section>
+						<?php endif;
+								if ($i == 2) : echo '<div class="row">';
+								endif;
+								if ($i > 1 && $i <= 5) : ?>
+							<div class="mb-4 col-12 col-lg-3 d-flex flex-column justify-content-between">
+								<div class="h-100" style="padding:0 !important;">
+									<div>
+										<img class="w-100 mob-image3" src="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'medium_large')[0] ?>">
+									</div>
+									<div class=" <?php echo $popular . $breaknews ?>">
+										<div>
+											<p class="post-tagline">
+												<?php echo getCategoryOrSub($the_query->post->ID) ?>
+												<span>|</span>
+												<span><?php echo get_post_time('H:i') ?></span>
+											</p>
+										</div>
+										<h2 class="post-title post-title2">
+											<a class="title-slug" href="<?php echo get_the_permalink($the_query->post->ID) ?>">
+												<?php echo $ttln ?>
+											</a></h2>
+										<p class="post-description section1-description">
+											<?php echo $excpt ?>
+										</p>
+									</div>
+								</div>
+							</div>
+						<?php endif; ?>
+						<?php if ($i == 5) : echo '</div>';
+								endif; ?>
 				<?php
-				echo '<h3> <a href="'.get_the_permalink($the_query->post->ID).'" >'.$the_query->post->post_title.'</a></h3>';
-				echo '<p >'.$excpt.'</p>';
-				//echo '<a href="'.get_the_permalink($the_query->post->ID).'" class="btn btn-default">Continue</a>';
+						$postnot[] = $the_query->post->ID;
+						$i++;
+					endwhile;
+					wp_reset_postdata();
+				endif;
 				?>
+			</div>
+			<div class="col-lg-8 category-wide-section">
+				<?php
+				$args = array(
+					'post_type'              => 'linernews',
+					'post_status'            => 'publish',
+					'posts_per_page'         => 10,
+					'post__not_in'           => $postnot,
+					'paged' 				=>	 $paged,
+					'tax_query' 			 => array(
+						array(
+							'taxonomy' 	=> 'newstag',
+							'field'    	=> 'slug',
+							'terms'    	=> $term->slug,
+						)
+					)
+				);
+
+				$the_query = new WP_Query($args);
+				if ($the_query->have_posts()) {
+					echo '<h2 class="egy-header-title single text-uppercase">További Hírek</h2>';
+					/* Start the Loop */
+					while ($the_query->have_posts()) {
+						$the_query->the_post();
+
+						$excpt = $the_query->post->post_excerpt;
+
+
+						$image_attribute = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'medium_large');
+
+
+						$ttln = $the_query->post->post_title;
+
+						$poplr = get_field('most_popular_news', $the_query->post->ID);
+						$brknews = get_field('breaking_news', $the_query->post->ID);
+
+						if ($poplr == 1) {
+							$popular = ' post-background-green d-flex flex-column justify-content-center w-100';
+						} else {
+							$popular = '';
+						}
+
+						if ($brknews == 1) {
+							$breaknews = ' post-background-yellow d-flex flex-column justify-content-center w-100';
+							$popular = '';
+						} else {
+							$breaknews = '';
+						}
+
+						if ($brknews == 1 || $poplr == 1) {
+							$normal = '';
+						} else {
+							$normal = 'ml-4';
+						}
+						?>
+
+						<div class="cat-article-card mt-5">
+							<div class="">
+								<img class="w-100" src="<?php echo $image_attribute[0]; ?>">
+							</div>
+							<div class="<?php echo $popular . $breaknews . $normal; ?>">
+								<div>
+									<p class="post-tagline">
+										<?php echo getCategoryOrSub($the_query->post->ID) ?>
+										<span>|</span>
+										<span><?php echo get_post_time('H:i') ?></span>
+									</p>
+								</div>
+								<h2 class="post-title post-title1">
+									<a class="title-slug" href="<?php echo get_the_permalink($the_query->post->ID) ?>">
+										<?php echo $ttln ?>
+									</a></h2>
+								<p class="post-description section1-description mb-0">
+									<?php echo $excpt ?>
+								</p>
+							</div>
+						</div>
+
+				<?php $postnot[] = $the_query->post->ID;
+						$i++;
+					}
+
+					if (count($sub_categories) < 1) :
+						$big = 999999999; // need an unlikely integer
+						echo '<div class="text-center mt-5">';
+						echo '<div class="page-links page cat aut">';
+						echo paginate_links(array(
+							'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+							'format' => '?paged=%#%',
+							'current' => max(1, get_query_var('paged')),
+							'total' => $the_query->max_num_pages
+						));
+						echo '</div>';
+						echo '</div>';
+					endif;
+					echo '</div>';
+				}  ?>
+				<div class="col-lg-4 col-sm-12 category-wide-sidebar">
+
+					<?php if (is_active_sidebar('sidebar-5')) : ?><div class="news_sidebar category-sidebar" style="margin-top:-4px;"><?php dynamic_sidebar('sidebar-5'); ?></div><?php endif; ?>
+					<div class="sdbrstcky_post">
+						<?php echo do_shortcode('[sidebar-sticky]'); ?>
+					</div>
 				</div>
 
-				<?php
-
-				echo '</div>';
-
-
-				$i++;
-			}
-
-
-
-			 $big = 999999999; // need an unlikely integer
-			  echo '<div class="page-links page cat aut pull-right">';
-				echo paginate_links( array(
-					'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-					'format' => '?paged=%#%',
-					'current' => max( 1, get_query_var('paged') ),
-					'total' => $the_query->max_num_pages
-				) );
-				echo '</div>';
-
-
-
-			echo '</div>';
-		}else{ ?>
-			<div class="col-md-8 col-sm-12"><h3 class="text-uppercase text-center">not found</h3></div>
-		<?php } ?>
-
-		<div class="col-md-4 col-sm-12"><?php if(is_active_sidebar( 'sidebar-5' )) : ?><div class="news_sidebar"><?php dynamic_sidebar( 'sidebar-5' ); ?></div><?php endif; ?>
-		<div class="sdbrstcky_post">
-			<?php echo do_shortcode('[sidebar-sticky]');?>
-		</div></div>
-
-		</div></div>
-	</section>
+			</div>
+		</div>
+</section>
 
 
 
 
-<?php //get_sidebar(); ?>
+<?php //get_sidebar(); 
+?>
 <?php get_footer(); ?>

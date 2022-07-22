@@ -20,7 +20,7 @@ get_header(); ?>
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
-				<h1 class="friss-title">
+				<h1 class="egy-header-title my-5">
 					<?php
 					/* translators: %s: Search query. */
 					printf(__('Keresési találatok: %s', 'liner'), '<span>' . get_search_query() . '</span>');
@@ -73,18 +73,24 @@ get_header(); ?>
 						$breaknews = '';
 					}
 
-					$image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'full');
+					$image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'medium');
 
 					if ($date != get_the_date('Y.m.d')) {
+						setlocale(LC_ALL, 'hu_HU.UTF-8');
+						$dateTitle = strftime('%A', strtotime(get_the_date('Y/m/d')));
+						echo '<div class="d-flex align-items-center justify-content-between mt-4" style="border-bottom: 1px solid #d1d1d1;">
+						<h1 class="friss-title egy-header-title mt-0">' . $dateTitle . '</h1>';
 						$date = get_the_date('Y.m.d');
 						echo '<div class="group-date">' . $date . '</div>';
+						echo '</div>';
 					}
+
 
 					?>
 					<div class="news-item d-flex <?php echo $poplr || $brknews ? 'align-items-center' : ''; ?>">
 						<span class="post-tagline mr-4 font-weight-bold <?php echo $poplr || $brknews ? '' : 'mt-5'; ?>"><?php echo get_post_time('H:i'); ?></span>
 						<?php if ($poplr || $brknews) : ?>
-							<img src="<?php echo $image_attributes[0] ?>" style="width: 140px;min-height: 70px;object-fit: cover;max-height: 70px;min-width: 140px;max-width: 140px;" class="mr-4" />
+							<img src="<?php echo $image_attributes[0] ?>" style="width: 120px;min-height: 70px;object-fit: cover;max-height: 70px;min-width: 120px;max-width: 120px;" class="mr-4" />
 						<?php endif; ?>
 						<div>
 							<p class="post-tagline">
@@ -142,7 +148,7 @@ get_header(); ?>
 
 			<?php } ?>
 
-			<div class="col-md-4 col-sm-12 category-wide-sidebar"><?php if (is_active_sidebar('sidebar-5')) : ?><div class="news_sidebar mt-5"><?php dynamic_sidebar('sidebar-5'); ?></div><?php endif; ?>
+			<div class="col-md-4 col-sm-12 category-wide-sidebar"><?php if (is_active_sidebar('sidebar-5')) : ?><div class="news_sidebar category-sidebar" style="margin-top:12px"><?php dynamic_sidebar('sidebar-5'); ?></div><?php endif; ?>
 				<div class="sdbrstcky_post">
 					<?php echo do_shortcode('[sidebar-sticky]'); ?>
 				</div>

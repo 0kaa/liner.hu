@@ -214,25 +214,16 @@
 						<button class="mr-1 button-nav-toggle mr-lg-3">
 							<i class="fa fa-bars" aria-hidden="true"></i>
 						</button>
-						<div class="currnet-date">
-							<?php
-							// echo date('Y.m.d, l');
-							// echo date with another Hungarian language
-							setlocale(LC_ALL, 'hu_HU.UTF-8');
-							echo strftime('%Y.%m.%d, %A');
 
-
-							?>
-						</div>
 						<a href="<?php echo esc_url(home_url('/')); ?>" class="header__logo navbar-brand" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
 							<?php if (get_theme_mod('site_logo')) : ?>
 								<img src='<?php echo $logo_src; ?>' class="img-responsive" alt=""><?php endif; ?>
 						</a>
 						<div class="ml-2 d-flex align-items-center">
-							<a href="https://liner.hu/" class="top-nav-link">
-								LINER.HU</a>
-							<a href="https://motorsport.hu/" class="top-nav-link">
-								MOTORSPORT.HU</a>
+							<a href="<?php echo get_permalink(get_page_by_title('Friss hirek')); ?>" class="top-nav-link font-weight-bold text-uppercase">Friss hírek</a>
+							<a href="<?php echo get_permalink(get_page_by_title('Sztori Bekuldes')); ?>" class="top-nav-link font-weight-bold text-uppercase">Sztori beküldése</a>
+							<a href="https://liner.hu/" class="top-nav-link">LINER.HU</a>
+							<a href="https://motorsport.hu/" class="top-nav-link">MOTORSPORT.HU</a>
 						</div>
 
 					</div>
@@ -294,8 +285,8 @@
 				$eur_currency_old = get_option('eur_currency_old')['data']['HUF']['value'];
 				$gbp_currency = get_option('gbp_currency')['data']['HUF']['value'];
 				$gbp_currency_old = get_option('gbp_currency_old')['data']['HUF']['value'];
-				$btc_currency = get_option('btc_currency')['data']['BTC']['value'];
-				$btc_currency_old = get_option('btc_currency_old')['data']['BTC']['value'];
+				$btc_currency = get_option('btc_currency')['data']['USD']['value'];
+				$btc_currency_old = get_option('btc_currency_old')['data']['USD']['value'];
 
 				wp_localize_script('liner-navigation', 'weather', array($weather));
 				wp_enqueue_script('liner-navigation');
@@ -316,9 +307,7 @@
 								<span><?php echo count($last_visit_query->posts); ?></span>
 							</div>
 						</button>
-						<a href="<?php echo get_permalink(get_page_by_title('orosz ukran haboru elo kozvetites')); ?>" class="orosz-ukran-btn">
-							orosz-ukrán háború
-						</a>
+						<?php wp_nav_menu(array('theme_location' => 'fontos', 'menu_class' => 'fontos-menu mb-0', 'container' => '')); ?>
 					</div>
 					<div class="d-flex">
 						<div class="currency d-flex align-items-center currency-gap">
@@ -328,7 +317,7 @@
 										<span class="title">Dollár</span>
 									</div>
 									<span class="value">
-										<?php echo number_format($usd_currency, 3, ',', ' '); ?>
+										<?php echo number_format($usd_currency, 2, ',', ' '); ?> Ft
 									</span>
 								</div>
 								<?php if ($usd_currency_old !== $usd_currency) : ?>
@@ -340,7 +329,7 @@
 									<div class="top">
 										<span class="title">Euró</span>
 									</div>
-									<span class="value"><?php echo number_format($eur_currency, 3, ',', ' '); ?></span>
+									<span class="value"><?php echo number_format($eur_currency, 2, ',', ' '); ?> Ft</span>
 								</div>
 								<?php if ($eur_currency_old !== $eur_currency) : ?>
 									<span class="change <?php echo ($eur_currency_old > $eur_currency) ? 'down' : 'up'; ?>"></span>
@@ -351,30 +340,44 @@
 									<div class="top">
 										<span class="title">Font</span>
 									</div>
-									<span class="value"><?php echo number_format($gbp_currency, 3, ',', ' '); ?></span>
+									<span class="value"><?php echo number_format($gbp_currency, 2, ',', ' '); ?> Ft</span>
 								</div>
 								<?php if ($gbp_currency_old !== $gbp_currency) : ?>
 									<span class="change <?php echo ($gbp_currency_old > $gbp_currency) ? 'down' : 'up'; ?>"></span>
 								<?php endif; ?>
 							</div>
-							<div class="item">
-								<div class="info">
-									<div class="top">
-										<span class="title">Bitcoin</span>
+							<?php if ($btc_currency >= 1) : ?>
+								<div class="item">
+									<div class="info">
+										<div class="top">
+											<span class="title">Bitcoin</span>
+										</div>
+										<span class="value"><?php echo number_format($btc_currency); ?></span>
 									</div>
-									<span class="value"><?php echo number_format($btc_currency); ?></span>
+									<?php if ($btc_currency_old !== $btc_currency) : ?>
+										<span class="change <?php echo ($btc_currency_old > $btc_currency) ? 'down' : 'up'; ?>"></span>
+									<?php endif; ?>
 								</div>
-								<?php if ($btc_currency_old !== $btc_currency) : ?>
-									<span class="change <?php echo ($btc_currency_old > $btc_currency) ? 'down' : 'up'; ?>"></span>
-								<?php endif; ?>
-							</div>
+							<?php endif; ?>
 						</div>
 					</div>
 				</div>
 				<div class="bot-nav">
 
-					<div>
-						<?php wp_nav_menu(array('theme_location' => 'primary', 'menu_class' => 'ml-auto main-header d-flex', 'container' => '')); ?>
+					<div class="d-flex align-items-center justify-content-between w-100">
+						<div>
+							<?php wp_nav_menu(array('theme_location' => 'primary', 'menu_class' => 'ml-auto main-header d-flex', 'container' => '')); ?>
+						</div>
+						<div class="currnet-date">
+							<?php
+							// echo date('Y.m.d, l');
+							// echo date with another Hungarian language
+							setlocale(LC_ALL, 'hu_HU.UTF-8');
+							echo strftime('%Y.%m.%d, %A');
+
+
+							?>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -420,7 +423,7 @@
 												<span class="title">Dollár</span>
 											</div>
 											<span class="value">
-												<?php echo number_format($usd_currency, 3, ',', ' '); ?>
+												<?php echo number_format($usd_currency, 2, ',', ' '); ?> Ft
 											</span>
 										</div>
 										<?php if ($usd_currency_old !== $usd_currency) : ?>
@@ -432,7 +435,7 @@
 											<div class="top">
 												<span class="title">Euró</span>
 											</div>
-											<span class="value"><?php echo number_format($eur_currency, 3, ',', ' '); ?></span>
+											<span class="value"><?php echo number_format($eur_currency, 2, ',', ' '); ?> Ft</span>
 										</div>
 										<?php if ($eur_currency_old !== $eur_currency) : ?>
 											<span class="change <?php echo ($eur_currency_old > $eur_currency) ? 'down' : 'up'; ?>"></span>
@@ -443,7 +446,7 @@
 											<div class="top">
 												<span class="title">Font</span>
 											</div>
-											<span class="value"><?php echo number_format($gbp_currency, 3, ',', ' '); ?></span>
+											<span class="value"><?php echo number_format($gbp_currency, 2, ',', ' '); ?> Ft</span>
 										</div>
 										<?php if ($gbp_currency_old !== $gbp_currency) : ?>
 											<span class="change <?php echo ($gbp_currency_old > $gbp_currency) ? 'down' : 'up'; ?>"></span>
@@ -533,7 +536,7 @@
 						'post__not_in' 			 => array($post->ID),
 						'post_type'              => 'linernews',
 						'post_status'            => 'publish',
-						'posts_per_page'         => 4,
+						'posts_per_page'         => 3,
 						'tax_query'         	 => array(
 							array(
 								'taxonomy' => 'news_cat',
@@ -586,8 +589,9 @@
 					if ($last_visit_query && $last_visit_query->have_posts()) {
 						echo '<div class="last-visit-modal">
 						<div class="container">
-							<div class="text-right">
-							<button class="px-3 mt-4 bg-transparent close-visit-modal">
+							<div class="d-flex align-items-center justify-content-between my-4 ">
+							<h2 class="egy-header-title">Mióta itt jártál</h2>
+							<button class="px-3 bg-transparent close-visit-modal">
 								<i class="fa fa-times"></i>
 							</button>
 							</div>

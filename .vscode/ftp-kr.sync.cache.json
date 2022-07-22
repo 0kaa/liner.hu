@@ -11,8 +11,8 @@
           "liner": {
             "archive.php": {
               "type": "-",
-              "size": 4691,
-              "lmtime": 1654897229622,
+              "size": 8302,
+              "lmtime": 1658440843005,
               "modified": false
             },
             "readme.txt": {
@@ -53,8 +53,8 @@
             },
             "page-friss-hirek.php": {
               "type": "-",
-              "size": 4897,
-              "lmtime": 1656958509727,
+              "size": 5508,
+              "lmtime": 1658439124721,
               "modified": false
             },
             "content-status.php": {
@@ -65,14 +65,14 @@
             },
             "header.php": {
               "type": "-",
-              "size": 20878,
-              "lmtime": 1657883167772,
+              "size": 21410,
+              "lmtime": 1658423673710,
               "modified": false
             },
             "single-linernews.php": {
               "type": "-",
-              "size": 29112,
-              "lmtime": 1657655703690,
+              "size": 29403,
+              "lmtime": 1658444034659,
               "modified": false
             },
             "content.php": {
@@ -102,8 +102,8 @@
             "inc": {
               "custom-function.php": {
                 "type": "-",
-                "size": 141227,
-                "lmtime": 1658302694161,
+                "size": 142168,
+                "lmtime": 1658440929679,
                 "modified": false
               },
               "custom-header.php": {
@@ -286,6 +286,12 @@
                 "type": "-",
                 "size": 23013,
                 "lmtime": 1654881496785,
+                "modified": false
+              },
+              "koronavirus_ikon.png": {
+                "type": "-",
+                "size": 3830,
+                "lmtime": 1658406745504,
                 "modified": false
               },
               "american.png": {
@@ -545,8 +551,8 @@
             },
             "single-longform.php": {
               "type": "-",
-              "size": 5902,
-              "lmtime": 1654897234897,
+              "size": 6017,
+              "lmtime": 1658425944907,
               "modified": false
             },
             "page.php": {
@@ -569,15 +575,15 @@
             },
             "taxonomy-news_cat.php": {
               "type": "-",
-              "size": 13139,
-              "lmtime": 1657432641468,
+              "size": 10688,
+              "lmtime": 1658440420790,
               "modified": false
             },
             "search.php": {
               "type": "-",
-              "size": 4200,
-              "lmtime": 1654897236314,
-              "modified": true
+              "size": 4580,
+              "lmtime": 1658439872371,
+              "modified": false
             },
             "content-aside.php": {
               "type": "-",
@@ -593,8 +599,8 @@
             },
             "page-orosz-ukran-haboru-elo-kozvetites.php": {
               "type": "-",
-              "size": 9599,
-              "lmtime": 1657887166607,
+              "size": 9328,
+              "lmtime": 1658405828379,
               "modified": false
             },
             "content-link.php": {
@@ -1167,14 +1173,14 @@
             },
             "custom-style.css": {
               "type": "-",
-              "size": 127575,
-              "lmtime": 1658287408635,
+              "size": 131065,
+              "lmtime": 1658442322149,
               "modified": false
             },
             "functions.php": {
               "type": "-",
-              "size": 33761,
-              "lmtime": 1657887400810,
+              "size": 33766,
+              "lmtime": 1658428322094,
               "modified": false
             },
             "page-templates": {
@@ -1223,8 +1229,8 @@
             },
             "style.css": {
               "type": "-",
-              "size": 49675,
-              "lmtime": 1658287409047,
+              "size": 49673,
+              "lmtime": 1658316589973,
               "modified": false
             }
           },

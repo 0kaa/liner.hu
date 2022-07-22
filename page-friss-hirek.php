@@ -28,12 +28,11 @@ $args = array(
 
 $the_query = new WP_Query($args);
 
-
+$i = 1;
 
 ?>
 <div class='container'>
     <div id="primary">
-        <h1 class="friss-title">Friss Hírek</h1>
         <div class="row">
             <div class="col-md-8 category-wide-section">
                 <?php
@@ -57,17 +56,27 @@ $the_query = new WP_Query($args);
                             $breaknews = '';
                         }
 
-                        $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'full');
-
+                        $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'medium');
                         if ($date != get_the_date('Y.m.d')) {
+                            setlocale(LC_ALL, 'hu_HU.UTF-8');
+                            if ($i == 1) {
+                                $dateTitle = 'Friss Hírek';
+                            } else {
+
+                                $dateTitle = strftime('%A', strtotime(get_the_date('Y/m/d')));
+                            }
+
+                            echo '<div class="d-flex align-items-center justify-content-between mt-4" style="border-bottom: 1px solid #d1d1d1;">
+                            <h1 class="friss-title egy-header-title">' . $dateTitle . '</h1>';
                             $date = get_the_date('Y.m.d');
                             echo '<div class="group-date">' . $date . '</div>';
+                            echo '</div>';
                         }
                         ?>
                         <div class="news-item d-flex <?php echo $poplr || $brknews ? 'align-items-center' : ''; ?>">
                             <span class="post-tagline mr-4 font-weight-bold <?php echo $poplr || $brknews ? '' : 'mt-5'; ?>"><?php echo get_post_time('H:i'); ?></span>
                             <?php if ($poplr || $brknews) : ?>
-                                <img src="<?php echo $image_attributes[0] ?>" style="width: 140px;min-height: 70px;object-fit: cover;max-height: 70px;min-width: 140px;max-width: 140px;" class="mr-4" />
+                                <img src="<?php echo $image_attributes[0] ?>" style="width: 120px;min-height: 70px;object-fit: cover;max-height: 70px;min-width: 120px;max-width: 120px;" class="mr-4" />
                             <?php endif; ?>
                             <div>
                                 <p class="post-tagline">
@@ -85,6 +94,7 @@ $the_query = new WP_Query($args);
                             </div>
                         </div>
                 <?php
+                        $i++;
                     endwhile;
                     $big = 999999999; // need an unlikely integer
                     echo '<div class="text-center mt-5">';

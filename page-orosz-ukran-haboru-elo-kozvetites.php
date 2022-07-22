@@ -40,11 +40,11 @@ $the_query = new WP_Query($args); ?>
         endif;
         ?>
 
-        <p class="mb-4">Élő közvetítés az orosz-ukrán háború történéseiről</p>
+        <p class="mb-4 post-description">Élő közvetítés az orosz-ukrán háború történéseiről</p>
         <div class="row">
             <div class="col-md-8 category-wide-section">
                 <div class="key-points-section">
-                    <h2 class="key-points-title">Key points</h2>
+                    <h2 class="egy-header-title single">Key points</h2>
                     <div class="key-points-list">
                         <?php
                         if ($the_query->have_posts()) :
@@ -115,14 +115,14 @@ $the_query = new WP_Query($args); ?>
                             <div class="timeline-item">
                                 <div class="timeline-header mb-3 d-flex align-items-center justify-content-between">
                                     <div class="timeline-time">
-                                        <?php echo get_the_date('H:i'); ?>
+                                        <?php echo get_the_date('Y.m.d - H:i'); ?>
                                     </div>
-                                    <div class="d-flex align-items-start justify-content-between share-parent h-100">
+                                    <div class="d-flex align-items-start justify-content-between h-100">
                                         <div class="share-content flex-row" style="margin:0 !important;">
                                             <a href="#" class="copy-link pr" data-permalink="<?php echo $permalink; ?>" data-id="copylink_<?php echo $post->ID ?>">
                                                 <img src="<?php echo get_bloginfo("template_url"); ?>/images/copy.png" style="width:30px" />
                                             </a>
-                                            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $permalink; ?>" target="_blank" class="facebook-share-icon">
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $permalink; ?>" target="_blank" class="">
                                                 <img src="<?php echo get_bloginfo("template_url"); ?>/images/Facebook-share.png" style="width:30px" />
                                             </a>
                                             <a href="https://twitter.com/intent/tweet?text=<?php the_title(); ?>&url=<?php echo $permalink; ?>" target="_blank">
@@ -135,9 +135,6 @@ $the_query = new WP_Query($args); ?>
                                             </div>
 
                                         </div>
-                                        <a href="<?php echo esc_url(home_url('/')); ?>" class="home-page-button" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
-                                            Homepage
-                                        </a>
                                     </div>
                                 </div>
                                 <div class="timeline-content <?php echo $popular . $breaknews; ?>">
@@ -186,7 +183,7 @@ $the_query = new WP_Query($args); ?>
             </div>
             <div class="col-md-4 category-wide-sidebar">
                 <?php if (is_active_sidebar('sidebar-5')) : ?>
-                    <div class="news_sidebar">
+                    <div class="news_sidebar category-sidebar">
                         <?php dynamic_sidebar('sidebar-5'); ?>
                     </div>
                 <?php endif; ?>

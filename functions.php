@@ -110,6 +110,7 @@ function liner_setup()
 	register_nav_menu('primary', __('Primary Menu', 'liner'));
 	register_nav_menu('hamburger', __('Hamburger Menu', 'liner'));
 	register_nav_menu('informations', __('Hamburger Menu', 'liner'));
+	register_nav_menu('fontos', __('Fontos', 'liner'));
 
 	/*
 	 * This theme supports custom background color and image,
@@ -124,8 +125,8 @@ function liner_setup()
 
 	// This theme uses a custom image size for featured images, displayed on "standard" posts.
 	add_theme_support('post-thumbnails');
-	set_post_thumbnail_size(624, 9999); // Unlimited height, soft crop.
-
+	
+	
 	// Indicate widget sidebars can use selective refresh in the Customizer.
 	add_theme_support('customize-selective-refresh-widgets');
 }
@@ -943,7 +944,7 @@ if (!function_exists('liner_content_nav')) :
 			update_option('gbp_currency', $data_gbp);
 
 			// request api
-			$btc_url = 'https://api.currencyapi.com/v3/latest?apikey=vsAKQVd2VbDSbuhKvCCeDp0YMkNigJRViarqYaae&currencies=BTC';
+			$btc_url = 'https://api.currencyapi.com/v3/latest?apikey=vsAKQVd2VbDSbuhKvCCeDp0YMkNigJRViarqYaae&currencies=USD&base_currency=BTC';
 			// use curl to get the data
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $btc_url);

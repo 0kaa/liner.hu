@@ -12,11 +12,12 @@ get_header(); ?>
 		<div class="row">
 			<div class="col-12 mb-4">
 				<?php
+					global $article_id;
 				while (have_posts()) :
 					the_post();
 					// asign global id to the post
-					global $article_id;
 					$article_id = get_the_ID();
+				
 					?>
 					<div>
 						<?php
@@ -46,10 +47,10 @@ get_header(); ?>
 							</ol>
 						</nav>
 					</div>
-					<h1 class="page_title mt-4"><?php the_title(); ?></h1>
+					<h1 class="page_title mt-4 mb-5"><?php the_title(); ?></h1>
 				<?php endwhile; ?>
 			</div>
-			<div class="col-lg-8">
+			<div class="col-lg-8 category-wide-section">
 				<?php
 				while (have_posts()) :
 
@@ -85,7 +86,7 @@ get_header(); ?>
 	        if( count($sldrimg) ){
 	        	echo '<div class="owl-carousel owl-theme" id="slider-'.$post->ID.'">';
 	        	foreach($sldrimg as $simage){
-	        		$child_thumb = wp_get_attachment_image_src( $simage['id'],'slidesingle-thumb' );
+	        		$child_thumb = wp_get_attachment_image_src( $simage['id'],'large' );
 	        		echo '<div class="item"><img src="'.$child_thumb[0].'" class="img-responsive" /></div>';
 	        	}
 	        	echo '</div>';
@@ -111,7 +112,7 @@ get_header(); ?>
 							$vdolnk = '';
 							$sldrimg = '';
 							$caption = '';
-							$child_thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'singlepagebanner-thumb');
+							$child_thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'medium_large');
 
 							if ($child_thumb) {
 								$image_cap = wp_get_attachment_caption(get_post_thumbnail_id($post->ID));
@@ -123,7 +124,7 @@ get_header(); ?>
 								} else {
 									$caption = '';
 								}
-								echo '<img src="' . $child_thumb[0] . '" class="img-responsive" />' . $caption;
+								echo '<img src="' . $child_thumb[0] . '" class="img-responsive mob-image6" />' . $caption;
 							} else {
 								echo '<img src="' . get_bloginfo("template_url") . '/images/slide.jpg" class="img-responsive" />';
 							}
@@ -162,7 +163,12 @@ get_header(); ?>
 								</div>
 								<div class="author-desc">
 									<h3><?php the_field('news_author'); ?></h3>
-									<p><?php echo  get_the_date('Y. F j. - H:i'); ?></p>
+									<p><?php
+
+											setlocale(LC_ALL, 'hu_HU.UTF-8');
+											echo strftime('%Y. %B %d', strtotime(get_the_date('Y/m/d'))); ?>
+
+									</p>
 								</div>
 							</div>
 							<?php
@@ -282,12 +288,12 @@ get_header(); ?>
 											$postlinks = array();
 											$relterms_links = array();
 											$relterms = get_the_terms($article_id, 'news_cat');
+											echo print_r($article_id);
 											if ($relterms && !is_wp_error($relterms)) {
 
 												foreach ($relterms as $relterm) {
 													$relterms_links[] = $relterm->slug;
 												}
-
 												$args_args = array(
 													'post__not_in' 			 => array($article_id),
 													'post_type'              => 'linernews',
@@ -308,7 +314,7 @@ get_header(); ?>
 												if ($next_query->have_posts()) :
 													while ($next_query->have_posts()) :
 														$next_query->the_post();
-														echo '<a class="next-article-link" href="' . get_the_permalink() . '">' . get_the_title() . '</a>';
+														echo '<a class="next-article-link" href="' . get_the_permalink() . '">' . $next_query->post->post_title . '</a>';
 													endwhile;
 												endif;
 											}
@@ -361,9 +367,9 @@ get_header(); ?>
 				?>
 
 			</div>
-			<div class="col-lg-4 col-sm-12">
+			<div class="col-lg-4 col-sm-12 category-wide-sidebar">
 				<?php if (is_active_sidebar('sidebar-5')) : ?>
-					<div class="news_sidebar">
+					<div class="news_sidebar category-sidebar" style="margin-top:-45px">
 						<?php dynamic_sidebar('sidebar-5'); ?>
 					</div>
 				<?php endif; ?>
@@ -824,7 +830,7 @@ if ($relterms && !is_wp_error($relterms)) {
 				'whatever': 1234,
 				'page_url': path
 			};
-
+			var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
 			jQuery.post(ajaxurl, data, function(response) {
 				console.log('ajax recevieved count');
 				console.log('Got this from the server: ' + response);
