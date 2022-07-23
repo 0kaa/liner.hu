@@ -1678,7 +1678,8 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   padding: 0;
 }
 .single_news h1.page_title {
-  margin: 0 0 10px;
+  margin-top: 10px;
+  margin-bottom: 10px !important;
 }
 .single_news h2 {
   font-size: 25px;
@@ -2029,10 +2030,11 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   color: #323234;
 }
 .excerpt-content p {
-  font-size: 18px;
-  font-family: "PTSansBold";
+  font-size: 20px;
+  font-family: "Roboto";
   color: #202020;
   line-height: 28px;
+  font-weight: 600;
 }
 .related_post .crp_related {
   border-bottom: 4px solid #0d0d0d;
@@ -2147,10 +2149,12 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
 
 .news_sidebar #text-2 .widget-title {
   position: relative;
-  padding: 0 0 4px;
-  font: 500 22px/24px "Bai Jamjuree";
+  padding: 0 0 0px;
+  font: 500 20px/15px "Bai Jamjuree";
   color: #000000;
   margin: 0;
+  left: 0px;
+  text-transform: uppercase;
 }
 .news_sidebar .justin_single {
   border: 1px solid #b5b5b5;
@@ -2187,31 +2191,31 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   margin-left: -7px;
 }
 .news_sidebar.category-sidebar .category-sidebar-title:before {
-  width: 110px;
+  width: 125px;
 }
 .news_sidebar.category-sidebar .category-sidebar-title:after {
   left: 33px;
   width: 40px;
 }
 .news_sidebar.category-sidebar .justin_single .sidebar-img {
-  top: 22px;
+  top: 16px;
   max-width: 45px;
 }
 .news_sidebar.category-sidebar .justin_single .sidebar-img img {
   max-width: 30px;
 }
 .meg-tobb-btn {
-  background: #567076 !important;
   display: block;
-  color: #fff !important;
+  color: #000 !important;
   box-shadow: none !important;
-  width: 80%;
-  padding: 15px;
+  width: 35%;
+  padding: 5px;
   border-radius: 0 !important;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 14px;
   text-align: center;
   font-weight: normal;
+  border: 1px solid black;
 }
 .news_sidebar .justin_single img {
   max-width: 60px;
@@ -2226,6 +2230,7 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   display: flex;
   align-items: flex-start;
   gap: 10px;
+  border-bottom: 1px dashed black;
 }
 .news_sidebar .justin_single ul li span {
   color: #000;
@@ -2242,7 +2247,7 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   overflow: hidden;
   clear: none;
   margin: 0;
-  max-width: 235px;
+  max-width: 260px;
 }
 .news_sidebar .justin_single ul li::before {
   position: absolute;
@@ -5351,7 +5356,7 @@ h5.article-meta {
   position: absolute;
   bottom: -3px;
   left: 0;
-  width: 100px;
+  width: 150px;
   height: 5px;
   background-color: #1a1d2e;
 }
@@ -5359,7 +5364,7 @@ h5.article-meta {
   content: "";
   position: absolute;
   bottom: -3px;
-  left: 25px;
+  left: 50px;
   width: 50px;
   height: 5px;
   background-color: #58ceb6;
@@ -5767,7 +5772,7 @@ input.contact-submit-btn {
   gap: 30px;
 }
 .van-sztorid-widget {
-  border: 3px solid #000;
+  border: 1px solid #000;
   padding: 30px;
   margin-bottom: 30px;
   margin-top: 27px;
@@ -5776,7 +5781,7 @@ input.contact-submit-btn {
 }
 .van-sztorid-widget .sztorid-img {
   position: absolute;
-  top: -27px;
+  top: -20px;
   left: 0;
   right: 0;
   margin: auto;
@@ -5785,34 +5790,36 @@ input.contact-submit-btn {
   width: max-content;
 }
 .van-sztorid-widget .sztorid-img img {
-  width: 54px;
-  height: 54px;
+  width: 36px;
+  height: 36px;
   object-fit: cover;
 }
 .van-sztorid-widget .sztorid-title {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 600;
   color: #000;
   margin-bottom: 20px;
+  margin-top: 0px !important;
 }
 .van-sztorid-widget .sztorid-paragraph {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.4;
-  font-weight: 700;
-  color: #383737;
+  font-weight: 400;
+  color: #000;
   margin-top: 10px;
   text-align: center;
 }
 .van-sztorid-widget .sztori-btn {
-  background: #567076 !important;
-  display: block;
-  color: #fff !important;
+  display: inline-block;
+  color: #000 !important;
   box-shadow: none !important;
-  width: 100%;
-  padding: 15px;
+  width: 45%;
+  padding: 5px;
   border-radius: 0 !important;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  border: 1px solid black;
 }
 .key-points-section {
   background-color: #f2f2f2;
@@ -6223,7 +6230,7 @@ body {
   content: "";
   position: absolute;
   bottom: -10px;
-  left: 0;
+  left: 0px;
   width: 150px;
   height: 5px;
   background-color: #1a1d2e;

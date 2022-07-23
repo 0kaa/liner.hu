@@ -3156,7 +3156,7 @@ if( $the_query->have_posts() ) {
       $the_query = new WP_Query($args);
 
       if ($the_query->have_posts()) {
-        $output .= '<div class="justin_single" style="padding-top: 30px;margin-top: 17px;">
+        $output .= '<div class="justin_single" style="padding-top: 20px;margin-top: 17px;">
     <div class="sidebar-img">
     <img src="' . get_template_directory_uri() . '/images/24_liner.png" class="img-responsive">
     </div>

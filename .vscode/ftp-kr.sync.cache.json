@@ -4,6 +4,7 @@
       "wp-content": {
         "themes": {
           "twentytwentyone": {},
+          "twentytwentytwo": {},
           "_liner_": {},
           "liner_covid_section": {},
           "twentytwelve": {},
@@ -71,8 +72,8 @@
             },
             "single-linernews.php": {
               "type": "-",
-              "size": 29470,
-              "lmtime": 1658518410767,
+              "size": 29456,
+              "lmtime": 1658532568603,
               "modified": false
             },
             "content.php": {
@@ -103,7 +104,7 @@
               "custom-function.php": {
                 "type": "-",
                 "size": 143358,
-                "lmtime": 1658528459354,
+                "lmtime": 1658532556013,
                 "modified": false
               },
               "custom-header.php": {
@@ -575,8 +576,8 @@
             },
             "taxonomy-news_cat.php": {
               "type": "-",
-              "size": 10688,
-              "lmtime": 1658440420790,
+              "size": 11048,
+              "lmtime": 1658532970167,
               "modified": false
             },
             "search.php": {
@@ -1173,8 +1174,8 @@
             },
             "custom-style.css": {
               "type": "-",
-              "size": 132245,
-              "lmtime": 1658529061084,
+              "size": 132428,
+              "lmtime": 1658532569427,
               "modified": false
             },
             "functions.php": {

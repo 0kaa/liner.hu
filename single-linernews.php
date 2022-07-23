@@ -177,8 +177,8 @@ get_header(); ?>
 								$twitterlink = get_field('twitter-url', $post->ID);
 								?>
 							<ul class="author-social">
-								<li><a class="google d-flex align-items-center" target="_blank" href="https://news.google.com/publications/CAAqBwgKMKulmQswy6-xAw?hl=hu&amp;gl=HU&amp;ceid=HU%253Ahu" style="font-weight: 600;">Google hírek
-										<img style="width:30px;margin-left:10px;object-fit:cover;" src="<?php echo get_bloginfo("template_url"); ?>/images/google_news.png" />
+								<li><a class="google d-flex align-items-center" target="_blank" href="https://news.google.com/publications/CAAqBwgKMKulmQswy6-xAw?hl=hu&amp;gl=HU&amp;ceid=HU%253Ahu" style="font-weight: 600;">
+										<img style="width:30px;margin-left:0px;object-fit:cover;" src="<?php echo get_bloginfo("template_url"); ?>/images/google_news.png" />
 									</a></li>
 								<li>
 									<a class="facebook d-flex align-items-center p-0" target="_blank" href="#">
@@ -369,7 +369,7 @@ get_header(); ?>
 			</div>
 			<div class="col-lg-4 col-sm-12 category-wide-sidebar">
 				<?php if (is_active_sidebar('sidebar-5')) : ?>
-					<div class="news_sidebar category-sidebar" style="margin-top:-45px">
+					<div class="news_sidebar category-sidebar" style="margin-top:-10px">
 						<?php dynamic_sidebar('sidebar-5'); ?>
 					</div>
 				<?php endif; ?>
