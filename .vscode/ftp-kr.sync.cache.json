@@ -42,8 +42,8 @@
             },
             "editor-style.css": {
               "type": "-",
-              "size": 5462,
-              "lmtime": 1654897231074,
+              "size": 5447,
+              "lmtime": 1658596425294,
               "modified": false
             },
             "category.php": {
@@ -66,14 +66,14 @@
             },
             "header.php": {
               "type": "-",
-              "size": 21435,
-              "lmtime": 1658527657099,
+              "size": 21577,
+              "lmtime": 1658599084399,
               "modified": false
             },
             "single-linernews.php": {
               "type": "-",
-              "size": 29456,
-              "lmtime": 1658532568603,
+              "size": 29442,
+              "lmtime": 1658600736210,
               "modified": false
             },
             "content.php": {
@@ -103,8 +103,8 @@
             "inc": {
               "custom-function.php": {
                 "type": "-",
-                "size": 143358,
-                "lmtime": 1658532556013,
+                "size": 143317,
+                "lmtime": 1658601603566,
                 "modified": false
               },
               "custom-header.php": {
@@ -577,7 +577,7 @@
             "taxonomy-news_cat.php": {
               "type": "-",
               "size": 11048,
-              "lmtime": 1658532970167,
+              "lmtime": 1658601597937,
               "modified": false
             },
             "search.php": {
@@ -600,8 +600,8 @@
             },
             "page-orosz-ukran-haboru-elo-kozvetites.php": {
               "type": "-",
-              "size": 9346,
-              "lmtime": 1658528935863,
+              "size": 9535,
+              "lmtime": 1658593810450,
               "modified": false
             },
             "content-link.php": {
@@ -612,8 +612,8 @@
             },
             "page-sztori-bekuldes.php": {
               "type": "-",
-              "size": 7239,
-              "lmtime": 1657048836715,
+              "size": 7246,
+              "lmtime": 1658593811143,
               "modified": false
             },
             "content-quote.php": {
@@ -827,8 +827,8 @@
               },
               "custom-script.js": {
                 "type": "-",
-                "size": 9826,
-                "lmtime": 1658523726098,
+                "size": 10165,
+                "lmtime": 1658598306391,
                 "modified": false
               }
             },
@@ -1174,14 +1174,14 @@
             },
             "custom-style.css": {
               "type": "-",
-              "size": 132428,
-              "lmtime": 1658532569427,
+              "size": 133520,
+              "lmtime": 1658601130517,
               "modified": false
             },
             "functions.php": {
               "type": "-",
-              "size": 33766,
-              "lmtime": 1658428322094,
+              "size": 34465,
+              "lmtime": 1658601060177,
               "modified": false
             },
             "page-templates": {
@@ -1230,8 +1230,8 @@
             },
             "style.css": {
               "type": "-",
-              "size": 49779,
-              "lmtime": 1658528433701,
+              "size": 49759,
+              "lmtime": 1658593814526,
               "modified": false
             }
           },

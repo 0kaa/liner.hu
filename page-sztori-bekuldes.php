@@ -32,12 +32,12 @@ get_header();
                         <input type="email" class="form-control py-4" name="email" id="email" placeholder="Email-cím">
                     </div>
                     <div class="col-md-6 form-group mb-3">
-                        <input type="text" class="form-control py-4" name="name" id="name" placeholder="Name">
+                        <input type="text" class="form-control py-4" name="name" id="name" placeholder="Név">
                     </div>
                 </div>
                 <div class="row mb-5">
                     <div class="col-md-12 form-group mb-3">
-                        <textarea class="form-control" name="message" id="message" cols="30" rows="8" placeholder="Message"></textarea>
+                        <textarea class="form-control" name="message" id="message" cols="30" rows="8" placeholder="Üzenet"></textarea>
                     </div>
                 </div>
                 <div class="uploaded-files">
@@ -94,7 +94,7 @@ get_header();
         //     maxFiles: 3,
         //     name: 'file',
         //     storeAsFile: true,
-        //     labelIdle: 'Drag & Drop your files or <span class="filepond--label-action">Browse</span>',
+        //     labelIdle: 'Húzd ide a fájlokat, vagy <span class="filepond--label-action">böngésés</span>',
         // });
 
         // Listen for addfile event

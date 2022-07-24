@@ -27,7 +27,7 @@ get_header(); ?>
 						<!-- breadcrumb -->
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="<?php echo get_home_url(); ?>">HOMEPAGE</a></li>
+								<li class="breadcrumb-item"><a href="<?php echo get_home_url(); ?>">KEZDŐLAP</a></li>
 								<?php if ($terms && count($terms) > 0) : ?>
 									<li class="breadcrumb-item">
 										<a href="<?php $term = $terms[0];
@@ -239,7 +239,8 @@ get_header(); ?>
 								</div>
 								<!--liner_cikk_roadblock_1-->
 								<div class="editor_content">
-									<?php the_content();
+									<?php 
+									echo the_content();
 
 										wp_link_pages(
 											array(
@@ -281,14 +282,13 @@ get_header(); ?>
 									<div class="next-article-section">
 										<div class="next-article-section-title">
 											<img src="<?php echo get_bloginfo("template_url"); ?>/images/arrow.png" style="width:30px" />
-											<p>Next Article</p>
+											<p>Következő cikk</p>
 											<img src="<?php echo get_bloginfo("template_url"); ?>/images/arrow.png" style="width:30px" />
 										</div>
 										<?php
 											$postlinks = array();
 											$relterms_links = array();
 											$relterms = get_the_terms($article_id, 'news_cat');
-											echo print_r($article_id);
 											if ($relterms && !is_wp_error($relterms)) {
 
 												foreach ($relterms as $relterm) {
@@ -407,7 +407,7 @@ get_header(); ?>
 				<div class="next-article-section">
 					<div class="next-article-section-title">
 						<img src="<?php echo get_bloginfo("template_url"); ?>/images/arrow.png" style="width:30px" />
-						<p>Next Article</p>
+						<p>Következő cikk</p>
 						<img src="<?php echo get_bloginfo("template_url"); ?>/images/arrow.png" style="width:30px" />
 					</div>
 					<?php

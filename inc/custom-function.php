@@ -27,7 +27,7 @@ function theme_scripts()
   //wp_enqueue_script( 'popper-script', get_template_directory_uri() .'/js/popper.min.js', array(), '', true );
   //wp_enqueue_script( 'bootstrap-script', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js', array(), '', true );
   wp_enqueue_script('bootstrap-script', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '', true);
-  wp_enqueue_script('site-script', get_template_directory_uri() . '/js/custom-script.js?lnr=' . time(), array(), '', true);
+  wp_enqueue_script('site-script', get_template_directory_uri() . '/js/custom-script.js', array(), '', true);
 
 
   if (is_singular('linernews')) {
@@ -49,7 +49,7 @@ function load_css_files()
   //wp_enqueue_style( 'bootstrap-css','https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css', array(), '', false );
   wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '', false);
   wp_enqueue_style('gfont-style', 'https://fonts.googleapis.com/css?family=Bai+Jamjuree:300,400,500,600,700|Poppins:100,200,300,400,500,600,700,800,900|Roboto:300,400,500,700,900&display=swap', array(), '', false);
-  wp_enqueue_style('custom-style', get_template_directory_uri() . '/custom-style.css?lnr=' . time(), array(), '', false);
+  wp_enqueue_style('custom-style', get_template_directory_uri() . '/custom-style.css', array(), '', false);
 }
 add_action('wp_enqueue_scripts', 'load_css_files');
 // Register logo section
@@ -667,7 +667,7 @@ function get_latest_news_blocks($postnot_in = 0)
 
     $output_latest_news_block[$i] = '
         <div class="d-flex">            
-            <div style="width: 150px;height: 80px;min-width: 150px;">
+            <div style="width: 140px;height: 80px;min-width: 140px;">
                 <img class="w-100 h-100" style="object-fit:cover;" src="' . $image_attributes[0] . '">
             </div>            
             <div class="second-article' . $popular . $breaknews . ' d-flex flex-column justify-content-center ml-3" >
@@ -1809,7 +1809,7 @@ if( $the_query->have_posts() ) {
         // get epic category link
         $epic_cat_link = get_term_link('epic', 'news_cat');
         $output .= ' <section class="egy-header position-relative auto_float">
-        <a href="' . $epic_cat_link . '" target="_blank"><h2 class="egy-header-title text-uppercase">Megér Egy Misét</h2></a>';
+        <a href="' . $epic_cat_link . '" target="_blank"><h2 class="egy-header-title text-uppercase">EPIC</h2></a>';
         while ($the_query->have_posts()) {
           $the_query->the_post();
           $postnot[] = $the_query->post->ID;

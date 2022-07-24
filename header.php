@@ -97,7 +97,7 @@
 			$last_visit_args = array(
 				'post_type' => 'linernews',
 				'post_status' => 'publish',
-				'posts_per_page' => 15,
+				'posts_per_page' => 100,
 				'orderby' => 'date',
 				'order' => 'DESC',
 				'date_query' => array(
@@ -414,7 +414,7 @@
 							<?php wp_nav_menu(array('theme_location' => 'informations', 'menu_class' => 'informations-menu')); ?>
 						</div>
 						<div class="mb-5">
-							<h3 class="informac-title">ÁREOLYAM</h3>
+							<h3 class="informac-title">ÁRFOLYAM</h3>
 							<div class="d-flex">
 								<div class="currency d-flex align-items-center currency-gap">
 									<div class="item">
@@ -467,7 +467,7 @@
 							</div>
 						</div>
 						<div>
-							<h3 class="informac-title">TOVABBI LAPOK</h3>
+							<h3 class="informac-title">TOVÁBBI LAPOK</h3>
 							<div class="d-flex align-items-center justify-content-between">
 								<a href="https://tesztauto.hu/" class="external-link" target="_blank">TESZTAUTO.HU</a>
 								<a href="https://motorsport.hu/" class="external-link" target="_blank">MOTORSPORT.HU</a>
@@ -590,11 +590,12 @@
 						echo '<div class="last-visit-modal">
 						<div class="container">
 							<div class="d-flex align-items-center justify-content-between my-4 ">
-							<h2 class="egy-header-title">Mióta itt jártál</h2>
+							<h2 class="egy-header-title">Mióta itt jártál:</h2>
 							<button class="px-3 bg-transparent close-visit-modal">
 								<i class="fa fa-times"></i>
 							</button>
 							</div>
+							<div class="last-visit-modal-content" style="max-height: 460px;overflow: auto;box-shadow: 0 0 10px #00000026;padding: 20px;">
 						';
 						while ($last_visit_query->have_posts()) {
 							$last_visit_query->the_post();
@@ -627,6 +628,6 @@
 						</div>
 					</div>
 			<?php }
-				echo '</div></div>';
+				echo '</div></div></div>';
 			}
 			?>

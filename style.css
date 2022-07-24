@@ -1792,7 +1792,7 @@ img#wpstats {
 	.widget-area,
 	img.header-image,
 	.main-navigation {
-		display: none;
+		display:block;
 	}
 	.wrapper {
 		border-top: none;
@@ -1998,7 +1998,7 @@ p {
 .post-description {
     font-size: 18px;
     color: var(--content);
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Roboto';
     font-weight: 400;
     display: -webkit-box;
     -webkit-line-clamp: 4;
@@ -2561,6 +2561,7 @@ div.list-wrapp-columns {
         margin-top: 105px;
     }
 }
+
 hr {
 	margin-left:0;
 	margin-right:0;

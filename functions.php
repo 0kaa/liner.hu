@@ -125,8 +125,8 @@ function liner_setup()
 
 	// This theme uses a custom image size for featured images, displayed on "standard" posts.
 	add_theme_support('post-thumbnails');
-	
-	
+
+
 	// Indicate widget sidebars can use selective refresh in the Customizer.
 	add_theme_support('customize-selective-refresh-widgets');
 }
@@ -180,8 +180,30 @@ function liner_get_font_url()
 		$font_url   = add_query_arg($query_args, 'https://fonts.googleapis.com/css');
 	}
 
-	return $font_url;
+	return null;
 }
+
+/**
+ * Append the wp_link_pages to the content.
+ */
+!is_admin() && add_filter('the_content', function ($content) {
+	if (in_the_loop()) {
+		$args = [
+			'echo' => false, '_show' => true,
+			'before' => '<div class="post-nav-links">Lapozó:',
+			'after'  => '</div>',
+		];  // <-- Adjust the arguments to your needs!
+		$content .= wp_link_pages($args);
+	}
+	return $content;
+}, 10);                                              // <-- Adjust the priority to your needs!
+
+/**
+ * Only display wp_link_pages() output when the '_show' argument is true.
+ */
+add_filter('wp_link_pages', function ($output, $args) {
+	return !isset($args['_show']) || !wp_validate_boolean($args['_show']) ? '' : $output;
+}, 10, 2);
 
 /**
  * Enqueue scripts and styles for front end.
@@ -206,7 +228,7 @@ function liner_scripts_styles()
 	// define global variables for the theme
 	wp_localize_script('liner-navigation', 'liner_global', array(
 		'baseUrl' => get_template_directory_uri(),
-		
+
 	));
 
 	$font_url = liner_get_font_url();
@@ -236,7 +258,7 @@ function liner_block_editor_styles()
 	// Block styles.
 	wp_enqueue_style('liner-block-editor-style', get_template_directory_uri() . '/css/editor-blocks.css', array(), '20190406');
 	// Add custom fonts.
-	wp_enqueue_style('liner-fonts', liner_get_font_url(), array(), null);
+	// wp_enqueue_style('liner-fonts', liner_get_font_url(), array(), null);
 }
 add_action('enqueue_block_editor_assets', 'liner_block_editor_styles');
 

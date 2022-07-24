@@ -40,11 +40,11 @@ $the_query = new WP_Query($args); ?>
         endif;
         ?>
 
-        <p class="mb-4 post-description">Élő közvetítés az orosz-ukrán háború történéseiről</p>
+        <p class="mb-4 post-description">Élő közvetítés az orosz-ukrán háború történéseiről, annak várható következményeiről és világgazdaságra gyakorolt hatásáról.</p>
         <div class="row">
             <div class="col-md-8 category-wide-section">
                 <div class="key-points-section">
-                    <h2 class="egy-header-title single">Key points</h2>
+                    <h2 class="egy-header-title single">Fontosabb történések</h2>
                     <div class="key-points-list">
                         <?php
                         if ($the_query->have_posts()) :
@@ -55,9 +55,10 @@ $the_query = new WP_Query($args); ?>
                                     <div class="key-points-item-content">
                                         <h3 class="key-points-item-title"><?php the_title(); ?></h3>
 
-                                        <a href="<?php the_permalink(); ?>" class="key-points-item-link">View post
+                                        <a href="<?php the_permalink(); ?>" class="key-points-item-link">Tovább
                                             <!-- <span class="chevron-down">↓</span> -->
                                             <i class="fa fa-arrow-right chevron-down"></i>
+                                            <i class="fa-regular fa-arrow-right-from-line"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -150,7 +151,7 @@ $the_query = new WP_Query($args); ?>
                                             </a>
                                             <?php the_content(); ?>
                                             <!-- permalink read more -->
-                                            <a href="<?php echo $permalink; ?>" class="read-more">Read more</a>
+                                            <a href="<?php echo $permalink; ?>" class="read-more">Tovább</a>
                                         </div>
                                     <?php else : ?>
                                         <div class="content">

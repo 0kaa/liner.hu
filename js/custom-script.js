@@ -215,6 +215,17 @@ jQuery(document).ready(function ($) {
       );
     }, 8000);
   });
+  // add parent div to the image
+  $(".instagram-media").each(function () {
+    var $this = $(this);
+    var parent = $this.parent();
+    console.log(parent);
+    if (parent.is(".embed-instagram")) {
+      return false;
+    } else {
+      $this.wrap('<div class="embed-instagram"></div>');
+    }
+  });
 
   $(".button-nav-toggle").click(function () {
     $(this).toggleClass("active");
@@ -228,7 +239,8 @@ jQuery(document).ready(function ($) {
   $(document).click(function (e) {
     if (
       e.target.classList.contains("button-nav-toggle") ||
-      e.target.classList.contains("fa")
+      e.target.classList.contains("fa") ||
+      e.target.closest(".ham-menu")
     ) {
       return;
     } else {
@@ -237,7 +249,7 @@ jQuery(document).ready(function ($) {
         .find("i")
         .removeClass("fa-times")
         .addClass("fa-bars");
-        $(".ham-menu").removeClass("active");
+      $(".ham-menu").removeClass("active");
     }
   });
   $(".sub-menu").each(function () {

@@ -340,7 +340,7 @@ global $postnot;
 						<!-- <img src="<?php echo get_template_directory_uri() ?>/images/300x600.jpeg" alt="ads" class="img-fluid w-100" style="max-width: 100%;max-height: 600px;object-fit: cover;"> -->
 						<div class="siderbar_ads1" id="liner_cikk_jobb_1">
 							<script type="text/javascript">
-								activateBanner(''liner_cikk_jobb_1'');
+								activateBanner('liner_cikk_jobb_1');
 							</script>
 						</div>
 					</div>
