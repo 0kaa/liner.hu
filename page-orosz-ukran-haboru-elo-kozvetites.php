@@ -155,7 +155,7 @@ $the_query = new WP_Query($args); ?>
                                         </div>
                                     <?php else : ?>
                                         <div class="content">
-                                            <h3 class="timeline-title"><?php the_title(); ?></h3>
+                                            <a href="<?php echo $permalink; ?>" class="timeline-title"><?php the_title(); ?></a>
                                             <?php the_content(); ?>
                                         </div>
 

@@ -12,12 +12,12 @@ get_header(); ?>
 		<div class="row">
 			<div class="col-12 mb-4">
 				<?php
-					global $article_id;
+				global $article_id;
 				while (have_posts()) :
 					the_post();
 					// asign global id to the post
 					$article_id = get_the_ID();
-				
+
 					?>
 					<div>
 						<?php
@@ -113,7 +113,19 @@ get_header(); ?>
 							$sldrimg = '';
 							$caption = '';
 							$child_thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'medium_large');
-
+							// get article terms newstag
+							$tags = [];
+							$terms = get_the_terms($post->ID, 'newstag');
+							foreach ($terms as $term) {
+								$tags[] = $term->slug;
+							}
+							$has_orosz = in_array('orosz-ukran-rovid', $tags);
+							$defaultClass = '';
+							if ($has_orosz == 1) {
+								$defaultClass = 'd-none';
+							} else {
+								$defaultClass = '';
+							}
 							if ($child_thumb) {
 								$image_cap = wp_get_attachment_caption(get_post_thumbnail_id($post->ID));
 								if (!empty($image_cap)) {
@@ -126,7 +138,7 @@ get_header(); ?>
 								}
 								echo '<img src="' . $child_thumb[0] . '" class="img-responsive mob-image6" />' . $caption;
 							} else {
-								echo '<img src="' . get_bloginfo("template_url") . '/images/slide.jpg" class="img-responsive" />';
+								echo '<img src="' . get_bloginfo("template_url") . '/images/slide.jpg" class="img-responsive ' . $defaultClass . '" />';
 							}
 
 							/*  } */
@@ -239,8 +251,8 @@ get_header(); ?>
 								</div>
 								<!--liner_cikk_roadblock_1-->
 								<div class="editor_content">
-									<?php 
-									echo the_content();
+									<?php
+										echo the_content();
 
 										wp_link_pages(
 											array(
@@ -252,7 +264,9 @@ get_header(); ?>
 											)
 										);
 
+
 										?>
+									
 									<?php //get_template_part( 'content', get_post_format() ); 
 										?>
 								</div>
@@ -589,6 +603,7 @@ if ($relterms && !is_wp_error($relterms)) {
 			$('.load_more #single_' + window.adsInfinityIndex).find('.siderbar_ads2').html('').attr('id', 'liner_jobb_2_infinite_' + window.adsInfinityIndex);
 			$('.load_more #single_' + window.adsInfinityIndex).find('.content_ads1').html('').attr('id', 'liner_roadblock_1_infinite_' + window.adsInfinityIndex);
 			$('.load_more #single_' + window.adsInfinityIndex).find('.content_ads2').html('').attr('id', 'liner_roadblock_2_infinite_' + window.adsInfinityIndex);
+			$('.load_more #single_' + window.adsInfinityIndex).find('.code-block').html('').attr('id', 'liner_code_block_2_infinite_' + window.adsInfinityIndex);
 
 			//player_infinite
 			$('#fwdevpDiv0').attr('id', 'fwdevpDiv' + count);
@@ -629,7 +644,7 @@ if ($relterms && !is_wp_error($relterms)) {
 
 			console.log('new id easy player fwdevpDiv' + count);
 			var playerid_l = 'fwdevpDiv' + count;
-			
+
 			//check if div exists
 			var $pDiv = $('#' + playerid_l);
 			if ($pDiv.length) {

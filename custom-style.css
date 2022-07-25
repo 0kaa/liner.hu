@@ -3311,25 +3311,31 @@ body.darkmode .valasztas_pcol4 ul li > span {
 .age_verify_content button {
 }
 
-.post-nav-links {
+.post-nav-links,
+.page-links {
   margin-bottom: 20px;
 }
-.post-nav-links a {
+.post-nav-links a,
+.page-links a {
   text-decoration: none;
   box-shadow: inset 0 -2px 0 #9ad0c4;
   transition: all 0.4s ease-in-out;
   background-color: transparent;
   color: #000;
 }
-.post-nav-links a:hover {
+.post-nav-links a:hover,
+.page-links a:hover {
   background-color: #9ad0c4b3 !important;
   box-shadow: none;
 }
-.post-nav-links .current {
+.post-nav-links .current,
+.page-links .current {
   box-shadow: none;
 }
 .post-nav-links a,
-.post-nav-links .current {
+.page-links a,
+.post-nav-links .current,
+.page-links .current {
   color: #212121;
   padding: 0 10px;
   display: inline-block;
@@ -3343,12 +3349,16 @@ body.darkmode .valasztas_pcol4 ul li > span {
   margin-bottom: 10px;
   margin-left: 10px;
 }
-.post-nav-links .current {
+.post-nav-links .current,
+.page-links .current {
   background: #000;
   color: white;
 }
 .post-nav-links a:hover,
-.post-nav-links .current:hover {
+.page-links a:hover,
+.post-nav-links .current:hover,
+.page-links .current:hover
+ {
   background: #000;
   color: white;
 }

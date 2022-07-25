@@ -1053,6 +1053,7 @@ if (!function_exists('liner_content_nav')) :
 				</span>
 				';
 					}
+					wp_reset_postdata();
 				}
 			}
 
@@ -1062,6 +1063,27 @@ if (!function_exists('liner_content_nav')) :
 
 			return $content;
 		}
+		// add_filter('the_content', 'prefix_insert_post_ads_two');
+
+		// function prefix_insert_post_ads_two($content)
+		// {
+		// 	global $post;
+		// 	// echo $post->post_title;
+		// 	$tags = [];
+		// 	$terms = get_the_terms($post->ID, 'newstag');
+		// 	foreach ($terms as $term) {
+		// 		$tags[] = $term->slug;
+		// 	}
+
+		// 	if (is_single() && !is_admin()) {
+
+		// 		if (in_array('longform', $tags) == 0 || in_array(18, $tags) == 0) {
+		// 			return prefix_insert_after_paragraph(adinserter(1), 4, $content);
+		// 		}
+		// 	}
+
+		// 	return $content;
+		// }
 
 		// Parent Function that makes the magic happen
 

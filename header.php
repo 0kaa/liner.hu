@@ -514,7 +514,7 @@
 					if ($childCategory == '') {
 						$output = '<a href="' . $parentLink . '" class="article-category">' . $parentCategory . '</a>';
 					} else {
-						$output .= '<a href="' . $childLink . '" class="mx-1 article-category">' . $childCategory . '</a>';
+						$output = '<a href="' . $childLink . '" class="mx-1 article-category">' . $childCategory . '</a>';
 					}
 					return $output;
 				}

@@ -27,7 +27,7 @@ function theme_scripts()
   //wp_enqueue_script( 'popper-script', get_template_directory_uri() .'/js/popper.min.js', array(), '', true );
   //wp_enqueue_script( 'bootstrap-script', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js', array(), '', true );
   wp_enqueue_script('bootstrap-script', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '', true);
-  wp_enqueue_script('site-script', get_template_directory_uri() . '/js/custom-script.js', array(), '', true);
+  wp_enqueue_script('site-script', get_template_directory_uri() . '/js/custom-script.js', false, '', true);
 
 
   if (is_singular('linernews')) {
@@ -2000,7 +2000,7 @@ if( $the_query->have_posts() ) {
       $output = '';
       global $postnot;
 
-      $i = 0;
+      $i = 1;
 
       $args = array(
         'post_type'              => 'linernews',
@@ -2544,7 +2544,7 @@ if( $the_query->have_posts() ) {
       $output = '';
       global $postnot;
 
-      $i = 0;
+      $i = 1;
 
       $output .= '<div class="">';
       $args = array(
@@ -2576,7 +2576,7 @@ if( $the_query->have_posts() ) {
           <div class="col-12 col-lg-6">';
         while ($the_query->have_posts()) {
           $the_query->the_post();
-          $i++;
+
           $custom_author = get_field('news_author', $the_query->post->ID);
           $poplr = get_field('most_popular_news', $the_query->post->ID);
           $brknews = get_field('breaking_news', $the_query->post->ID);
@@ -2745,6 +2745,7 @@ if( $the_query->have_posts() ) {
         </div>';
           }
           $postnot[] = $the_query->post->ID;
+          $i++;
         }
       }
 
@@ -2765,7 +2766,7 @@ if( $the_query->have_posts() ) {
       $output = '';
       global $postnot;
       $firstArticle = '';
-      $i = 0;
+      $i = 1;
       $style_cat_link = get_term_link('style', 'news_cat');
       $output .= '<div class="auto_float style_boxRow mb-4">
       
@@ -2848,10 +2849,10 @@ if( $the_query->have_posts() ) {
               </div>
             ';
           }
-          if ($i == 7) {
+          if ($i == 8) {
             $output .= '</div>';
           }
-          if ($i >= 7 && $i <= 11) {
+          if ($i >= 8 && $i <= 11) {
             $output .= '
               <div class="col-lg-3 mt-4">
                 <div>
@@ -2893,7 +2894,7 @@ if( $the_query->have_posts() ) {
       $shortcode_id = rand(0, 99999);
       $output = '';
       $cat_ar = explode(',', $cat);
-      $i = 0;
+      $i = 1;
       $args = array(
         'post_type'         => 'linernews',
         'post_status'       => 'publish',
@@ -2936,7 +2937,7 @@ if( $the_query->have_posts() ) {
         <h2 class="egy-header-title single text-uppercase">Fontos hírek az elmúlt 24 órából</h2>
             <div class="row">';
         while ($the_query->have_posts()) {
-          $i++;
+
           $the_query->the_post();
           $tdy = date('Y-m-d H:i:s');
           $pday = get_the_date('Y-m-d H:i:s');
@@ -2955,6 +2956,7 @@ if( $the_query->have_posts() ) {
              </div>
             </div>
            </div>';
+          $i++;
         }
         $output .= '</div></div>';
       }
@@ -3056,7 +3058,7 @@ if( $the_query->have_posts() ) {
       $shortcode_id = rand(0, 99999);
       $output = '';
       $cat_ar = explode(',', $cat);
-      $i = 0;
+      $i = 1;
       $args = array(
         'post_type'         => 'linernews',
         'post_status'       => 'publish',

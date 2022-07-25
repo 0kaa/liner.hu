@@ -66,14 +66,14 @@
             },
             "header.php": {
               "type": "-",
-              "size": 21577,
-              "lmtime": 1658599084399,
-              "modified": false
+              "size": 21572,
+              "lmtime": 1658671900201,
+              "modified": true
             },
             "single-linernews.php": {
               "type": "-",
-              "size": 29442,
-              "lmtime": 1658600736210,
+              "size": 30004,
+              "lmtime": 1658667701129,
               "modified": false
             },
             "content.php": {
@@ -104,7 +104,7 @@
               "custom-function.php": {
                 "type": "-",
                 "size": 143317,
-                "lmtime": 1658601603566,
+                "lmtime": 1658656965402,
                 "modified": false
               },
               "custom-header.php": {
@@ -576,8 +576,8 @@
             },
             "taxonomy-news_cat.php": {
               "type": "-",
-              "size": 11048,
-              "lmtime": 1658601597937,
+              "size": 11043,
+              "lmtime": 1658674108403,
               "modified": false
             },
             "search.php": {
@@ -600,8 +600,8 @@
             },
             "page-orosz-ukran-haboru-elo-kozvetites.php": {
               "type": "-",
-              "size": 9535,
-              "lmtime": 1658593810450,
+              "size": 9566,
+              "lmtime": 1658648116111,
               "modified": false
             },
             "content-link.php": {
@@ -1174,14 +1174,14 @@
             },
             "custom-style.css": {
               "type": "-",
-              "size": 133520,
-              "lmtime": 1658601130517,
+              "size": 133700,
+              "lmtime": 1658645583577,
               "modified": false
             },
             "functions.php": {
               "type": "-",
-              "size": 34465,
-              "lmtime": 1658601060177,
+              "size": 35046,
+              "lmtime": 1658666719759,
               "modified": false
             },
             "page-templates": {
