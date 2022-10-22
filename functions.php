@@ -1063,6 +1063,91 @@ if (!function_exists('liner_content_nav')) :
 
 			return $content;
 		}
+		add_filter('the_content', 'prefix_insert_post_ads2');
+
+		function prefix_insert_post_ads2($content)
+		{
+			global $post;
+			$home_top_content = '';
+
+			$args = array(
+				'post_type'              => 'linernews',
+				'post_status'            => 'publish',
+				'posts_per_page'         => 2,
+				'no_found_rows'      => true,
+				'post__not_in' => array($post->ID),
+				'update_post_meta_cache' => false,
+				'update_post_term_cache' => false,
+				'tax_query' => array(
+					// 'relation' => 'OR',
+					// array(
+					// 	'taxonomy' => 'newstag',
+					// 	'field'    => 'term_id',
+					// 	'terms'    => wp_get_post_terms($post->ID, 'newstag', array('fields' => 'ids')),
+					// ),
+					// array(
+					// 	'taxonomy' => 'news_cat',
+					// 	'field'    => 'term_id',
+					// 	'terms'    => wp_get_post_terms($post->ID, 'news_cat', array('fields' => 'ids')),
+					// ),
+					'relation' => 'AND',
+					array(
+						'taxonomy' => 'news_cat',
+						'field'    => 'term_id',
+						'terms'    => wp_get_post_terms($post->ID, 'news_cat', array('fields' => 'ids')),
+					),
+					// and has at least two of these tags
+					array(
+						'taxonomy' => 'newstag',
+						'field'    => 'term_id',
+						'terms'    => wp_get_post_terms($post->ID, 'newstag', array('fields' => 'ids')),
+						'operator' => 'IN',
+					),
+
+				),
+
+				// published date must before 24 hours
+				'date_query' => array(
+					array(
+						'after' => '1 day ago',
+						// 'before' => 'today',
+						'inclusive' => true,
+					),
+				),
+
+			);
+			$the_query = new WP_Query($args);
+
+			if ($the_query->have_posts()) {
+				$home_top_content .= '
+					<div class="connection_articles">
+						<div class="connection_title_section">
+							<span class="connection_title_before"></span>
+							<h6 class="connection_title">KAPCSOLÓDÓ</h6>							
+						</div>
+					<div class="connection_content">
+					
+					
+				';
+				while ($the_query->have_posts()) {
+					$the_query->the_post();
+					$home_top_content .= '
+		
+						<a target="_blank" href="' . get_permalink() . '">' . get_the_title() . '</a>
+			
+				';
+				}
+				$home_top_content .= '</div></div>';
+				wp_reset_postdata();
+			}
+
+
+			if (is_single() && !is_admin()) {
+				return prefix_insert_after_paragraph($home_top_content, 4, $content);
+			}
+
+			return $content;
+		}
 		// add_filter('the_content', 'prefix_insert_post_ads_two');
 
 		// function prefix_insert_post_ads_two($content)
