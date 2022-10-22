@@ -49,7 +49,7 @@ function load_css_files()
   //wp_enqueue_style( 'bootstrap-css','https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css', array(), '', false );
   wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '', false);
   wp_enqueue_style('gfont-style', 'https://fonts.googleapis.com/css?family=Bai+Jamjuree:300,400,500,600,700|Poppins:100,200,300,400,500,600,700,800,900|Roboto:300,400,500,700,900&display=swap', array(), '', false);
-  wp_enqueue_style('custom-style', get_template_directory_uri() . '/custom-style.css', array(), '', false);
+  wp_enqueue_style('custom-style', get_template_directory_uri() . '/custom-style.css', array(), '1.0.0', false);
 }
 add_action('wp_enqueue_scripts', 'load_css_files');
 // Register logo section
@@ -632,7 +632,7 @@ function get_latest_news_blocks($postnot_in = 0)
       array(
         'taxonomy' => 'newstag',
         'field' => 'slug',
-        'terms' => array('orosz-ukran-haboru-fontosabb-tortenesek'),
+        'terms' => array('orosz-ukran-haboru-fontosabb-tortenesek','orosz-ukran-rovid'),
         'operator' => 'NOT IN'
       )
     )
@@ -715,7 +715,7 @@ function get_latest_news_blocks_two($postnot_in = 0)
       array(
         'taxonomy' => 'newstag',
         'field' => 'slug',
-        'terms' => array('orosz-ukran-haboru-fontosabb-tortenesek'),
+        'terms' => array('orosz-ukran-haboru-fontosabb-tortenesek', 'orosz-ukran-rovid'),
         'operator' => 'NOT IN'
       )
     )
@@ -897,7 +897,7 @@ function section2_shortcode($atts, $content)
       array(
         'taxonomy' => 'newstag',
         'field' => 'slug',
-        'terms' => array('orosz-ukran-haboru-fontosabb-tortenesek'),
+        'terms' => array('orosz-ukran-haboru-fontosabb-tortenesek', 'orosz-ukran-rovid'),
         'operator' => 'NOT IN'
       )
     )
@@ -1124,10 +1124,28 @@ function section3_shortcode($atts, $content)
         </div>';
       }
       if ($i == 2) {
-        $output .= '</div></div><div class="col-lg-6"><div class="row">';
+        $output .= '</div></div><div class="col-lg-6"><div class="row"><div class="col-lg-6">';
       }
-      if ($i > 2 && $i <= 8) {
-        $output .= '<div class="col-lg-6 border-dashed-parent">
+      if ($i > 2 && $i <= 5) {
+        $output .= '<div class="border-dashed-parent">
+        <div class="border-dashed-bottom">
+          <p class="post-tagline">' . getCategoryByPostId($the_query->post->ID) . '
+            <span>|</span>
+            <span>' . get_post_time('H:i') .  '</span>
+          </p>
+          <h2 class="post-title post-title2">
+            <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
+              ' . get_the_title() . '
+            </a>
+          </h2>
+        </div>
+        </div>';
+      }
+      if ($i == 5) {
+        $output .= '</div><div class="col-lg-6">';
+      }
+      if ($i > 5 && $i <= 8) {
+        $output .= '<div class="border-dashed-parent">
         <div class="border-dashed-bottom">
           <p class="post-tagline">' . getCategoryByPostId($the_query->post->ID) . '
             <span>|</span>
@@ -1142,7 +1160,7 @@ function section3_shortcode($atts, $content)
         </div>';
       }
       if ($i == 8) {
-        $output .= '</div></div>';
+        $output .= '</div></div></div>';
       }
       ?>
 
@@ -1179,7 +1197,7 @@ function section3_shortcode($atts, $content)
           array(
             'taxonomy' => 'newstag',
             'field' => 'slug',
-            'terms' => array('orosz-ukran-haboru-fontosabb-tortenesek'),
+            'terms' => array('orosz-ukran-haboru-fontosabb-tortenesek', 'orosz-ukran-rovid'),
             'operator' => 'NOT IN'
           )
         )
@@ -1418,11 +1436,18 @@ if( $the_query->have_posts() ) {
         //                              ),
         //                      ),
         'tax_query'         => array(
+          'relation' => 'AND',
           array(
             'taxonomy' => 'news_cat',
             'field' => 'slug',
             'terms' => array('style'),
             'operator' => 'Not IN'
+          ),
+          array(
+            'taxonomy' => 'newstag',
+            'field' => 'slug',
+            'terms' => array('orosz-ukran-rovid'),
+            'operator' => 'NOT IN'
           )
         )
       );
@@ -1853,12 +1878,19 @@ if( $the_query->have_posts() ) {
         'update_post_meta_cache' => false,
         'update_post_term_cache' => false,
         'tax_query'        => array(
+          'relation' => 'AND',
           array(
             'taxonomy' => 'news_cat',
             'field' => 'slug',
             'terms' => array('style'),
             'operator' => 'Not IN'
           ),
+          array(
+            'taxonomy' => 'newstag',
+            'field' => 'slug',
+            'terms' => array('orosz-ukran-rovid'),
+            'operator' => 'NOT IN'
+          )
         )
       );
 
@@ -2007,7 +2039,7 @@ if( $the_query->have_posts() ) {
         'post_status'            => 'publish',
         'posts_per_page'         => 1,
         // not in
-        'post__not_in'           => $postnot,
+        // 'post__not_in'           => $postnot,
         'no_found_rows'      => true,
         'update_post_meta_cache' => false,
         'update_post_term_cache' => false,
@@ -2205,11 +2237,18 @@ if( $the_query->have_posts() ) {
         //                                ),
         //                        ),
         'tax_query'         => array(
+          'relation' => 'AND',
           array(
             'taxonomy' => 'news_cat',
             'field' => 'slug',
             'terms' => array('style', 'sport'),
             'operator' => 'Not IN'
+          ),
+          array(
+            'taxonomy' => 'newstag',
+            'field' => 'slug',
+            'terms' => array('orosz-ukran-rovid'),
+            'operator' => 'NOT IN'
           )
         )
       );

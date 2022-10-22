@@ -149,7 +149,12 @@ $the_query = new WP_Query($args); ?>
                                             <a href="<?php echo $permalink; ?>" class="timeline-title">
                                                 <?php echo get_the_title(); ?>
                                             </a>
-                                            <?php the_content(); ?>
+                                            <div class="excerpt">
+                                                <?php the_excerpt(); ?>
+                                            </div>
+                                            <div class="content-fnc">
+                                                <?php the_content(); ?>
+                                            </div>
                                             <!-- permalink read more -->
                                             <a href="<?php echo $permalink; ?>" class="read-more">Tovább</a>
                                         </div>

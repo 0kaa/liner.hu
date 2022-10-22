@@ -3357,8 +3357,7 @@ body.darkmode .valasztas_pcol4 ul li > span {
 .post-nav-links a:hover,
 .page-links a:hover,
 .post-nav-links .current:hover,
-.page-links .current:hover
- {
+.page-links .current:hover {
   background: #000;
   color: white;
 }
@@ -5944,13 +5943,26 @@ input.contact-submit-btn {
   font-weight: 500;
   font-family: "Bai Jamjuree";
 }
-.inner-content *,
-.inner-content figure {
+.inner-content .content-fnc *,
+.inner-content .content-fnc figure {
   display: none !important;
 }
-.inner-content p:nth-of-type(1),
-.inner-content p:nth-of-type(2) {
-  display: block !important;
+.inner-content .content-fnc > :first-child,
+.inner-content .content-fnc > :first-child * {
+  display: inline-block !important;
+}
+.timeline-content .inner-content .content-fnc a,
+.timeline-content .content p a {
+  text-decoration: none;
+  box-shadow: inset 0 -2px 0 #9ad0c4;
+  transition: all 0.4s ease-in-out;
+  background-color: transparent;
+  color: #000;
+}
+.timeline-content .inner-content .content-fnc a:hover,
+.timeline-content .content p a:hover {
+  background-color: rgba(154, 208, 196, 0.7);
+  box-shadow: none;
 }
 .timeline-title {
   font-size: 24px;
@@ -5964,7 +5976,7 @@ input.contact-submit-btn {
 .timeline-content .content {
   position: relative;
   color: #000000;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 18px;
   line-height: 144%;
   padding: 10px 15px 15px 10px;

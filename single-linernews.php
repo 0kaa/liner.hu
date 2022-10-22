@@ -225,7 +225,7 @@ get_header(); ?>
 									</a>
 								</div>
 							</div>
-							<div class="col-lg-11 overflow-hidden">
+							<div class="col-lg-11 overflow-hidden article-textbody">
 								<div class="excerpt-content">
 									<?php the_excerpt(); ?>
 								</div>
@@ -266,7 +266,7 @@ get_header(); ?>
 
 
 										?>
-									
+
 									<?php //get_template_part( 'content', get_post_format() ); 
 										?>
 								</div>
@@ -291,8 +291,9 @@ get_header(); ?>
 										Homepage
 									</a>
 								</div>
-
-								<div class="col-12 d-lg-none">
+								<!-- video player -->
+								<?php echo do_shortcode('[fwdevp preset_id="Liner v_1" video_path="{source:\'https://liner.hu/wp-content/uploads/2022/02/orosz_ukran_2.mp4\', label:\'previd\', videoType:\'normal\', isPrivate:\'no\'}" start_at_video="1" playback_rate_speed="1" vast="{source:\'https://pubads.g.doubleclick.net/gampad/ads?iu=/22652647,22588056191/liner_instream&description_url=https%3A%2F%2Fliner.hu%2F&tfcd=0&npa=0&sz=640x360&gdfp_req=1&ad_rule=1&output=vmap&vid_d=30&allcues=15000&unviewed_position_start=1&env=vp&impl=s&correlator=&vad_type=linear\'}"]'); ?>
+								<div class="col-12 d-lg-none mt-5">
 									<div class="next-article-section">
 										<div class="next-article-section-title">
 											<img src="<?php echo get_bloginfo("template_url"); ?>/images/arrow.png" style="width:30px" />
@@ -337,12 +338,6 @@ get_header(); ?>
 									</div>
 								</div>
 
-
-								<?php echo do_shortcode('[fwdevp preset_id="Liner v_1" video_path="{source:\'https://liner.hu/wp-content/uploads/2022/02/orosz_ukran_2.mp4\', label:\'previd\', videoType:\'normal\', isPrivate:\'no\'}" start_at_video="1" playback_rate_speed="1" vast="{source:\'https://pubads.g.doubleclick.net/gampad/ads?iu=/22652647,22588056191/liner_instream&description_url=https%3A%2F%2Fliner.hu%2F&tfcd=0&npa=0&sz=640x360&gdfp_req=1&ad_rule=1&output=vmap&vid_d=30&allcues=15000&unviewed_position_start=1&env=vp&impl=s&correlator=&vad_type=linear\'}"]'); ?>
-
-
-
-
 								<!--liner_cikk_roadblock_2-->
 								<div class="content_ads2" id="liner_cikk_roadblock_2">
 									<script type="text/javascript">
@@ -376,12 +371,11 @@ get_header(); ?>
 						</div>
 					</div>
 
-
 				<?php endwhile; // end of the loop. 
 				?>
 
 			</div>
-			<div class="col-lg-4 col-sm-12 category-wide-sidebar">
+			<div class="col-lg-4 col-sm-12 d-none d-md-block category-wide-sidebar">
 				<?php if (is_active_sidebar('sidebar-5')) : ?>
 					<div class="news_sidebar category-sidebar" style="margin-top:-10px">
 						<?php dynamic_sidebar('sidebar-5'); ?>
@@ -546,7 +540,7 @@ if ($relterms && !is_wp_error($relterms)) {
 			path: getPenPath,
 			append: '.single_news',
 			scrollThreshold: 10,
-			prefill: true,
+			// prefill: true,
 			//prefill			: true,
 			history: 'push',
 			historyTitle: true,
@@ -598,12 +592,13 @@ if ($relterms && !is_wp_error($relterms)) {
 			console.log('window index');
 			console.log(count);
 			$('.load_more .single_news:last-child').attr('id', 'single_' + count);
-			$('.load_more #single_' + window.adsInfinityIndex).find('.before_ads').html('').attr('id', 'liner_fekvo_infinite_' + window.adsInfinityIndex);
-			$('.load_more #single_' + window.adsInfinityIndex).find('.siderbar_ads1').html('').attr('id', 'liner_jobb_1_infinite_' + window.adsInfinityIndex);
-			$('.load_more #single_' + window.adsInfinityIndex).find('.siderbar_ads2').html('').attr('id', 'liner_jobb_2_infinite_' + window.adsInfinityIndex);
-			$('.load_more #single_' + window.adsInfinityIndex).find('.content_ads1').html('').attr('id', 'liner_roadblock_1_infinite_' + window.adsInfinityIndex);
-			$('.load_more #single_' + window.adsInfinityIndex).find('.content_ads2').html('').attr('id', 'liner_roadblock_2_infinite_' + window.adsInfinityIndex);
-			$('.load_more #single_' + window.adsInfinityIndex).find('.code-block').html('').attr('id', 'liner_code_block_2_infinite_' + window.adsInfinityIndex);
+			$('.load_more #single_' + window.adsInfinityIndex).find('.article-textbody').removeClass('article-textbody').addClass(`article-textbody-inf-${window.adsInfinityIndex}`);
+			$('.load_more #single_' + window.adsInfinityIndex).find('.before_ads').html('').attr('id', 'liner_fekvo_inf_' + window.adsInfinityIndex);
+			$('.load_more #single_' + window.adsInfinityIndex).find('.siderbar_ads1').html('').attr('id', 'liner_jobb_1_inf_' + window.adsInfinityIndex);
+			$('.load_more #single_' + window.adsInfinityIndex).find('.siderbar_ads2').html('').attr('id', 'liner_jobb_2_inf_' + window.adsInfinityIndex);
+			$('.load_more #single_' + window.adsInfinityIndex).find('.content_ads1').html('').attr('id', 'liner_roadblock_1_inf_' + window.adsInfinityIndex);
+			$('.load_more #single_' + window.adsInfinityIndex).find('.content_ads2').html('').attr('id', 'liner_roadblock_2_inf_' + window.adsInfinityIndex);
+			$('.load_more #single_' + window.adsInfinityIndex).find('.code-block').html('').attr('id', 'liner_code_block_2_inf_' + window.adsInfinityIndex);
 
 			//player_infinite
 			$('#fwdevpDiv0').attr('id', 'fwdevpDiv' + count);

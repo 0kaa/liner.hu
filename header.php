@@ -121,9 +121,15 @@
 		jQuery(document).ready(function($) {
 			// add count of posts to title of browser
 			var title = document.title;
-			var count = <?php echo count($last_visit_query->posts); ?>;
+			var count = <?php if (isset($last_visit_query) && is_object($last_visit_query)) {
+							echo $last_visit_query->post_count;
+						} else {
+							echo 0;
+						} ?>;
 			if (count > 0) {
-				document.title = '(' + count + ') ' + title;
+				setTimeout(() => {
+					document.title = '(' + count + ') ' + title;
+				}, 2000);
 			}
 
 
@@ -232,15 +238,18 @@
 							<img src="<?php echo get_template_directory_uri(); ?>/images/wall-clock.png" alt="clock" class="img-fluid" width="32">
 							<span>
 								<?php
-								echo count($last_visit_query->posts);
-
+								if (isset($last_visit_query) && is_object($last_visit_query)) {
+									echo count($last_visit_query->posts);
+								} else {
+									echo '0';
+								}
 								?>
 							</span>
 						</div>
 					</button>
 					<div class="d-none d-lg-flex align-items-center">
 						<div class="weather-widget d-flex align-items-center justify-content-center">
-							<img style="margin-right:10px;object-fit: cover;height: 25px;" src="https://dev.liner.hu/wp-content/themes/liner/images/09.png" alt="Clouds" title="Clouds" width="30" height="30">
+							<img style="margin-right:10px;object-fit: cover;height: 25px;" src="https://liner.hu/wp-content/themes/liner/images/09.png" alt="Clouds" title="Clouds" width="30" height="30">
 
 							<div class="d-flex flex-column" style="min-width:100%;">
 								<span class="graduak">
@@ -304,7 +313,13 @@
 						<button class="ml-4 mr-5 notification-articles active" type="button">
 							<div class="position-relative d-flex align-items-center" style="height:38px">
 								<img src="<?php echo get_template_directory_uri(); ?>/images/wall-clock.png" alt="clock" class="img-fluid" width="32">
-								<span><?php echo count($last_visit_query->posts); ?></span>
+								<span><?php
+										if (isset($last_visit_query) && is_object($last_visit_query)) {
+											echo count($last_visit_query->posts);
+										} else {
+											echo '0';
+										}
+										?></span>
 							</div>
 						</button>
 						<?php wp_nav_menu(array('theme_location' => 'fontos', 'menu_class' => 'fontos-menu mb-0', 'container' => '')); ?>
@@ -586,7 +601,7 @@
 						echo '</div></div></nav>';
 					}
 
-					if ($last_visit_query && $last_visit_query->have_posts()) {
+					if (isset($last_visit_query) && is_object($last_visit_query)) {
 						echo '<div class="last-visit-modal">
 						<div class="container">
 							<div class="d-flex align-items-center justify-content-between my-4 ">
