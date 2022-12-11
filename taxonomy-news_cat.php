@@ -236,17 +236,17 @@ global $postnot;
 					}
 
 					// if (count($sub_categories) < 1) :
-					$big = 999999999; // need an unlikely integer
-					echo '<div class="text-center mt-5">';
-					echo '<div class="page-links page cat aut">';
-					echo paginate_links(array(
-						'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-						'format' => '?paged=%#%',
-						'current' => max(1, get_query_var('paged')),
-						'total' => $the_query->max_num_pages
-					));
-					echo '</div>';
-					echo '</div>';
+						$big = 999999999; // need an unlikely integer
+						echo '<div class="text-center mt-5">';
+						echo '<div class="page-links page cat aut">';
+						echo paginate_links(array(
+							'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+							'format' => '?paged=%#%',
+							'current' => max(1, get_query_var('paged')),
+							'total' => $the_query->max_num_pages
+						));
+						echo '</div>';
+						echo '</div>';
 					// endif;
 					echo '</div>';
 				} ?>

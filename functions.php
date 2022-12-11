@@ -125,8 +125,8 @@ function liner_setup()
 
 	// This theme uses a custom image size for featured images, displayed on "standard" posts.
 	add_theme_support('post-thumbnails');
-
-
+	
+	
 	// Indicate widget sidebars can use selective refresh in the Customizer.
 	add_theme_support('customize-selective-refresh-widgets');
 }
@@ -228,7 +228,7 @@ function liner_scripts_styles()
 	// define global variables for the theme
 	wp_localize_script('liner-navigation', 'liner_global', array(
 		'baseUrl' => get_template_directory_uri(),
-
+		
 	));
 
 	$font_url = liner_get_font_url();
@@ -1048,7 +1048,7 @@ if (!function_exists('liner_content_nav')) :
 				<span class="ao-article-banner">
 					<span>Soron kívül</span>
 					<span>
-						<a target="_blank" href="' . get_permalink() . '">' . get_the_title() . '</a>
+						<a target="_blank" class="soron_kivul" href="' . get_permalink() . '">' . get_the_title() . '</a>
 					</span>
 				</span>
 				';
@@ -1061,7 +1061,7 @@ if (!function_exists('liner_content_nav')) :
 				return prefix_insert_after_paragraph($home_top_content, 1, $content);
 			}
 
-			return $content;
+					return $content;
 		}
 		add_filter('the_content', 'prefix_insert_post_ads2');
 
@@ -1120,20 +1120,17 @@ if (!function_exists('liner_content_nav')) :
 
 			if ($the_query->have_posts()) {
 				$home_top_content .= '
-					<div class="connection_articles">
-						<div class="connection_title_section">
-							<span class="connection_title_before"></span>
-							<h6 class="connection_title">KAPCSOLÓDÓ</h6>							
+					<div class="kapcsolodo_cikkek">
+						<div class="kapcsolodo_cim_section">
+							<span class="kapcsolodo_cim_before"></span>
+							<h6 class="kapcsolodo_cim">NE HAGYD KI</h6>							
 						</div>
-					<div class="connection_content">
-					
-					
-				';
+					<div class="kapcsolodo_tartalom">';
 				while ($the_query->have_posts()) {
 					$the_query->the_post();
 					$home_top_content .= '
 		
-						<a target="_blank" href="' . get_permalink() . '">' . get_the_title() . '</a>
+					<a target="_blank" class="kapcsolodo" href="' . get_permalink() . '">' . get_the_title() . '</a>
 			
 				';
 				}
@@ -1143,11 +1140,11 @@ if (!function_exists('liner_content_nav')) :
 
 
 			if (is_single() && !is_admin()) {
-				return prefix_insert_after_paragraph($home_top_content, 4, $content);
-			}
+				return prefix_insert_after_paragraph($home_top_content, 3, $content);
+			}		
 
 			return $content;
-		}
+		} 
 		// add_filter('the_content', 'prefix_insert_post_ads_two');
 
 		// function prefix_insert_post_ads_two($content)
@@ -1170,7 +1167,7 @@ if (!function_exists('liner_content_nav')) :
 		// 	return $content;
 		// }
 
-		// Parent Function that makes the magic happen
+				// Parent Function that makes the magic happen
 
 		function prefix_insert_after_paragraph($insertion, $paragraph_id, $content)
 		{
@@ -1237,3 +1234,20 @@ if (!function_exists('liner_content_nav')) :
 			return $query_vars;
 		}
 		add_filter('query_vars', 'wptrc_query_vars');
+
+		add_action('init', 'wpse26388_rewrites_init');
+		function wpse26388_rewrites_init()
+		{
+			add_rewrite_rule(
+				'mappa/([^/]+)/?$',
+				'index.php?pagename=folders&folder_id=$matches[1]',
+				'top'
+			);
+		}
+
+		add_filter('query_vars', 'wpse26388_query_vars');
+		function wpse26388_query_vars($query_vars)
+		{
+			$query_vars[] = 'folder_id';
+			return $query_vars;
+		}

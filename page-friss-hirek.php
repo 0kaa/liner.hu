@@ -117,10 +117,20 @@ $i = 1;
             </div>
             <div class="col-md-4 category-wide-sidebar">
                 <div class="mt-4">
-                    <img src="<?php echo get_template_directory_uri() ?>/images/300x600.jpeg" alt="ads" class="img-fluid w-100" style="max-width: 100%;max-height: 600px;object-fit: cover;">
-                </div>
+                    <!-- <img src="<?php echo get_template_directory_uri() ?>/images/300x600.jpeg" alt="ads" class="img-fluid w-100" style="max-width: 100%;max-height: 600px;object-fit: cover;"> -->
+                    <div class="siderbar_ads1" id="liner_cikk_jobb_1">
+							<script type="text/javascript">
+								activateBanner('liner_cikk_jobb_1');
+							</script>
+						</div>
+					</div>
                 <div class="mt-4 mb-4">
-                    <img src="<?php echo get_template_directory_uri() ?>/images/300x600.jpeg" alt="ads" class="img-fluid w-100" style="max-width: 100%;max-height: 600px;object-fit: cover;">
+                <div class="siderbar_ads2" id="liner_cikk_jobb_2">
+							<script type="text/javascript">
+								activateBanner('liner_cikk_jobb_2');
+							</script>
+						</div>
+                    <!-- <img src="<?php echo get_template_directory_uri() ?>/images/300x600.jpeg" alt="ads" class="img-fluid w-100" style="max-width: 100%;max-height: 600px;object-fit: cover;"> -->
                 </div>
             </div>
         </div>

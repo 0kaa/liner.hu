@@ -33,16 +33,8 @@
 	<!--[if lt IE 9]>
 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js?ver=3.7.0" type="text/javascript"></script>
 <![endif]-->
-	<script>
-		var adsQueue = window.adsQueue || [];
 
-		function noAB(a) {
-			window.adsQueue.push(a);
-		}
-		var activateBanner = window.activateBanner || noAB;
-	</script>
 	<script src="<?php echo 'https://cdn.atmedia.hu/liner.hu.js?v=' . date('Ymd'); ?>/js/html5.js?ver=3.7.0" type="text/javascript" async></script>
-	<script src="<?php echo 'https://cdn.atmedia.hu/liner.hu.infinite.js?v=' . date('Ymd'); ?>/js/html5.js?ver=3.7.0" type="text/javascript" async></script>
 
 	<!-- Google Tag Manager -->
 	<script>
@@ -97,7 +89,7 @@
 			$last_visit_args = array(
 				'post_type' => 'linernews',
 				'post_status' => 'publish',
-				'posts_per_page' => 100,
+				'posts_per_page' => 99,
 				'orderby' => 'date',
 				'order' => 'DESC',
 				'date_query' => array(
@@ -128,8 +120,8 @@
 						} ?>;
 			if (count > 0) {
 				setTimeout(() => {
-					document.title = '(' + count + ') ' + title;
-				}, 2000);
+				document.title = '(' + count + ') ' + title;
+			}, 2000);
 			}
 
 

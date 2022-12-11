@@ -12,8 +12,8 @@
           "liner": {
             "archive.php": {
               "type": "-",
-              "size": 8242,
-              "lmtime": 1658760501721,
+              "size": 12750,
+              "lmtime": 1670063946790,
               "modified": false
             },
             "readme.txt": {
@@ -42,8 +42,8 @@
             },
             "editor-style.css": {
               "type": "-",
-              "size": 5447,
-              "lmtime": 1658596425294,
+              "size": 5448,
+              "lmtime": 1670063947040,
               "modified": false
             },
             "category.php": {
@@ -54,8 +54,8 @@
             },
             "page-friss-hirek.php": {
               "type": "-",
-              "size": 5726,
-              "lmtime": 1658521482101,
+              "size": 5970,
+              "lmtime": 1670063947754,
               "modified": false
             },
             "content-status.php": {
@@ -66,15 +66,15 @@
             },
             "header.php": {
               "type": "-",
-              "size": 21819,
-              "lmtime": 1659094998671,
-              "modified": true
+              "size": 18697,
+              "lmtime": 1670266253636,
+              "modified": false
             },
             "single-linernews.php": {
               "type": "-",
-              "size": 30204,
-              "lmtime": 1659094282255,
-              "modified": false
+              "size": 46759,
+              "lmtime": 1670421915930,
+              "modified": true
             },
             "content.php": {
               "type": "-",
@@ -103,8 +103,8 @@
             "inc": {
               "custom-function.php": {
                 "type": "-",
-                "size": 144708,
-                "lmtime": 1658786573096,
+                "size": 155996,
+                "lmtime": 1670250441984,
                 "modified": false
               },
               "custom-header.php": {
@@ -129,8 +129,8 @@
               },
               "foto.png": {
                 "type": "-",
-                "size": 1117,
-                "lmtime": 0,
+                "size": 907,
+                "lmtime": 1670063951466,
                 "modified": false
               },
               "coin.png": {
@@ -141,8 +141,8 @@
               },
               "copy.png": {
                 "type": "-",
-                "size": 1077,
-                "lmtime": 1655235968000,
+                "size": 1262,
+                "lmtime": 1670063951719,
                 "modified": false
               },
               "pound.png": {
@@ -155,6 +155,12 @@
                 "type": "-",
                 "size": 259302,
                 "lmtime": 1654897241096,
+                "modified": false
+              },
+              "AD.png": {
+                "type": "-",
+                "size": 134140,
+                "lmtime": 1670154907810,
                 "modified": false
               },
               "fblog.png": {
@@ -201,14 +207,14 @@
               },
               "google_news.png": {
                 "type": "-",
-                "size": 810,
-                "lmtime": 0,
+                "size": 1274,
+                "lmtime": 1670063951970,
                 "modified": false
               },
               "Twitter-share.png": {
                 "type": "-",
-                "size": 2182,
-                "lmtime": 1655235951000,
+                "size": 1638,
+                "lmtime": 1670063952219,
                 "modified": false
               },
               "10.png": {
@@ -237,8 +243,8 @@
               },
               "arrow.png": {
                 "type": "-",
-                "size": 1002,
-                "lmtime": 1655236196000,
+                "size": 1434,
+                "lmtime": 1670063952470,
                 "modified": false
               },
               "11.png": {
@@ -435,8 +441,14 @@
               },
               "Facebook-share.png": {
                 "type": "-",
-                "size": 1405,
-                "lmtime": 1655235941000,
+                "size": 1481,
+                "lmtime": 1670063952724,
+                "modified": false
+              },
+              "ED.png": {
+                "type": "-",
+                "size": 134140,
+                "lmtime": 1670154907810,
                 "modified": false
               },
               "01.png": {
@@ -528,6 +540,12 @@
                 "size": 10822,
                 "lmtime": 0,
                 "modified": false
+              },
+              "IDEZET_SVG.svg": {
+                "type": "-",
+                "size": 789,
+                "lmtime": 1670196845440,
+                "modified": false
               }
             },
             "files": {
@@ -576,8 +594,14 @@
             },
             "taxonomy-news_cat.php": {
               "type": "-",
-              "size": 11043,
-              "lmtime": 1658674108403,
+              "size": 11054,
+              "lmtime": 1670063948703,
+              "modified": false
+            },
+            "folder.php": {
+              "type": "-",
+              "size": 17,
+              "lmtime": 1670063948958,
               "modified": false
             },
             "search.php": {
@@ -590,12 +614,6 @@
               "type": "-",
               "size": 1282,
               "lmtime": 1654897236609,
-              "modified": false
-            },
-            "error_log": {
-              "type": "-",
-              "size": 4244,
-              "lmtime": 1654897236892,
               "modified": false
             },
             "page-orosz-ukran-haboru-elo-kozvetites.php": {
@@ -661,26 +679,26 @@
               },
               "owl.theme.css": {
                 "type": "-",
-                "size": 2301,
-                "lmtime": 1654897255075,
+                "size": 2212,
+                "lmtime": 1670063952978,
                 "modified": false
               },
               "editor-blocks.css": {
                 "type": "-",
-                "size": 11529,
-                "lmtime": 1654897255428,
+                "size": 11575,
+                "lmtime": 1670063953232,
                 "modified": false
               },
               "bootstrap.css": {
                 "type": "-",
-                "size": 146007,
-                "lmtime": 1654897255885,
+                "size": 139254,
+                "lmtime": 1670063953806,
                 "modified": false
               },
               "owl.carousel.css": {
                 "type": "-",
-                "size": 4606,
-                "lmtime": 1654897256165,
+                "size": 4398,
+                "lmtime": 1670063954068,
                 "modified": false
               },
               "bootstrap.min.css": {
@@ -701,6 +719,12 @@
                 "lmtime": 1654897257295,
                 "modified": false
               }
+            },
+            "page-folders.php": {
+              "type": "-",
+              "size": 12566,
+              "lmtime": 1669033584218,
+              "modified": false
             },
             "js": {
               "infinite-scroll.pkgd.min.js": {
@@ -809,8 +833,8 @@
               },
               "owl.carousel.js": {
                 "type": "-",
-                "size": 78702,
-                "lmtime": 1654897259436,
+                "size": 76083,
+                "lmtime": 1670063954567,
                 "modified": false
               },
               "html5.js": {
@@ -827,8 +851,8 @@
               },
               "custom-script.js": {
                 "type": "-",
-                "size": 10165,
-                "lmtime": 1658598306391,
+                "size": 13243,
+                "lmtime": 1670443735942,
                 "modified": false
               }
             },
@@ -836,6 +860,12 @@
               "type": "-",
               "size": 4796,
               "lmtime": 1654897237756,
+              "modified": false
+            },
+            "page-folder.php": {
+              "type": "-",
+              "size": 17,
+              "lmtime": 1670063949462,
               "modified": false
             },
             "fonts": {
@@ -1174,14 +1204,14 @@
             },
             "custom-style.css": {
               "type": "-",
-              "size": 134394,
-              "lmtime": 1658774312294,
-              "modified": true
+              "size": 146811,
+              "lmtime": 1670375493734,
+              "modified": false
             },
             "functions.php": {
               "type": "-",
-              "size": 35046,
-              "lmtime": 1658666719759,
+              "size": 37728,
+              "lmtime": 1670063950531,
               "modified": false
             },
             "page-templates": {
@@ -1205,8 +1235,8 @@
               },
               "contact-us.php": {
                 "type": "-",
-                "size": 4174,
-                "lmtime": 1654897279167,
+                "size": 4150,
+                "lmtime": 1670063955068,
                 "modified": false
               },
               "full-width.php": {

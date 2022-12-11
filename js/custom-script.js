@@ -49,6 +49,26 @@ jQuery(function ($) {
     $(".menu_1ul li .search_panle").slideToggle();
     e.preventDefault();
   });
+  if (jQuery("body").hasClass("single")) {
+    const articleContent = document.querySelector('.article-textbody')
+    const lastParagraph =
+      articleContent.querySelectorAll('#liner_cikk_roadblock_1_2')[0]
+    const connectionComponent = document.querySelector('.kapcsolodo_cikkek')
+    if (lastParagraph && connectionComponent) {
+
+      lastParagraph.parentNode.insertBefore(
+        connectionComponent,
+        lastParagraph.nextSibling
+      )
+    }
+
+
+    // if .kapcsolodo_cikkek inside blockquote, move it outside jquery
+    if ($('.kapcsolodo_cikkek').parent().is('blockquote')) {
+      $('.kapcsolodo_cikkek').insertAfter('.article-textbody blockquote');
+    }
+  }
+
 
   if ($("body").hasClass("single-linernews")) {
     var $temp = $("<input>");
@@ -160,6 +180,10 @@ jQuery(document).ready(function ($) {
 
   // for inner page
   //news bar
+  var sidebar = jQuery('.single_news .next-articles');
+  if (sidebar) {
+    var sidebar_top = sidebar.offset().top;
+  }
   jQuery(window).scroll(function ($) {
     var scroll = jQuery(window).scrollTop();
 
@@ -179,7 +203,65 @@ jQuery(document).ready(function ($) {
         jQuery(".breaking_bar").removeClass("breaking_bar_float");
         jQuery("header").removeClass("move_header");
       }
+      if (scroll > sidebar_top) {
+        sidebar.addClass('fixed');
+      } else {
+        sidebar.removeClass('fixed');
+      }
+
+      jQuery('.single_news').each(function () {
+        // console.log('single_news', jQuery(this).attr('data-slug'));
+        var element = jQuery(this)
+        var element_top = element.offset().top;
+        var element_height = element.height();
+        var element_bottom = element_top + element_height;
+        if (scroll > element_top && scroll < element_bottom) {
+          jQuery('.related-article').removeClass('active');
+          jQuery('.related-article[data-slug="' + jQuery(this).attr('data-slug') + '"]').addClass('active');
+          var wcontainer = jQuery(this).innerHeight();
+          var wscroll = jQuery(window).scrollTop();
+          var wscroll_perc = ((wscroll - element_top) / (wcontainer)) * 100;
+
+
+          // console.log(wscroll_perc)
+          if (wscroll_perc <= 100) {
+            jQuery('.related-article[data-slug="' + jQuery(this).attr('data-slug') + '"].active .divbar').css("width", wscroll_perc + "%");
+          }
+
+        }
+
+
+
+        // if (jQuery(this).attr('data-slug') == currentPath) {
+        //   jQuery('.related-article').removeClass('active');
+        //   jQuery('.related-article[data-slug="' + currentPath + '"]').addClass('active');
+        //   var wcontainer = jQuery('.single_news[data-slug="' + currentPath + '"]').height();
+        //   var wscroll = jQuery(window).scrollTop();
+        //   var wscroll_perc = (wscroll / wcontainer) * 100;
+        //   if (wscroll_perc <= 100) {
+        //     jQuery('.related-article[data-slug="' + currentPath + '"].active .divbar').css("width", wscroll_perc + "%");
+        //   }
+        // }
+
+      });
     }
+    // when scroll is equal element top position add class
+
+
+
+
+    // var domain = window.location.protocol + '//' + window.location.hostname;
+    // var path = window.location.href;
+    // var currentPath = path.replace(domain + '/', '');
+    // // remove / from the end of the path
+    // currentPath = currentPath.replace(/\/$/, '');
+    // jQuery('.related-article').removeClass('active');
+    // jQuery('.related-article[data-slug="' + currentPath + '"]').addClass('active');
+
+    // add width persentage to breaking bar based on scroll
+
+
+
   }); //eof scroll
 
   $(".weather-widget").each(function () {

@@ -230,8 +230,8 @@ img {
 
 footer .ftrwidgetContainer {
   background-color: #171717;
-  padding-top: 57px;
-  padding-bottom: 46px;
+  padding-top: 35px;
+  padding-bottom: 35px;
 }
 footer .ftrwidgetContainer aside.widget img {
   box-shadow: none;
@@ -248,7 +248,7 @@ footer .ftrwidgetContainer aside.widget ul.menu li {
   display: inline-block;
   padding: 0 4px;
   text-transform: uppercase;
-  font: 500 16px/22px "Poppins", sans-serif;
+  font: 500 14px/22px "Poppins", sans-serif;
   color: rgba(255, 255, 255, 0.4);
 }
 footer .ftrwidgetContainer aside.widget ul.menu li a {
@@ -361,6 +361,7 @@ section.section_1 {
   overflow: hidden;
 }
 .left_1Content span img {
+  object-fit: cover;
   /*margin: auto;
 	width: auto;
 	height: auto;
@@ -487,6 +488,11 @@ section.section_1 {
   min-height: 220px;
 }
 .mob-image3 {
+  max-height: 192px;
+  object-fit: cover;
+  min-height: 192px;
+}
+.mob-image-world-cup {
   max-height: 192px;
   object-fit: cover;
   min-height: 192px;
@@ -1683,7 +1689,7 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
 }
 .single_news h2 {
   font-size: 25px;
-  line-height: 28px;
+  line-height: 32px;
 }
 .single_news h3 {
   font-size: 19px;
@@ -1730,7 +1736,12 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   margin: 30px 0 30px;
   padding: 0;
   text-align: left;
-  font: 400 18px/29px "Roboto";
+  font-family: "Bai Jamjuree", sans-serif;
+  font-size: 20px;
+  line-height: 30px;
+
+  letter-spacing: 0.02em;
+
   color: #000000;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -1738,7 +1749,7 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
 }
 .single_news .editor_content p a {
   text-decoration: none;
-  box-shadow: inset 0 -2px 0 #9ad0c4;
+  box-shadow: inset 0 -3px 0 #000;
   transition: all 0.4s ease-in-out;
   background-color: transparent;
   color: #000;
@@ -1750,8 +1761,9 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
 .single_news .wp-block-pullquote {
   border-top: none;
   border-bottom: none;
-  margin-bottom: 40px;
-  padding: 0;
+  padding-top: 30px;
+  padding-bottom: 0;
+  margin: 0 !important;
 }
 .single_news .editor_content button,
 .single_news .editor_content button:active,
@@ -1806,13 +1818,13 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   padding: 0;
 }
 .single_news .editor_content ul li {
-  font: 500 15px/23px "Poppins";
+  font: 400 16px/23px "Roboto";
   color: #424141;
   position: relative;
-  padding-left: 15px;
+  padding-left: 10px;
 }
 .single_news .editor_content ul li:not(:last-child) {
-  margin-bottom: 3px;
+  margin-bottom: 15px;
 }
 .single_news .editor_content ul li a {
   color: #424141;
@@ -1947,10 +1959,10 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   margin: 0 0 18px 0;
 }
 .author-detail {
-  border-top: 1px solid #e8e8e8;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 2px solid #000;
   /* margin: 30px 0 24px; */
   padding: 20px 0;
+  display: flex;
 }
 .author-detail .author-img {
   border-radius: 50%;
@@ -2030,11 +2042,24 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   color: #323234;
 }
 .excerpt-content p {
-  font-size: 20px;
-  font-family: "Roboto";
+  font-size: 26px;
+  font-family: "Bai Jamjuree";
   color: #202020;
-  line-height: 28px;
+  line-height: 30px;
   font-weight: 600;
+  position: relative;
+  padding-left: 13px;
+  margin-bottom: 60px;
+}
+.excerpt-content p::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  height: 100%;
+  background-color: #59cdb6;
 }
 .related_post .crp_related {
   border-bottom: 4px solid #0d0d0d;
@@ -2194,7 +2219,7 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   width: 125px;
 }
 .news_sidebar.category-sidebar .category-sidebar-title:after {
-  left: 33px;
+  left: 40px;
   width: 40px;
 }
 .news_sidebar.category-sidebar .justin_single .sidebar-img {
@@ -2224,7 +2249,7 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
 }
 .news_sidebar .justin_single ul li {
   margin: 0;
-  padding: 10px 15px;
+  padding: 10px 9px;
   position: relative;
   margin-bottom: 10px;
   display: flex;
@@ -2462,14 +2487,16 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   gap: 10px;
   color: #282828;
   font-weight: 300;
-  background-color: #edece8;
-  padding: 10px;
+  background-color: transparent;
+  padding: 10px 0;
+  border-bottom: 2px dashed #000;
 }
 .page_banner {
   margin-bottom: 15px;
   /* border-bottom: 1px solid #e5e5e5; */
 }
 .wp-block-embed {
+  margin-top: 40px;
   margin-bottom: 30px;
   text-align: -webkit-center;
 }
@@ -2617,6 +2644,7 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
 .author-detail .author-img img {
   width: 50px;
   height: 50px;
+  border-radius: 100%;
 }
 .longform .related_post {
   display: none;
@@ -2665,9 +2693,9 @@ section.porta_section article.gue_leftmain.line_leftGu > h3::before {
   padding-left: 15px;
 }
 .strossle-widget {
-  padding: 10px 20px;
-  margin-left: 5px;
-  margin-right: 5px;
+  /* padding: 10px 20px; */
+  /* margin-left: 5px;
+  margin-right: 5px; */
 }
 .page-load-status {
   display: none !important;
@@ -2692,10 +2720,31 @@ li.blocks-gallery-item {
 .sdbrstcky_post {
   margin-bottom: 35px;
 }
+.liner_nyito_fekvo_1 {
+  background: #f3f3f3;
+  text-align: center;
+  padding: 15px 0px;
+  min-height: 305px;
+  margin-bottom: 20px;
+}
+.liner_v {
+  background: #f3f3f3;
+  text-align: center;
+  padding: 15px 0px;
+  min-height: 305px;
+  margin-bottom: 20px;
+}
+.liner_cikk_roadblock_1_1 {
+  margin-top: 60px;
+  margin-bottom: 20px;
+  min-height: 305px;
+}
 .before_ads {
   background: #f3f3f3;
   text-align: center;
   padding: 15px 0px;
+  min-height: 305px;
+  margin-bottom: 20px;
 }
 .content_ads1 {
   background: #f3f3f3;
@@ -2703,6 +2752,7 @@ li.blocks-gallery-item {
   padding: 15px 0px;
   margin-bottom: 30px;
   z-index: -9999 !important;
+  min-height: 380px;
 }
 .content_ads2 {
   background: #f3f3f3;
@@ -2710,6 +2760,7 @@ li.blocks-gallery-item {
   padding: 15px 0px;
   margin-top: 10px;
   margin-bottom: 25px;
+  min-height: 380px;
 }
 .siderbar_ads1 {
   background: #f3f3f3;
@@ -2720,6 +2771,12 @@ li.blocks-gallery-item {
   background: #f3f3f3;
   text-align: center;
   padding: 10px 10px;
+  position: sticky;
+  top: 20px;
+}
+#liner_cikk_jobb_2_inf_1 {
+  position: sticky;
+  top: 20px;
 }
 /*
 .contact-us
@@ -2792,8 +2849,8 @@ li.blocks-gallery-item {
 }
 .contact-us .btn.btn-primary {
   border-radius: 30px;
-  background: #49a790;
-  color: #fff;
+  background: #59ceb6;
+  color: #000;
   -webkit-box-shadow: 0 15px 30px 0 rgba(77, 128, 228, 0.2);
   box-shadow: 0 15px 30px 0 rgba(77, 128, 228, 0.2);
 }
@@ -3313,7 +3370,12 @@ body.darkmode .valasztas_pcol4 ul li > span {
 
 .post-nav-links,
 .page-links {
-  margin-bottom: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-family: "Bai Jamjuree";
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px solid;
 }
 .post-nav-links a,
 .page-links a {
@@ -3473,8 +3535,6 @@ body.single-linernews header.move_header {
 @media (min-width: 1200px) {
   .container {
     max-width: 1200px;
-    padding-right: 3px;
-    padding-left: 3px;
   }
   .page_banner img.img-responsive {
     /* width: 1090px; */
@@ -3482,6 +3542,13 @@ body.single-linernews header.move_header {
   }
   .longform.page_banner img {
     /* width:1900px */
+  }
+}
+
+@media (min-width: 1350px) {
+  .container {
+    max-width: 1320px !important;
+    padding: 0 !important;
   }
 }
 
@@ -3666,8 +3733,8 @@ body.single-linernews header.move_header {
     top: 7px;
   }
   footer .ftrwidgetContainer aside.widget {
-    flex: 0 0 25%;
-    max-width: 25%;
+    flex: 0 0 18%;
+    max-width: 18%;
     padding-left: 13px;
     padding-right: 13px;
   }
@@ -4469,7 +4536,7 @@ body.single-linernews header.move_header {
     padding-right: 0; /*  height: 47px; */
   }
   .single_news .author-desc h3 {
-    font: 500 14px/17px "Bai Jamjuree";
+    font: 600 16px/17px "Bai Jamjuree";
   }
   .single_news .author-desc p {
     font-family: "Roboto";
@@ -4548,8 +4615,68 @@ body.single-linernews header.move_header {
     position: relative !important;
     overflow: hidden;
   }
+  .content_ads1 {
+    background: #f3f3f3;
+    text-align: center;
+    padding: 15px 0px;
+    margin-bottom: 30px;
+    z-index: -9999 !important;
+    margin: 0px auto;
+    max-width: 100%;
+    transition-duration: 0s;
+    min-height: 350px;
+  }
+  .content_ads2 {
+    background: #f3f3f3;
+    text-align: center;
+    padding: 15px 0px;
+    margin-bottom: 30px;
+    z-index: -9999 !important;
+    margin: 0px auto;
+    max-width: 100%;
+    transition-duration: 0s;
+    min-height: 350px;
+  }
+  .before_ads {
+    background: #f3f3f3;
+    text-align: center;
+    padding: 15px 0px;
+    min-height: 350px;
+  }
+  .code-block .code-block-1 {
+    margin: 8px 0;
+    clear: both;
+    min-height: 320px !important;
+    width: 100% !important;
+  }
+  .fwdevp {
+    width: 100%;
+    min-height: 220px !important;
+  }
+  .next-article-section-title img {
+    width: 15px !important;
+  }
+  .next-article-section-title p {
+    font-size: 14px !important;
+  }
+  .next-article-link {
+    font-size: 15px !important;
+  }
+  .next-article-section {
+    padding: 15px 0 15px !important;
+  }
+  .next-article-section-title {
+    top: -25px !important;
+  }
+  .wp-block-pullquote__citation,
+  .wp-block-pullquote cite,
+  .wp-block-pullquote footer {
+    font-size: 14px;
+    text-transform: none;
+    float: right;
+    margin-top: 5px !important;
+  }
 }
-
 @media (max-width: 400px) {
   .nc_left_1 {
     width: 53%;
@@ -5322,6 +5449,7 @@ h5.article-meta {
   color: #1f1f3c;
   font-size: 12px;
   font-weight: 600;
+  margin-left: 0px !important;
 }
 
 .ham-menu {
@@ -5375,10 +5503,10 @@ h5.article-meta {
   margin: 0;
 }
 .breadcrumb {
+  margin-top: 30px;
   background-color: transparent;
   position: relative;
   padding: 0 0;
-  margin-top: 10px;
   border-bottom: 1px solid #b5b5b5;
   padding-bottom: 5px;
 }
@@ -5409,15 +5537,15 @@ h5.article-meta {
 }
 
 .editor_content blockquote {
-  padding: 20px 10px;
-  margin: 0 0 20px;
+  padding: 20px 5px 0;
+  margin: 0;
   position: relative;
+  overflow: hidden;
 }
 iframe {
   position: relative;
 }
-.editor_content blockquote::before,
-.twitter-tweet::before,
+.editor_content /*blockquote::before,*/.twitter-tweet::before,
 .wp-block-embed-youtube::before,
 .embed-facebook::before,
 .embed-instagram::before {
@@ -5427,12 +5555,12 @@ iframe {
   left: 0;
   width: 100%;
   height: 30px;
-  border-left: 1px solid #64687f;
-  border-top: 1px solid #64687f;
-  border-right: 1px solid #64687f;
+  border-left: 2px solid #000000;
+  border-top: 2px solid #000000;
+  border-right: 2px solid #000000;
 }
 /* after */
-.editor_content blockquote::after,
+.editor_content /*blockquote::after,*/
 .twitter-tweet::after,
 .wp-block-embed-youtube::after,
 .embed-facebook::after,
@@ -5454,12 +5582,58 @@ iframe {
   justify-content: center;
   background-position: center;
 }
-.editor_content blockquote,
-.editor_content blockquote * {
-  font-size: 16px;
-  line-height: 1.5;
+.editor_content blockquote p {
+  font-size: 28px;
+  font-family: "Bai Jamjuree";
+  font-weight: 700;
+  line-height: 36px;
   font-style: italic;
-  margin: 0;
+  margin: 0px;
+  letter-spacing: 0.02em;
+  position: relative;
+  padding-left: 80px;
+  
+  /* text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 0.15rem;
+  text-underline-offset: 0em;
+  text-decoration-color: #59ceb6;
+  text-decoration-skip-ink: none;
+  text-decoration-skip: none; */
+}
+.editor_content blockquote p:before {
+  content: "";
+  background-image: url("./images/IDEZET_SVG.svg");
+  width: 70px;
+  height: 70px;
+  display: block;
+  background-size: cover;
+  position: absolute;
+  left: 0;
+  top: -10px;
+}
+.editor_content blockquote cite,
+.editor_content blockquote cite * {
+  font-size: 20px;
+  font-family: "Bai Jamjuree";
+  font-weight: 400;
+  line-height: 30px;
+  margin: 0px;
+  position: relative;
+  float: right;
+  font-style: normal;
+  margin-top: 25px;
+}
+
+.editor_content blockquote cite:before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background-color: #cdf0e9;
+  border: 4px solid #000;
 }
 
 .twitter-tweet {
@@ -5487,6 +5661,7 @@ iframe {
 .embed-instagram {
   padding: 30px 10px !important;
   position: relative;
+  margin-top: 30px;
 }
 .wp-block-embed-youtube::after {
   background-image: url("./images/youtube.png") !important;
@@ -5521,7 +5696,7 @@ iframe {
 
 .next-article-section {
   position: relative;
-  padding: 50px 10px 0;
+  padding: 30px 0px 15px 0px;
   text-align: center;
 }
 .next-article-section::before {
@@ -5537,14 +5712,15 @@ iframe {
 }
 .next-article-section-title {
   position: absolute;
-  top: -45px;
+  top: -13px;
   display: flex;
   align-items: center;
   justify-content: center;
   left: 0;
   right: 0;
-  margin: auto;
+  margin: 0 auto;
   background: #fff;
+  max-height: 28px;
   width: 350px;
   gap: 40px;
 }
@@ -5610,7 +5786,8 @@ iframe {
   padding: 6px 14px;
   border: 1px solid #000;
   color: #000;
-  font-weight: bold;
+  background: #59ceb6;
+  font-weight: 600;
   font-size: 12px;
 }
 .home-page-button:hover,
@@ -5673,7 +5850,7 @@ iframe {
 .ao-article-banner {
   display: block;
   position: relative;
-  margin: 60px 0 20px;
+  margin: 75px 0 20px;
 }
 .ao-article-banner span:first-child {
   position: absolute;
@@ -5728,9 +5905,9 @@ iframe {
   justify-content: center;
   align-items: center;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 600;
   border-radius: 100%;
-  background-color: #000;
+  background-color: #f10;
   color: #fff;
   position: absolute;
   bottom: 2px;
@@ -5976,7 +6153,7 @@ input.contact-submit-btn {
 .timeline-content .content {
   position: relative;
   color: #000000;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 18px;
   line-height: 144%;
   padding: 10px 15px 15px 10px;
@@ -6074,10 +6251,10 @@ input.contact-submit-btn {
 .live-badge {
   background-color: red;
   color: #fff;
-  padding: 0px 5px;
+  padding: 1px 5px;
   margin-right: 5px;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 11px;
   font-family: "Bai Jamjuree", sans-serif !important;
 }
 .live_icon:before {
@@ -6134,7 +6311,7 @@ body {
 }
 
 .border-dashed-bottom {
-  border-top: 1px dashed #000;
+  /*border-top: 1px dashed #000;*/
   height: 100%;
   padding-top: 15px;
 }
@@ -6142,6 +6319,7 @@ body {
 .border-dashed-parent:nth-child(2) .border-dashed-bottom {
   border: none;
   padding-top: 0;
+  border-top: 1px dashed #000;
 }
 .border-dashed-parent h2 {
   display: -webkit-box;
@@ -6270,6 +6448,73 @@ body {
   border: none !important;
   font-size: 14px;
 }
+.world-cup-header {
+  background: linear-gradient(90deg, #891638 41.67%, #111111 100%);
+  color: #eeeee4;
+  padding: 5px 15px;
+  margin-bottom: 18px;
+}
+.world-cup-end-section {
+  background: linear-gradient(90deg, #891638 41.67%, #111111 100%);
+  height: 15px;
+  margin-top: 10px;
+}
+.world-cup-header .world-cup-title {
+  font-size: 30px;
+  font-weight: 700;
+}
+.folder-section {
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+.folder-header {
+  background: linear-gradient(280deg, #9ecec6 0%, rgba(158, 206, 198, 0) 100%);
+  color: #eeeee4;
+  padding: 4px 10px;
+}
+.folder-header .folder-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 !important;
+  text-transform: uppercase;
+}
+.folder-section .folder-body {
+  background-color: #fafafa;
+  padding: 24px 50px 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+}
+.folder-section .folder-body .folder-item .folder-item-title a {
+  color: #000;
+  font-weight: 600;
+  font-size: 18px;
+  position: relative;
+  padding-left: 20px;
+  display: block;
+}
+.folder-section .folder-body .folder-item .folder-item-title a::before {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 100%;
+  background-color: #000;
+  left: 0;
+}
+.folder-all {
+  color: #000 !important;
+  font-size: 14px;
+  text-align: right;
+  font-weight: 600;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
+.folder-all svg {
+  width: 9px;
+  height: 9px;
+}
 .article-card-body {
   border-bottom: 1px dashed #000;
   margin-bottom: 10px;
@@ -6385,6 +6630,7 @@ body {
   color: #fff;
   height: 400px;
   background-color: #1a1d2e;
+  margin-top: 30px;
 }
 
 .tovabb-btn-2 {
@@ -6435,17 +6681,17 @@ body {
 .load_more .col-12.d-lg-none {
   display: none !important;
 }
-
-.connection_articles {
+.kapcsolodo_cikkek {
+  margin-top: 35px;
   background-color: #fafafa;
   border-radius: 4px;
-  padding: 20px 38px 25px;
+  padding: 20px 25px 25px;
 }
 
-.connection_articles .connection_title {
+.kapcsolodo_cikkek .kapcsolodo_cim {
   font-size: 18px;
   font-weight: bold;
-  color: #1B1D2E;
+  color: #1b1d2e;
   line-height: 1.2;
   text-align: center;
   background-color: #fafafa;
@@ -6454,7 +6700,7 @@ body {
   margin: 0 !important;
 }
 
-.connection_articles .connection_content {
+.kapcsolodo_cikkek .kapcsolodo_tartalom {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -6462,41 +6708,252 @@ body {
   margin-top: 18px;
 }
 
-.connection_articles .connection_content a {
-  color: #000;
-  font-size: 18px;
+.kapcsolodo_cikkek .kapcsolodo_tartalom a {
+  color: #1b1d2e;
+  font-size: 17px;
   font-weight: 600;
   position: relative;
   padding-left: 20px;
 }
-.connection_articles .connection_content a:before {
+.kapcsolodo_cikkek .kapcsolodo_tartalom a:before {
   content: "";
   position: absolute;
   left: 0;
   width: 4px;
   height: 100%;
   background-color: #59cdb6;
-  border-radius: 2px;
 }
 
-.connection_title_section {
+.kapcsolodo_cim_section {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.connection_title_before {
+.kapcsolodo_cim_before {
   width: 100%;
   position: absolute;
   left: 0%;
   height: 1px;
-  border: 1px dashed #1B1D2E;
+  border: 1px solid #1b1d2e;
   top: 0;
   bottom: 0;
   margin: auto;
   z-index: 0;
 }
+.player {
+  margin-top: 30px;
+}
+.wp-block-image {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.liner_tags {
+  gap: 20px;
+  flex-wrap: wrap;
+  font-family: "Bai Jamjuree";
+  border-bottom: 1px solid #000;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.liner_tags .liner-tags-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+.liner_tags .liner_tag {
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-style: italic;
+  color: #000;
+}
+.single-article-ad {
+  margin-bottom: 40px;
+}
+.subcategory-with-date {
+  border-right: 1px solid #ddd;
+  font-family: "Bai Jamjuree";
+  width: 245px;
+}
+.subcategory-with-date .subcat {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  position: relative;
+  padding-left: 8px;
+  line-height: 1;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.subcategory-with-date .subcat:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  height: 100%;
+  background-color: #59cdb6;
+}
+.subcategory-with-date .article-date {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+.single_widget {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+.single_widget ul li {
+  font-family: "Bai Jamjuree";
+  border-bottom: 1px dashed #000;
+  padding: 10px 0;
+}
+.single_widget ul li .widget-category-link,
+.single_widget ul li .widget-article-date {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 21px;
+  color: #000;
+  text-transform: uppercase;
+}
+/* widget-single-title */
+.single_widget ul li .widget-single-title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 18px;
+  color: #0a0a0a;
+}
+.single-widget-title {
+  font-weight: 500;
+  font-family: "Bai Jamjuree";
+  font-size: 20px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+.single-widget-title-before,
+.single-widget-title-after {
+  flex: 1;
+  background-color: #1a1d2e;
+  height: 5px;
+  position: relative;
+}
+.single-widget-title-before:before,
+.single-widget-title-after:before {
+  content: "";
+  background-color: #58ceb6;
+  height: 5px;
+  width: 37px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.load_more .next-articles-col {
+  display: none !important;
+}
 
+.next-articles {
+  padding: 30px 0px;
+}
+.next-articles .copy-link {
+  display: flex;
+}
+.next-articles .copy-message {
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 96%;
+}
+.next-articles .copy-link div {
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.next-articles-title {
+  font-size: 15px;
+  line-height: 21px;
+  font-family: "Bai Jamjuree";
+  font-weight: 700;
+  display: block;
+  border-bottom: 2px solid #000;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.next-articles-col {
+  width: 245px;
+}
+.next-articles.fixed {
+  position: fixed;
+  top: 0;
+  width: 245px;
+  z-index: 11;
+}
+.single-sidebar-left {
+  width: 245px;
+  flex-shrink: 0;
+}
+.article-sidebar-wrapper {
+  width: 300px;
+  flex-shrink: 0;
+}
+.related-article a {
+  background-color: #e6e6e6;
+  padding: 6px 8px;
+  display: block;
+  color: #000;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 21px;
+  letter-spacing: 0.02em;
+  position: relative;
+  z-index: 1;
+}
+.related-article a .divbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  height: 100%;
+  background: #9ecec6;
+  z-index: -1;
+}
+.related-article.active a .divbar {
+  display: block !important;
+}
+
+.author-job {
+  color: #949494;
+  font-size: 14px;
+  line-height: 18px;
+  font-family: "Bai Jamjuree";
+  font-weight: 500;
+}
+.author-desc h3 {
+  font-family: "Bai Jamjuree";
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 600;
+}
+.single-tags-mob {
+  display: none;
+}
+.single_news .page_banner .mob-image6 {
+  min-height: 600px;
+  max-height: 600px;
+}
+.load_more .single_news .page_banner .mob-image6 {
+  max-height: 460px;
+  min-height: 460px;
+}
 /* Responsive */
 @media (min-width: 992px) {
   .cat-article-card .ml-4 {
@@ -6563,6 +7020,7 @@ body {
     margin-top: 0 !important;
   }
   .share-parent {
+    margin-top: 30px;
     margin-bottom: 40px;
     border-bottom: 1px solid #000;
     padding-bottom: 15px;
@@ -6619,18 +7077,92 @@ body {
   .ham-menu .main-list {
     margin-bottom: 0px;
   }
-  .connection_articles {
-    padding: 16px;
+  .kapcsolodo_cikkek {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 12px;
   }
-  .connection_articles .connection_content a {
-    font-size: 14px;
-    font-weight: 500;
+  .kapcsolodo_cikkek .kapcsolodo_tartalom a {
+    font-size: 16px;
+    font-weight: 600;
   }
-  .connection_articles .connection_title {
+  .kapcsolodo_cikkek .kapcsolodo_cim {
     font-size: 16px;
   }
+  .world-cup-header .world-cup-title {
+    font-size: 20px;
+  }
+  .wrap-mobile.d-flex {
+    display: block !important;
+  }
+  .subcategory-with-date {
+    display: none !important;
+  }
+  .single-tags-mob {
+    border: 1px solid #000;
+    padding: 10px;
+    gap: 10px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .single-tags-mob .liner-tags-title {
+    font-size: 15px;
+    font-family: "Bai Jamjuree", sans-serif;
+    line-height: 22px;
+    font-weight: 500;
+    padding-right: 10px;
+    border-right: 1px solid #c0c0c0;
+  }
+  .single-tags-mob .mob-tags {
+    display: flex;
+    width: 100%;
+    overflow: auto;
+    position: relative;
+    gap: 10px;
+    align-items: center;
+  }
+  .single-tags-mob .mob-tags .liner_tag {
+    font-size: 15px;
+    color: #000;
+    font-weight: 500;
+    flex-shrink: 0;
+    font-style: italic;
+    line-height: 22px;
+    font-family: "Bai Jamjuree", sans-serif;
+    text-transform: uppercase;
+  }
+  .single-tags,
+  .article-sidebar-wrapper {
+    display: none !important;
+  }
+  .author-detail {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .next-articles-col {
+    display: none !important;
+  }
+  .article-sidebar-wrapper {
+    width: auto;
+  }
+  .editor_content blockquote p {
+    font-size: 18px;
+    line-height: 24px;
+    padding-left: 60px;
+    margin-bottom: 15px;
+  }
+  .editor_content blockquote p:before {
+    width: 50px;
+    height: 50px;
+  }
+  .editor_content blockquote cite,
+  .editor_content blockquote cite * {
+    font-size: 16px;
+    line-height: 22px;
+  }
 }
-
 @media (max-width: 1100px) {
   .mid-nav {
     display: none !important;
@@ -6651,9 +7183,9 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 12px;
-    font-weight: bold;
+    font-weight: 600;
     border-radius: 100%;
-    background-color: #000;
+    background-color: #f00;
     color: #fff;
     position: absolute;
     bottom: 1px;
@@ -6725,7 +7257,7 @@ body {
     display: none;
   }
   .next-article-section-title img {
-    width: 20px !important;
+    width: 15px !important;
   }
   .copy-message {
     left: 0 !important;
@@ -6761,5 +7293,34 @@ body {
   .immersive-break-2 img {
     max-height: 225px !important;
     min-height: 225px !important;
+  }
+  .mob-image-world-cup {
+    max-height: 55px !important;
+    min-height: 55px !important;
+    min-width: 85px !important;
+    max-width: 85px !important;
+  }
+  .world-cup-end-section {
+    margin: 0 !important;
+  }
+  .world-cup-article {
+    /* d-flex gap-4 d-lg-block mb-lg-0 mb-3  */
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .folder-header .folder-title {
+    font-size: 20px;
+  }
+  .folder-header .folder-title svg {
+    width: 23px;
+    height: 23px;
+  }
+  .folder-section .folder-body {
+    padding: 15px 20px;
+  }
+  .folder-section .folder-body .folder-item .folder-item-title a {
+    font-weight: 500;
+    font-size: 16px;
   }
 }

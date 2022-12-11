@@ -18,11 +18,11 @@ Template Name: Contact us
 							<div class="row">
 								<div class="col-md-6 form-group mb-3">
 									<label for="" class="col-form-label">Név *</label>
-									<input type="text" class="form-control" name="name" id="name" placeholder="Add meg a neved">
+									<input type="text" class="form-control" name="name" id="name" placeholder="Név">
 								</div>
 								<div class="col-md-6 form-group mb-3">
 									<label for="" class="col-form-label">E-mail *</label>
-									<input type="email" class="form-control" name="email" id="email" placeholder="Add meg az email-címed">
+									<input type="email" class="form-control" name="email" id="email" placeholder="Email-cím">
 								</div>
 							</div>
 							<div class="row">
