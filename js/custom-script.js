@@ -110,6 +110,8 @@ jQuery(function ($) {
     }
     navbarFixed();
   }
+
+
 });
 /**  breaking news **/
 jQuery(document).ready(function ($) {
@@ -134,7 +136,7 @@ jQuery(document).ready(function ($) {
         darkMode = localStorage.getItem("darkmode");
         if (darkMode == "true") {
           $("body").addClass("darkmode");
-          $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/03/ft-logo.jpeg');
+          $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_dark_1.png');
         } else {
           $("body").removeClass("darkmode");
           $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_light-1.png');
@@ -143,7 +145,7 @@ jQuery(document).ready(function ($) {
       window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
         if (e.matches) {
           $("body").addClass("darkmode");
-          $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/03/ft-logo.jpeg');
+          $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_dark_1.png');
           localStorage.setItem("darkmode", true);
           setCookie("darkmode", true, 365);
         } else {
@@ -161,8 +163,9 @@ jQuery(document).ready(function ($) {
     setSwitcherAuto();
     $('.mode-switcher i').removeClass('fa-moon-o fa-lightbulb-o').addClass('fa-sun-o')
   } else if (switcher == 'dark') {
+    $("body").addClass("darkmode");
     $('.mode-switcher i').removeClass('fa-sun-o fa-lightbulb-o').addClass('fa-moon-o')
-    $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/03/ft-logo.jpeg');
+    $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_dark_1.png');
   } else if (switcher == 'light') {
     $('.mode-switcher i').removeClass('fa-sun-o fa-moon-o').addClass('fa-lightbulb-o')
     $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_light-1.png');
@@ -183,7 +186,7 @@ jQuery(document).ready(function ($) {
     let data = $(this).data('switch');
     if (data == 'dark') {
       $("body").addClass("darkmode");
-      $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/03/ft-logo.jpeg');
+      $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_dark_1.png');
       localStorage.setItem("darkmode", true);
       localStorage.setItem("switcher", 'dark');
       setCookie("darkmode", true, 365);
@@ -206,7 +209,7 @@ jQuery(document).ready(function ($) {
     if (data == 'auto') {
       if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
         $("body").addClass("darkmode");
-        $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/03/ft-logo.jpeg');
+        $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_dark_1.png');
         localStorage.setItem("darkmode", true);
         setCookie("darkmode", true, 365);
         $('.mode-switcher i').removeClass('fa-sun-o fa-lightbulb-o').addClass('fa-moon-o')

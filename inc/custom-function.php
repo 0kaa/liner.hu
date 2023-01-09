@@ -28,7 +28,7 @@ function theme_scripts()
   //wp_enqueue_script( 'popper-script', get_template_directory_uri() .'/js/popper.min.js', array(), '', true );
   //wp_enqueue_script( 'bootstrap-script', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js', array(), '', true );
   wp_enqueue_script('bootstrap-script', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '', true);
-  wp_enqueue_script('site-script', get_template_directory_uri() . '/js/custom-script.js', false, '', true);
+  wp_enqueue_script('site-script', get_template_directory_uri() . '/js/custom-script.js', array(), '1.0.56', false);
 
 
   if (is_singular('linernews')) {
@@ -690,7 +690,8 @@ function section1_shortcode($atts, $content)
                       <!--li><a href="' . get_author_posts_url($author_id) . '" class="athr_lnk">' . $custom_author . '</a> |</li-->
                       <li>' . getCategoryByPostId($the_query->post->ID) . '</li>
                       <li>|</li>
-                      <li>' . get_the_date('M. d', $the_query->post->ID) . '</li>
+                      <li>' . get_the_date('Y. F. d. H:i', $the_query->post->ID) . '</li>
+                      
                   </ul>
              </div>
          </div>
