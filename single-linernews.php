@@ -69,6 +69,7 @@ liner_cikk_fekvo_1-->
 						</nav>
 					</div>
 					<h1 class="page_title mt-4 mb-5"><?php the_title(); ?></h1>
+					
 					<!-- tags -->
 					<div class="single-tags">
 						<?php
@@ -101,6 +102,7 @@ liner_cikk_fekvo_1-->
 
 				<?php endwhile; ?>
 			</div>
+			<div class="article-date d-lg-none mt-4"><?php echo  get_the_date('Y. F j. - H:i'); ?></div>
 			<div class="d-flex wrap-mobile" style="gap:15px;">
 				<div class="article-content-wrapper">
 					<?php

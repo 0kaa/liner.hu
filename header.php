@@ -57,8 +57,9 @@
 
 	<?php wp_head(); ?>
 </head>
+<!-- dark mode -->
 
-<body <?php body_class(); ?>>
+<body <?php body_class(isset($_COOKIE['darkmode']) && $_COOKIE['darkmode'] == 'true' ? 'darkmode' : '') ?>>
 	<?php wp_body_open(); ?>
 
 	<!-- Google Tag Manager (noscript) -->
@@ -120,8 +121,8 @@
 						} ?>;
 			if (count > 0) {
 				setTimeout(() => {
-				document.title = '(' + count + ') ' + title;
-			}, 2000);
+					document.title = '(' + count + ') ' + title;
+				}, 2000);
 			}
 
 
@@ -178,7 +179,7 @@
 			<?php
 			$logo_src = esc_url(get_theme_mod('site_logo'));
 
-			if (isset($_COOKIE['dark_mode'])) {
+			if (isset($_COOKIE['darkmode'])) {
 				$dark_mode = true;
 			}
 			if (isset($dark_mode)) {
@@ -225,21 +226,49 @@
 						</div>
 
 					</div>
-					<button class="notification-articles active mobile" type="button">
-						<div class="position-relative" style="height:30px">
-							<img src="<?php echo get_template_directory_uri(); ?>/images/wall-clock.png" alt="clock" class="img-fluid" width="32">
-							<span>
-								<?php
-								if (isset($last_visit_query) && is_object($last_visit_query)) {
-									echo count($last_visit_query->posts);
-								} else {
-									echo '0';
-								}
-								?>
-							</span>
+					<div class="d-flex align-items-center">
+						<button class="notification-articles active mobile" type="button">
+							<div class="position-relative" style="height:30px">
+								<img src="<?php echo get_template_directory_uri(); ?>/images/wall-clock.png" alt="clock" class="img-fluid" width="32">
+								<span>
+									<?php
+									if (isset($last_visit_query) && is_object($last_visit_query)) {
+										echo count($last_visit_query->posts);
+									} else {
+										echo '0';
+									}
+									?>
+								</span>
+							</div>
+						</button>
+						<div class="switcher d-lg-none">
+							<div class="mode-switcher">
+								<i class="fa fa-moon-o" aria-hidden="true"></i>
+							</div>
+							<div class="switcher-list">
+								<button class="switch-button" data-switch="auto">
+									<i class="fa fa-sun-o" aria-hidden="true"></i>
+									<span>
+										Automatic
+									</span>
+								</button>
+								<button class="switch-button" data-switch="dark">
+									<i class="fa fa-moon-o" aria-hidden="true"></i>
+									<span>
+										Dark mode
+									</span>
+								</button>
+								<button class="switch-button" data-switch="light">
+									<i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+									<span>
+										Bright mode
+									</span>
+								</button>
+							</div>
 						</div>
-					</button>
+					</div>
 					<div class="d-none d-lg-flex align-items-center">
+
 						<div class="weather-widget d-flex align-items-center justify-content-center">
 							<img style="margin-right:10px;object-fit: cover;height: 25px;" src="https://liner.hu/wp-content/themes/liner/images/09.png" alt="Clouds" title="Clouds" width="30" height="30">
 
@@ -249,6 +278,31 @@
 									<small>℃</small>
 								</span>
 								<span class="title">Budapest</span>
+							</div>
+						</div>
+						<div class="switcher">
+							<div class="mode-switcher mr-3">
+								<i class="fa fa-moon-o" aria-hidden="true"></i>
+							</div>
+							<div class="switcher-list">
+								<button class="switch-button" data-switch="auto">
+									<i class="fa fa-sun-o" aria-hidden="true"></i>
+									<span>
+										Automatic
+									</span>
+								</button>
+								<button class="switch-button" data-switch="dark">
+									<i class="fa fa-moon-o" aria-hidden="true"></i>
+									<span>
+										Dark mode
+									</span>
+								</button>
+								<button class="switch-button" data-switch="light">
+									<i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+									<span>
+										Bright mode
+									</span>
+								</button>
 							</div>
 						</div>
 						<div class="top-social d-flex align-items-center">
@@ -497,104 +551,10 @@
 
 		<div class="main_wrapper">
 			<?php
-			if (is_single()) {
-				function categoryByID($id)
-				{
-					$categories = wp_get_post_terms($id, 'news_cat', array('fields' => 'all'));
-					$parentCategory = '';
-					$childCategory = '';
-					$parentLink = '';
-					$childLink = '';
-					foreach ($categories as $category) {
-						if ($category->parent == 0) {
-							$parentCategory = $category->name;
-							$parentCategory = str_replace('#', '', $parentCategory);
-							$parentLink = get_term_link($category->slug, 'news_cat');
-						}
-						if ($category->parent != 0) {
-							$childCategory = $category->name;
-							$childCategory = str_replace('#', '', $childCategory);
-							$childLink = get_term_link($category->slug, 'news_cat');
-						}
-					}
-
-					if ($childCategory == '') {
-						$output = '<a href="' . $parentLink . '" class="article-category">' . $parentCategory . '</a>';
-					} else {
-						$output = '<a href="' . $childLink . '" class="mx-1 article-category">' . $childCategory . '</a>';
-					}
-					return $output;
-				}
-
-				echo '<nav class="related-articles">
-					<div class="container"><div class="articles d-flex">';
-				$postlinks = array();
-				$relterms_links = array();
-				$relterms = get_the_terms($post->ID, 'news_cat');
-				if ($relterms && !is_wp_error($relterms)) {
-
-					foreach ($relterms as $relterm) {
-						$relterms_links[] = $relterm->slug;
-					}
 
 
-					//$postlinks[] = get_the_permalink(get_the_ID());
-					$args = array(
-						'post__not_in' 			 => array($post->ID),
-						'post_type'              => 'linernews',
-						'post_status'            => 'publish',
-						'posts_per_page'         => 3,
-						'tax_query'         	 => array(
-							array(
-								'taxonomy' => 'news_cat',
-								'field' 	 => 'slug',
-								'terms' 	 => $relterms[0]->slug,
-
-							)
-						)
-						/*,
-							'meta_query'			 => array(
-															array(
-																'key'     => 'long_form',
-																'compare' => 'NOT EXISTS',
-															),
-														)*/
-					);
-
-					$the_query = new WP_Query($args);
-
-					if ($the_query->have_posts()) :
-						while ($the_query->have_posts()) :
-							$the_query->the_post();
-							// $postlinks[] = get_the_permalink($the_query->post->ID);
-							$image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), 'medium');
-							?>
-
-							<div class="related-article" data-slug="<?php echo get_post_field('post_name', $the_query->post->ID); ?>">
-								<img src="<?php echo $image_attributes[0] ?>" class="img-fluid mob-image10">
-								<div class="align-self-center">
-									<a href="#" class="article-category">
-										<?php echo categoryByID($the_query->post->ID) ?>
-									</a>
-									<a href="<?php echo get_the_permalink($the_query->post->ID); ?>">
-										<h4 class="article-title">
-											<?php the_title(); ?>
-										</h4>
-									</a>
-								</div>
-							</div>
-
-
-					<?php
-
-								endwhile;
-							endif;
-						}
-						echo '</div></div></nav>';
-					}
-
-					if (isset($last_visit_query) && is_object($last_visit_query)) {
-						echo '<div class="last-visit-modal">
+			if (isset($last_visit_query) && is_object($last_visit_query)) {
+				echo '<div class="last-visit-modal">
 						<div class="container">
 							<div class="d-flex align-items-center justify-content-between my-4 ">
 							<h2 class="egy-header-title">Mióta itt jártál:</h2>
@@ -604,27 +564,27 @@
 							</div>
 							<div class="last-visit-modal-content" style="max-height: 460px;overflow: auto;box-shadow: 0 0 10px #00000026;padding: 20px;">
 						';
-						while ($last_visit_query->have_posts()) {
-							$last_visit_query->the_post();
-							$image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($last_visit_query->post->ID), '');
+				while ($last_visit_query->have_posts()) {
+					$last_visit_query->the_post();
+					$image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($last_visit_query->post->ID), '');
 
-							$poplr = get_field('most_popular_news', $last_visit_query->post->ID);
-							$brknews = get_field('breaking_news', $last_visit_query->post->ID);
+					$poplr = get_field('most_popular_news', $last_visit_query->post->ID);
+					$brknews = get_field('breaking_news', $last_visit_query->post->ID);
 
-							if ($poplr == 1) {
-								$popular = '';
-							} else {
-								$popular = '';
-							}
+					if ($poplr == 1) {
+						$popular = '';
+					} else {
+						$popular = '';
+					}
 
-							if ($brknews == 1) {
-								$breaknews = '';
-								$popular = '';
-							} else {
-								$breaknews = '';
-							}
+					if ($brknews == 1) {
+						$breaknews = '';
+						$popular = '';
+					} else {
+						$breaknews = '';
+					}
 
-							?>
+					?>
 
 					<div class="news-item d-flex align-items-center">
 						<span class="mt-0 mr-4 post-tagline font-weight-bold"><?php echo get_post_time('H:i'); ?></span>

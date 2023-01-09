@@ -125,8 +125,8 @@ function liner_setup()
 
 	// This theme uses a custom image size for featured images, displayed on "standard" posts.
 	add_theme_support('post-thumbnails');
-	
-	
+
+
 	// Indicate widget sidebars can use selective refresh in the Customizer.
 	add_theme_support('customize-selective-refresh-widgets');
 }
@@ -228,7 +228,7 @@ function liner_scripts_styles()
 	// define global variables for the theme
 	wp_localize_script('liner-navigation', 'liner_global', array(
 		'baseUrl' => get_template_directory_uri(),
-		
+
 	));
 
 	$font_url = liner_get_font_url();
@@ -1061,7 +1061,7 @@ if (!function_exists('liner_content_nav')) :
 				return prefix_insert_after_paragraph($home_top_content, 1, $content);
 			}
 
-					return $content;
+			return $content;
 		}
 		add_filter('the_content', 'prefix_insert_post_ads2');
 
@@ -1141,10 +1141,10 @@ if (!function_exists('liner_content_nav')) :
 
 			if (is_single() && !is_admin()) {
 				return prefix_insert_after_paragraph($home_top_content, 3, $content);
-			}		
+			}
 
 			return $content;
-		} 
+		}
 		// add_filter('the_content', 'prefix_insert_post_ads_two');
 
 		// function prefix_insert_post_ads_two($content)
@@ -1167,7 +1167,7 @@ if (!function_exists('liner_content_nav')) :
 		// 	return $content;
 		// }
 
-				// Parent Function that makes the magic happen
+		// Parent Function that makes the magic happen
 
 		function prefix_insert_after_paragraph($insertion, $paragraph_id, $content)
 		{

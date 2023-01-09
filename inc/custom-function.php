@@ -770,7 +770,7 @@ function get_latest_news_blocks($postnot_in = 0)
                     <div class="mt-0 post-tagline">
                         ' . getCategoryByPostId($latest_news->post->ID) . '
                         <span>|</span>
-					    <span>' . get_post_time('H:i') .  '</span>
+					              <span>' . (time() - strtotime($latest_news->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                     </div>
                 </div>
                 <h2 class="post-title post-title2">
@@ -845,7 +845,7 @@ function get_latest_news_blocks_two($postnot_in = 0)
           <div class="mt-0 post-tagline">
             ' . getCategoryByPostId($latest_news->post->ID) . '
             <span>|</span>
-            <span>' . get_post_time('H:i') .  '</span>
+            <span>' . (time() - strtotime($latest_news->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
           </div>
         </div>
         <h2 class="post-title post-title4">
@@ -946,7 +946,7 @@ function section2_shortcode($atts, $content)
       $output .= '</div><div class="nc_imgContent">
       ' . getCategoryByPostId($the_query->post->ID) . '
 					<span>|</span>
-					<span>' . get_post_time('H:i') .  '</span>
+          <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                     <p>' . $the_query->post->post_excerpt . '</p>' .
         '<hr style="margin-inline:0;">';
 
@@ -1043,7 +1043,7 @@ function section2_shortcode($atts, $content)
               <p class="post-tagline">
                 ' . getCategoryByPostId($the_query->post->ID) . '
                 <span>|</span>
-                <span>' . get_post_time('H:i') .  '</span>
+                <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
               </p>
           </div>
           <h2 class="post-title post-title2">
@@ -1064,7 +1064,7 @@ function section2_shortcode($atts, $content)
                     <p class="post-tagline">
                       ' . getCategoryByPostId($the_query->post->ID) . '
                       <span>|</span>
-                      <span>' . get_post_time('H:i') .  '</span>
+                      <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                     </p>
                     <h2 class="post-title post-title4">
                       <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
@@ -1088,7 +1088,7 @@ function section2_shortcode($atts, $content)
                       <p class="post-tagline">
                       ' . getCategoryByPostId($the_query->post->ID) . '
                         <span>|</span>
-                        <span>' . get_post_time('H:i') .  '</span>
+                        <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                       </p>
                     </div>
                     <h2 class="post-title post-title4">
@@ -1114,7 +1114,7 @@ function section2_shortcode($atts, $content)
                            <p class="post-tagline">
                         ' . getCategoryByPostId($the_query->post->ID) . '
                           <span>|</span>
-                          <span>' . get_post_time('H:i') .  '</span>
+                          <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                         </p>
                      
                       <h2 class="post-title post-title4">
@@ -1205,7 +1205,7 @@ function section3_shortcode($atts, $content)
         }
         $output .= '' . getCategoryByPostId($the_query->post->ID) . '
               <span>|</span>
-              <span>' . get_post_time('H:i') .  '</span>
+              <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
             </p>
             <h2 class="post-title post-title2">';
         if ($i == 1) {
@@ -1227,7 +1227,7 @@ function section3_shortcode($atts, $content)
         <div class="border-dashed-bottom">
           <p class="post-tagline">' . getCategoryByPostId($the_query->post->ID) . '
             <span>|</span>
-            <span>' . get_post_time('H:i') .  '</span>
+            <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
           </p>
           <h2 class="post-title post-title2">
             <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
@@ -1245,7 +1245,7 @@ function section3_shortcode($atts, $content)
         <div class="border-dashed-bottom">
           <p class="post-tagline">' . getCategoryByPostId($the_query->post->ID) . '
             <span>|</span>
-            <span>' . get_post_time('H:i') .  '</span>
+            <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
           </p>
           <h2 class="post-title post-title2">
             <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
@@ -1360,7 +1360,7 @@ function section3_shortcode($atts, $content)
                         <p class="post-tagline">
                           ' . getCategoryByPostId($the_query->post->ID) . '
                           <span>|</span>
-                          <span>' . get_post_time('H:i') .  '</span>
+                          <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                         </p>
                       </div>
                       <h2 class="post-title post-title2">
@@ -1486,7 +1486,7 @@ if( $the_query->have_posts() ) {
                 <p class="post-tagline">
                   ' . getCategoryByPostId($the_query->post->ID) . '
                   <span>|</span>
-                  <span>' . get_post_time('H:i') .  '</span>
+                  <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                 </p>
               </div>
               <h2 class="post-title post-title2">
@@ -1595,7 +1595,7 @@ if( $the_query->have_posts() ) {
                       <p class="post-tagline">
                         ' . getCategoryByPostId($the_query->post->ID) . '
                         <span>|</span>
-                        <span>' . get_post_time('H:i') .  '</span>
+                        <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                       </p>
                     </div>
                     <h2 class="post-title post-title3">
@@ -1618,7 +1618,7 @@ if( $the_query->have_posts() ) {
                     <p class="post-tagline">
                       ' . getCategoryByPostId($the_query->post->ID) . '
                       <span>|</span>
-                      <span>' . get_post_time('H:i') .  '</span>
+                      <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                     </p>
                   </div>
                   <h2 class="post-title post-title2">
@@ -1642,7 +1642,7 @@ if( $the_query->have_posts() ) {
                   <p class="post-tagline">
                     ' . getCategoryByPostId($the_query->post->ID) . '
                     <span>|</span>
-                    <span>' . get_post_time('H:i') .  '</span>
+                    <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                   </p>
                 </div>
                 <h2 class="post-title post-title3">
@@ -1666,7 +1666,7 @@ if( $the_query->have_posts() ) {
                   <p class="post-tagline">
                     ' . getCategoryByPostId($the_query->post->ID) . '
                     <span>|</span>
-                    <span>' . get_post_time('H:i') .  '</span>
+                    <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                   </p>
                 </div>
                 <h2 class="post-title post-title2">
@@ -1691,7 +1691,7 @@ if( $the_query->have_posts() ) {
                   <p class="post-tagline">
                     ' . getCategoryByPostId($the_query->post->ID) . '
                     <span>|</span>
-                    <span>' . get_post_time('H:i') .  '</span>
+                    <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                   </p>
                 </div>
                 <h2 class="post-title post-title3">
@@ -1711,7 +1711,7 @@ if( $the_query->have_posts() ) {
                   <p class="post-tagline">
                     ' . getCategoryByPostId($the_query->post->ID) . '
                     <span>|</span>
-                    <span>' . get_post_time('H:i') .  '</span>
+                    <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                   </p>
                 </div>
                 <h2 class="post-title post-title2">
@@ -2029,7 +2029,7 @@ if( $the_query->have_posts() ) {
                <p class="post-tagline">
                ' . getCategoryByPostId($the_query->post->ID) . '
                  <span>|</span>
-                 <span>' . get_post_time('H:i') .  '</span>
+                 <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                </p>
              </div>
              <h2 class="post-title post-title2">
@@ -2130,77 +2130,76 @@ if( $the_query->have_posts() ) {
 
       $i = 1;
 
-      $args = array(
-        'post_type'              => 'linernews',
-        'post_status'            => 'publish',
-        'posts_per_page'         => 1,
-        // not in
-        // 'post__not_in'           => $postnot,
-        'no_found_rows'      => true,
-        'update_post_meta_cache' => false,
-        'update_post_term_cache' => false,
-        'tax_query'              => array(
-          array(
-            'taxonomy' => 'newstag',
-            'field' => 'slug',
-            'terms' => array('longform'),
-            'operator' => 'IN'
-          )
-        )
-      );
+      // $args = array(
+      //   'post_type'              => 'linernews',
+      //   'post_status'            => 'publish',
+      //   'posts_per_page'         => 1,
+      //   // not in
+      //   // 'post__not_in'           => $postnot,
+      //   'no_found_rows'      => true,
+      //   'update_post_meta_cache' => false,
+      //   'update_post_term_cache' => false,
+      //   'tax_query'              => array(
+      //     array(
+      //       'taxonomy' => 'newstag',
+      //       'field' => 'slug',
+      //       'terms' => array('longform'),            
+      //     )
+      //   )
+      // );
 
 
-      $main = array();
-      $tagpost = array();
-      $terms = get_terms(array('taxonomy' => 'newstag', 'hide_empty' => true,));
-      foreach ($terms as $term) {
-        $main[] = $term->term_id;
-      }
+      // $main = array();
+      // $tagpost = array();
+      // $terms = get_terms(array('taxonomy' => 'newstag', 'hide_empty' => true,));
+      // foreach ($terms as $term) {
+      //   $main[] = $term->term_id;
+      // }
 
-      $the_query = new WP_Query($args);
+      // $the_query = new WP_Query($args);
 
-      if ($the_query->have_posts()) {
-        while ($the_query->have_posts()) {
-          $the_query->the_post();
-          $term_obj_list = array();
-          $tagpost = array();
-          $result = array();
+      // if ($the_query->have_posts()) {
+      //   while ($the_query->have_posts()) {
+      //     $the_query->the_post();
+      //     $term_obj_list = array();
+      //     $tagpost = array();
+      //     $result = array();
 
-          $term_obj_list = get_the_terms($the_query->post->ID, 'newstag');
+      //     $term_obj_list = get_the_terms($the_query->post->ID, 'newstag');
 
-          if (!empty($term_obj_list) && is_array($term_obj_list)) {
-            foreach ($term_obj_list as $tag) {
-              $tagpost[] = $tag->term_id;
-            }
-          }
+      //     if (!empty($term_obj_list) && is_array($term_obj_list)) {
+      //       foreach ($term_obj_list as $tag) {
+      //         $tagpost[] = $tag->term_id;
+      //       }
+      //     }
 
-          if (!empty($main) && !empty($tagpost)) {
-            $result = array_intersect($main, $tagpost);
-          }
-          $tagcount = count($result);
-          //die;
-          if ($tagcount > 0) {
-            $postidarr[$i]['id'] = $the_query->post->ID;
-            $postidarr[$i]['count'] = $tagcount;
-          }
-          unset($tagpost);
-          $i++;
-        }
-      }
-
-
-      wp_reset_postdata();
+      //     if (!empty($main) && !empty($tagpost)) {
+      //       $result = array_intersect($main, $tagpost);
+      //     }
+      //     $tagcount = count($result);
+      //     //die;
+      //     if ($tagcount > 0) {
+      //       $postidarr[$i]['id'] = $the_query->post->ID;
+      //       $postidarr[$i]['count'] = $tagcount;
+      //     }
+      //     unset($tagpost);
+      //     $i++;
+      //   }
+      // }
 
 
-      $final = array_sort($postidarr, 'count', SORT_DESC);
-      $postid = array();
-      $k = 1;
-      foreach ($final as $value) {
-        if ($k < 5) {
-          $postid[] = $value['id'];
-        }
-        $k++;
-      }
+      // wp_reset_postdata();
+
+
+      // $final = array_sort($postidarr, 'count', SORT_DESC);
+      // $postid = array();
+      // $k = 1;
+      // foreach ($final as $value) {
+      //   if ($k < 5) {
+      //     $postid[] = $value['id'];
+      //   }
+      //   $k++;
+      // }
 
 
       $j = 1;
@@ -2215,6 +2214,13 @@ if( $the_query->have_posts() ) {
         'no_found_rows'      => true,
         'update_post_meta_cache' => false,
         'update_post_term_cache' => false,
+        'tax_query'              => array(
+          array(
+            'taxonomy' => 'newstag',
+            'field' => 'slug',
+            'terms' => array('longform'),
+          )
+        )
       );
 
       $final_query = new WP_Query($fargs);
@@ -2229,7 +2235,7 @@ if( $the_query->have_posts() ) {
           $final_query->the_post();
 
           $image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($final_query->post->ID), 'medium_large');
-          $custom_author = get_field('news_author', $the_query->post->ID);
+          // $custom_author = get_field('news_author', $the_query->post->ID);
 
           $firstpost = '<h1><a href="' . get_the_permalink($final_query->post->ID) . '">' . $final_query->post->post_title . '</a></h1><p class="lacus_pTxt">' . $final_query->post->post_excerpt . '</p>';
           // old version OLVASMÁNYOS
@@ -2289,7 +2295,6 @@ if( $the_query->have_posts() ) {
           </section>
           ';
 
-          $postnot[] = $the_query->post->ID;
 
           $j++;
         }
@@ -2388,7 +2393,7 @@ if( $the_query->have_posts() ) {
                       <p class="post-tagline">
                         ' . getCategoryByPostId($the_query->post->ID) . '
                         <span>|</span>
-                        <span>' . get_post_time('H:i') .  '</span>
+                        <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                       </p>
                     </div>
                     <h2 class="post-title post-title3">
@@ -2411,7 +2416,7 @@ if( $the_query->have_posts() ) {
                     <p class="post-tagline">
                       ' . getCategoryByPostId($the_query->post->ID) . '
                       <span>|</span>
-                      <span>' . get_post_time('H:i') .  '</span>
+                      <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                     </p>
                   </div>
                   <h2 class="post-title post-title2">
@@ -2438,7 +2443,7 @@ if( $the_query->have_posts() ) {
                   <p class="post-tagline">
                     ' . getCategoryByPostId($the_query->post->ID) . '
                     <span>|</span>
-                    <span>' . get_post_time('H:i') .  '</span>
+                    <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                   </p>
                 </div>
                 <h2 class="post-title post-title2">
@@ -2464,7 +2469,7 @@ if( $the_query->have_posts() ) {
                 <p class="post-tagline">
                   ' . getCategoryByPostId($the_query->post->ID) . '
                   <span>|</span>
-                  <span>' . get_post_time('H:i') .  '</span>
+                  <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                 </p>
               </div>
               <h2 class="post-title post-title3">
@@ -2488,7 +2493,7 @@ if( $the_query->have_posts() ) {
                   <p class="post-tagline">
                     ' . getCategoryByPostId($the_query->post->ID) . '
                     <span>|</span>
-                    <span>' . get_post_time('H:i') .  '</span>
+                    <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                   </p>
                 </div>
                 <h2 class="post-title post-title2">
@@ -2646,7 +2651,7 @@ if( $the_query->have_posts() ) {
                <p class="post-tagline">
                ' . getCategoryByPostId($the_query->post->ID) . '
                  <span>|</span>
-                 <span>' . get_post_time('H:i') .  '</span>
+                 <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                </p>
              </div>
              <h2 class="post-title post-title2">
@@ -2741,7 +2746,7 @@ if( $the_query->have_posts() ) {
             <p class="post-tagline">
             ' . getCategoryByPostId($the_query->post->ID) . '
               <span>|</span>
-              <span>' . get_post_time('H:i') .  '</span>
+              <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
             </p>
         </div>
         <h2 class="post-title post-title2">
@@ -2766,7 +2771,7 @@ if( $the_query->have_posts() ) {
                     <div class="mt-0 post-tagline">
                         ' . getCategoryByPostId($the_query->post->ID) . '
                         <span>|</span>
-					    <span>' . get_post_time('H:i') .  '</span>
+                        <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                     </div>
                 </div>
                 <h2 class="post-title post-title2">
@@ -2789,7 +2794,7 @@ if( $the_query->have_posts() ) {
                       <p class="post-tagline">
                       ' . getCategoryByPostId($the_query->post->ID) . '
                         <span>|</span>
-                        <span>' . get_post_time('H:i') .  '</span>
+                        <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                       </p>
                     </div>
                     <h2 class="post-title post-title2">
@@ -2811,7 +2816,7 @@ if( $the_query->have_posts() ) {
               <p class="post-tagline">
               ' . getCategoryByPostId($the_query->post->ID) . '
                 <span>|</span>
-                <span>' . get_post_time('H:i') .  '</span>
+                <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
               </p>
             </div>
             <h2 class="post-title post-title2">
@@ -2836,7 +2841,7 @@ if( $the_query->have_posts() ) {
               <p class="post-tagline">
               ' . getCategoryByPostId($the_query->post->ID) . '
               <span>|</span>
-              <span>' . get_post_time('H:i') .  '</span>
+              <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
               </p>
               </div>
               <h2 class="post-title post-title2">
@@ -2859,7 +2864,7 @@ if( $the_query->have_posts() ) {
             <p class="post-tagline">
             ' . getCategoryByPostId($the_query->post->ID) . '
               <span>|</span>
-              <span>' . get_post_time('H:i') .  '</span>
+              <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
             </p>
           </div>
           <h2 class="post-title post-title2">
@@ -2974,7 +2979,7 @@ if( $the_query->have_posts() ) {
             $output .= '
               <div class="item mb-3 d-flex align-items-start ' . $popular . $breaknews . '">
                 <p class="post-tagline mt-0 mr-4">
-                  <span>' . get_post_time('H:i') .  '</span>
+                  <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                 </p>
                 <h2 class="post-title post-title1">
                   <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
@@ -2997,7 +3002,7 @@ if( $the_query->have_posts() ) {
                   <p class="post-tagline">
                     ' . getCategoryByPostId($the_query->post->ID) . '
                     <span>|</span>
-                    <span>' . get_post_time('H:i') .  '</span>
+                    <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                   </p>
                   <h2 class="post-title post-title2">
                     <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
@@ -3325,7 +3330,8 @@ if( $the_query->have_posts() ) {
           $output .= '<li>          
           <span>
           
-            <span>' . get_post_time('H:i') .  '</span>
+            
+            <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
             ';
           // if (true || false) {
           //   $output .= '<img class="fontos-img" src="' . get_bloginfo("template_url") . '/images/fontos.png" style="width:15px" />';

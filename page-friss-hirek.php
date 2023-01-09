@@ -73,7 +73,7 @@ $i = 1;
                             if ($i !== 1) :
                                 echo '<div class="group-date egy-header-title">' . $date . '</div>';
                             endif;
-                            echo '<h1 class="friss-title2 '.$style.' mt-0">' . $dateTitle . '</h1>';
+                            echo '<h1 class="friss-title2 ' . $style . ' mt-0">' . $dateTitle . '</h1>';
                             echo '</div>';
                         }
                         ?>
@@ -119,17 +119,17 @@ $i = 1;
                 <div class="mt-4">
                     <!-- <img src="<?php echo get_template_directory_uri() ?>/images/300x600.jpeg" alt="ads" class="img-fluid w-100" style="max-width: 100%;max-height: 600px;object-fit: cover;"> -->
                     <div class="siderbar_ads1" id="liner_cikk_jobb_1">
-							<script type="text/javascript">
-								activateBanner('liner_cikk_jobb_1');
-							</script>
-						</div>
-					</div>
+                        <script type="text/javascript">
+                            activateBanner('liner_cikk_jobb_1');
+                        </script>
+                    </div>
+                </div>
                 <div class="mt-4 mb-4">
-                <div class="siderbar_ads2" id="liner_cikk_jobb_2">
-							<script type="text/javascript">
-								activateBanner('liner_cikk_jobb_2');
-							</script>
-						</div>
+                    <div class="siderbar_ads2" id="liner_cikk_jobb_2">
+                        <script type="text/javascript">
+                            activateBanner('liner_cikk_jobb_2');
+                        </script>
+                    </div>
                     <!-- <img src="<?php echo get_template_directory_uri() ?>/images/300x600.jpeg" alt="ads" class="img-fluid w-100" style="max-width: 100%;max-height: 600px;object-fit: cover;"> -->
                 </div>
             </div>

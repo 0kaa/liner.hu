@@ -54,8 +54,8 @@
             },
             "page-friss-hirek.php": {
               "type": "-",
-              "size": 5970,
-              "lmtime": 1670063947754,
+              "size": 6125,
+              "lmtime": 1672631752415,
               "modified": false
             },
             "content-status.php": {
@@ -66,15 +66,15 @@
             },
             "header.php": {
               "type": "-",
-              "size": 18697,
-              "lmtime": 1670266253636,
+              "size": 20365,
+              "lmtime": 1673184268164,
               "modified": false
             },
             "single-linernews.php": {
               "type": "-",
-              "size": 46759,
-              "lmtime": 1670421915930,
-              "modified": true
+              "size": 46797,
+              "lmtime": 1673185318329,
+              "modified": false
             },
             "content.php": {
               "type": "-",
@@ -103,8 +103,8 @@
             "inc": {
               "custom-function.php": {
                 "type": "-",
-                "size": 155996,
-                "lmtime": 1670250441984,
+                "size": 158948,
+                "lmtime": 1673183458210,
                 "modified": false
               },
               "custom-header.php": {
@@ -851,8 +851,8 @@
               },
               "custom-script.js": {
                 "type": "-",
-                "size": 13243,
-                "lmtime": 1670443735942,
+                "size": 18582,
+                "lmtime": 1673184709245,
                 "modified": false
               }
             },
@@ -1204,14 +1204,14 @@
             },
             "custom-style.css": {
               "type": "-",
-              "size": 146811,
-              "lmtime": 1670375493734,
+              "size": 153984,
+              "lmtime": 1673185249191,
               "modified": false
             },
             "functions.php": {
               "type": "-",
-              "size": 37728,
-              "lmtime": 1670063950531,
+              "size": 37717,
+              "lmtime": 1672631646542,
               "modified": false
             },
             "page-templates": {
@@ -1260,8 +1260,8 @@
             },
             "style.css": {
               "type": "-",
-              "size": 49759,
-              "lmtime": 1658593814526,
+              "size": 49748,
+              "lmtime": 1672730142035,
               "modified": false
             }
           },

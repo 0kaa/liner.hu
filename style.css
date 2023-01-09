@@ -2052,7 +2052,7 @@ p {
 }
 
 .post-background-yellow {
-    background-color: #1a1d2e !important;
+    background-color: #1a1d2e;
 	color: #58ceb6 !important;
     padding-top: 5px;
     padding-bottom: 5px;
