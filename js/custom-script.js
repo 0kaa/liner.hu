@@ -110,66 +110,89 @@ jQuery(function ($) {
     }
     navbarFixed();
   }
-
-
 });
 /**  breaking news **/
 jQuery(document).ready(function ($) {
   switcher = localStorage.getItem("switcher");
   if (!switcher) {
     localStorage.setItem("switcher", "auto");
-  }
-
-  function setSwitcherAuto() {
-    let switcher = localStorage.getItem("switcher");
-    console.log(switcher)
-    if (switcher == 'auto') {
-      // sync dark mode from system to website watch for changes
-      if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        // let darkMode = localStorage.getItem("darkmode");
-        // use cookies instead of localstorage
-        let darkMode = localStorage.getItem("darkmode");
-        if (!darkMode) {
-          localStorage.setItem("darkmode", true);
-          setCookie("darkmode", true, 365);
-        }
-        darkMode = localStorage.getItem("darkmode");
-        if (darkMode == "true") {
-          $("body").addClass("darkmode");
-          $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_dark_1.png');
-        } else {
-          $("body").removeClass("darkmode");
-          $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_light-1.png');
-        }
-      }
-      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-        if (e.matches) {
-          $("body").addClass("darkmode");
-          $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_dark_1.png');
-          localStorage.setItem("darkmode", true);
-          setCookie("darkmode", true, 365);
-        } else {
-          $("body").removeClass("darkmode");
-          $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_light-1.png');
-          localStorage.setItem("darkmode", false);
-          setCookie("darkmode", 'false', 365);
-        }
-      });
-    }
-
+    
   }
   switcher = localStorage.getItem("switcher");
   if (switcher == 'auto') {
     setSwitcherAuto();
-    $('.mode-switcher i').removeClass('fa-moon-o fa-lightbulb-o').addClass('fa-sun-o')
   } else if (switcher == 'dark') {
-    $("body").addClass("darkmode");
-    $('.mode-switcher i').removeClass('fa-sun-o fa-lightbulb-o').addClass('fa-moon-o')
-    $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_dark_1.png');
+    changeMode('dark');
   } else if (switcher == 'light') {
-    $('.mode-switcher i').removeClass('fa-sun-o fa-moon-o').addClass('fa-lightbulb-o')
-    $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_light-1.png');
+    changeMode('light');
   }
+
+  function changeMode(mode) {
+    if (mode == 'dark') {
+      $("body").addClass("darkmode");
+      $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_dark_1.png');
+      $('.mode-switcher i').removeClass('fa-sun-o fa-lightbulb-o').addClass('fa-moon-o')
+      localStorage.setItem("switcher", "dark");
+      setCookie("darkmode", true, 365);
+    } else if (mode == 'light') {
+      $("body").removeClass("darkmode");
+      $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_light-1.png');
+      $('.mode-switcher i').removeClass('fa-sun-o fa-moon-o').addClass('fa-lightbulb-o')
+      localStorage.setItem("switcher", "light");
+      setCookie("darkmode", 'false', 365);
+    } else {
+      localStorage.setItem("switcher", "auto");
+      setSwitcherAuto();
+
+    }
+  }
+
+  function setSwitcherAuto() {
+
+    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      $("body").addClass("darkmode");
+      $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_dark_1.png');
+      $('.mode-switcher i').removeClass('fa-moon-o fa-lightbulb-o').addClass('fa-sun-o')
+      localStorage.setItem("switcher", "auto");
+      setCookie("darkmode", true, 365);      
+    } else {
+      $("body").removeClass("darkmode");
+      $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_light-1.png');
+      $('.mode-switcher i').removeClass('fa-lightbulb-o fa-moon-o').addClass('fa-sun-o')
+      localStorage.setItem("switcher", "auto");
+      setCookie("darkmode", 'false', 365);
+    }
+
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+      if (e.matches) {
+        $("body").addClass("darkmode");
+        $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_dark_1.png');
+        $('.mode-switcher i').removeClass('fa-moon-o fa-lightbulb-o').addClass('fa-sun-o')
+        localStorage.setItem("switcher", "auto");
+        setCookie("darkmode", true, 365);
+      } else {
+        $("body").removeClass("darkmode");
+        $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_light-1.png');
+        $('.mode-switcher i').removeClass('fa-lightbulb-o fa-moon-o').addClass('fa-sun-o')
+        localStorage.setItem("switcher", "auto");
+        setCookie("darkmode", 'false', 365);
+      }
+    });
+
+  }
+
+  // switcher = localStorage.getItem("switcher");
+  // if (switcher == 'auto') {
+  //   setSwitcherAuto();
+  //   $('.mode-switcher i').removeClass('fa-moon-o fa-lightbulb-o').addClass('fa-sun-o')
+  // } else if (switcher == 'dark') {
+  //   $("body").addClass("darkmode");
+  //   $('.mode-switcher i').removeClass('fa-sun-o fa-lightbulb-o').addClass('fa-moon-o')
+  //   $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_dark_1.png');
+  // } else if (switcher == 'light') {
+  //   $('.mode-switcher i').removeClass('fa-sun-o fa-moon-o').addClass('fa-lightbulb-o')
+  //   $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_light-1.png');
+  // }
 
   $('.mode-switcher').click(function () {
     $('.switcher-list').toggleClass('active');
@@ -184,21 +207,13 @@ jQuery(document).ready(function ($) {
 
   $('.switch-button').click(function () {
     let data = $(this).data('switch');
+
     if (data == 'dark') {
-      $("body").addClass("darkmode");
-      $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_dark_1.png');
-      localStorage.setItem("darkmode", true);
-      localStorage.setItem("switcher", 'dark');
-      setCookie("darkmode", true, 365);
-      $('.mode-switcher i').removeClass('fa-sun-o fa-lightbulb-o').addClass('fa-moon-o')
-    }
-    if (data == 'light') {
-      $("body").removeClass("darkmode");
-      $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_light-1.png');
-      localStorage.setItem("darkmode", false);
-      localStorage.setItem("switcher", 'light');
-      setCookie("darkmode", 'false', 365);
-      $('.mode-switcher i').removeClass('fa-sun-o fa-moon-o').addClass('fa-lightbulb-o')
+      changeMode('dark');
+    } else if (data == 'light') {
+      changeMode('light');
+    } else {
+      changeMode('auto');
     }
 
     // if (data == 'auto') {
@@ -206,39 +221,27 @@ jQuery(document).ready(function ($) {
     //   $('.mode-switcher i').removeClass('fa-moon-o fa-lightbulb-o').addClass('fa-sun-o')
     // }
 
-    if (data == 'auto') {
-      if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        $("body").addClass("darkmode");
-        $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_dark_1.png');
-        localStorage.setItem("darkmode", true);
-        setCookie("darkmode", true, 365);
-        $('.mode-switcher i').removeClass('fa-sun-o fa-lightbulb-o').addClass('fa-moon-o')
-      } else {
-        $("body").removeClass("darkmode");
-        $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_light-1.png');
-        localStorage.setItem("darkmode", false);
-        setCookie("darkmode", 'false', 365);
-        $('.mode-switcher i').removeClass('fa-sun-o fa-moon-o').addClass('fa-lightbulb-o')
-      }
-      localStorage.setItem("switcher", 'auto');
-      setSwitcherAuto();
-      $('.mode-switcher i').removeClass('fa-moon-o fa-lightbulb-o').addClass('fa-sun-o');
+    // if (data == 'auto') {
+    //   if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    //     $("body").addClass("darkmode");
+    //     $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_dark_1.png');
+    //     localStorage.setItem("darkmode", true);
+    //     setCookie("darkmode", true, 365);
+    //     $('.mode-switcher i').removeClass('fa-sun-o fa-lightbulb-o').addClass('fa-moon-o')
+    //   } else {
+    //     //         $("body").removeClass("darkmode");
+    //     $('.header__logo.navbar-brand img').attr('src', 'https://cdn.liner.hu/wp-content/uploads/2021/04/logo_light-1.png');
+    //     localStorage.setItem("darkmode", false);
+    //     setCookie("darkmode", 'false', 365);
+    //     $('.mode-switcher i').removeClass('fa-sun-o fa-moon-o').addClass('fa-lightbulb-o')
+    //   }
+    //   localStorage.setItem("switcher", 'auto');
+    //   setSwitcherAuto();
+    //   $('.mode-switcher i').removeClass('fa-moon-o fa-lightbulb-o').addClass('fa-sun-o');
 
-    }
+    // }
 
   });
-
-  // $('.mode-switcher').click(function () {
-  //   if ($("body").hasClass("darkmode")) {
-  //     $("body").removeClass("darkmode");
-  //     localStorage.setItem("darkmode", false);
-  //     setCookie("darkmode", 'false', 365);
-  //   } else {
-  //     $("body").addClass("darkmode");
-  //     localStorage.setItem("darkmode", true);
-  //     setCookie("darkmode", true, 365);
-  //   }
-  // });
 
   /* breaking bar close and other functions */
   function setCookie(name, value, days) {

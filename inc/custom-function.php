@@ -28,7 +28,7 @@ function theme_scripts()
   //wp_enqueue_script( 'popper-script', get_template_directory_uri() .'/js/popper.min.js', array(), '', true );
   //wp_enqueue_script( 'bootstrap-script', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js', array(), '', true );
   wp_enqueue_script('bootstrap-script', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '', true);
-  wp_enqueue_script('site-script', get_template_directory_uri() . '/js/custom-script.js', array(), '1.0.56', false);
+  wp_enqueue_script('site-script', get_template_directory_uri() . '/js/custom-script.js', array(), '1.0.59', false);
 
 
   if (is_singular('linernews')) {
@@ -50,7 +50,7 @@ function load_css_files()
   //wp_enqueue_style( 'bootstrap-css','https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css', array(), '', false );
   wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '', false);
   wp_enqueue_style('gfont-style', 'https://fonts.googleapis.com/css?family=Bai+Jamjuree:300,400,500,600,700|Poppins:100,200,300,400,500,600,700,800,900|Roboto:300,400,500,700,900&display=swap', array(), '', false);
-  wp_enqueue_style('custom-style', get_template_directory_uri() . '/custom-style.css', array(), '1.0.56', false);
+  wp_enqueue_style('custom-style', get_template_directory_uri() . '/custom-style.css', array(), '1.0.74', false);
 }
 add_action('wp_enqueue_scripts', 'load_css_files');
 // Register logo section
@@ -770,8 +770,9 @@ function get_latest_news_blocks($postnot_in = 0)
                 <div>
                     <div class="mt-0 post-tagline">
                         ' . getCategoryByPostId($latest_news->post->ID) . '
-                        <span>|</span>
-					              <span>' . (time() - strtotime($latest_news->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
+                        <span>|</span>					    
+                        <span>' . get_the_date('Y. F. d. H:i', $latest_news->post->ID) . '</span>
+              
                     </div>
                 </div>
                 <h2 class="post-title post-title2">
@@ -845,8 +846,8 @@ function get_latest_news_blocks_two($postnot_in = 0)
         <div>
           <div class="mt-0 post-tagline">
             ' . getCategoryByPostId($latest_news->post->ID) . '
-            <span>|</span>
-            <span>' . (time() - strtotime($latest_news->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
+            <span>|</span>            
+            <span>' . get_the_date('Y. F. d. H:i', $latest_news->post->ID) . '</span>
           </div>
         </div>
         <h2 class="post-title post-title4">
@@ -947,7 +948,7 @@ function section2_shortcode($atts, $content)
       $output .= '</div><div class="nc_imgContent">
       ' . getCategoryByPostId($the_query->post->ID) . '
 					<span>|</span>
-          <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
+					<span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                     <p>' . $the_query->post->post_excerpt . '</p>' .
         '<hr style="margin-inline:0;">';
 
@@ -2144,7 +2145,7 @@ if( $the_query->have_posts() ) {
       //     array(
       //       'taxonomy' => 'newstag',
       //       'field' => 'slug',
-      //       'terms' => array('longform'),            
+      //       'terms' => array('longform'),
       //     )
       //   )
       // );
@@ -2211,7 +2212,7 @@ if( $the_query->have_posts() ) {
         'post_type'              => 'linernews',
         'post_status'            => 'publish',
         'posts_per_page'         => 1,
-        'post__in'               => $postid,
+        //'post__in'               => $postid,
         'no_found_rows'      => true,
         'update_post_meta_cache' => false,
         'update_post_term_cache' => false,
@@ -2772,7 +2773,7 @@ if( $the_query->have_posts() ) {
                     <div class="mt-0 post-tagline">
                         ' . getCategoryByPostId($the_query->post->ID) . '
                         <span>|</span>
-                        <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
+					    <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                     </div>
                 </div>
                 <h2 class="post-title post-title2">
@@ -2980,7 +2981,7 @@ if( $the_query->have_posts() ) {
             $output .= '
               <div class="item mb-3 d-flex align-items-start ' . $popular . $breaknews . '">
                 <p class="post-tagline mt-0 mr-4">
-                  <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
+                <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
                 </p>
                 <h2 class="post-title post-title1">
                   <a class="title-slug" href="' . get_the_permalink($the_query->post->ID) . '">
@@ -3331,8 +3332,8 @@ if( $the_query->have_posts() ) {
           $output .= '<li>          
           <span>
           
-            
-            <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
+   
+          <span>' . (time() - strtotime($the_query->post->post_date) > 86400 ? get_post_time('M. d') : get_post_time('H:i')) . '</span>
             ';
           // if (true || false) {
           //   $output .= '<img class="fontos-img" src="' . get_bloginfo("template_url") . '/images/fontos.png" style="width:15px" />';
@@ -3751,19 +3752,19 @@ Takacs Petra - Takács Petra
     //add_action('wp_head','map_user_to_news');
 
     /* add dark mode **/
-    add_filter('body_class', function ($classes) {
+            add_filter('body_class', function ($classes) {
 
-      $dark_mode = isset($_GET['darkmode']) ? $_GET['darkmode'] : 0;
-      //check if user have aleady  enable dark mode
-      if (isset($_COOKIE['dark_mode'])) {
-        $dark_mode = true;
-      }
-      if (isset($dark_mode) and $dark_mode != 0) {
-        return array_merge($classes, array('darkmode'));
-      }
+                $dark_mode = isset($_GET['darkmode']) ? $_GET['darkmode'] : 0;
+                //check if user have aleady  enable dark mode
+                if (isset($_COOKIE['dark_mode'])) {
+                    $dark_mode = true;
+                }
+                if (isset($dark_mode) and $dark_mode != 0) {
+                    return array_merge($classes, array('darkmode'));
+                }
 
-      return $classes;
-    });
+                return $classes;
+            });
 
     // add_filter('wp_nav_menu_items', 'dm_switch_button', 10, 2);
     function dm_switch_button($items, $args)

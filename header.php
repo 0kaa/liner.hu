@@ -249,19 +249,19 @@
 								<button class="switch-button" data-switch="auto">
 									<i class="fa fa-sun-o" aria-hidden="true"></i>
 									<span>
-										Automatic
+										Auto mód
 									</span>
 								</button>
 								<button class="switch-button" data-switch="dark">
 									<i class="fa fa-moon-o" aria-hidden="true"></i>
 									<span>
-										Dark mode
+										Sötét mód
 									</span>
 								</button>
 								<button class="switch-button" data-switch="light">
 									<i class="fa fa-lightbulb-o" aria-hidden="true"></i>
 									<span>
-										Bright mode
+										Világos mód
 									</span>
 								</button>
 							</div>
@@ -288,19 +288,19 @@
 								<button class="switch-button" data-switch="auto">
 									<i class="fa fa-sun-o" aria-hidden="true"></i>
 									<span>
-										Automatic
+										Auto mód
 									</span>
 								</button>
 								<button class="switch-button" data-switch="dark">
 									<i class="fa fa-moon-o" aria-hidden="true"></i>
 									<span>
-										Dark mode
+										Sötét mód
 									</span>
 								</button>
 								<button class="switch-button" data-switch="light">
 									<i class="fa fa-lightbulb-o" aria-hidden="true"></i>
 									<span>
-										Bright mode
+										Világos mód
 									</span>
 								</button>
 							</div>
